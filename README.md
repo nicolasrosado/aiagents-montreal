@@ -30,6 +30,14 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - Bright cyan pulsing dots per talk with glow halo — hover to slow the rotation, click to open the YouTube video
 - Circuit animation (red/orange particles) in the background, same style as the header
 - Uses `assets/ai-agents-image.jpg` — no additional asset needed
+- **Displayed first** — section 01, before the World Map
+
+### 🌍 Global Speakers Map
+- **Orbital mind graph** — 14 talks orbiting the AI brain image (same Option D treatment as the header)
+- 2 concentric orbits: inner (talks 1-7, clockwise) · outer (talks 8-14, counter-clockwise)
+- Bright cyan pulsing dots per talk with glow halo — hover to slow the rotation, click to open the YouTube video
+- Circuit animation (red/orange particles) in the background, same style as the header
+- Uses `assets/ai-agents-image.jpg` — no additional asset needed
 - Inserted between the World Map and the Speakers sections
 - **Leaflet.js** interactive map with dark CartoDB tiles
 - 🔵 Cyan glowing markers = past speakers · 🟡 Amber glowing markers = upcoming speakers
