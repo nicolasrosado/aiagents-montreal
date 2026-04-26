@@ -1203,6 +1203,7 @@
 
     <div class="nav-links">
         <a href="#map-section" class="nav-btn primary">World Map</a>
+        <a href="#knowledge-graph" class="nav-btn secondary">Knowledge Graph</a>
         <a href="#speakers" class="nav-btn secondary">Speakers</a>
         <a href="#talks" class="nav-btn secondary">Talks</a>
         <a href="#articles" class="nav-btn secondary">Articles</a>
@@ -1232,10 +1233,71 @@
 
 <hr class="section-divider" />
 
+<!-- KNOWLEDGE GRAPH -->
+<section id="knowledge-graph" style="padding: 5rem 0;">
+    <div style="max-width:1100px;margin:0 auto;padding:0 2rem 1.5rem;">
+        <div class="section-header">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Talk Knowledge Graph</h2>
+            <div class="section-line"></div>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:1.5rem;">
+            14 talks orbiting the AI brain — hover to slow, click to watch on YouTube.
+        </p>
+    </div>
+    <div id="mindgraph-container" style="
+        width:100%;
+        height:600px;
+        position:relative;
+        background:var(--bg);
+        overflow:hidden;
+    ">
+        <canvas id="mg-circuit" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+        <svg id="mg-svg" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;">
+            <defs>
+                <radialGradient id="mg-bf" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="white" stop-opacity="1"/>
+                    <stop offset="50%"  stop-color="white" stop-opacity="0.95"/>
+                    <stop offset="72%"  stop-color="white" stop-opacity="0.5"/>
+                    <stop offset="88%"  stop-color="white" stop-opacity="0.12"/>
+                    <stop offset="100%" stop-color="white" stop-opacity="0"/>
+                </radialGradient>
+                <mask id="mg-bm"><circle id="mg-bmc" r="110" fill="url(#mg-bf)"/></mask>
+                <radialGradient id="mg-bd" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="rgba(5,5,18,0.38)"/>
+                    <stop offset="60%"  stop-color="rgba(5,5,18,0.65)"/>
+                    <stop offset="100%" stop-color="rgba(7,8,15,0.98)"/>
+                </radialGradient>
+                <radialGradient id="mg-cg" cx="40%" cy="20%" r="55%">
+                    <stop offset="0%"   stop-color="rgba(0,229,255,0.15)"/>
+                    <stop offset="100%" stop-color="rgba(0,229,255,0)"/>
+                </radialGradient>
+                <radialGradient id="mg-vg" cx="75%" cy="75%" r="45%">
+                    <stop offset="0%"   stop-color="rgba(124,58,237,0.12)"/>
+                    <stop offset="100%" stop-color="rgba(124,58,237,0)"/>
+                </radialGradient>
+                <pattern id="mg-grid" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+                    <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(0,229,255,0.04)" stroke-width="1"/>
+                </pattern>
+                <filter id="mg-rg" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/>
+                    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+            </defs>
+        </svg>
+        <canvas id="mg-hit" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;background:transparent;"></canvas>
+        <p style="position:absolute;bottom:0.75rem;left:50%;transform:translateX(-50%);font-size:9px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap;z-index:3;pointer-events:none;">
+            Hover to slow · Click to watch the talk
+        </p>
+    </div>
+</section>
+
+<hr class="section-divider" />
+
 <!-- SPEAKERS -->
 <section id="speakers">
     <div class="section-header">
-        <span class="section-number">02</span>
+        <span class="section-number">03</span>
         <h2 class="section-title">Speakers</h2>
         <div class="section-line"></div>
     </div>
@@ -1247,7 +1309,7 @@
 <!-- TALKS -->
 <section id="talks">
     <div class="section-header">
-        <span class="section-number">03</span>
+        <span class="section-number">04</span>
         <h2 class="section-title">All Talks</h2>
         <div class="section-line"></div>
     </div>
@@ -1259,7 +1321,7 @@
 <!-- ARTICLES -->
 <section id="articles">
     <div class="section-header">
-        <span class="section-number">04</span>
+        <span class="section-number">05</span>
         <h2 class="section-title">Articles & Resources</h2>
         <div class="section-line"></div>
     </div>
@@ -1292,7 +1354,7 @@
 <!-- ECOSYSTEM -->
 <section id="ecosystem">
     <div class="section-header">
-        <span class="section-number">05</span>
+        <span class="section-number">06</span>
         <h2 class="section-title">Local Ecosystem & Events</h2>
         <div class="section-line"></div>
     </div>
@@ -1595,7 +1657,7 @@
 <!-- SUBSCRIBE -->
 <section id="subscribe" style="max-width:1100px;margin:0 auto;padding:5rem 2rem;">
     <div class="section-header">
-        <span class="section-number">06</span>
+        <span class="section-number">07</span>
         <h2 class="section-title">Stay in the Loop</h2>
         <div class="section-line"></div>
     </div>
@@ -2623,6 +2685,176 @@
     loadMeetupData();
     loadCraftersEvent();
     loadMenderConEvent();
+
+    // ── TALK KNOWLEDGE GRAPH ──────────────────────────────────────────────────────
+
+    (function() {
+        var container = document.getElementById('mindgraph-container');
+        if (!container) return;
+
+        var mgSvg    = document.getElementById('mg-svg');
+        var mgCanvas = document.getElementById('mg-circuit');
+        var mgHit    = document.getElementById('mg-hit');
+        var NS       = 'http://www.w3.org/2000/svg';
+
+        function mgEl(tag, attrs, p) {
+            attrs = attrs || {};
+            var e = document.createElementNS(NS, tag);
+            Object.keys(attrs).forEach(function(k){ e.setAttribute(k, attrs[k]); });
+            if (p) p.appendChild(e);
+            return e;
+        }
+
+        var W  = container.offsetWidth;
+        var H  = container.offsetHeight;
+        var CX = W/2, CY = H/2;
+        var R1 = Math.min(W,H) * 0.26;
+        var R2 = Math.min(W,H) * 0.39;
+
+        mgCanvas.width = W; mgCanvas.height = H;
+        mgHit.width    = W; mgHit.height    = H;
+
+        var mgCtx = mgCanvas.getContext('2d');
+
+        var MG_TALKS = [
+            { t:"How to Trust AI Coding at Scale",          yt:"https://www.youtube.com/watch?v=Ie27sg1FQik\u0026t=1989s" },
+            { t:"Software Craftsmanship for Coding Agents", yt:"https://www.youtube.com/watch?v=nd2fXYHK4vc\u0026t=5s" },
+            { t:"Refactoring Legacy Code Safely",           yt:"https://www.youtube.com/watch?v=nDu0zA_QiwU\u0026t=2773s" },
+            { t:"Zero Lines, Zero Bugs",                    yt:"https://www.youtube.com/watch?v=c6EsmTs4dAY\u0026t=154s" },
+            { t:"Instrument, Govern \u0026 Debug Agents",   yt:"https://www.youtube.com/watch?v=BQfBNesA_7A\u0026t=551s" },
+            { t:"Team Dynamics After AI",                   yt:"https://www.youtube.com/watch?v=9coYgxFwHuU\u0026t=423s" },
+            { t:"Agents Across the SDLC",                   yt:"https://www.youtube.com/watch?v=CZjImpmUR7Y\u0026t=1605s" },
+            { t:"How AI Agents Really Read Code",           yt:"https://www.youtube.com/watch?v=YXx4YQnu7Cs" },
+            { t:"Approximation Before Precision",           yt:"https://www.youtube.com/watch?v=82Tah-yrcFY\u0026t=327s" },
+            { t:"New Organizational Models for AI",         yt:"https://www.youtube.com/watch?v=McozJv6ThiQ\u0026t=3030s" },
+            { t:"From Spaghetti to Ravioli",                yt:"https://www.youtube.com/watch?v=Zdobci6tWeM\u0026t=9s" },
+            { t:"Agentic AI Coding: Best Practices",        yt:"https://www.youtube.com/watch?v=AQWyhqzGHaU\u0026t=982s" },
+            { t:"XP Practices: The Missing Piece",          yt:"https://www.youtube.com/watch?v=M58tOdNHbxM\u0026t=4956s" },
+            { t:"AC/DC \u2014 Agent-Centric Dev Cycle",     yt:"https://www.youtube.com/watch?v=YXXFjebvfNc\u0026t=9s" },
+        ];
+
+        // Brain image — uses assets/ai-agents-image.jpg (already in repo)
+        document.getElementById('mg-bmc').setAttribute('cx', CX);
+        document.getElementById('mg-bmc').setAttribute('cy', CY);
+        mgEl('image', { href:'assets/ai-agents-image.jpg', x:CX-200, y:CY-135,
+            width:400, height:268, mask:'url(#mg-bm)',
+            preserveAspectRatio:'xMidYMid slice',
+            style:'filter:brightness(0.28) saturate(1.4)' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:110,fill:'url(#mg-grid)',mask:'url(#mg-bm)',style:'pointer-events:none;opacity:0.5' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:110,fill:'url(#mg-bd)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:110,fill:'url(#mg-cg)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:110,fill:'url(#mg-vg)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:75,fill:'none',stroke:'rgba(0,229,255,0.10)',
+            'stroke-width':'1',filter:'url(#mg-rg)',style:'pointer-events:none' }, mgSvg);
+
+        // Circuit rails
+        var mgRails = [
+            [{x:0,y:H*.18},{x:W*.10,y:H*.18},{x:W*.10,y:H*.40},{x:W*.28,y:H*.40},{x:W*.28,y:H*.12},{x:W*.55,y:H*.12},{x:W*.55,y:H*.38},{x:W*.78,y:H*.38},{x:W*.78,y:H*.08},{x:W,y:H*.08}],
+            [{x:W,y:H*.72},{x:W*.85,y:H*.72},{x:W*.85,y:H*.52},{x:W*.60,y:H*.52},{x:W*.60,y:H*.82},{x:W*.35,y:H*.82},{x:W*.35,y:H*.60},{x:W*.12,y:H*.60},{x:W*.12,y:H*.90},{x:0,y:H*.90}],
+            [{x:W*.22,y:0},{x:W*.22,y:H*.28},{x:W*.42,y:H*.28},{x:W*.42,y:H*.72},{x:W*.60,y:H*.72},{x:W*.60,y:H*.15},{x:W*.80,y:H*.15},{x:W*.80,y:H}],
+        ];
+        var mgParts = [];
+        mgRails.forEach(function(rail, ri) {
+            for (var i=0;i<2;i++) mgParts.push({ rail:rail, pos:i/2, speed:0.0008+ri*0.00015+Math.random()*0.0005, tail:20 });
+        });
+        function mgPtOn(rail, t) {
+            t=((t%1)+1)%1;
+            var n=rail.length-1, seg=Math.min(Math.floor(t*n),n-1), f=t*n-seg;
+            return { x:rail[seg].x+(rail[seg+1].x-rail[seg].x)*f, y:rail[seg].y+(rail[seg+1].y-rail[seg].y)*f };
+        }
+
+        var mgBaseAngle = 0;
+        var mgHovered   = -1;
+        var mgPositions = MG_TALKS.map(function() { return {x:0,y:0,w:0}; });
+        var INNER_SPD   = 0.00042;
+        var OUTER_SPD   = 0.00055;
+
+        mgHit.addEventListener('mousemove', function(e) {
+            var rect=mgHit.getBoundingClientRect(), mx=e.clientX-rect.left, my=e.clientY-rect.top;
+            mgHovered=-1;
+            mgPositions.forEach(function(pos,i){
+                if(Math.abs(mx-pos.x)<pos.w/2+8 && Math.abs(my-pos.y)<12) mgHovered=i;
+            });
+            mgHit.style.cursor = mgHovered>=0?'pointer':'default';
+        });
+        mgHit.addEventListener('click', function(){
+            if(mgHovered>=0) window.open(MG_TALKS[mgHovered].yt,'_blank');
+        });
+
+        function drawOrbNode(i, x, y) {
+            var isHov=mgHovered===i, text=MG_TALKS[i].t;
+            mgCtx.font='9px Space Mono, monospace';
+            var tw=mgCtx.measureText(text).width;
+            mgPositions[i]={x:x,y:y,w:tw};
+            // Halo
+            var gr=mgCtx.createRadialGradient(x,y,0,x,y,isHov?30:21);
+            gr.addColorStop(0,isHov?'rgba(0,229,255,0.35)':'rgba(0,229,255,0.22)');
+            gr.addColorStop(1,'rgba(0,229,255,0)');
+            mgCtx.beginPath();mgCtx.arc(x,y,isHov?30:21,0,Math.PI*2);
+            mgCtx.fillStyle=gr;mgCtx.fill();
+            // Dot
+            mgCtx.beginPath();mgCtx.arc(x,y,isHov?6:4.5,0,Math.PI*2);
+            mgCtx.fillStyle=isHov?'rgba(0,229,255,1)':'rgba(0,229,255,0.85)';
+            mgCtx.shadowColor='rgba(0,229,255,0.9)';mgCtx.shadowBlur=isHov?18:12;
+            mgCtx.fill();mgCtx.shadowBlur=0;
+            // Highlight
+            mgCtx.beginPath();mgCtx.arc(x-1,y-1,isHov?2:1.5,0,Math.PI*2);
+            mgCtx.fillStyle='rgba(255,255,255,0.7)';mgCtx.fill();
+            // Label
+            mgCtx.save();mgCtx.textAlign='center';mgCtx.textBaseline='middle';
+            mgCtx.font='9px Space Mono, monospace';
+            if(isHov){mgCtx.shadowColor='rgba(0,229,255,0.8)';mgCtx.shadowBlur=16;}
+            mgCtx.fillStyle=isHov?'#ffffff':'rgba(185,195,220,0.78)';
+            mgCtx.fillText(text,x,y-14);
+            mgCtx.restore();
+        }
+
+        function mgAnimate() {
+            var mult=mgHovered>=0?0.08:1;
+            mgBaseAngle+=INNER_SPD*mult;
+            mgCtx.clearRect(0,0,W,H);
+            mgCtx.font='9px Space Mono, monospace';
+            // Orbit rings
+            [R1,R2].forEach(function(r){
+                mgCtx.beginPath();mgCtx.arc(CX,CY,r,0,Math.PI*2);
+                mgCtx.strokeStyle='rgba(0,229,255,0.05)';mgCtx.lineWidth=1;
+                mgCtx.setLineDash([3,9]);mgCtx.stroke();mgCtx.setLineDash([]);
+            });
+            // Circuit
+            mgRails.forEach(function(rail){
+                mgCtx.beginPath();mgCtx.moveTo(rail[0].x,rail[0].y);
+                rail.forEach(function(p){mgCtx.lineTo(p.x,p.y);});
+                mgCtx.strokeStyle='rgba(160,25,8,0.11)';mgCtx.lineWidth=1;mgCtx.stroke();
+                rail.forEach(function(p,i){
+                    if(i===0||i===rail.length-1)return;
+                    mgCtx.beginPath();mgCtx.arc(p.x,p.y,2,0,Math.PI*2);
+                    mgCtx.fillStyle='rgba(200,40,10,0.20)';mgCtx.fill();
+                });
+            });
+            mgParts.forEach(function(p){
+                p.pos=(p.pos+p.speed)%1;
+                for(var i=0;i<p.tail;i++){
+                    var tp=((p.pos-i*0.022)+1)%1,pt=mgPtOn(p.rail,tp),frac=1-i/p.tail;
+                    mgCtx.beginPath();mgCtx.arc(pt.x,pt.y,frac*2.5,0,Math.PI*2);
+                    mgCtx.fillStyle=i<3?('rgba(255,230,120,'+(frac*0.9)+')'):i<8?('rgba(255,120,30,'+(frac*0.75)+')'):('rgba(210,45,10,'+(frac*0.6)+')');
+                    mgCtx.fill();
+                }
+            });
+            // Inner orbit (0-6)
+            for(var i=0;i<7;i++){
+                var a=mgBaseAngle+(i/7)*Math.PI*2;
+                drawOrbNode(i,CX+Math.cos(a)*R1,CY+Math.sin(a)*R1);
+            }
+            // Outer orbit (7-13, counter-clockwise)
+            var outerA=-(mgBaseAngle*(OUTER_SPD/INNER_SPD));
+            for(var j=0;j<7;j++){
+                var a2=outerA+(j/7)*Math.PI*2;
+                drawOrbNode(7+j,CX+Math.cos(a2)*R2,CY+Math.sin(a2)*R2);
+            }
+            requestAnimationFrame(mgAnimate);
+        }
+        mgAnimate();
+    })();
 </script>
 </body>
 </html>
