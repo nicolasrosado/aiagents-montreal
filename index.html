@@ -330,7 +330,8 @@
             height: 500px;
             border-radius: 4px;
             border: 1px solid var(--border);
-            overflow: hidden;
+            position: relative;
+            z-index: 2;
         }
 
         .map-caption {
@@ -1874,55 +1875,75 @@
 
     // ── MAP ───────────────────────────────────────────────────────────────────
 
-    const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([30, 0], 2);
+    let map;
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd', maxZoom: 19
-    }).addTo(map);
+    function initMap() {
+        const mapEl = document.getElementById('map');
+        if (!mapEl || map) return;
 
-    // Force map to recalculate size after full page render
-    setTimeout(() => { map.invalidateSize(); }, 300);
+        map = L.map('map', {
+            zoomControl: true,
+            scrollWheelZoom: false,
+            preferCanvas: true
+        }).setView([30, 0], 2);
 
-    function makeIcon(upcoming) {
-        const color = upcoming ? '#f59e0b' : '#00e5ff';
-        const glow  = upcoming ? 'rgba(245,158,11,0.7), 0 0 20px rgba(245,158,11,0.3)' : 'rgba(0,229,255,0.7), 0 0 20px rgba(0,229,255,0.3)';
-        return L.divIcon({
-            className: '',
-            html: `<div style="
-      width:14px; height:14px;
-      background:${color};
-      border-radius:50%;
-      border:2px solid #0a0a0f;
-      box-shadow:0 0 10px ${glow};
-    "></div>`,
-            iconSize: [14, 14],
-            iconAnchor: [7, 7]
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd', maxZoom: 19
+        }).addTo(map);
+
+        function makeIcon(upcoming) {
+            const color = upcoming ? '#f59e0b' : '#00e5ff';
+            const glow  = upcoming ? 'rgba(245,158,11,0.7), 0 0 20px rgba(245,158,11,0.3)' : 'rgba(0,229,255,0.7), 0 0 20px rgba(0,229,255,0.3)';
+            return L.divIcon({
+                className: '',
+                html: `<div style="
+        width:14px; height:14px;
+        background:${color};
+        border-radius:50%;
+        border:2px solid #0a0a0f;
+        box-shadow:0 0 10px ${glow};
+      "></div>`,
+                iconSize: [14, 14],
+                iconAnchor: [7, 7]
+            });
+        }
+
+        const coordMap = {};
+        speakers.forEach(s => {
+            const key = `${s.lat},${s.lng}`;
+            if (!coordMap[key]) coordMap[key] = [];
+            coordMap[key].push(s);
         });
+
+        Object.entries(coordMap).forEach(([key, group]) => {
+            const [lat, lng] = key.split(',').map(Number);
+            const names = group.map(s => s.name).join(' + ');
+            const isUpcoming = group.every(s => s.upcoming);
+            const talksList = group.map(s => `<div class="popup-talk">${s.upcoming ? '🔜' : '🎙'} "${s.talk}"</div>`).join('');
+            const locs = [...new Set(group.map(s => s.location))].join(', ');
+
+            const marker = L.marker([lat, lng], { icon: makeIcon(isUpcoming) }).addTo(map);
+            marker.bindPopup(`
+      <div class="popup-name">${names}</div>
+      <div class="popup-location">${locs}</div>
+      ${talksList}
+    `, { maxWidth: 280 });
+        });
+
+        // Multiple invalidateSize calls to handle async rendering
+        setTimeout(() => map.invalidateSize(), 100);
+        setTimeout(() => map.invalidateSize(), 500);
+        setTimeout(() => map.invalidateSize(), 1500);
     }
 
-    // Group speakers by coordinates to avoid overlap
-    const coordMap = {};
-    speakers.forEach(s => {
-        const key = `${s.lat},${s.lng}`;
-        if (!coordMap[key]) coordMap[key] = [];
-        coordMap[key].push(s);
-    });
-
-    Object.entries(coordMap).forEach(([key, group]) => {
-        const [lat, lng] = key.split(',').map(Number);
-        const names = group.map(s => s.name).join(' + ');
-        const isUpcoming = group.every(s => s.upcoming);
-        const talksList = group.map(s => `<div class="popup-talk">${s.upcoming ? '🔜' : '🎙'} "${s.talk}"</div>`).join('');
-        const locs = [...new Set(group.map(s => s.location))].join(', ');
-
-        const marker = L.marker([lat, lng], { icon: makeIcon(isUpcoming) }).addTo(map);
-        marker.bindPopup(`
-    <div class="popup-name">${names}</div>
-    <div class="popup-location">${locs}</div>
-    ${talksList}
-  `, { maxWidth: 280 });
-    });
+    // Init on DOM ready AND window load for reliability
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMap);
+    } else {
+        initMap();
+    }
+    window.addEventListener('load', initMap);
 
     // ── SPEAKERS GRID ──────────────────────────────────────────────────────────
 
