@@ -1827,6 +1827,7 @@
             upcoming: true
         },
         {
+            name: "Dragan Stepanović",
             location: "Berlin, Germany 🇩🇪",
             lat: 52.52, lng: 13.405,
             bio: "Staff Engineer with deep expertise in distributed systems and software design. Advocates for Systems Thinking, Lean, Theory of Constraints, and XP applied to AI-assisted development teams. Based in Berlin.",
@@ -2384,88 +2385,52 @@
     loadMediumArticles();
     renderResources();
     loadCraftCodeEpisode();
+
+
     // ── CIRCUIT PARTICLE ANIMATION ───────────────────────────────────────────────
 
     (function () {
         const canvas = document.getElementById('circuit-canvas');
         if (!canvas) return;
 
-        function resize() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-        }
-
-        resize();
-        window.addEventListener('resize', () => {
-            resize();
-            buildRails();
-        });
-
         const ctx = canvas.getContext('2d');
         let rails = [];
         let particles = [];
+        let raf;
+
+        function resize() {
+            const w = canvas.parentElement ? canvas.parentElement.offsetWidth : window.innerWidth;
+            const h = canvas.parentElement ? canvas.parentElement.offsetHeight : window.innerHeight;
+            canvas.width = w || window.innerWidth;
+            canvas.height = h || 500;
+        }
 
         function buildRails() {
             const W = canvas.width, H = canvas.height;
+            if (!W || !H) return;
+
             rails = [
-                [{x: 0, y: H * .22}, {x: W * .12, y: H * .22}, {x: W * .12, y: H * .44}, {
-                    x: W * .28,
-                    y: H * .44
-                }, {x: W * .28, y: H * .18}, {x: W * .55, y: H * .18}, {x: W * .55, y: H * .38}, {
-                    x: W * .72,
-                    y: H * .38
-                }, {x: W * .72, y: H * .12}, {x: W, y: H * .12}],
-                [{x: 0, y: H * .65}, {x: W * .08, y: H * .65}, {x: W * .08, y: H * .82}, {
-                    x: W * .22,
-                    y: H * .82
-                }, {x: W * .22, y: H * .55}, {x: W * .42, y: H * .55}, {x: W * .42, y: H * .78}, {
-                    x: W * .60,
-                    y: H * .78
-                }, {x: W * .60, y: H * .48}, {x: W * .80, y: H * .48}, {x: W * .80, y: H * .70}, {
-                    x: W,
-                    y: H * .70
-                }],
-                [{x: W, y: H * .30}, {x: W * .88, y: H * .30}, {x: W * .88, y: H * .58}, {
-                    x: W * .68,
-                    y: H * .58
-                }, {x: W * .68, y: H * .28}, {x: W * .48, y: H * .28}, {x: W * .48, y: H * .62}, {
-                    x: W * .32,
-                    y: H * .62
-                }, {x: W * .32, y: H * .35}, {x: W * .15, y: H * .35}, {x: W * .15, y: H * .72}, {
-                    x: 0,
-                    y: H * .72
-                }],
-                [{x: W * .20, y: 0}, {x: W * .20, y: H * .25}, {x: W * .38, y: H * .25}, {
-                    x: W * .38,
-                    y: H * .68
-                }, {x: W * .52, y: H * .68}, {x: W * .52, y: H * .15}, {x: W * .65, y: H * .15}, {
-                    x: W * .65,
-                    y: H * .50
-                }, {x: W * .82, y: H * .50}, {x: W * .82, y: H}],
-                [{x: W * .70, y: 0}, {x: W * .70, y: H * .20}, {x: W * .45, y: H * .20}, {
-                    x: W * .45,
-                    y: H * .45
-                }, {x: W * .25, y: H * .45}, {x: W * .25, y: H * .88}, {x: W * .10, y: H * .88}, {
-                    x: W * .10,
-                    y: H
-                }],
+                [{x:0,y:H*.22},{x:W*.12,y:H*.22},{x:W*.12,y:H*.44},{x:W*.28,y:H*.44},{x:W*.28,y:H*.18},{x:W*.55,y:H*.18},{x:W*.55,y:H*.38},{x:W*.72,y:H*.38},{x:W*.72,y:H*.12},{x:W,y:H*.12}],
+                [{x:0,y:H*.65},{x:W*.08,y:H*.65},{x:W*.08,y:H*.82},{x:W*.22,y:H*.82},{x:W*.22,y:H*.55},{x:W*.42,y:H*.55},{x:W*.42,y:H*.78},{x:W*.60,y:H*.78},{x:W*.60,y:H*.48},{x:W*.80,y:H*.48},{x:W*.80,y:H*.70},{x:W,y:H*.70}],
+                [{x:W,y:H*.30},{x:W*.88,y:H*.30},{x:W*.88,y:H*.58},{x:W*.68,y:H*.58},{x:W*.68,y:H*.28},{x:W*.48,y:H*.28},{x:W*.48,y:H*.62},{x:W*.32,y:H*.62},{x:W*.32,y:H*.35},{x:W*.15,y:H*.35},{x:W*.15,y:H*.72},{x:0,y:H*.72}],
+                [{x:W*.20,y:0},{x:W*.20,y:H*.25},{x:W*.38,y:H*.25},{x:W*.38,y:H*.68},{x:W*.52,y:H*.68},{x:W*.52,y:H*.15},{x:W*.65,y:H*.15},{x:W*.65,y:H*.50},{x:W*.82,y:H*.50},{x:W*.82,y:H}],
+                [{x:W*.70,y:0},{x:W*.70,y:H*.20},{x:W*.45,y:H*.20},{x:W*.45,y:H*.45},{x:W*.25,y:H*.45},{x:W*.25,y:H*.88},{x:W*.10,y:H*.88},{x:W*.10,y:H}],
             ];
 
             particles = [];
-            rails.forEach((rail, ri) => {
-                const count = 4 + ri;
+            rails.forEach(function(rail, ri) {
+                const count = 3 + ri;
                 for (let i = 0; i < count; i++) {
                     particles.push({
-                        rail,
+                        rail: rail,
                         pos: i / count,
-                        speed: 0.0025 + ri * 0.0004 + Math.random() * 0.0015,
-                        tailLen: 22 + Math.floor(Math.random() * 12),
+                        // Speed reduced by ~60% vs previous version
+                        speed: 0.0008 + ri * 0.00015 + Math.random() * 0.0005,
+                        tailLen: 18 + Math.floor(Math.random() * 10),
                     });
                 }
             });
         }
-
-        buildRails();
 
         function ptOn(rail, t) {
             t = ((t % 1) + 1) % 1;
@@ -2482,51 +2447,59 @@
             ctx.beginPath();
             ctx.moveTo(rail[0].x, rail[0].y);
             for (let i = 1; i < rail.length; i++) ctx.lineTo(rail[i].x, rail[i].y);
-            ctx.strokeStyle = 'rgba(160,25,8,0.15)';
+            ctx.strokeStyle = 'rgba(160,25,8,0.12)';
             ctx.lineWidth = 1;
             ctx.stroke();
-            // junction nodes
-            rail.forEach((p, i) => {
+            rail.forEach(function(p, i) {
                 if (i === 0 || i === rail.length - 1) return;
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(200,40,10,0.3)';
+                ctx.fillStyle = 'rgba(200,40,10,0.25)';
                 ctx.fill();
             });
         }
 
-        let raf;
-
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
             rails.forEach(drawRail);
-
-            particles.forEach(p => {
+            particles.forEach(function(p) {
                 p.pos = (p.pos + p.speed) % 1;
                 for (let i = 0; i < p.tailLen; i++) {
                     const tp = ((p.pos - i * 0.022) + 1) % 1;
                     const pt = ptOn(p.rail, tp);
                     const frac = 1 - i / p.tailLen;
-                    const size = frac * 2.8;
                     ctx.beginPath();
-                    ctx.arc(pt.x, pt.y, size, 0, Math.PI * 2);
-                    // head = bright yellow-white, tail = deep orange-red
+                    ctx.arc(pt.x, pt.y, frac * 2.5, 0, Math.PI * 2);
                     if (i < 3) {
-                        ctx.fillStyle = `rgba(255,230,120,${frac * 0.95})`;
+                        ctx.fillStyle = 'rgba(255,230,120,' + (frac * 0.9) + ')';
                     } else if (i < 8) {
-                        ctx.fillStyle = `rgba(255,120,30,${frac * 0.85})`;
+                        ctx.fillStyle = 'rgba(255,120,30,' + (frac * 0.75) + ')';
                     } else {
-                        ctx.fillStyle = `rgba(210,45,10,${frac * 0.7})`;
+                        ctx.fillStyle = 'rgba(210,45,10,' + (frac * 0.6) + ')';
                     }
                     ctx.fill();
                 }
             });
-
             raf = requestAnimationFrame(animate);
         }
 
-        animate();
+        function start() {
+            resize();
+            buildRails();
+            if (canvas.width > 0 && canvas.height > 0) {
+                animate();
+            } else {
+                setTimeout(start, 100);
+            }
+        }
+
+        window.addEventListener('resize', function() { resize(); buildRails(); });
+
+        if (document.readyState === 'complete') {
+            setTimeout(start, 50);
+        } else {
+            window.addEventListener('load', function() { setTimeout(start, 50); });
+        }
     })();
 
     loadMeetupData();
