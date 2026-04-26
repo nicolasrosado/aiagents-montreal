@@ -1249,7 +1249,7 @@
                     <stop offset="88%"  stop-color="white" stop-opacity="0.12"/>
                     <stop offset="100%" stop-color="white" stop-opacity="0"/>
                 </radialGradient>
-                <mask id="mg-bm"><circle id="mg-bmc" r="110" fill="url(#mg-bf)"/></mask>
+                <mask id="mg-bm"><circle id="mg-bmc" r="175" fill="url(#mg-bf)"/></mask>
                 <radialGradient id="mg-bd" cx="50%" cy="50%" r="50%">
                     <stop offset="0%"   stop-color="rgba(5,5,18,0.38)"/>
                     <stop offset="60%"  stop-color="rgba(5,5,18,0.65)"/>
@@ -2736,15 +2736,15 @@
         // Brain image — uses assets/ai-agents-image.jpg (already in repo)
         document.getElementById('mg-bmc').setAttribute('cx', CX);
         document.getElementById('mg-bmc').setAttribute('cy', CY);
-        mgEl('image', { href:'assets/ai-agents-image.jpg', x:CX-200, y:CY-135,
-            width:400, height:268, mask:'url(#mg-bm)',
-            preserveAspectRatio:'xMidYMid slice',
-            style:'filter:brightness(0.28) saturate(1.4)' }, mgSvg);
-        mgEl('circle', { cx:CX,cy:CY,r:110,fill:'url(#mg-grid)',mask:'url(#mg-bm)',style:'pointer-events:none;opacity:0.5' }, mgSvg);
-        mgEl('circle', { cx:CX,cy:CY,r:110,fill:'url(#mg-bd)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
-        mgEl('circle', { cx:CX,cy:CY,r:110,fill:'url(#mg-cg)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
-        mgEl('circle', { cx:CX,cy:CY,r:110,fill:'url(#mg-vg)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
-        mgEl('circle', { cx:CX,cy:CY,r:75,fill:'none',stroke:'rgba(0,229,255,0.10)',
+        mgEl('image', { href:'assets/brain-circle.jpg', x:CX-175, y:CY-175,
+            width:350, height:350, mask:'url(#mg-bm)',
+            preserveAspectRatio:'none',
+            style:'filter:brightness(0.32) saturate(1.5)' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:175,fill:'url(#mg-grid)',mask:'url(#mg-bm)',style:'pointer-events:none;opacity:0.5' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:175,fill:'url(#mg-bd)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:175,fill:'url(#mg-cg)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:175,fill:'url(#mg-vg)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:119,fill:'none',stroke:'rgba(0,229,255,0.10)',
             'stroke-width':'1',filter:'url(#mg-rg)',style:'pointer-events:none' }, mgSvg);
 
         // Circuit rails

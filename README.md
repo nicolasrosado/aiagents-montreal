@@ -12,7 +12,8 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 ├── README.md
 ├── TODO.md
 └── assets/
-    └── ai-agents-image.jpg # Header background image (parallax + circuit animation)
+    ├── ai-agents-image.jpg # Header background image (parallax + circuit animation)
+    └── brain-circle.jpg    # Brain image for the Knowledge Graph center (350×350px crop)
 ```
 
 ## Features
@@ -24,21 +25,15 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - Live next event banner fetched from Meetup
 - "🎙 Suggest a Talk" CTA → LinkedIn
 
-### 🧠 Talk Knowledge Graph
+### 🧠 Talk Knowledge Graph *(section 01 — displayed first)*
 - **Orbital mind graph** — 14 talks orbiting the AI brain image (same Option D treatment as the header)
 - 2 concentric orbits: inner (talks 1-7, clockwise) · outer (talks 8-14, counter-clockwise)
 - Bright cyan pulsing dots per talk with glow halo — hover to slow the rotation, click to open the YouTube video
 - Circuit animation (red/orange particles) in the background, same style as the header
-- Uses `assets/ai-agents-image.jpg` — no additional asset needed
-- **Displayed first** — section 01, before the World Map
+- Uses `assets/brain-circle.jpg` — 350×350px crop centered on the brain, no "AI" text visible
+- Mask radius r=175 — image fits exactly inside the circle
 
-### 🌍 Global Speakers Map
-- **Orbital mind graph** — 14 talks orbiting the AI brain image (same Option D treatment as the header)
-- 2 concentric orbits: inner (talks 1-7, clockwise) · outer (talks 8-14, counter-clockwise)
-- Bright cyan pulsing dots per talk with glow halo — hover to slow the rotation, click to open the YouTube video
-- Circuit animation (red/orange particles) in the background, same style as the header
-- Uses `assets/ai-agents-image.jpg` — no additional asset needed
-- Inserted between the World Map and the Speakers sections
+### 🌍 Global Speakers Map *(section 02)*
 - **Leaflet.js** interactive map with dark CartoDB tiles
 - 🔵 Cyan glowing markers = past speakers · 🟡 Amber glowing markers = upcoming speakers
 - Click any marker for a popup with name, location, and talk title
