@@ -10,6 +10,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 /
 ├── index.html              # Single-page site (self-contained)
 ├── README.md
+├── TODO.md
 └── assets/
     └── ai-agents-image.jpg # Header background image (parallax + circuit animation)
 ```
@@ -18,7 +19,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 
 ### 🎬 Header
 - **Parallax background** — `ai-agents-image.jpg` fixed in place with dark overlay (Option D — Cinematic), grid and cyan/violet glows layered on top
-- **Animated circuit board** — red/orange particle flow (Option B) on orthogonal rails inspired by the PCB in the hero image; responsive canvas, 60fps, auto-rebuilds on resize
+- **Animated circuit board** — red/orange particle flow (Option B) on orthogonal rails inspired by the PCB in the hero image; speed reduced ~60% for a smoother, more subtle effect; responsive canvas, auto-rebuilds on resize
 - Live member count fetched from Meetup
 - Live next event banner fetched from Meetup
 - "🎙 Suggest a Talk" CTA → LinkedIn
@@ -38,11 +39,14 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 
 ### 🎙 Talks
 - Full list of all 14 past talks
-- YouTube and Meetup links per talk *(update YouTube links once videos are published)*
+- **All YouTube links updated** with individual video URLs and timestamps
+- **All Meetup event links updated** with individual event pages
 
 ### ✍️ Articles & Resources
 - **Articles tab** — dynamically fetched from Nicolas Rosado's Medium RSS feed; excludes "Formation continue"; falls back to hardcoded list
-- **Talk Resources tab** — placeholder for links from YouTube comments (slides, GitHub, tools); fill in the `talkResources` array in `index.html`
+- **Talk Resources tab** — fully populated with 60+ links across 12 talks, sourced from YouTube comments:
+    - GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers
+    - Talks with no external resources (Benedikt Stemmildt, Matthias Patzak) are omitted from the list
 
 ### 🌱 Local Ecosystem & Events
 8 community cards covering:
@@ -85,10 +89,9 @@ Uses a **cascade of 3 CORS proxies** — if one fails, the next is tried automat
 
 ## Things to update over time
 
-- **YouTube links** — replace `https://www.youtube.com/@aiagentsmontreal` in the `talks` array with individual video URLs as they are published
-- **Talk Resources** — fill the `talkResources` array with links from YouTube video comments (slides, GitHub, tools)
+- **New talks** — add to the `talks` array and populate `talkResources` with links from YouTube comments
 - **Newsletter** — replace the disabled button with your Substack link once created
-- **Speaker bios** — replace generated bios with the official "About me" from each Meetup event description
+- **Speaker bios** — a few speakers (Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting) are still using generated bios; replace with official "About me" once available
 - **New speakers** — add to the `speakers` array; set `upcoming: true` for future talks, remove the flag once the talk has aired
 - **Devoxx4Kids next event** — update the date (~every 3 months)
 
