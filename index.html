@@ -6,7 +6,7 @@
     <title>AI Agents Montreal — Community</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
     <style>
         :root {
             --bg: #0a0a0f;
@@ -1658,7 +1658,7 @@
     </p>
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
     // ── DATA ──────────────────────────────────────────────────────────────────
 
@@ -1890,73 +1890,206 @@
 
     let map;
 
+    // ── CUSTOM SVG WORLD MAP — zero dependencies ──────────────────────────────
+
     function initMap() {
         const mapEl = document.getElementById('map');
-        if (!mapEl || map) return;
+        if (!mapEl) return;
 
-        map = L.map('map', {
-            zoomControl: true,
-            scrollWheelZoom: false,
-            preferCanvas: true
-        }).setView([30, 0], 2);
-
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-            subdomains: 'abcd', maxZoom: 19
-        }).addTo(map);
-
-        function makeIcon(upcoming) {
-            const color = upcoming ? '#f59e0b' : '#00e5ff';
-            const glow  = upcoming ? 'rgba(245,158,11,0.7), 0 0 20px rgba(245,158,11,0.3)' : 'rgba(0,229,255,0.7), 0 0 20px rgba(0,229,255,0.3)';
-            return L.divIcon({
-                className: '',
-                html: `<div style="
-        width:14px; height:14px;
-        background:${color};
-        border-radius:50%;
-        border:2px solid #0a0a0f;
-        box-shadow:0 0 10px ${glow};
-      "></div>`,
-                iconSize: [14, 14],
-                iconAnchor: [7, 7]
-            });
+        // Mercator projection helpers
+        function project(lat, lng, W, H) {
+            const x = (lng + 180) / 360 * W;
+            const latRad = lat * Math.PI / 180;
+            const mercN = Math.log(Math.tan(Math.PI / 4 + latRad / 2));
+            const y = H / 2 - (mercN * W / (2 * Math.PI));
+            return { x, y };
         }
 
+        // Group speakers by coord
         const coordMap = {};
         speakers.forEach(s => {
-            const key = `${s.lat},${s.lng}`;
+            const key = `${s.lat.toFixed(2)},${s.lng.toFixed(2)}`;
             if (!coordMap[key]) coordMap[key] = [];
             coordMap[key].push(s);
         });
 
-        Object.entries(coordMap).forEach(([key, group]) => {
-            const [lat, lng] = key.split(',').map(Number);
-            const names = group.map(s => s.name).join(' + ');
-            const isUpcoming = group.every(s => s.upcoming);
-            const talksList = group.map(s => `<div class="popup-talk">${s.upcoming ? '🔜' : '🎙'} "${s.talk}"</div>`).join('');
-            const locs = [...new Set(group.map(s => s.location))].join(', ');
+        // Build canvas map
+        const canvas = document.createElement('canvas');
+        canvas.style.cssText = 'width:100%;height:100%;cursor:crosshair;';
+        mapEl.innerHTML = '';
+        mapEl.appendChild(canvas);
 
-            const marker = L.marker([lat, lng], { icon: makeIcon(isUpcoming) }).addTo(map);
-            marker.bindPopup(`
-      <div class="popup-name">${names}</div>
-      <div class="popup-location">${locs}</div>
-      ${talksList}
-    `, { maxWidth: 280 });
+        // Tooltip element
+        const tooltip = document.createElement('div');
+        tooltip.style.cssText = `
+    position:absolute;display:none;background:#1a1a24;border:1px solid #2a2a3a;
+    border-radius:4px;padding:0.75rem 1rem;font-family:monospace;font-size:0.75rem;
+    color:#e8e8f0;pointer-events:none;z-index:100;max-width:260px;line-height:1.5;
+    box-shadow:0 8px 24px rgba(0,0,0,0.5);
+  `;
+        mapEl.style.position = 'relative';
+        mapEl.appendChild(tooltip);
+
+        const ctx = canvas.getContext('2d');
+        let W, H;
+        const dots = [];
+        let animFrame;
+        let pulse = 0;
+        let activeGroup = null;
+
+        // Simple world map land polygons (simplified)
+        const LAND = [
+            // North America
+            "M140,95 L145,90 L155,88 L165,85 L178,82 L185,85 L190,90 L192,98 L195,105 L198,115 L200,125 L198,135 L193,145 L188,152 L182,158 L175,162 L168,168 L162,175 L158,182 L155,188 L152,195 L150,200 L145,205 L140,210 L135,215 L130,218 L125,215 L122,210 L120,205 L118,198 L120,192 L122,185 L125,178 L128,170 L130,162 L132,155 L133,148 L132,140 L130,133 L128,125 L127,118 L128,110 L130,103 L135,98 Z",
+            // Greenland
+            "M185,55 L195,52 L205,50 L215,52 L220,58 L218,65 L212,70 L205,72 L198,70 L192,65 L188,60 Z",
+            // South America
+            "M160,220 L165,215 L172,212 L178,215 L182,220 L185,228 L186,238 L184,248 L180,258 L175,268 L170,278 L165,285 L160,290 L155,293 L150,292 L146,287 L144,280 L143,272 L144,262 L146,252 L148,243 L150,234 L153,226 Z",
+            // Europe
+            "M245,78 L252,75 L260,74 L268,76 L274,80 L276,86 L272,92 L265,96 L258,98 L252,96 L247,92 L244,86 Z",
+            // Africa
+            "M248,105 L256,102 L264,103 L270,108 L274,115 L275,124 L274,133 L270,142 L265,150 L259,158 L253,164 L247,168 L242,170 L238,168 L236,162 L235,155 L235,147 L236,139 L238,131 L240,123 L242,115 L244,108 Z",
+            // Asia
+            "M290,68 L300,65 L315,63 L330,62 L345,63 L358,66 L368,70 L375,76 L378,83 L375,90 L368,96 L358,100 L345,103 L330,104 L315,103 L300,100 L290,96 L285,90 L285,82 Z",
+            // Southeast Asia / Oceania
+            "M340,120 L350,118 L360,120 L368,125 L370,132 L365,138 L355,140 L345,138 L338,132 L337,125 Z",
+            "M350,148 L360,146 L368,150 L370,157 L365,163 L355,164 L347,160 L346,153 Z",
+            // Australia
+            "M335,165 L348,162 L360,163 L370,167 L376,174 L375,182 L368,188 L356,191 L344,190 L334,185 L330,178 L330,170 Z",
+            // Japan
+            "M370,82 L374,80 L378,82 L379,86 L376,89 L372,88 Z",
+            // UK
+            "M238,76 L241,74 L244,76 L244,80 L241,82 L238,80 Z",
+            // Scandinavia
+            "M248,60 L255,56 L260,58 L260,65 L255,68 L249,66 Z",
+        ];
+
+        function draw() {
+            W = canvas.offsetWidth;
+            H = canvas.offsetHeight;
+            canvas.width = W;
+            canvas.height = H;
+            pulse = (pulse + 0.02) % (Math.PI * 2);
+
+            // Background
+            ctx.fillStyle = '#0e0e18';
+            ctx.fillRect(0, 0, W, H);
+
+            // Grid lines
+            ctx.strokeStyle = 'rgba(0,229,255,0.04)';
+            ctx.lineWidth = 1;
+            for (let lng = -180; lng <= 180; lng += 30) {
+                const p1 = project(85, lng, W, H);
+                const p2 = project(-60, lng, W, H);
+                ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+            }
+            for (let lat = -60; lat <= 85; lat += 30) {
+                ctx.beginPath();
+                for (let lng = -180; lng <= 180; lng += 5) {
+                    const p = project(lat, lng, W, H);
+                    lng === -180 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+                }
+                ctx.stroke();
+            }
+
+            // Land masses (simplified paths scaled to canvas)
+            const scaleX = W / 540, scaleY = H / 360;
+            ctx.fillStyle = 'rgba(30,35,55,0.85)';
+            ctx.strokeStyle = 'rgba(50,60,90,0.6)';
+            ctx.lineWidth = 0.8;
+            LAND.forEach(d => {
+                const scaled = d.replace(/(-?\d+\.?\d*),(-?\d+\.?\d*)/g, (_, x, y) =>
+                    `${(parseFloat(x) * scaleX).toFixed(1)},${(parseFloat(y) * scaleY).toFixed(1)}`
+                );
+                const path = new Path2D(scaled);
+                ctx.fill(path); ctx.stroke(path);
+            });
+
+            // Speaker dots
+            dots.length = 0;
+            Object.entries(coordMap).forEach(([key, group]) => {
+                const [lat, lng] = key.split(',').map(Number);
+                const p = project(lat, lng, W, H);
+                const upcoming = group.every(s => s.upcoming);
+                const color = upcoming ? '#f59e0b' : '#00e5ff';
+                const glowColor = upcoming ? 'rgba(245,158,11,' : 'rgba(0,229,255,';
+                const pulseFactor = 1 + Math.sin(pulse + lat) * 0.3;
+
+                // Glow ring
+                const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 12 * pulseFactor);
+                gradient.addColorStop(0, glowColor + '0.3)');
+                gradient.addColorStop(1, glowColor + '0)');
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 12 * pulseFactor, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                // Dot
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+                ctx.fillStyle = color;
+                ctx.shadowColor = color;
+                ctx.shadowBlur = 8;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                // Border
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+                ctx.strokeStyle = '#0a0a0f';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                dots.push({ x: p.x, y: p.y, group, upcoming });
+            });
+
+            animFrame = requestAnimationFrame(draw);
+        }
+
+        draw();
+
+        // Hover / tooltip
+        canvas.addEventListener('mousemove', e => {
+            const rect = canvas.getBoundingClientRect();
+            const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+            const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+            let hit = null;
+            for (const d of dots) {
+                const dist = Math.hypot(d.x - mx, d.y - my);
+                if (dist < 12) { hit = d; break; }
+            }
+            if (hit) {
+                canvas.style.cursor = 'pointer';
+                const names = hit.group.map(s => s.name).join(' + ');
+                const locs = [...new Set(hit.group.map(s => s.location))].join(', ');
+                const talks = hit.group.map(s => `${s.upcoming ? '🔜' : '🎙'} ${s.talk}`).join('<br>');
+                tooltip.innerHTML = `
+        <div style="font-family:sans-serif;font-weight:700;color:${hit.upcoming ? '#f59e0b' : '#00e5ff'};margin-bottom:3px">${names}</div>
+        <div style="font-size:0.68rem;color:#6b7280;margin-bottom:6px">${locs}</div>
+        <div style="font-size:0.72rem;font-style:italic">${talks}</div>
+      `;
+                const canvasRect = canvas.getBoundingClientRect();
+                const containerRect = mapEl.getBoundingClientRect();
+                let tx = e.clientX - containerRect.left + 12;
+                let ty = e.clientY - containerRect.top + 12;
+                if (tx + 270 > containerRect.width) tx -= 280;
+                tooltip.style.left = tx + 'px';
+                tooltip.style.top = ty + 'px';
+                tooltip.style.display = 'block';
+            } else {
+                canvas.style.cursor = 'crosshair';
+                tooltip.style.display = 'none';
+            }
         });
 
-        // Multiple invalidateSize calls to handle async rendering
-        setTimeout(() => map.invalidateSize(), 100);
-        setTimeout(() => map.invalidateSize(), 500);
-        setTimeout(() => map.invalidateSize(), 1500);
+        canvas.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
     }
 
-    // Init on DOM ready AND window load for reliability
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initMap);
     } else {
         initMap();
     }
-    window.addEventListener('load', initMap);
 
     // ── SPEAKERS GRID ──────────────────────────────────────────────────────────
 
