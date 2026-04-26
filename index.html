@@ -2115,24 +2115,25 @@
 
     const list = document.getElementById('talks-list');
     talks.forEach(t => {
-        list.innerHTML += `
-    <div class="talk-item">
-      <div class="talk-number">${String(t.n).padStart(2, '0')}</div>
-      <div>
-        <div class="talk-title">${t.title}</div>
-        <div class="talk-speaker">${t.speaker}</div>
-      </div>
-      <div class="talk-links">
-        <a href="${t.yt}" target="_blank" class="talk-link yt">▶ YouTube</a>
-        <a href="${t.meetup}" target="_blank" class="talk-link meetup">● Meetup</a>
-      </div>
-    </div>
-  `;
+            list.innerHTML += `
+        <div class="talk-item">
+          <div class="talk-number">${String(t.n).padStart(2, '0')}</div>
+          <div>
+            <div class="talk-title">${t.title}</div>
+            <div class="talk-speaker">${t.speaker}</div>
+          </div>
+          <div class="talk-links">
+            <a href="${t.yt}" target="_blank" class="talk-link yt">▶ YouTube</a>
+            <a href="${t.meetup}" target="_blank" class="talk-link meetup">● Meetup</a>
+          </div>
+        </div>
+      `;
+    })
 // ── DYNAMIC: Software Crafters MTL via Guild.host ──────────────────────────
 
         async function loadCraftersEvent() {
             const titleEl = document.getElementById('crafters-event-title');
-            const dateEl  = document.getElementById('crafters-event-date');
+            const dateEl = document.getElementById('crafters-event-date');
             try {
                 // Guild.host exposes a public JSON feed for each guild's upcoming events
                 const res = await fetchWithProxy('https://guild.host/api/guilds/software-crafters-montreal/events?type=upcoming&limit=1');
@@ -2144,7 +2145,12 @@
                     const name = ev.name || ev.title || 'Upcoming event';
                     const dateRaw = ev.startAt || ev.start_at || ev.date || ev.startsAt;
                     const dateStr = dateRaw
-                        ? new Date(dateRaw).toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' })
+                        ? new Date(dateRaw).toLocaleDateString('en-US', {
+                            weekday: 'long',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })
                         : '';
                     const mode = ev.isInPerson ? 'In-Person' : ev.isVirtual ? 'Virtual' : '';
                     const attendees = ev.attendeeCount || ev.attendees_count || '';
@@ -2153,7 +2159,7 @@
                 } else {
                     throw new Error('no event');
                 }
-            } catch(e) {
+            } catch (e) {
                 // Fallback: show known event with link
                 titleEl.innerHTML = `<a href="https://guild.host/software-crafters-montreal/events" target="_blank" style="color:inherit;text-decoration:none;">See upcoming events on Guild.host ↗</a>`;
                 dateEl.textContent = 'Click to view the latest events';
@@ -2163,8 +2169,8 @@
 // ── DYNAMIC: MenderCon via homepage ────────────────────────────────────────
 
         async function loadMenderConEvent() {
-            const titleEl  = document.getElementById('mendercon-event-title');
-            const dateEl   = document.getElementById('mendercon-event-date');
+            const titleEl = document.getElementById('mendercon-event-title');
+            const dateEl = document.getElementById('mendercon-event-date');
             const ticketEl = document.getElementById('mendercon-ticket-link');
             try {
                 // Use a CORS proxy to fetch MenderCon homepage and parse the event info
@@ -2200,7 +2206,7 @@
                 } else {
                     throw new Error('parse failed');
                 }
-            } catch(e) {
+            } catch (e) {
                 // Fallback to last known data
                 titleEl.textContent = 'MenderCon — see mendercon.com for next edition';
                 dateEl.innerHTML = `<a href="https://mendercon.com" target="_blank" style="color:var(--accent);text-decoration:none;">mendercon.com ↗</a>`;
@@ -2216,18 +2222,19 @@
             ];
             for (const proxy of proxies) {
                 try {
-                    const res = await fetch(proxy(url), { signal: AbortSignal.timeout(6000) });
+                    const res = await fetch(proxy(url), {signal: AbortSignal.timeout(6000)});
                     if (res.ok) return res;
-                } catch(e) { /* try next */ }
+                } catch (e) { /* try next */
+                }
             }
             throw new Error('All proxies failed');
         }
 
         async function loadMeetupData() {
             const memberEl = document.getElementById('member-count');
-            const banner   = document.getElementById('next-event-banner');
-            const linkEl   = document.getElementById('next-event-link');
-            const dateEl   = document.getElementById('next-event-date');
+            const banner = document.getElementById('next-event-banner');
+            const linkEl = document.getElementById('next-event-link');
+            const dateEl = document.getElementById('next-event-date');
 
             try {
                 const res = await fetchWithProxy('https://www.meetup.com/ai-agent-montreal/');
@@ -2291,7 +2298,7 @@
                     _updateAIAgentsEcoCard('See upcoming events', 'https://www.meetup.com/ai-agent-montreal/events/', '');
                 }
 
-            } catch(e) {
+            } catch (e) {
                 memberEl.textContent = '800+';
                 linkEl.textContent = 'See upcoming events ↗';
                 linkEl.href = 'https://www.meetup.com/ai-agent-montreal/events/';
@@ -2312,6 +2319,7 @@
             const duration = 1200;
             const start = performance.now();
             const startVal = Math.max(0, target - 50);
+
             function step(now) {
                 const progress = Math.min((now - start) / duration, 1);
                 const eased = 1 - Math.pow(1 - progress, 3); // ease out cubic
@@ -2319,6 +2327,7 @@
                 el.textContent = current.toLocaleString();
                 if (progress < 1) requestAnimationFrame(step);
             }
+
             requestAnimationFrame(step);
         }
 
@@ -2352,7 +2361,7 @@
                 const articles = items
                     .map(item => {
                         const title = item.querySelector('title')?.textContent || '';
-                        const link  = item.querySelector('link')?.textContent?.trim() ||
+                        const link = item.querySelector('link')?.textContent?.trim() ||
                             item.getElementsByTagName('link')[0]?.nextSibling?.nodeValue?.trim() || '';
                         const pubDate = item.querySelector('pubDate')?.textContent || '';
                         const desc = item.querySelector('description')?.textContent || '';
@@ -2370,7 +2379,7 @@
                             year: 'numeric', month: 'short', day: 'numeric'
                         }) : '';
 
-                        return { title, link, date, excerpt, isExcluded };
+                        return {title, link, date, excerpt, isExcluded};
                     })
                     .filter(a => !a.isExcluded && a.title && a.link);
 
@@ -2385,14 +2394,39 @@
       </a>
     `).join('');
 
-            } catch(e) {
+            } catch (e) {
                 // Fallback: hardcoded articles (excluding Formation continue)
                 const fallback = [
-                    { date: 'Feb 17, 2025', title: 'Feedback after five episodes of my podcast 🎙️', link: 'https://nicolas-rosado.medium.com/feedback-after-five-episodes-of-my-podcast-%EF%B8%8F-d7d8d94cfc41', excerpt: 'An open letter to the me of December 2024 from the me of February 2025 — lessons learned after five podcast episodes.' },
-                    { date: 'Feb 17, 2025', title: 'How to tackle developer imposter syndrome thanks to your Reticular Activating System (RAS)', link: 'https://nicolas-rosado.medium.com/how-to-tackle-developer-imposter-syndrome-thanks-to-your-reticular-activating-system-ras-2f38d6dd8d6c', excerpt: 'If you feel like you don\'t know anything despite your experience, your brain\'s RAS might be the key to changing that.' },
-                    { date: 'Dec 3, 2024', title: 'Property Based Testing (PBT) in Java', link: 'https://nicolas-rosado.medium.com/property-based-testing-pbt-in-java-5faccc2ef6f7', excerpt: 'Most developers know classic unit tests but few know property based testing. A clear guide to this powerful testing method.' },
-                    { date: 'Dec 2, 2024', title: 'My Journey On How I Started My Podcast (And Why You Should Overcome Your Fears)', link: 'https://nicolas-rosado.medium.com/my-journey-on-how-i-started-my-podcast-and-why-you-should-overcome-your-fears-c6bca3a5478e', excerpt: 'How I went from fear to action and launched my podcast — and why you should too.' },
-                    { date: 'Jan 17, 2022', title: 'How being a twin girls father has improved my work as a lead developer', link: 'https://nicolas-rosado.medium.com/how-being-a-twin-girls-father-has-improved-my-work-as-a-lead-developer-df5e1b708b02', excerpt: 'Becoming a father of twin girls taught me lessons that made me a better lead developer than any book or course.' },
+                    {
+                        date: 'Feb 17, 2025',
+                        title: 'Feedback after five episodes of my podcast 🎙️',
+                        link: 'https://nicolas-rosado.medium.com/feedback-after-five-episodes-of-my-podcast-%EF%B8%8F-d7d8d94cfc41',
+                        excerpt: 'An open letter to the me of December 2024 from the me of February 2025 — lessons learned after five podcast episodes.'
+                    },
+                    {
+                        date: 'Feb 17, 2025',
+                        title: 'How to tackle developer imposter syndrome thanks to your Reticular Activating System (RAS)',
+                        link: 'https://nicolas-rosado.medium.com/how-to-tackle-developer-imposter-syndrome-thanks-to-your-reticular-activating-system-ras-2f38d6dd8d6c',
+                        excerpt: 'If you feel like you don\'t know anything despite your experience, your brain\'s RAS might be the key to changing that.'
+                    },
+                    {
+                        date: 'Dec 3, 2024',
+                        title: 'Property Based Testing (PBT) in Java',
+                        link: 'https://nicolas-rosado.medium.com/property-based-testing-pbt-in-java-5faccc2ef6f7',
+                        excerpt: 'Most developers know classic unit tests but few know property based testing. A clear guide to this powerful testing method.'
+                    },
+                    {
+                        date: 'Dec 2, 2024',
+                        title: 'My Journey On How I Started My Podcast (And Why You Should Overcome Your Fears)',
+                        link: 'https://nicolas-rosado.medium.com/my-journey-on-how-i-started-my-podcast-and-why-you-should-overcome-your-fears-c6bca3a5478e',
+                        excerpt: 'How I went from fear to action and launched my podcast — and why you should too.'
+                    },
+                    {
+                        date: 'Jan 17, 2022',
+                        title: 'How being a twin girls father has improved my work as a lead developer',
+                        link: 'https://nicolas-rosado.medium.com/how-being-a-twin-girls-father-has-improved-my-work-as-a-lead-developer-df5e1b708b02',
+                        excerpt: 'Becoming a father of twin girls taught me lessons that made me a better lead developer than any book or course.'
+                    },
                 ];
                 container.innerHTML = fallback.map(a => `
       <a href="${a.link}" target="_blank" class="article-card">
@@ -2451,30 +2485,30 @@
 
         async function loadCraftCodeEpisode() {
             const titleEl = document.getElementById('craftcode-ep-title');
-            const dateEl  = document.getElementById('craftcode-ep-date');
+            const dateEl = document.getElementById('craftcode-ep-date');
 
             const YT_PLAYLIST = 'https://youtube.com/playlist?list=PLpWOuEp7MZW91uyBJZyOf_HzBM1eEFUHx&si=gvcSRUvLaBZvtk4j';
 
             try {
-                const RSS_URL  = 'https://anchor.fm/s/ff024d88/podcast/rss';
+                const RSS_URL = 'https://anchor.fm/s/ff024d88/podcast/rss';
                 const res = await fetchWithProxy(RSS_URL);
                 if (!res.ok) throw new Error('fetch error');
                 const text = await res.text();
-                const xml  = new DOMParser().parseFromString(text, 'text/xml');
+                const xml = new DOMParser().parseFromString(text, 'text/xml');
 
                 const item = xml.querySelector('item');
                 if (!item) throw new Error('no item');
 
-                const title   = item.querySelector('title')?.textContent?.trim() || 'Latest episode';
+                const title = item.querySelector('title')?.textContent?.trim() || 'Latest episode';
                 const pubDate = item.querySelector('pubDate')?.textContent || '';
-                const date    = pubDate ? new Date(pubDate).toLocaleDateString('en-US', {
+                const date = pubDate ? new Date(pubDate).toLocaleDateString('en-US', {
                     year: 'numeric', month: 'short', day: 'numeric'
                 }) : '';
 
                 // Always link to YouTube — RSS is only used for title & date metadata
                 titleEl.innerHTML = `<a href="${YT_PLAYLIST}" target="_blank" style="color:inherit;text-decoration:none;">${title} ↗</a>`;
                 dateEl.textContent = date ? `${date} · Watch on YouTube` : 'Watch on YouTube';
-            } catch(e) {
+            } catch (e) {
                 titleEl.innerHTML = `<a href="${YT_PLAYLIST}" target="_blank" style="color:inherit;text-decoration:none;">See all episodes on YouTube ↗</a>`;
                 dateEl.textContent = 'Also available on Spotify';
             }
@@ -2485,16 +2519,20 @@
         loadCraftCodeEpisode();
 // ── CIRCUIT PARTICLE ANIMATION ───────────────────────────────────────────────
 
-        (function() {
+        (function () {
             const canvas = document.getElementById('circuit-canvas');
             if (!canvas) return;
 
             function resize() {
-                canvas.width  = canvas.offsetWidth;
+                canvas.width = canvas.offsetWidth;
                 canvas.height = canvas.offsetHeight;
             }
+
             resize();
-            window.addEventListener('resize', () => { resize(); buildRails(); });
+            window.addEventListener('resize', () => {
+                resize();
+                buildRails();
+            });
 
             const ctx = canvas.getContext('2d');
             let rails = [];
@@ -2503,11 +2541,47 @@
             function buildRails() {
                 const W = canvas.width, H = canvas.height;
                 rails = [
-                    [{x:0,y:H*.22},{x:W*.12,y:H*.22},{x:W*.12,y:H*.44},{x:W*.28,y:H*.44},{x:W*.28,y:H*.18},{x:W*.55,y:H*.18},{x:W*.55,y:H*.38},{x:W*.72,y:H*.38},{x:W*.72,y:H*.12},{x:W,y:H*.12}],
-                    [{x:0,y:H*.65},{x:W*.08,y:H*.65},{x:W*.08,y:H*.82},{x:W*.22,y:H*.82},{x:W*.22,y:H*.55},{x:W*.42,y:H*.55},{x:W*.42,y:H*.78},{x:W*.60,y:H*.78},{x:W*.60,y:H*.48},{x:W*.80,y:H*.48},{x:W*.80,y:H*.70},{x:W,y:H*.70}],
-                    [{x:W,y:H*.30},{x:W*.88,y:H*.30},{x:W*.88,y:H*.58},{x:W*.68,y:H*.58},{x:W*.68,y:H*.28},{x:W*.48,y:H*.28},{x:W*.48,y:H*.62},{x:W*.32,y:H*.62},{x:W*.32,y:H*.35},{x:W*.15,y:H*.35},{x:W*.15,y:H*.72},{x:0,y:H*.72}],
-                    [{x:W*.20,y:0},{x:W*.20,y:H*.25},{x:W*.38,y:H*.25},{x:W*.38,y:H*.68},{x:W*.52,y:H*.68},{x:W*.52,y:H*.15},{x:W*.65,y:H*.15},{x:W*.65,y:H*.50},{x:W*.82,y:H*.50},{x:W*.82,y:H}],
-                    [{x:W*.70,y:0},{x:W*.70,y:H*.20},{x:W*.45,y:H*.20},{x:W*.45,y:H*.45},{x:W*.25,y:H*.45},{x:W*.25,y:H*.88},{x:W*.10,y:H*.88},{x:W*.10,y:H}],
+                    [{x: 0, y: H * .22}, {x: W * .12, y: H * .22}, {x: W * .12, y: H * .44}, {
+                        x: W * .28,
+                        y: H * .44
+                    }, {x: W * .28, y: H * .18}, {x: W * .55, y: H * .18}, {x: W * .55, y: H * .38}, {
+                        x: W * .72,
+                        y: H * .38
+                    }, {x: W * .72, y: H * .12}, {x: W, y: H * .12}],
+                    [{x: 0, y: H * .65}, {x: W * .08, y: H * .65}, {x: W * .08, y: H * .82}, {
+                        x: W * .22,
+                        y: H * .82
+                    }, {x: W * .22, y: H * .55}, {x: W * .42, y: H * .55}, {x: W * .42, y: H * .78}, {
+                        x: W * .60,
+                        y: H * .78
+                    }, {x: W * .60, y: H * .48}, {x: W * .80, y: H * .48}, {x: W * .80, y: H * .70}, {
+                        x: W,
+                        y: H * .70
+                    }],
+                    [{x: W, y: H * .30}, {x: W * .88, y: H * .30}, {x: W * .88, y: H * .58}, {
+                        x: W * .68,
+                        y: H * .58
+                    }, {x: W * .68, y: H * .28}, {x: W * .48, y: H * .28}, {x: W * .48, y: H * .62}, {
+                        x: W * .32,
+                        y: H * .62
+                    }, {x: W * .32, y: H * .35}, {x: W * .15, y: H * .35}, {x: W * .15, y: H * .72}, {
+                        x: 0,
+                        y: H * .72
+                    }],
+                    [{x: W * .20, y: 0}, {x: W * .20, y: H * .25}, {x: W * .38, y: H * .25}, {
+                        x: W * .38,
+                        y: H * .68
+                    }, {x: W * .52, y: H * .68}, {x: W * .52, y: H * .15}, {x: W * .65, y: H * .15}, {
+                        x: W * .65,
+                        y: H * .50
+                    }, {x: W * .82, y: H * .50}, {x: W * .82, y: H}],
+                    [{x: W * .70, y: 0}, {x: W * .70, y: H * .20}, {x: W * .45, y: H * .20}, {
+                        x: W * .45,
+                        y: H * .45
+                    }, {x: W * .25, y: H * .45}, {x: W * .25, y: H * .88}, {x: W * .10, y: H * .88}, {
+                        x: W * .10,
+                        y: H
+                    }],
                 ];
 
                 particles = [];
@@ -2532,8 +2606,8 @@
                 const seg = Math.min(Math.floor(t * n), n - 1);
                 const f = t * n - seg;
                 return {
-                    x: rail[seg].x + (rail[seg+1].x - rail[seg].x) * f,
-                    y: rail[seg].y + (rail[seg+1].y - rail[seg].y) * f,
+                    x: rail[seg].x + (rail[seg + 1].x - rail[seg].x) * f,
+                    y: rail[seg].y + (rail[seg + 1].y - rail[seg].y) * f,
                 };
             }
 
@@ -2555,6 +2629,7 @@
             }
 
             let raf;
+
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
