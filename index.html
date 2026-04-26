@@ -1,0 +1,2417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agents Montreal — Community</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a24;
+      --border: #2a2a3a;
+      --accent: #00e5ff;
+      --accent2: #7c3aed;
+      --accent3: #f59e0b;
+      --text: #e8e8f0;
+      --muted: #6b7280;
+      --font-display: 'Syne', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      overflow: hidden;
+    }
+    .parallax-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 100vh;
+      background-image: url('assets/ai-agents-image.jpg');
+      background-size: cover;
+      background-position: center 30%;
+      background-attachment: fixed;
+      filter: brightness(0.22) saturate(1.3);
+      z-index: -1;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(5,5,18,0.3) 0%, rgba(5,5,18,0.6) 70%, rgba(10,10,15,1) 100%),
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,229,255,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 50%, rgba(124,58,237,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(0,229,255,0.3);
+      padding: 0.25rem 0.75rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-inline: auto;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.3rem;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .nav-btn {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.6rem 1.4rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: 1px solid;
+    }
+
+    .nav-btn.primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .nav-btn.primary:hover { background: #00c4db; border-color: #00c4db; }
+
+    .nav-btn.cta {
+      background: linear-gradient(135deg, var(--accent2), #9333ea);
+      color: white;
+      border-color: transparent;
+      font-weight: 700;
+      box-shadow: 0 0 16px rgba(124,58,237,0.4);
+      transition: all 0.2s;
+    }
+
+    .nav-btn.cta:hover {
+      box-shadow: 0 0 24px rgba(124,58,237,0.6);
+      transform: translateY(-1px);
+    }
+
+    /* ── SUGGEST A TALK BLOCK ── */
+    .suggest-talk-block {
+      background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(0,229,255,0.05));
+      border: 1px solid rgba(124,58,237,0.25);
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .suggest-talk-text {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .suggest-talk-title {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #a78bfa;
+      margin-bottom: 0.2rem;
+    }
+
+    .suggest-talk-desc {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .suggest-talk-btn {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.5rem 1rem;
+      border-radius: 2px;
+      text-decoration: none;
+      background: linear-gradient(135deg, var(--accent2), #9333ea);
+      color: white;
+      border: none;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: all 0.2s;
+      box-shadow: 0 0 12px rgba(124,58,237,0.35);
+      flex-shrink: 0;
+    }
+
+    .suggest-talk-btn:hover {
+      box-shadow: 0 0 20px rgba(124,58,237,0.55);
+      transform: translateY(-1px);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-number {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      margin-left: 1rem;
+    }
+
+    /* ── NEXT EVENT BANNER ── */
+    .next-event-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1.75rem;
+      padding: 0.6rem 1.25rem;
+      background: rgba(0,229,255,0.06);
+      border: 1px solid rgba(0,229,255,0.25);
+      border-radius: 2px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.6s 0.5s ease both;
+    }
+
+    .neb-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .neb-title {
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .neb-title:hover { color: var(--accent); }
+
+    .neb-date {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    .neb-date::before {
+      content: '·';
+      margin-right: 0.5rem;
+      color: var(--border);
+    }
+
+    /* ── MAP ── */
+    #map-section { padding-bottom: 3rem; }
+
+    #map {
+      width: 100%;
+      height: 500px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .map-caption {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* ── SPEAKERS GRID ── */
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .speaker-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .speaker-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .speaker-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-2px); }
+    .speaker-card:hover::before { transform: scaleX(1); }
+
+    .speaker-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .speaker-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .speaker-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .speaker-location {
+      font-size: 0.72rem;
+      color: var(--accent);
+      margin-top: 0.15rem;
+    }
+
+    .speaker-bio {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .speaker-talk {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.72rem;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    /* ── TALKS LIST ── */
+    .talks-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .talk-item {
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+      display: grid;
+      grid-template-columns: 2.5rem 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .talk-item:last-child { border-bottom: none; }
+    .talk-item:hover { background: var(--surface2); }
+
+    .talk-number {
+      font-size: 0.65rem;
+      color: var(--accent);
+      opacity: 0.5;
+      font-family: var(--font-mono);
+      text-align: right;
+    }
+
+    .talk-title {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .talk-speaker {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .talk-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .talk-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.6rem;
+      border-radius: 2px;
+      text-decoration: none;
+      border: 1px solid;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .talk-link.yt {
+      color: #ff4444;
+      border-color: rgba(255,68,68,0.3);
+    }
+
+    .talk-link.yt:hover { background: rgba(255,68,68,0.1); border-color: #ff4444; }
+
+    .talk-link.meetup {
+      color: var(--accent3);
+      border-color: rgba(245,158,11,0.3);
+    }
+
+    .talk-link.meetup:hover { background: rgba(245,158,11,0.1); border-color: var(--accent3); }
+
+    .talk-link.soon {
+      color: var(--muted);
+      border-color: var(--border);
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    /* ── ECOSYSTEM ── */
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .eco-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .eco-card:hover { border-color: rgba(0,229,255,0.25); transform: translateY(-2px); }
+
+    .eco-card-header {
+      padding: 1.25rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .eco-emoji {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .eco-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .eco-type {
+      font-size: 0.68rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.15rem;
+    }
+
+    .eco-body {
+      padding: 1.25rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .eco-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .eco-next-event {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--accent3);
+      border-radius: 2px;
+      padding: 0.75rem 1rem;
+    }
+
+    .eco-next-label {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent3);
+      margin-bottom: 0.3rem;
+    }
+
+    .eco-next-title {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .eco-next-date {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    .eco-hosting {
+      background: rgba(124,58,237,0.07);
+      border: 1px solid rgba(124,58,237,0.25);
+      border-radius: 2px;
+      padding: 0.85rem 1rem;
+    }
+
+    .eco-hosting-title {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #a78bfa;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .eco-hosting-text {
+      font-size: 0.74rem;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .eco-hosting-text .lang-tag {
+      font-size: 0.6rem;
+      background: rgba(124,58,237,0.2);
+      color: #a78bfa;
+      padding: 0.1rem 0.4rem;
+      border-radius: 2px;
+      margin-right: 0.3rem;
+      vertical-align: middle;
+    }
+
+    .eco-footer {
+      padding: 0.85rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .eco-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      text-decoration: none;
+      border: 1px solid;
+      transition: all 0.15s;
+    }
+
+    .eco-link.primary {
+      color: var(--accent);
+      border-color: rgba(0,229,255,0.3);
+    }
+
+    .eco-link.primary:hover { background: rgba(0,229,255,0.08); border-color: var(--accent); }
+
+    .eco-link.contact {
+      color: #a78bfa;
+      border-color: rgba(124,58,237,0.3);
+    }
+
+    .eco-link.contact:hover { background: rgba(124,58,237,0.1); border-color: #a78bfa; }
+
+    .eco-link.sponsor {
+      color: var(--accent3);
+      border-color: rgba(245,158,11,0.3);
+    }
+
+    .eco-link.sponsor:hover { background: rgba(245,158,11,0.08); border-color: var(--accent3); }
+
+    /* ── ARTICLES ── */
+    .articles-tabs {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      width: fit-content;
+    }
+
+    .art-tab {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.6rem 1.25rem;
+      border: none;
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      border-right: 1px solid var(--border);
+    }
+
+    .art-tab:last-child { border-right: none; }
+    .art-tab:hover { background: var(--surface2); color: var(--text); }
+
+    .art-tab--active {
+      background: var(--surface2);
+      color: var(--accent);
+    }
+
+    .art-loading {
+      padding: 3rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .article-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .article-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #00e5ff, #7c3aed);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .article-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-2px); }
+    .article-card:hover::before { transform: scaleX(1); }
+
+    .article-date {
+      font-size: 0.65rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-family: var(--font-mono);
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--text);
+    }
+
+    .article-excerpt {
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .article-readmore {
+      font-size: 0.68rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: var(--font-mono);
+    }
+
+    /* Resources tab */
+    .resources-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .resource-group {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .resource-group:last-child { border-bottom: none; }
+
+    .resource-group-header {
+      padding: 1rem 1.5rem;
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .resource-group-header:hover { background: var(--surface2); }
+
+    .resource-group-speaker {
+      font-size: 0.68rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-weight: 400;
+    }
+
+    .resource-toggle {
+      margin-left: auto;
+      font-size: 0.7rem;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+
+    .resource-group.open .resource-toggle { transform: rotate(180deg); }
+
+    .resource-links {
+      display: none;
+      padding: 0.5rem 1.5rem 1rem 3rem;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .resource-group.open .resource-links { display: flex; }
+
+    .resource-link {
+      font-size: 0.76rem;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: opacity 0.15s;
+    }
+
+    .resource-link:hover { opacity: 0.75; }
+
+    .resource-link-label {
+      font-size: 0.62rem;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 0.1rem 0.4rem;
+      border-radius: 2px;
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+
+    .resources-placeholder {
+      padding: 3rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+
+    .eco-badges {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-top: 0.4rem;
+    }
+
+    .eco-badge {
+      font-size: 0.62rem;
+      font-family: var(--font-mono);
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+
+    .eco-badge--inperson {
+      color: #34d399;
+      border-color: rgba(52,211,153,0.3);
+      background: rgba(52,211,153,0.07);
+    }
+
+    .eco-badge--online {
+      color: var(--accent);
+      border-color: rgba(0,229,255,0.3);
+      background: rgba(0,229,255,0.06);
+    }
+
+    .eco-badge--regular {
+      color: var(--accent3);
+      border-color: rgba(245,158,11,0.3);
+      background: rgba(245,158,11,0.06);
+    }
+
+    .eco-badge--occasional {
+      color: #a78bfa;
+      border-color: rgba(167,139,250,0.3);
+      background: rgba(167,139,250,0.06);
+    }
+
+    /* ── COMMUNITY NOTE ── */
+    .eco-community-note {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: rgba(59,130,246,0.06);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-left: 3px solid #3b82f6;
+      border-radius: 2px;
+      padding: 0.75rem 1rem;
+      margin-top: 0.75rem;
+    }
+
+    .eco-community-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      line-height: 1.5;
+    }
+
+    .eco-community-text {
+      font-size: 0.74rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .eco-community-text strong {
+      color: var(--text);
+    }
+
+    /* ── SUBSCRIBE ── */
+    .subscribe-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sub-card {
+      background: var(--surface);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .sub-card:last-child { border-bottom: none; }
+    .sub-card:hover { background: var(--surface2); }
+
+    .sub-icon {
+      font-size: 1.5rem;
+      width: 2.5rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .sub-card--yt .sub-icon { color: #ff4444; }
+    .sub-card--rss .sub-icon { color: var(--accent3); }
+    .sub-card--newsletter .sub-icon { color: #a78bfa; }
+
+    .sub-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .sub-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .sub-coming-soon {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: rgba(124,58,237,0.2);
+      color: #a78bfa;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      border: 1px solid rgba(124,58,237,0.3);
+      font-weight: 400;
+    }
+
+    .sub-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      line-height: 1.5;
+    }
+
+    .sub-hint {
+      font-size: 0.65rem;
+      color: var(--border);
+      margin-top: 0.3rem;
+      font-family: var(--font-mono);
+    }
+
+    .sub-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .sub-btn {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.55rem 1.1rem;
+      border-radius: 2px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s;
+      border: 1px solid;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .sub-btn--yt {
+      background: #ff4444;
+      color: white;
+      border-color: #ff4444;
+      font-weight: 700;
+    }
+    .sub-btn--yt:hover { background: #e03333; border-color: #e03333; }
+
+    .sub-btn--rss {
+      background: var(--accent3);
+      color: var(--bg);
+      border-color: var(--accent3);
+      font-weight: 700;
+    }
+    .sub-btn--rss:hover { background: #d97706; border-color: #d97706; }
+
+    .sub-btn--outline {
+      background: transparent;
+      color: var(--accent3);
+      border-color: rgba(245,158,11,0.4);
+      font-weight: 400;
+    }
+    .sub-btn--outline:hover { background: rgba(245,158,11,0.08); border-color: var(--accent3); }
+
+    .sub-btn--newsletter {
+      background: rgba(124,58,237,0.15);
+      color: #a78bfa;
+      border-color: rgba(124,58,237,0.3);
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 640px) {
+      .sub-card { flex-direction: column; align-items: flex-start; }
+      .sub-actions { width: 100%; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── LEAFLET DARK OVERRIDE ── */
+    .leaflet-container {
+      background: #0e0e18 !important;
+      font-family: var(--font-mono) !important;
+    }
+
+    .leaflet-popup-content-wrapper {
+      background: var(--surface2) !important;
+      color: var(--text) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 4px !important;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+    }
+
+    .leaflet-popup-tip { background: var(--surface2) !important; }
+
+    .leaflet-popup-content {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.6;
+    }
+
+    .popup-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .popup-location {
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .popup-talk {
+      font-size: 0.72rem;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    .loading-pulse {
+      display: inline-block;
+      color: var(--muted);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .talk-item { grid-template-columns: 1.5rem 1fr; }
+      .talk-links { grid-column: 1 / -1; }
+      .stats-row { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="parallax-bg"></div>
+<header>
+  <canvas id="circuit-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
+  <div class="grid-bg"></div>
+  <div class="tag">Montreal · Online · Worldwide</div>
+  <h1>AI Agents<br /><span>Montreal</span></h1>
+  <p class="subtitle">A community for developers curious about AI agents, tools & tech trends around agentic systems.</p>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-number">19</div>
+      <div class="stat-label">Speakers</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">9</div>
+      <div class="stat-label">Countries</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">4</div>
+      <div class="stat-label">Continents</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" id="member-count"><span class="loading-pulse">…</span></div>
+      <div class="stat-label">Members</div>
+    </div>
+  </div>
+
+  <div class="nav-links">
+    <a href="#map-section" class="nav-btn primary">World Map</a>
+    <a href="#speakers" class="nav-btn secondary">Speakers</a>
+    <a href="#talks" class="nav-btn secondary">Talks</a>
+    <a href="#articles" class="nav-btn secondary">Articles</a>
+    <a href="#ecosystem" class="nav-btn secondary">Ecosystem</a>
+    <a href="#subscribe" class="nav-btn secondary">Subscribe</a>
+    <a href="https://www.meetup.com/ai-agent-montreal/" target="_blank" class="nav-btn secondary">Join on Meetup ↗</a>
+    <a href="https://www.linkedin.com/in/nicolas-rosado-a97b3393" target="_blank" class="nav-btn cta">🎙 Suggest a Talk</a>
+  </div>
+
+  <div id="next-event-banner" class="next-event-banner" style="display:none">
+    <span class="neb-label">📅 Next event</span>
+    <a id="next-event-link" href="https://www.meetup.com/ai-agent-montreal/events/" target="_blank" class="neb-title"><span class="loading-pulse">Loading…</span></a>
+    <span id="next-event-date" class="neb-date"></span>
+  </div>
+</header>
+
+<!-- MAP -->
+<section id="map-section">
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Global Speakers Map</h2>
+    <div class="section-line"></div>
+  </div>
+  <div id="map"></div>
+  <p class="map-caption">19 speakers across 13 cities — click a marker to learn more. <span style="color:var(--accent3)">●</span> Upcoming speakers.</p>
+</section>
+
+<hr class="section-divider" />
+
+<!-- SPEAKERS -->
+<section id="speakers">
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Speakers</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="speakers-grid" id="speakers-grid"></div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- TALKS -->
+<section id="talks">
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <h2 class="section-title">All Talks</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="talks-list" id="talks-list"></div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ARTICLES -->
+<section id="articles">
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Articles & Resources</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="articles-tabs">
+    <button class="art-tab art-tab--active" data-tab="articles">✍️ Articles</button>
+    <button class="art-tab" data-tab="resources">🔗 Talk Resources</button>
+  </div>
+
+  <!-- ARTICLES TAB -->
+  <div id="tab-articles" class="art-panel">
+    <div id="medium-articles" class="articles-grid">
+      <div class="art-loading">
+        <span class="loading-pulse">Fetching articles from Medium…</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:1.5rem">
+      <a href="https://nicolas-rosado.medium.com" target="_blank" class="nav-btn secondary">See all on Medium ↗</a>
+    </div>
+  </div>
+
+  <!-- RESOURCES TAB -->
+  <div id="tab-resources" class="art-panel" style="display:none">
+    <div class="resources-list" id="resources-list"></div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ECOSYSTEM -->
+<section id="ecosystem">
+  <div class="section-header">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Local Ecosystem & Events</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="ecosystem-grid">
+
+    <!-- Mental Health in Software Engineering -->
+    <div class="eco-card">
+      <div class="eco-card-header">
+        <div class="eco-emoji">🧠</div>
+        <div>
+          <div class="eco-name">Mental Health in Software Engineering</div>
+          <div class="eco-type">Meetup · Montreal</div>
+          <div class="eco-badges">
+            <span class="eco-badge eco-badge--online">🌐 Online</span>
+            <span class="eco-badge eco-badge--occasional">📆 On demand</span>
+          </div>
+        </div>
+      </div>
+      <div class="eco-body">
+        <div class="eco-desc">
+          A safe community space where developers, engineers, and tech professionals can openly discuss mental health — burnout, imposter syndrome, anxiety, work-life balance — without judgment. Because building software is also a human experience.
+        </div>
+        <div class="eco-next-event">
+          <div class="eco-next-label">📅 Next event</div>
+          <div class="eco-next-title">See upcoming events on Meetup</div>
+          <div class="eco-next-date">Events are listed directly on the Meetup group page.</div>
+        </div>
+        <div class="eco-community-note">
+          <div class="eco-community-icon">💙</div>
+          <div class="eco-community-text">
+            <strong>Free & independent</strong> — These meetups are a personal and financial investment by the organizer. They are <strong>100% free</strong> for all attendees. Please check the waiting room chat for any announcements before the event starts.<br/><br/>
+            We are a <strong>community of professionals</strong> — kindness, empathy, and respect are at the heart of everything we do here. <strong>Psychological safety and humility</strong> are the foundation: everyone's experience is valid, and vulnerability is a strength. This is a safe space to share openly. 🙏
+          </div>
+        </div>
+        <div class="suggest-talk-block">
+          <div class="suggest-talk-text">
+            <div class="suggest-talk-title">🎙 Want to speak or share your story?</div>
+            <div class="suggest-talk-desc">Have a topic around mental health, burnout, or wellbeing in tech? Reach out via LinkedIn.</div>
+          </div>
+          <a href="https://www.linkedin.com/in/nicolas-rosado-a97b3393" target="_blank" class="suggest-talk-btn">Get in Touch ↗</a>
+        </div>
+      </div>
+      <div class="eco-footer">
+        <a href="https://www.meetup.com/mental-health-in-software-engineering-montreal/" target="_blank" class="eco-link primary">● Meetup ↗</a>
+        <a href="https://www.linkedin.com/company/mental-health-in-software-engineering-montreal/" target="_blank" class="eco-link contact">in LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <!-- Software Crafters Montréal — dynamic via Guild.host API -->
+    <div class="eco-card" id="crafters-card">
+      <div class="eco-card-header">
+        <div class="eco-emoji">🛠️</div>
+        <div>
+          <div class="eco-name">Software Crafters Montréal</div>
+          <div class="eco-type">Guild · 505 Members</div>
+          <div class="eco-badges">
+            <span class="eco-badge eco-badge--inperson">📍 In-Person</span>
+            <span class="eco-badge eco-badge--regular">🔁 1st Wed. of month</span>
+          </div>
+        </div>
+      </div>
+      <div class="eco-body">
+        <div class="eco-desc">
+          A community for developers passionate about well-crafted software — testing, DDD, architecture, clean code, refactoring, pairing/mobbing, and legacy code. United by the Software Craftsmanship Manifesto.
+        </div>
+        <div class="eco-next-event" id="crafters-event">
+          <div class="eco-next-label">📅 Next event</div>
+          <div class="eco-next-title" id="crafters-event-title"><span class="loading-pulse">Loading…</span></div>
+          <div class="eco-next-date" id="crafters-event-date"></div>
+        </div>
+        <div class="eco-hosting">
+          <div class="eco-hosting-title">🏠 We're looking for hosts & speakers!</div>
+          <div class="eco-hosting-text">
+            <span class="lang-tag">FR</span>
+            Nous avons à cœur de créer des logiciels faciles à maintenir et de partager, d'échanger mais aussi d'expérimenter autour de tout ce qui s'y rapporte. Si vous avez des sujets autour des tests, de l'architecture, du DDD, de l'impact de l'IA ou encore du recrutement, n'hésitez pas à nous contacter !<br/><br/>
+            🔹 Proposer des sujets en tant que speaker 🎙️<br/>
+            🔹 Accueillir l'un de nos événements 🍕 🍺<br/>
+            C'est avec joie que nous prendrons du temps pour vous répondre 🙂
+          </div>
+          <div class="eco-hosting-text">
+            <span class="lang-tag">EN</span>
+            We care about building maintainable software and to share, exchange but also experiment around everything related to it. If you have topics around testing, architecture, DDD, the impact of AI or even recruitment, don't hesitate to reach out!<br/><br/>
+            🔹 Propose topics as a speaker 🎙️<br/>
+            🔹 Host one of our events 🍕 🍺<br/>
+            We'd be delighted to take the time to get back to you 🙂
+          </div>
+        </div>
+      </div>
+      <div class="eco-footer">
+        <a href="https://guild.host/software-crafters-montreal" target="_blank" class="eco-link primary">↗ Guild</a>
+        <a href="http://manifesto.softwarecraftsmanship.org/" target="_blank" class="eco-link sponsor">📜 Manifesto ↗</a>
+        <a href="https://www.linkedin.com/company/software-crafters-montreal/" target="_blank" class="eco-link contact">in LinkedIn ↗</a>
+        <a href="https://www.linkedin.com/in/nicolas-rosado-a97b3393" target="_blank" class="eco-link contact">✉ Contact organizer</a>
+      </div>
+    </div>
+
+    <!-- AI Agents Montreal -->
+    <div class="eco-card">
+      <div class="eco-card-header">
+        <div class="eco-emoji">🤖</div>
+        <div>
+          <div class="eco-name">AI Agents Montreal</div>
+          <div class="eco-type">Meetup · Online · Worldwide</div>
+          <div class="eco-badges">
+            <span class="eco-badge eco-badge--online">🌐 Online</span>
+            <span class="eco-badge eco-badge--occasional">📆 On demand</span>
+          </div>
+        </div>
+      </div>
+      <div class="eco-body">
+        <div class="eco-desc">
+          The community you're on right now! A global online meetup exploring AI agents, agentic systems, and the engineering practices around them — bringing world-class speakers to developers everywhere.
+        </div>
+        <div class="eco-next-event">
+          <div class="eco-next-label">📅 Next event</div>
+          <div class="eco-next-title" id="aiagents-eco-title"><span class="loading-pulse">Loading…</span></div>
+          <div class="eco-next-date" id="aiagents-eco-date"></div>
+        </div>
+        <div class="eco-community-note">
+          <div class="eco-community-icon">💙</div>
+          <div class="eco-community-text">
+            <strong>Free & independent</strong> — These meetups are a personal and financial investment by the organizer. They are <strong>100% free</strong> for all attendees. Please check the waiting room chat for any announcements before the event starts (speaker delays, technical issues, etc.).<br/><br/>
+            We are a <strong>community of professionals</strong> — we ask everyone to engage with kindness, curiosity, and respect. Speakers volunteer their time and expertise; let's honour that with constructive and generous feedback. Our foundation is <strong>psychological safety and humility</strong> — no question is too basic, no idea too bold. 🙏
+          </div>
+        </div>
+        <div class="suggest-talk-block">
+            <div class="suggest-talk-desc">Got a topic around AI agents, agentic systems, or engineering practices? Reach out via LinkedIn — all speakers are contacted through this channel.</div>
+          </div>
+          <a href="https://www.linkedin.com/in/nicolas-rosado-a97b3393" target="_blank" class="suggest-talk-btn">Suggest a Talk ↗</a>
+        </div>
+      </div>
+      <div class="eco-footer">
+        <a href="https://www.meetup.com/ai-agent-montreal/" target="_blank" class="eco-link primary">● Meetup ↗</a>
+        <a href="https://www.linkedin.com/company/ai-agents-montreal/" target="_blank" class="eco-link contact">in LinkedIn ↗</a>
+        <a href="https://www.youtube.com/@aiagentsmontreal" target="_blank" class="eco-link sponsor">▶ YouTube ↗</a>
+      </div>
+    </div>
+
+    <!-- ACG - AI Craftspeople Guild -->
+    <div class="eco-card">
+      <div class="eco-card-header">
+        <div class="eco-emoji">⚒️</div>
+        <div>
+          <div class="eco-name">AI Craftspeople Guild</div>
+          <div class="eco-type">Global Movement · Professional Code of Conduct</div>
+          <div class="eco-badges">
+            <span class="eco-badge eco-badge--online">🌐 Online</span>
+            <span class="eco-badge eco-badge--occasional">📆 Occasional</span>
+          </div>
+        </div>
+      </div>
+      <div class="eco-body">
+        <div class="eco-desc">
+          A professional movement advocating for quality, integrity, and human-centered AI in software engineering. ACG promotes a code of conduct for engineers using AI — pushing back against half-baked outputs, snake oil tactics, and the erosion of software craft. A worship-free zone focused on real engineering standards.
+        </div>
+        <div class="eco-next-event">
+          <div class="eco-next-label">📅 Next event</div>
+          <div class="eco-next-title">See upcoming events on LinkedIn</div>
+          <div class="eco-next-date">Follow the ACG LinkedIn page for announcements.</div>
+        </div>
+      </div>
+      <div class="eco-footer">
+        <a href="https://aicraftspeopleguild.github.io" target="_blank" class="eco-link primary">↗ Website</a>
+        <a href="https://www.linkedin.com/company/ai-craftspeople-guild/" target="_blank" class="eco-link contact">in LinkedIn ↗</a>
+        <a href="https://aicraftspeopleguild.github.io/aicraftspeopleguild-manifesto.html" target="_blank" class="eco-link sponsor">📜 Sign Manifesto ↗</a>
+      </div>
+    </div>
+
+    <!-- dev/mtl -->
+    <div class="eco-card">
+      <div class="eco-card-header">
+        <div class="eco-emoji">🏙️</div>
+        <div>
+          <div class="eco-name">/dev/mtl</div>
+          <div class="eco-type">Conference · Montreal's Community-Driven Tech Event</div>
+          <div class="eco-badges">
+            <span class="eco-badge eco-badge--inperson">📍 In-Person</span>
+            <span class="eco-badge eco-badge--regular">🔁 Annual Conference</span>
+          </div>
+        </div>
+      </div>
+      <div class="eco-body">
+        <div class="eco-desc">
+          La conférence des communautés tech de Montréal — Montreal's community-driven tech conference. A celebration of the local developer ecosystem, bringing together multiple communities under one roof for talks, workshops, and networking.
+        </div>
+        <div class="eco-next-event">
+          <div class="eco-next-label">📅 Next edition</div>
+          <div class="eco-next-title">/dev/mtl 2026</div>
+          <div class="eco-next-date">Date TBA — visit dev-mtl.ca for updates</div>
+        </div>
+        <div class="suggest-talk-block">
+          <div class="suggest-talk-text">
+            <div class="suggest-talk-title">🤝 Sponsor or host /dev/mtl?</div>
+            <div class="suggest-talk-desc">
+              <span class="lang-tag">EN</span> Interested in sponsoring or hosting one of Montreal's biggest community-driven tech events?<br/>
+              <span class="lang-tag">FR</span> Intéressé(e) par le sponsoring ou l'accueil de la conférence ?
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;flex-shrink:0">
+            <a href="https://www.dev-mtl.ca/sponsorship?lang=en" target="_blank" class="suggest-talk-btn">Sponsor (EN) ↗</a>
+            <a href="https://www.dev-mtl.ca/sponsorship?lang=fr" target="_blank" class="suggest-talk-btn">Sponsor (FR) ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="eco-footer">
+        <a href="https://www.dev-mtl.ca" target="_blank" class="eco-link primary">↗ Website</a>
+        <a href="https://www.linkedin.com/company/dev-mtl/" target="_blank" class="eco-link contact">in LinkedIn ↗</a>
+        <a href="https://www.linkedin.com/in/nicolas-rosado-a97b3393" target="_blank" class="eco-link contact">✉ Contact</a>
+      </div>
+    </div>
+
+    <!-- Devoxx4Kids Québec -->
+    <div class="eco-card">
+      <div class="eco-card-header">
+        <div class="eco-emoji">👾</div>
+        <div>
+          <div class="eco-name">Devoxx4Kids Québec</div>
+          <div class="eco-type">Community · Kids & Technology · Montréal</div>
+          <div class="eco-badges">
+            <span class="eco-badge eco-badge--inperson">📍 In-Person</span>
+            <span class="eco-badge eco-badge--regular">🔁 Every ~3 months</span>
+          </div>
+        </div>
+      </div>
+      <div class="eco-body">
+        <div class="eco-desc">
+          Notre but est de faire découvrir l'informatique, la robotique et l'ingénierie à nos jeunes — introducing kids to programming, robotics, and engineering through hands-on workshops. A bilingual (FR/EN) community rooted in Montréal, part of the global Devoxx4Kids movement.
+        </div>
+        <div class="eco-next-event">
+          <div class="eco-next-label">📅 Next event</div>
+          <div class="eco-next-title">~June 2026 — approximately every 3 months</div>
+          <div class="eco-next-date">Last event: Sat. March 21, 2026 · Follow on Bluesky or subscribe to their mailing list for the exact date.</div>
+        </div>
+      </div>
+      <div class="eco-footer">
+        <a href="https://www.devoxx4kids.org/quebec/" target="_blank" class="eco-link primary">↗ Website</a>
+        <a href="https://bsky.app/profile/devoxx4kidsqc.bsky.social" target="_blank" class="eco-link contact">🦋 Bluesky ↗</a>
+        <a href="mailto:devoxx4kids@montreal-jug.org" class="eco-link sponsor">✉ Contact</a>
+      </div>
+    </div>
+
+    <!-- CraftCode Podcast -->
+    <div class="eco-card">
+      <div class="eco-card-header">
+        <div class="eco-emoji">🎙️</div>
+        <div>
+          <div class="eco-name">CraftCode Podcast</div>
+          <div class="eco-type">Podcast · Interviews · English</div>
+        </div>
+      </div>
+      <div class="eco-body">
+        <div class="eco-desc">
+          An interview-based podcast hosted by Nicolas Rosado exploring software craftsmanship, engineering excellence, and the practices behind maintainable code — from TDD and clean architecture to DDD, AI impact, and the human side of software. Each episode features a guest practitioner sharing real-world experience and hard-won lessons.
+        </div>
+        <div class="eco-next-event">
+          <div class="eco-next-label">🎧 Latest episode</div>
+          <div class="eco-next-title" id="craftcode-ep-title"><span class="loading-pulse">Loading…</span></div>
+          <div class="eco-next-date" id="craftcode-ep-date"></div>
+        </div>
+      </div>
+      <div class="eco-footer">
+        <a href="https://youtube.com/playlist?list=PLpWOuEp7MZW91uyBJZyOf_HzBM1eEFUHx&si=gvcSRUvLaBZvtk4j" target="_blank" class="eco-link primary">▶ YouTube ↗</a>
+        <a href="https://open.spotify.com/show/6z5HHdGHodPQSiAGzEEfjr" target="_blank" class="eco-link sponsor">🎵 Spotify ↗</a>
+        <a href="https://www.linkedin.com/company/craftcode-fr/" target="_blank" class="eco-link contact">in LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <!-- MenderCon — dynamic via mendercon.com scrape -->
+    <div class="eco-card">
+      <div class="eco-card-header">
+        <div class="eco-emoji">🔧</div>
+        <div>
+          <div class="eco-name">MenderCon</div>
+          <div class="eco-type">Virtual Conference · Legacy Code & Modernization</div>
+          <div class="eco-badges">
+            <span class="eco-badge eco-badge--online">🌐 Online</span>
+            <span class="eco-badge eco-badge--regular">🔁 Annual Conference</span>
+          </div>
+        </div>
+      </div>
+      <div class="eco-body">
+        <div class="eco-desc">
+          A full-day virtual unconference focused on modernizing and improving existing software systems — from the smallest apps to the biggest enterprise monoliths. Attendees co-create the schedule on the fly, fostering real conversations between people who love working on legacy code.
+        </div>
+        <div class="eco-next-event" id="mendercon-event">
+          <div class="eco-next-label">📅 Next event</div>
+          <div class="eco-next-title" id="mendercon-event-title"><span class="loading-pulse">Loading…</span></div>
+          <div class="eco-next-date" id="mendercon-event-date"></div>
+        </div>
+      </div>
+      <div class="eco-footer">
+        <a href="https://mendercon.com" target="_blank" class="eco-link primary">↗ mendercon.com</a>
+        <a id="mendercon-ticket-link" href="https://mendercon.com" target="_blank" class="eco-link sponsor" style="display:none">🎟 Get ticket ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SUBSCRIBE -->
+<section id="subscribe" style="max-width:1100px;margin:0 auto;padding:5rem 2rem;">
+  <div class="section-header">
+    <span class="section-number">06</span>
+    <h2 class="section-title">Stay in the Loop</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="subscribe-grid">
+
+    <!-- YouTube -->
+    <div class="sub-card sub-card--yt">
+      <div class="sub-icon">▶</div>
+      <div class="sub-content">
+        <div class="sub-name">YouTube</div>
+        <div class="sub-desc">Get notified the moment a new talk drops. Subscribe to the channel and hit the bell 🔔</div>
+      </div>
+      <a href="https://www.youtube.com/@aiagentsmontreal?sub_confirmation=1" target="_blank" class="sub-btn sub-btn--yt">
+        Subscribe
+      </a>
+    </div>
+
+    <!-- RSS -->
+    <div class="sub-card sub-card--rss">
+      <div class="sub-icon">⚡</div>
+      <div class="sub-content">
+        <div class="sub-name">RSS Feed</div>
+        <div class="sub-desc">Add to Feedly, Inoreader or any RSS reader to get new talks in your feed automatically.</div>
+        <div class="sub-hint">Works with Feedly · Inoreader · NewsBlur · Reeder</div>
+      </div>
+      <div class="sub-actions">
+        <a href="https://www.youtube.com/feeds/videos.xml?channel_id=UCGvKbQiSl3-2iqW2I1bRnag" target="_blank" class="sub-btn sub-btn--rss">
+          Copy RSS ↗
+        </a>
+        <a href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fwww.youtube.com%2Ffeeds%2Fvideos.xml%3Fchannel_id%3DUCGvKbQiSl3-2iqW2I1bRnag" target="_blank" class="sub-btn sub-btn--rss sub-btn--outline">
+          Add to Feedly
+        </a>
+      </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="sub-card sub-card--newsletter">
+      <div class="sub-icon">✉</div>
+      <div class="sub-content">
+        <div class="sub-name">Newsletter <span class="sub-coming-soon">Coming Soon</span></div>
+        <div class="sub-desc">A Substack newsletter with talk recaps, speaker spotlights and community updates — straight to your inbox.</div>
+        <div class="sub-hint">Powered by Substack · Free · No spam</div>
+      </div>
+      <button class="sub-btn sub-btn--newsletter" disabled>
+        Subscribe — Soon
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    Organized by <a href="https://www.linkedin.com/in/nicolas-rosado-a97b3393" target="_blank">Nicolas Rosado</a> &nbsp;·&nbsp;
+    <a href="https://www.meetup.com/ai-agent-montreal/" target="_blank">Meetup</a> &nbsp;·&nbsp;
+    <a href="https://www.youtube.com/@aiagentsmontreal" target="_blank">YouTube</a> &nbsp;·&nbsp;
+    <a href="https://www.linkedin.com/company/ai-agents-montreal" target="_blank">LinkedIn</a>
+  </p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+
+const speakers = [
+  {
+    name: "Arthur Magne",
+    location: "Bordeaux, France 🇫🇷",
+    lat: 44.8378, lng: -0.5792,
+    bio: "CPO & co-founder at Packmind. Developer passionate about knowledge sharing, craft practices, and coding standards in teams. Builds AI-powered tools that capture team decisions and feed them to coding agents.",
+    talk: "How to Trust AI Coding at Scale with Packmind",
+    linkedin: "https://www.linkedin.com/in/arthur-magne/",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/"
+  },
+  {
+    name: "Steven Diamante",
+    location: "Raleigh, USA 🇺🇸",
+    lat: 35.7796, lng: -78.6382,
+    bio: "Technical coach at Artium AI. Guides developers to adopt technical practices to confidently tackle any codebase. Organizer of the Raleigh Software Craftsmanship Community.",
+    talk: "Software Craftsmanship for Coding Agents: Taming the Dragon",
+    linkedin: "https://www.linkedin.com/in/stevendiamante/",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/events/311544422/"
+  },
+  {
+    name: "Michael R. Larson",
+    location: "Los Angeles, USA 🇺🇸",
+    lat: 34.0522, lng: -118.2437,
+    bio: "Software engineer and practitioner focused on safely modernizing legacy systems using AI-assisted TDD techniques.",
+    talk: "Refactoring Legacy Code Safely with AI + TDD",
+    linkedin: "",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/"
+  },
+  {
+    name: "William Bernting",
+    location: "Göteborg, Sweden 🇸🇪",
+    lat: 57.7089, lng: 11.9746,
+    bio: "AI-Enabled Coder, public speaker and freelancer in software engineering with 15 years of experience. Advocates for TDD + Claude Code + git worktrees as a practical AI-assisted development workflow.",
+    talk: "Zero Lines, Zero Bugs",
+    linkedin: "https://www.linkedin.com/in/williambernting/",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/events/312482727/"
+  },
+  {
+    name: "Carl Lapierre",
+    location: "Montréal, Canada 🇨🇦",
+    lat: 45.5017, lng: -73.5673,
+    bio: "Lead AI Engineer at Osedea, driving innovation through intelligent systems across healthcare, manufacturing, and mining. Expert in agentic systems, context engineering architectures, and LLM integration.",
+    talk: "How to Instrument, Govern, and Debug Agents Before They Go Rogue",
+    linkedin: "https://www.linkedin.com/in/carllapierre/",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/"
+  },
+  {
+    name: "Duncan Brown",
+    location: "London, UK 🇬🇧",
+    lat: 51.5074, lng: -0.1278,
+    bio: "CTO for Digital Prevention Services at NHS England (~600 people). Former Head of Software Engineering at the UK Government's Incubator for AI (i.AI). Expert on how AI reshapes engineering team dynamics.",
+    talk: "Team Dynamics After AI",
+    linkedin: "",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/"
+  },
+  {
+    name: "Benedikt Stemmildt",
+    location: "Hamburg, Germany 🇩🇪",
+    lat: 53.5753, lng: 10.0153,
+    bio: "Founder of hackers&wizards. Helps engineering leaders create environments where developers thrive with AI. 20+ years in enterprise software including CTO roles at OTTO and Breuninger.",
+    talk: "Agents Across the SDLC: From Refinement to Retro",
+    linkedin: "",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/"
+  },
+  {
+    name: "Leandro Damasio",
+    location: "São Paulo, Brazil 🇧🇷",
+    lat: -23.5505, lng: -46.6333,
+    bio: "AI Engineer at Enforce. Designs and operates AI-first and agentic platforms for financial and legal domains. Builds production-grade LLM and RAG systems in highly regulated environments with a focus on reliability, observability, and governance.",
+    talk: "How AI Coding Agents Really Read Code (Inside the Runtime)",
+    linkedin: "https://br.linkedin.com/in/ldamasio",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/"
+  },
+  {
+    name: "Alex Bunardzic",
+    location: "Vancouver, Canada 🇨🇦",
+    lat: 49.2827, lng: -123.1207,
+    bio: "Business Velocity Architect and creator of Test-Driven Navigation (TDN). Pioneer of TDD with 30+ years in software. Helps organizations use AI as a precision tool for continuous system evolution rather than a risky code generator.",
+    talk: "Approximation Before Precision",
+    linkedin: "https://www.linkedin.com/in/alexbunardzic/",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/"
+  },
+  {
+    name: "Matthias Patzak",
+    location: "Munich, Germany 🇩🇪",
+    lat: 48.1351, lng: 11.582,
+    bio: "Executive in Residence at AWS. Advises 100+ leaders annually on building loosely coupled, highly aligned digital organizations. Former CTO at AutoScout24. Co-author of 'All Hands on Tech'.",
+    talk: "New Organizational Models for the Age of AI Agents",
+    linkedin: "https://www.linkedin.com/in/matthias-patzak/",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/"
+  },
+  {
+    name: "Alessandro Di Gioia",
+    location: "London, UK 🇬🇧",
+    lat: 51.52, lng: -0.09,
+    bio: "Co-creator of nWave, an open-source multi-agent AI coding framework built on Claude Code. Focuses on AI-guided refactoring and safe migration from legacy to maintainable architectures.",
+    talk: "From Spaghetti to Ravioli: AI-Guided Refactoring with nWave",
+    linkedin: "",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/"
+  },
+  {
+    name: "Michele Brissoni",
+    location: "Bratislava, Slovakia 🇸🇰",
+    lat: 48.1486, lng: 17.1077,
+    bio: "Founder of BriX Consulting. Co-creator of nWave, an agentic AI-coding assistant. Brings a martial arts discipline and behavioral science perspective to software quality and AI systems governance.",
+    talk: "From Spaghetti to Ravioli: AI-Guided Refactoring with nWave",
+    linkedin: "https://www.linkedin.com/in/michelebrissoni/",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/"
+  },
+  {
+    name: "Adam Tornhill",
+    location: "Sweden 🇸🇪",
+    lat: 59.3293, lng: 18.0686,
+    bio: "Founder & CTO of CodeScene. Programmer combining degrees in engineering and psychology. Author of 'Your Code as a Crime Scene' and 'Software Design X-Rays'. 100% of his production code is now written by AI agents.",
+    talk: "Agentic AI Coding: Best Practice Patterns for Speed with Quality",
+    linkedin: "",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/"
+  },
+  {
+    name: "Paul Hammond",
+    location: "Manchester, UK 🇬🇧",
+    lat: 53.4808, lng: -2.2426,
+    bio: "Software engineer at NewDay. 20+ years in the industry. Strong advocate of XP practices, TDD, and feedback-driven development. Former TDD lead at BBC Sport. Creator of feedbackdriven.dev.",
+    talk: "XP Practices Are the Missing Piece for AI-Assisted Development",
+    linkedin: "https://www.linkedin.com/in/paul-hammond-bb5b78251/",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/events/313704055/"
+  },
+  {
+    name: "Edgar Kussberg",
+    location: "Zug, Switzerland 🇨🇭",
+    lat: 47.1661, lng: 8.5154,
+    bio: "Group Product Manager for AI Code Remediation, Agents & IDE Experience at Sonar. Previously AI Group Lead at Snyk. Product leader driving cutting-edge AI solutions for developer tooling and application security.",
+    talk: "AC/DC — Agent-Centric Development Cycle",
+    linkedin: "https://www.linkedin.com/in/kussberg/",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/events/313880985/"
+  },
+  {
+    name: "Antony Marcano",
+    location: "London, UK 🇬🇧",
+    lat: 51.515, lng: -0.11,
+    bio: "Co-founder of RiverGlide, agile coaching & consultancy firm. Creator of the Screenplay Pattern. Nearly 25 years in software development — practitioner, coach, trainer, and keynote speaker in XP, TDD, BDD, and Software Craftsmanship. Referenced in multiple agile books; former Technical Editor at Better Software Magazine. Guest lecturer at Oxford University on TDD and ATDD.",
+    talk: "Upcoming talk — May 2026",
+    linkedin: "https://www.linkedin.com/in/antonymarcano/",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/",
+    upcoming: true
+  },
+  {
+    location: "Berlin, Germany 🇩🇪",
+    lat: 52.52, lng: 13.405,
+    bio: "Staff Engineer with deep expertise in distributed systems and software design. Advocates for Systems Thinking, Lean, Theory of Constraints, and XP applied to AI-assisted development teams. Based in Berlin.",
+    talk: "LLM-assisted Coding: A Systems Perspective",
+    linkedin: "",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/",
+    upcoming: true
+  },
+  {
+    name: "Fabrice Monnier",
+    location: "Bretagne, France 🇫🇷",
+    lat: 48.1173, lng: -1.6778,
+    bio: "Software engineer and consultant specializing in spec-driven development. Explores how to structure AI-assisted workflows using frameworks like BMAD, OpenSpec and SpecKit — in solo and team contexts.",
+    talk: "Spec-Driven Development: From BMAD to Custom Skills",
+    linkedin: "",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/",
+    upcoming: true
+  },
+  {
+    name: "Margaret-Anne Storey",
+    location: "Victoria, Canada 🇨🇦",
+    lat: 48.4284, lng: -123.3656,
+    bio: "Professor at the University of Victoria and Canada Research Chair in Human and Social Aspects of Software Engineering. Pioneer researcher on developer experience, AI in software engineering, and the emerging concept of Triple Debt (technical, cognitive, and intent debt).",
+    talk: "Cognitive and Intent Debt in Practice",
+    linkedin: "",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/",
+    upcoming: true
+  },
+  {
+    name: "Soma Bini",
+    location: "Paris, France 🇫🇷",
+    lat: 48.8566, lng: 2.3522,
+    bio: "Software engineer and practitioner of spec-driven, agent-assisted development. Demonstrates how to build production-ready applications end-to-end using AI agents — from design and architecture to CI/CD deployment.",
+    talk: "From Specs to Production: Building Software with AI Agents End to End",
+    linkedin: "",
+    youtube: "https://www.youtube.com/@aiagentsmontreal",
+    meetup: "https://www.meetup.com/ai-agent-montreal/",
+    upcoming: true
+  }
+];
+
+const talks = [
+  { n: 1, title: "How to Trust AI Coding at Scale with Packmind", speaker: "Arthur Magne", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/" },
+  { n: 2, title: "Software Craftsmanship for Coding Agents: Taming the Dragon", speaker: "Steven Diamante", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/events/311544422/" },
+  { n: 3, title: "Refactoring Legacy Code Safely with AI + TDD", speaker: "Michael R. Larson", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/" },
+  { n: 4, title: "Zero Lines, Zero Bugs", speaker: "William Bernting", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/events/312482727/" },
+  { n: 5, title: "How to Instrument, Govern, and Debug Agents Before They Go Rogue", speaker: "Carl Lapierre", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/" },
+  { n: 6, title: "Team Dynamics After AI", speaker: "Duncan Brown", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/" },
+  { n: 7, title: "Agents Across the SDLC: From Refinement to Retro", speaker: "Benedikt Stemmildt", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/" },
+  { n: 8, title: "How AI Coding Agents Really Read Code (Inside the Runtime)", speaker: "Leandro Damasio", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/" },
+  { n: 9, title: "Approximation Before Precision", speaker: "Alex Bunardzic", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/" },
+  { n: 10, title: "New Organizational Models for the Age of AI Agents", speaker: "Matthias Patzak", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/" },
+  { n: 11, title: "From Spaghetti to Ravioli: AI-Guided Refactoring with nWave", speaker: "Alessandro Di Gioia & Michele Brissoni", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/" },
+  { n: 12, title: "Agentic AI Coding: Best Practice Patterns for Speed with Quality", speaker: "Adam Tornhill", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/" },
+  { n: 13, title: "XP Practices Are the Missing Piece for AI-Assisted Development", speaker: "Paul Hammond", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/events/313704055/" },
+  { n: 14, title: "AC/DC — Agent-Centric Development Cycle", speaker: "Edgar Kussberg", yt: "https://www.youtube.com/@aiagentsmontreal", meetup: "https://www.meetup.com/ai-agent-montreal/events/313880985/" },
+];
+
+// ── MAP ───────────────────────────────────────────────────────────────────
+
+const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([30, 0], 2);
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd', maxZoom: 19
+}).addTo(map);
+
+function makeIcon(upcoming) {
+  const color = upcoming ? '#f59e0b' : '#00e5ff';
+  const glow  = upcoming ? 'rgba(245,158,11,0.7), 0 0 20px rgba(245,158,11,0.3)' : 'rgba(0,229,255,0.7), 0 0 20px rgba(0,229,255,0.3)';
+  return L.divIcon({
+    className: '',
+    html: `<div style="
+      width:14px; height:14px;
+      background:${color};
+      border-radius:50%;
+      border:2px solid #0a0a0f;
+      box-shadow:0 0 10px ${glow};
+    "></div>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
+  });
+}
+
+// Group speakers by coordinates to avoid overlap
+const coordMap = {};
+speakers.forEach(s => {
+  const key = `${s.lat},${s.lng}`;
+  if (!coordMap[key]) coordMap[key] = [];
+  coordMap[key].push(s);
+});
+
+Object.entries(coordMap).forEach(([key, group]) => {
+  const [lat, lng] = key.split(',').map(Number);
+  const names = group.map(s => s.name).join(' + ');
+  const isUpcoming = group.every(s => s.upcoming);
+  const talksList = group.map(s => `<div class="popup-talk">${s.upcoming ? '🔜' : '🎙'} "${s.talk}"</div>`).join('');
+  const locs = [...new Set(group.map(s => s.location))].join(', ');
+
+  const marker = L.marker([lat, lng], { icon: makeIcon(isUpcoming) }).addTo(map);
+  marker.bindPopup(`
+    <div class="popup-name">${names}</div>
+    <div class="popup-location">${locs}</div>
+    ${talksList}
+  `, { maxWidth: 280 });
+});
+
+// ── SPEAKERS GRID ──────────────────────────────────────────────────────────
+
+const grid = document.getElementById('speakers-grid');
+speakers.forEach(s => {
+  const initials = s.name.split(' ').map(w => w[0]).slice(0, 2).join('');
+  grid.innerHTML += `
+    <div class="speaker-card">
+      <div class="speaker-header">
+        <div class="speaker-avatar" style="${s.upcoming ? 'background:linear-gradient(135deg,#f59e0b,#d97706)' : ''}">${initials}</div>
+        <div>
+          <div class="speaker-name">${s.linkedin ? `<a href="${s.linkedin}" target="_blank" style="color:inherit;text-decoration:none;">${s.name} ↗</a>` : s.name}${s.upcoming ? ' <span style="font-size:0.6rem;background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);padding:0.1rem 0.4rem;border-radius:2px;font-family:var(--font-mono);font-weight:400;vertical-align:middle;letter-spacing:0.08em">UPCOMING</span>' : ''}</div>
+          <div class="speaker-location">${s.location}</div>
+        </div>
+      </div>
+      <div class="speaker-bio">${s.bio}</div>
+      <div class="speaker-talk">🎙 ${s.talk}</div>
+    </div>
+  `;
+});
+
+// ── TALKS LIST ──────────────────────────────────────────────────────────────
+
+const list = document.getElementById('talks-list');
+talks.forEach(t => {
+  list.innerHTML += `
+    <div class="talk-item">
+      <div class="talk-number">${String(t.n).padStart(2, '0')}</div>
+      <div>
+        <div class="talk-title">${t.title}</div>
+        <div class="talk-speaker">${t.speaker}</div>
+      </div>
+      <div class="talk-links">
+        <a href="${t.yt}" target="_blank" class="talk-link yt">▶ YouTube</a>
+        <a href="${t.meetup}" target="_blank" class="talk-link meetup">● Meetup</a>
+      </div>
+    </div>
+  `;
+// ── DYNAMIC: Software Crafters MTL via Guild.host ──────────────────────────
+
+async function loadCraftersEvent() {
+  const titleEl = document.getElementById('crafters-event-title');
+  const dateEl  = document.getElementById('crafters-event-date');
+  try {
+    // Guild.host exposes a public JSON feed for each guild's upcoming events
+    const res = await fetch('https://guild.host/api/guilds/software-crafters-montreal/events?type=upcoming&limit=1', {
+      headers: { 'Accept': 'application/json' }
+    });
+    if (!res.ok) throw new Error('guild api error');
+    const data = await res.json();
+    const events = data?.events || data?.data || data;
+    const ev = Array.isArray(events) ? events[0] : null;
+    if (ev) {
+      const name = ev.name || ev.title || 'Upcoming event';
+      const dateRaw = ev.startAt || ev.start_at || ev.date || ev.startsAt;
+      const dateStr = dateRaw
+        ? new Date(dateRaw).toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' })
+        : '';
+      const mode = ev.isInPerson ? 'In-Person' : ev.isVirtual ? 'Virtual' : '';
+      const attendees = ev.attendeeCount || ev.attendees_count || '';
+      titleEl.innerHTML = `<a href="https://guild.host/events/${ev.slug || ''}" target="_blank" style="color:inherit;text-decoration:none;">${name} ↗</a>`;
+      dateEl.textContent = [dateStr, mode, attendees ? `${attendees} attending` : ''].filter(Boolean).join(' · ');
+    } else {
+      throw new Error('no event');
+    }
+  } catch(e) {
+    // Fallback: show known event with link
+    titleEl.innerHTML = `<a href="https://guild.host/software-crafters-montreal/events" target="_blank" style="color:inherit;text-decoration:none;">See upcoming events on Guild.host ↗</a>`;
+    dateEl.textContent = 'Click to view the latest events';
+  }
+}
+
+// ── DYNAMIC: MenderCon via homepage ────────────────────────────────────────
+
+async function loadMenderConEvent() {
+  const titleEl  = document.getElementById('mendercon-event-title');
+  const dateEl   = document.getElementById('mendercon-event-date');
+  const ticketEl = document.getElementById('mendercon-ticket-link');
+  try {
+    // Use a CORS proxy to fetch MenderCon homepage and parse the event info
+    const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent('https://mendercon.com');
+    const res = await fetch(proxyUrl);
+    if (!res.ok) throw new Error('fetch error');
+    const html = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    // Extract h1 (usually "MenderCon YYYY") and nearby date text
+    const h1 = doc.querySelector('h1');
+    const eventName = h1 ? h1.textContent.trim() : null;
+
+    // Look for a date-like string near the top of the page
+    const bodyText = doc.body ? doc.body.innerText || doc.body.textContent : '';
+    const dateMatch = bodyText.match(/(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}/i);
+    const dateStr = dateMatch ? dateMatch[0] : null;
+
+    // Look for Eventbrite ticket link
+    const ticketAnchor = [...doc.querySelectorAll('a')].find(a =>
+      a.href && a.href.includes('eventbrite.com')
+    );
+
+    if (eventName) {
+      titleEl.textContent = eventName;
+      dateEl.textContent = dateStr
+        ? `${dateStr} · Virtual (Gather)`
+        : 'Date TBA — check mendercon.com';
+      if (ticketAnchor) {
+        ticketEl.href = ticketAnchor.href;
+        ticketEl.style.display = 'inline-flex';
+      }
+    } else {
+      throw new Error('parse failed');
+    }
+  } catch(e) {
+    // Fallback to last known data
+    titleEl.textContent = 'MenderCon — see mendercon.com for next edition';
+    dateEl.innerHTML = `<a href="https://mendercon.com" target="_blank" style="color:var(--accent);text-decoration:none;">mendercon.com ↗</a>`;
+  }
+}
+
+// ── DYNAMIC: AI Agents Montreal member count + next event via Meetup scrape ──
+
+async function loadMeetupData() {
+  const memberEl = document.getElementById('member-count');
+  const banner   = document.getElementById('next-event-banner');
+  const linkEl   = document.getElementById('next-event-link');
+  const dateEl   = document.getElementById('next-event-date');
+
+  try {
+    const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent('https://www.meetup.com/ai-agent-montreal/');
+    const res = await fetch(proxyUrl);
+    if (!res.ok) throw new Error('fetch error');
+    const html = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const bodyText = doc.body ? doc.body.textContent : '';
+
+    // ── Member count ──
+    const memberMatch = bodyText.match(/([\d,]+)\s+[Mm]embers?/);
+    if (memberMatch) {
+      const count = parseInt(memberMatch[1].replace(/,/g, ''), 10);
+      animateCount(memberEl, count);
+    } else {
+      memberEl.textContent = '800+';
+    }
+
+    // ── Next event: look for event links and titles in the DOM ──
+    // Meetup renders upcoming events as anchors containing event paths
+    const eventAnchors = [...doc.querySelectorAll('a[href*="/events/"]')]
+      .filter(a => {
+        const href = a.href || a.getAttribute('href') || '';
+        return href.match(/\/ai-agent-montreal\/events\/\d+/) ||
+               href.match(/meetup\.com\/ai-agent-montreal\/events\/\d+/);
+      });
+
+    if (eventAnchors.length > 0) {
+      const a = eventAnchors[0];
+      const rawHref = a.getAttribute('href') || '';
+      const fullUrl = rawHref.startsWith('http') ? rawHref : 'https://www.meetup.com' + rawHref;
+
+      // Get title: try the anchor text, or a nearby heading
+      let title = (a.textContent || '').trim().replace(/\s+/g, ' ');
+      if (!title || title.length < 5) {
+        const heading = a.querySelector('h2, h3, h1, [class*="title"], [class*="name"]');
+        title = heading ? heading.textContent.trim() : 'Upcoming event';
+      }
+      if (title.length > 80) title = title.slice(0, 77) + '…';
+
+      // Look for a date near the anchor
+      const parentText = (a.parentElement ? a.parentElement.textContent : '') +
+                         (a.parentElement?.parentElement ? a.parentElement.parentElement.textContent : '');
+      const dateMatch = parentText.match(
+        /(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*,?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}/i
+      );
+      const dateStr = dateMatch ? dateMatch[0] : '';
+
+      linkEl.textContent = title;
+      linkEl.href = fullUrl;
+      if (dateStr) dateEl.textContent = dateStr;
+      banner.style.display = 'inline-flex';
+      // Populate ecosystem card too
+      _updateAIAgentsEcoCard(title, fullUrl, dateStr);
+    } else {
+      // Fallback: just show a "see upcoming events" link
+      linkEl.textContent = 'See upcoming events ↗';
+      linkEl.href = 'https://www.meetup.com/ai-agent-montreal/events/';
+      dateEl.textContent = '';
+      banner.style.display = 'inline-flex';
+      _updateAIAgentsEcoCard('See upcoming events', 'https://www.meetup.com/ai-agent-montreal/events/', '');
+    }
+
+  } catch(e) {
+    memberEl.textContent = '800+';
+    linkEl.textContent = 'See upcoming events ↗';
+    linkEl.href = 'https://www.meetup.com/ai-agent-montreal/events/';
+    dateEl.textContent = '';
+    banner.style.display = 'inline-flex';
+    _updateAIAgentsEcoCard('See upcoming events', 'https://www.meetup.com/ai-agent-montreal/events/', '');
+  }
+}
+
+function _updateAIAgentsEcoCard(title, url, date) {
+  const t = document.getElementById('aiagents-eco-title');
+  const d = document.getElementById('aiagents-eco-date');
+  if (t) t.innerHTML = `<a href="${url}" target="_blank" style="color:inherit;text-decoration:none;">${title} ↗</a>`;
+  if (d && date) d.textContent = date;
+}
+
+function animateCount(el, target) {
+  const duration = 1200;
+  const start = performance.now();
+  const startVal = Math.max(0, target - 50);
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease out cubic
+    const current = Math.round(startVal + (target - startVal) * eased);
+    el.textContent = current.toLocaleString();
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ── ARTICLES TABS ────────────────────────────────────────────────────────────
+
+document.querySelectorAll('.art-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.art-tab').forEach(t => t.classList.remove('art-tab--active'));
+    tab.classList.add('art-tab--active');
+    const target = tab.dataset.tab;
+    document.getElementById('tab-articles').style.display = target === 'articles' ? 'block' : 'none';
+    document.getElementById('tab-resources').style.display = target === 'resources' ? 'block' : 'none';
+  });
+});
+
+// ── MEDIUM RSS FETCH ──────────────────────────────────────────────────────────
+
+const EXCLUDED_SLUGS = ['formation-continue']; // slugs to exclude
+
+async function loadMediumArticles() {
+  const container = document.getElementById('medium-articles');
+  try {
+    const rssUrl = 'https://nicolas-rosado.medium.com/feed';
+    const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(rssUrl);
+    const res = await fetch(proxyUrl);
+    if (!res.ok) throw new Error('fetch error');
+    const text = await res.text();
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(text, 'text/xml');
+    const items = [...xml.querySelectorAll('item')];
+
+    const articles = items
+      .map(item => {
+        const title = item.querySelector('title')?.textContent || '';
+        const link  = item.querySelector('link')?.textContent?.trim() ||
+                      item.getElementsByTagName('link')[0]?.nextSibling?.nodeValue?.trim() || '';
+        const pubDate = item.querySelector('pubDate')?.textContent || '';
+        const desc = item.querySelector('description')?.textContent || '';
+
+        // Extract plain text excerpt from HTML description
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = desc;
+        const excerpt = (tempDiv.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 160);
+
+        // Derive slug from link to check exclusions
+        const slug = link.split('/').pop()?.split('?')[0] || '';
+        const isExcluded = EXCLUDED_SLUGS.some(s => slug.includes(s));
+
+        const date = pubDate ? new Date(pubDate).toLocaleDateString('en-US', {
+          year: 'numeric', month: 'short', day: 'numeric'
+        }) : '';
+
+        return { title, link, date, excerpt, isExcluded };
+      })
+      .filter(a => !a.isExcluded && a.title && a.link);
+
+    if (articles.length === 0) throw new Error('no articles');
+
+    container.innerHTML = articles.map(a => `
+      <a href="${a.link}" target="_blank" class="article-card">
+        <div class="article-date">${a.date}</div>
+        <div class="article-title">${a.title}</div>
+        ${a.excerpt ? `<div class="article-excerpt">${a.excerpt}…</div>` : ''}
+        <div class="article-readmore">Read on Medium ↗</div>
+      </a>
+    `).join('');
+
+  } catch(e) {
+    // Fallback: hardcoded articles (excluding Formation continue)
+    const fallback = [
+      { date: 'Feb 17, 2025', title: 'Feedback after five episodes of my podcast 🎙️', link: 'https://nicolas-rosado.medium.com/feedback-after-five-episodes-of-my-podcast-%EF%B8%8F-d7d8d94cfc41', excerpt: 'An open letter to the me of December 2024 from the me of February 2025 — lessons learned after five podcast episodes.' },
+      { date: 'Feb 17, 2025', title: 'How to tackle developer imposter syndrome thanks to your Reticular Activating System (RAS)', link: 'https://nicolas-rosado.medium.com/how-to-tackle-developer-imposter-syndrome-thanks-to-your-reticular-activating-system-ras-2f38d6dd8d6c', excerpt: 'If you feel like you don\'t know anything despite your experience, your brain\'s RAS might be the key to changing that.' },
+      { date: 'Dec 3, 2024', title: 'Property Based Testing (PBT) in Java', link: 'https://nicolas-rosado.medium.com/property-based-testing-pbt-in-java-5faccc2ef6f7', excerpt: 'Most developers know classic unit tests but few know property based testing. A clear guide to this powerful testing method.' },
+      { date: 'Dec 2, 2024', title: 'My Journey On How I Started My Podcast (And Why You Should Overcome Your Fears)', link: 'https://nicolas-rosado.medium.com/my-journey-on-how-i-started-my-podcast-and-why-you-should-overcome-your-fears-c6bca3a5478e', excerpt: 'How I went from fear to action and launched my podcast — and why you should too.' },
+      { date: 'Jan 17, 2022', title: 'How being a twin girls father has improved my work as a lead developer', link: 'https://nicolas-rosado.medium.com/how-being-a-twin-girls-father-has-improved-my-work-as-a-lead-developer-df5e1b708b02', excerpt: 'Becoming a father of twin girls taught me lessons that made me a better lead developer than any book or course.' },
+    ];
+    container.innerHTML = fallback.map(a => `
+      <a href="${a.link}" target="_blank" class="article-card">
+        <div class="article-date">${a.date}</div>
+        <div class="article-title">${a.title}</div>
+        <div class="article-excerpt">${a.excerpt}</div>
+        <div class="article-readmore">Read on Medium ↗</div>
+      </a>
+    `).join('');
+  }
+}
+
+// ── TALK RESOURCES (to be filled with YouTube comment links) ─────────────────
+
+const talkResources = [
+  // Example structure — fill in with real links from YouTube comments:
+  // { talk: 'AC/DC — Agent-Centric Development Cycle', speaker: 'Edgar Kussberg', links: [
+  //   { label: 'Slides', url: 'https://...' },
+  //   { label: 'GitHub', url: 'https://...' },
+  // ]},
+];
+
+function renderResources() {
+  const container = document.getElementById('resources-list');
+  if (talkResources.length === 0) {
+    container.innerHTML = `<div class="resources-placeholder">
+      🔗 Talk resources (slides, GitHub repos, tools) will appear here soon.<br/>
+      They are pinned in the comments of each YouTube video.
+    </div>`;
+    return;
+  }
+  container.innerHTML = talkResources.map((t, i) => `
+    <div class="resource-group" id="rg-${i}">
+      <div class="resource-group-header" onclick="toggleResource(${i})">
+        <span>${t.talk}</span>
+        <span class="resource-group-speaker">${t.speaker}</span>
+        <span class="resource-toggle">▼</span>
+      </div>
+      <div class="resource-links">
+        ${t.links.map(l => `
+          <a href="${l.url}" target="_blank" class="resource-link">
+            <span class="resource-link-label">${l.label}</span>
+            ${l.url}
+          </a>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleResource(i) {
+  document.getElementById('rg-' + i)?.classList.toggle('open');
+}
+
+// ── DYNAMIC: CraftCode Podcast — title/date from Anchor RSS, link → YouTube ───
+
+async function loadCraftCodeEpisode() {
+  const titleEl = document.getElementById('craftcode-ep-title');
+  const dateEl  = document.getElementById('craftcode-ep-date');
+
+  const YT_PLAYLIST = 'https://youtube.com/playlist?list=PLpWOuEp7MZW91uyBJZyOf_HzBM1eEFUHx&si=gvcSRUvLaBZvtk4j';
+
+  try {
+    const RSS_URL  = 'https://anchor.fm/s/ff024d88/podcast/rss';
+    const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(RSS_URL);
+    const res = await fetch(proxyUrl);
+    if (!res.ok) throw new Error('fetch error');
+    const text = await res.text();
+    const xml  = new DOMParser().parseFromString(text, 'text/xml');
+
+    const item = xml.querySelector('item');
+    if (!item) throw new Error('no item');
+
+    const title   = item.querySelector('title')?.textContent?.trim() || 'Latest episode';
+    const pubDate = item.querySelector('pubDate')?.textContent || '';
+    const date    = pubDate ? new Date(pubDate).toLocaleDateString('en-US', {
+      year: 'numeric', month: 'short', day: 'numeric'
+    }) : '';
+
+    // Always link to YouTube — RSS is only used for title & date metadata
+    titleEl.innerHTML = `<a href="${YT_PLAYLIST}" target="_blank" style="color:inherit;text-decoration:none;">${title} ↗</a>`;
+    dateEl.textContent = date ? `${date} · Watch on YouTube` : 'Watch on YouTube';
+  } catch(e) {
+    titleEl.innerHTML = `<a href="${YT_PLAYLIST}" target="_blank" style="color:inherit;text-decoration:none;">See all episodes on YouTube ↗</a>`;
+    dateEl.textContent = 'Also available on Spotify';
+  }
+}
+
+loadMediumArticles();
+renderResources();
+loadCraftCodeEpisode();
+// ── CIRCUIT PARTICLE ANIMATION ───────────────────────────────────────────────
+
+(function() {
+  const canvas = document.getElementById('circuit-canvas');
+  if (!canvas) return;
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); buildRails(); });
+
+  const ctx = canvas.getContext('2d');
+  let rails = [];
+  let particles = [];
+
+  function buildRails() {
+    const W = canvas.width, H = canvas.height;
+    rails = [
+      [{x:0,y:H*.22},{x:W*.12,y:H*.22},{x:W*.12,y:H*.44},{x:W*.28,y:H*.44},{x:W*.28,y:H*.18},{x:W*.55,y:H*.18},{x:W*.55,y:H*.38},{x:W*.72,y:H*.38},{x:W*.72,y:H*.12},{x:W,y:H*.12}],
+      [{x:0,y:H*.65},{x:W*.08,y:H*.65},{x:W*.08,y:H*.82},{x:W*.22,y:H*.82},{x:W*.22,y:H*.55},{x:W*.42,y:H*.55},{x:W*.42,y:H*.78},{x:W*.60,y:H*.78},{x:W*.60,y:H*.48},{x:W*.80,y:H*.48},{x:W*.80,y:H*.70},{x:W,y:H*.70}],
+      [{x:W,y:H*.30},{x:W*.88,y:H*.30},{x:W*.88,y:H*.58},{x:W*.68,y:H*.58},{x:W*.68,y:H*.28},{x:W*.48,y:H*.28},{x:W*.48,y:H*.62},{x:W*.32,y:H*.62},{x:W*.32,y:H*.35},{x:W*.15,y:H*.35},{x:W*.15,y:H*.72},{x:0,y:H*.72}],
+      [{x:W*.20,y:0},{x:W*.20,y:H*.25},{x:W*.38,y:H*.25},{x:W*.38,y:H*.68},{x:W*.52,y:H*.68},{x:W*.52,y:H*.15},{x:W*.65,y:H*.15},{x:W*.65,y:H*.50},{x:W*.82,y:H*.50},{x:W*.82,y:H}],
+      [{x:W*.70,y:0},{x:W*.70,y:H*.20},{x:W*.45,y:H*.20},{x:W*.45,y:H*.45},{x:W*.25,y:H*.45},{x:W*.25,y:H*.88},{x:W*.10,y:H*.88},{x:W*.10,y:H}],
+    ];
+
+    particles = [];
+    rails.forEach((rail, ri) => {
+      const count = 4 + ri;
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          rail,
+          pos: i / count,
+          speed: 0.0025 + ri * 0.0004 + Math.random() * 0.0015,
+          tailLen: 22 + Math.floor(Math.random() * 12),
+        });
+      }
+    });
+  }
+
+  buildRails();
+
+  function ptOn(rail, t) {
+    t = ((t % 1) + 1) % 1;
+    const n = rail.length - 1;
+    const seg = Math.min(Math.floor(t * n), n - 1);
+    const f = t * n - seg;
+    return {
+      x: rail[seg].x + (rail[seg+1].x - rail[seg].x) * f,
+      y: rail[seg].y + (rail[seg+1].y - rail[seg].y) * f,
+    };
+  }
+
+  function drawRail(rail) {
+    ctx.beginPath();
+    ctx.moveTo(rail[0].x, rail[0].y);
+    for (let i = 1; i < rail.length; i++) ctx.lineTo(rail[i].x, rail[i].y);
+    ctx.strokeStyle = 'rgba(160,25,8,0.15)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    // junction nodes
+    rail.forEach((p, i) => {
+      if (i === 0 || i === rail.length - 1) return;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(200,40,10,0.3)';
+      ctx.fill();
+    });
+  }
+
+  let raf;
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    rails.forEach(drawRail);
+
+    particles.forEach(p => {
+      p.pos = (p.pos + p.speed) % 1;
+      for (let i = 0; i < p.tailLen; i++) {
+        const tp = ((p.pos - i * 0.022) + 1) % 1;
+        const pt = ptOn(p.rail, tp);
+        const frac = 1 - i / p.tailLen;
+        const size = frac * 2.8;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, size, 0, Math.PI * 2);
+        // head = bright yellow-white, tail = deep orange-red
+        if (i < 3) {
+          ctx.fillStyle = `rgba(255,230,120,${frac * 0.95})`;
+        } else if (i < 8) {
+          ctx.fillStyle = `rgba(255,120,30,${frac * 0.85})`;
+        } else {
+          ctx.fillStyle = `rgba(210,45,10,${frac * 0.7})`;
+        }
+        ctx.fill();
+      }
+    });
+
+    raf = requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+
+loadMeetupData();
+loadCraftersEvent();
+loadMenderConEvent();
+</script>
+</body>
+</html>
