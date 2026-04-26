@@ -246,6 +246,13 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 5rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Solid background bands between sections to cover parallax */
+        section, footer, .section-divider {
+            background: var(--bg);
         }
 
         .section-header {
@@ -323,7 +330,12 @@
         }
 
         /* ── MAP ── */
-        #map-section { padding-bottom: 3rem; }
+        #map-section {
+            padding-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+            isolation: isolate;
+        }
 
         #map {
             width: 100%;
@@ -332,6 +344,7 @@
             border: 1px solid var(--border);
             position: relative;
             z-index: 2;
+            background: #0e0e18;
         }
 
         .map-caption {
