@@ -24,15 +24,13 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - "🎙 Suggest a Talk" CTA → LinkedIn
 
 ### 🌍 Global Speakers Map
-- **Custom Canvas map** — zero external dependencies, pure JS Mercator projection
-- Dark background with cyan grid (meridians/parallels)
-- Simplified continent polygons
-- 🔵 Cyan pulsing markers = past speakers · 🟡 Amber pulsing markers = upcoming speakers
-- Hover tooltip with name, location, and talk title
-- Fully responsive — redraws on every frame, adapts to window resize
+- **Leaflet.js** interactive map with dark CartoDB tiles
+- 🔵 Cyan glowing markers = past speakers · 🟡 Amber glowing markers = upcoming speakers
+- Click any marker for a popup with name, location, and talk title
 - 19 speakers across 13 cities
+- `map.invalidateSize()` called at 200ms and 800ms after load for reliable rendering on GitHub Pages
 
-> ℹ️ Leaflet was removed due to rendering issues on GitHub Pages. The map is now self-contained with no CDN dependency.
+> ⚠️ Known fix applied: bare `&` characters in speaker bios were causing the HTML parser to truncate the JS script. All single `&` in JS strings are now escaped as `\u0026`.
 
 ### 👤 Speakers
 - Card grid with avatar, name, LinkedIn link, location, bio, and talk title
