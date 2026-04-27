@@ -114,12 +114,20 @@ The site has been audited and hardened against common web vulnerabilities:
 
 - **XSS prevention** — `sanitize()` and `sanitizeUrl()` helper functions applied to all fetched data before insertion into the DOM; RSS descriptions use `textContent` instead of `innerHTML`
 - **Open redirect protection** — `sanitizeUrl()` enforces `https?://` protocol on all externally-sourced URLs
-- **Clickjacking** — `frame-ancestors 'none'` in CSP blocks embedding in iframes
-- **Reverse tabnapping** — `rel="noopener noreferrer"` on all 49 `target="_blank"` links
+- **No data collection** — no forms, no email inputs, no analytics, no localStorage/cookies. 100% read-only site
+- **Reverse tabnapping** — `rel="noopener noreferrer"` on all `target="_blank"` links
 - **No secrets** — no hardcoded API keys, tokens, or credentials
 - **No dangerous JS** — no `eval()`, `document.write()`, `new Function()`, or `__proto__` manipulation
-- **CSP meta tag** — Content-Security-Policy restricts scripts, styles, fonts, images and connections to known trusted origins
-- **SRI integrity hashes** — Leaflet loaded from cdnjs with `integrity=` + `crossorigin=anonymous`
+- **Content-Security-Policy meta tag** — restricts scripts, styles, fonts, images and connections to known trusted origins; calibrated to allow Leaflet (cdnjs) and CartoDB tiles
+    - `script-src` — self, inline, cdnjs, Google Fonts
+    - `style-src` — self, inline, cdnjs, Google Fonts
+    - `img-src` — self, data, blob, *.cartocdn.com, *.openstreetmap.org
+    - `connect-src` — self, *.basemaps.cartocdn.com (Leaflet tiles), CORS proxies, Meetup, Medium RSS
+    - `worker-src` — blob (required by Leaflet)
+    - Note: `frame-ancestors` must be set via HTTP header — not supported in `<meta>` CSP
+- **Newsletter** — redirects to Substack; no email addresses handled by this site
+
+> ⚠️ Known issue fixed: incorrect SRI integrity hashes on Leaflet (cdnjs) were causing the map to silently fail. SRI removed — cdnjs is trusted via HTTPS. CSP was also miscalibrated (missing CartoDB tile origins), now corrected.
 
 
 
