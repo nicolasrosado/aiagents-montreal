@@ -1211,6 +1211,7 @@
         <a href="#talks" class="nav-btn secondary">Talks</a>
         <a href="#articles" class="nav-btn secondary">Articles</a>
         <a href="#ecosystem" class="nav-btn secondary">Ecosystem</a>
+        <a href="#ecosystem-graph" class="nav-btn secondary">Ecosystem Graph</a>
         <a href="#subscribe" class="nav-btn secondary">Subscribe</a>
         <a href="https://www.meetup.com/ai-agent-montreal/" target="_blank" class="nav-btn secondary" rel="noopener noreferrer">Join on Meetup ↗</a>
         <a href="https://www.linkedin.com/in/nicolas-rosado-a97b3393" target="_blank" class="nav-btn cta" rel="noopener noreferrer">🎙 Suggest a Talk</a>
@@ -1360,10 +1361,57 @@
 
 <hr class="section-divider" />
 
+<!-- ECOSYSTEM CIRCUIT GRAPH -->
+<section id="ecosystem-graph" style="padding: 5rem 0;">
+    <div style="max-width:1100px;margin:0 auto;padding:0 2rem 1.5rem;">
+        <div class="section-header">
+            <span class="section-number">06</span>
+            <h2 class="section-title">Ecosystem Circuit Graph</h2>
+            <div class="section-line"></div>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem;">
+            The local and global communities that make up our ecosystem — hover to slow, click to visit.
+        </p>
+    </div>
+    <div id="ecograph-container" style="width:100%;height:520px;position:relative;background:var(--bg);overflow:hidden;">
+        <canvas id="eco-circuit" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+        <svg id="eco-svg" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;">
+            <defs>
+                <radialGradient id="eco-cf" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="white" stop-opacity="1"/>
+                    <stop offset="50%"  stop-color="white" stop-opacity="0.95"/>
+                    <stop offset="72%"  stop-color="white" stop-opacity="0.5"/>
+                    <stop offset="88%"  stop-color="white" stop-opacity="0.12"/>
+                    <stop offset="100%" stop-color="white" stop-opacity="0"/>
+                </radialGradient>
+                <mask id="eco-cm"><circle id="eco-cmc" r="155" fill="url(#eco-cf)"/></mask>
+                <radialGradient id="eco-cd" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="rgba(5,5,18,0.2)"/>
+                    <stop offset="60%"  stop-color="rgba(5,5,18,0.55)"/>
+                    <stop offset="100%" stop-color="rgba(7,8,15,0.95)"/>
+                </radialGradient>
+                <radialGradient id="eco-rg" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="rgba(200,40,10,0.14)"/>
+                    <stop offset="100%" stop-color="rgba(200,40,10,0)"/>
+                </radialGradient>
+                <pattern id="eco-grid" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+                    <path d="M 28 0 L 0 0 0 28" fill="none" stroke="rgba(200,50,10,0.05)" stroke-width="1"/>
+                </pattern>
+            </defs>
+        </svg>
+        <canvas id="eco-hit" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;background:transparent;"></canvas>
+        <p style="position:absolute;bottom:0.75rem;left:50%;transform:translateX(-50%);font-size:9px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap;z-index:3;pointer-events:none;">
+            Hover to slow · Click to visit
+        </p>
+    </div>
+</section>
+
+<hr class="section-divider" />
+
 <!-- ECOSYSTEM -->
 <section id="ecosystem">
     <div class="section-header">
-        <span class="section-number">06</span>
+        <span class="section-number">07</span>
         <h2 class="section-title">Local Ecosystem & Events</h2>
         <div class="section-line"></div>
     </div>
@@ -1666,7 +1714,7 @@
 <!-- SUBSCRIBE -->
 <section id="subscribe" style="max-width:1100px;margin:0 auto;padding:5rem 2rem;">
     <div class="section-header">
-        <span class="section-number">07</span>
+        <span class="section-number">08</span>
         <h2 class="section-title">Stay in the Loop</h2>
         <div class="section-line"></div>
     </div>
@@ -2914,6 +2962,153 @@
             requestAnimationFrame(mgAnimate);
         }
         mgAnimate();
+    })();
+
+    // ── ECOSYSTEM CIRCUIT GRAPH ───────────────────────────────────────────────────
+
+    (function() {
+        var container = document.getElementById('ecograph-container');
+        if (!container) return;
+
+        var ecoSvg    = document.getElementById('eco-svg');
+        var ecoCanvas = document.getElementById('eco-circuit');
+        var ecoHit    = document.getElementById('eco-hit');
+        var NS        = 'http://www.w3.org/2000/svg';
+
+        function ecoEl(tag, attrs, p) {
+            var e = document.createElementNS(NS, tag);
+            Object.keys(attrs || {}).forEach(function(k){ e.setAttribute(k, attrs[k]); });
+            if (p) p.appendChild(e);
+            return e;
+        }
+
+        var W  = container.offsetWidth;
+        var H  = container.offsetHeight;
+        var CX = W/2, CY = H/2;
+        var R1 = Math.min(W,H) * 0.30;
+
+        ecoCanvas.width = W; ecoCanvas.height = H;
+        ecoHit.width    = W; ecoHit.height    = H;
+
+        var ecoCtx = ecoCanvas.getContext('2d');
+
+        var INITIATIVES = [
+            { name:'AI Agents Montreal',      emoji:'\uD83E\uDD16', url:'https://www.meetup.com/ai-agent-montreal/' },
+            { name:'Software Crafters MTL',   emoji:'\uD83D\uDD27', url:'https://guild.host/software-crafters-montreal' },
+            { name:'Mental Health in SW Eng', emoji:'\uD83E\uDDE0', url:'https://www.meetup.com/mental-health-in-software-engineering-montreal/' },
+            { name:'AI Craftspeople Guild',   emoji:'\u2692\uFE0F', url:'https://aicraftspeopleguild.github.io' },
+            { name:'/dev/mtl',               emoji:'\uD83C\uDFD9\uFE0F', url:'https://www.dev-mtl.ca' },
+            { name:'Devoxx4Kids Qu\u00e9bec', emoji:'\uD83D\uDC7E', url:'https://www.devoxx4kids.org/quebec/' },
+            { name:'MenderCon',              emoji:'\uD83D\uDD27', url:'https://mendercon.com' },
+        ];
+
+        // Circuit image center
+        document.getElementById('eco-cmc').setAttribute('cx', CX);
+        document.getElementById('eco-cmc').setAttribute('cy', CY);
+        ecoEl('image', { href:'assets/circuit-crop.jpg', x:CX-155, y:CY-155,
+            width:310, height:310, mask:'url(#eco-cm)',
+            preserveAspectRatio:'none', style:'filter:brightness(0.85)' }, ecoSvg);
+        ecoEl('circle', { cx:CX,cy:CY,r:155,fill:'url(#eco-grid)',mask:'url(#eco-cm)',style:'pointer-events:none;opacity:0.4' }, ecoSvg);
+        ecoEl('circle', { cx:CX,cy:CY,r:155,fill:'url(#eco-cd)',mask:'url(#eco-cm)',style:'pointer-events:none' }, ecoSvg);
+        ecoEl('circle', { cx:CX,cy:CY,r:155,fill:'url(#eco-rg)',mask:'url(#eco-cm)',style:'pointer-events:none' }, ecoSvg);
+
+        var ecoRails = [
+            [{x:0,y:H*.18},{x:W*.10,y:H*.18},{x:W*.10,y:H*.40},{x:W*.28,y:H*.40},{x:W*.28,y:H*.12},{x:W*.55,y:H*.12},{x:W*.55,y:H*.38},{x:W*.78,y:H*.38},{x:W*.78,y:H*.08},{x:W,y:H*.08}],
+            [{x:W,y:H*.72},{x:W*.85,y:H*.72},{x:W*.85,y:H*.52},{x:W*.60,y:H*.52},{x:W*.60,y:H*.82},{x:W*.35,y:H*.82},{x:W*.35,y:H*.60},{x:W*.12,y:H*.60},{x:W*.12,y:H*.90},{x:0,y:H*.90}],
+            [{x:W*.22,y:0},{x:W*.22,y:H*.28},{x:W*.42,y:H*.28},{x:W*.42,y:H*.72},{x:W*.60,y:H*.72},{x:W*.60,y:H*.15},{x:W*.80,y:H*.15},{x:W*.80,y:H}],
+        ];
+        var ecoBeams = ecoRails.map(function(rail, ri) {
+            return { rail:rail, pos:ri/ecoRails.length, speed:0.0018+ri*0.00036, length:0.18+ri*0.04, width:3+ri*0.8 };
+        });
+        function ecoPtOn(rail, t) {
+            t=((t%1)+1)%1;
+            var n=rail.length-1, seg=Math.min(Math.floor(t*n),n-1), f=t*n-seg;
+            return { x:rail[seg].x+(rail[seg+1].x-rail[seg].x)*f, y:rail[seg].y+(rail[seg+1].y-rail[seg].y)*f };
+        }
+        function ecoDrawBeam(b) {
+            b.pos=(b.pos+b.speed)%1;
+            var steps=80;
+            for(var i=0;i<steps;i++){
+                var t=((b.pos-i/steps*b.length)+1)%1, pt=ecoPtOn(b.rail,t), frac=i/steps;
+                var r,g,bv,alpha;
+                if(frac<0.08){r=255;g=240;bv=180;alpha=1.0;}
+                else if(frac<0.2){var ff=(frac-0.08)/0.12;r=255;g=Math.round(240-(240-120)*ff);bv=Math.round(180*(1-ff));alpha=0.95-ff*0.1;}
+                else if(frac<0.5){var ff=(frac-0.2)/0.3;r=255;g=Math.round(120*(1-ff));bv=0;alpha=0.85-ff*0.35;}
+                else{var ff=(frac-0.5)/0.5;r=Math.round(200*(1-ff*0.5));g=0;bv=0;alpha=(0.5-ff*0.5)*0.8;}
+                var size=b.width*(1-frac*0.7);
+                if(frac<0.3){
+                    var hs=size*3,hG=ecoCtx.createRadialGradient(pt.x,pt.y,0,pt.x,pt.y,hs),hA=alpha*0.25*(1-frac/0.3);
+                    hG.addColorStop(0,'rgba('+r+','+g+','+bv+','+hA+')');hG.addColorStop(1,'rgba('+r+','+g+','+bv+',0)');
+                    ecoCtx.beginPath();ecoCtx.arc(pt.x,pt.y,hs,0,Math.PI*2);ecoCtx.fillStyle=hG;ecoCtx.fill();
+                }
+                ecoCtx.beginPath();ecoCtx.arc(pt.x,pt.y,size,0,Math.PI*2);
+                ecoCtx.fillStyle='rgba('+r+','+g+','+bv+','+alpha+')';ecoCtx.fill();
+            }
+        }
+
+        var ECO_SPEED=0.00035, ecoBaseAngle=0, ecoHovered=-1;
+        var ecoPositions=INITIATIVES.map(function(){ return {x:0,y:0,w:0}; });
+
+        ecoHit.addEventListener('mousemove', function(e) {
+            var rect=ecoHit.getBoundingClientRect(), mx=e.clientX-rect.left, my=e.clientY-rect.top;
+            ecoHovered=-1;
+            ecoPositions.forEach(function(pos,i){
+                if(Math.abs(mx-pos.x)<pos.w/2+10 && Math.abs(my-pos.y)<16) ecoHovered=i;
+            });
+            ecoHit.style.cursor=ecoHovered>=0?'pointer':'default';
+        });
+        ecoHit.addEventListener('click', function(){
+            if(ecoHovered>=0) window.open(INITIATIVES[ecoHovered].url,'_blank','noopener noreferrer');
+        });
+
+        function ecoDrawNode(i, x, y) {
+            var isHov=ecoHovered===i, init=INITIATIVES[i];
+            ecoCtx.font='10px Space Mono, monospace';
+            var label=init.emoji+' '+init.name, tw=ecoCtx.measureText(label).width;
+            ecoPositions[i]={x:x,y:y,w:tw};
+            var gr=ecoCtx.createRadialGradient(x,y,0,x,y,isHov?35:24);
+            gr.addColorStop(0,isHov?'rgba(255,100,20,0.45)':'rgba(220,60,10,0.28)');
+            gr.addColorStop(1,'rgba(255,80,10,0)');
+            ecoCtx.beginPath();ecoCtx.arc(x,y,isHov?35:24,0,Math.PI*2);ecoCtx.fillStyle=gr;ecoCtx.fill();
+            ecoCtx.beginPath();ecoCtx.arc(x,y,isHov?6:4.5,0,Math.PI*2);
+            ecoCtx.fillStyle=isHov?'rgba(255,160,50,1)':'rgba(220,80,20,0.90)';
+            ecoCtx.shadowColor='rgba(255,100,20,0.9)';ecoCtx.shadowBlur=isHov?20:12;
+            ecoCtx.fill();ecoCtx.shadowBlur=0;
+            ecoCtx.beginPath();ecoCtx.arc(x-1,y-1,isHov?2:1.5,0,Math.PI*2);
+            ecoCtx.fillStyle='rgba(255,255,255,0.8)';ecoCtx.fill();
+            ecoCtx.save();ecoCtx.textAlign='center';ecoCtx.textBaseline='middle';
+            ecoCtx.font=isHov?'bold 10px Space Mono, monospace':'10px Space Mono, monospace';
+            if(isHov){ecoCtx.shadowColor='rgba(255,120,30,0.9)';ecoCtx.shadowBlur=14;}
+            ecoCtx.fillStyle=isHov?'#ffb060':'rgba(220,180,150,0.82)';
+            ecoCtx.fillText(label,x,y-16);
+            ecoCtx.restore();
+        }
+
+        function ecoAnimate() {
+            var mult=ecoHovered>=0?0.06:1;
+            ecoBaseAngle+=ECO_SPEED*mult;
+            ecoCtx.clearRect(0,0,W,H);
+            ecoCtx.beginPath();ecoCtx.arc(CX,CY,R1,0,Math.PI*2);
+            ecoCtx.strokeStyle='rgba(200,50,10,0.12)';ecoCtx.lineWidth=1;
+            ecoCtx.setLineDash([3,9]);ecoCtx.stroke();ecoCtx.setLineDash([]);
+            ecoRails.forEach(function(rail){
+                ecoCtx.beginPath();ecoCtx.moveTo(rail[0].x,rail[0].y);
+                rail.forEach(function(p){ecoCtx.lineTo(p.x,p.y);});
+                ecoCtx.strokeStyle='rgba(120,15,5,0.18)';ecoCtx.lineWidth=1.5;ecoCtx.stroke();
+                rail.forEach(function(p,i){
+                    if(i===0||i===rail.length-1)return;
+                    ecoCtx.beginPath();ecoCtx.arc(p.x,p.y,2.5,0,Math.PI*2);
+                    ecoCtx.fillStyle='rgba(160,30,8,0.28)';ecoCtx.fill();
+                });
+            });
+            ecoBeams.forEach(ecoDrawBeam);
+            for(var i=0;i<INITIATIVES.length;i++){
+                var angle=ecoBaseAngle+(i/INITIATIVES.length)*Math.PI*2;
+                ecoDrawNode(i,CX+Math.cos(angle)*R1,CY+Math.sin(angle)*R1);
+            }
+            requestAnimationFrame(ecoAnimate);
+        }
+        ecoAnimate();
     })();
 </script>
 </body>

@@ -13,7 +13,8 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 ├── TODO.md
 └── assets/
     ├── ai-agents-image.jpg # Header background image (parallax + circuit animation)
-    └── brain-circle.jpg    # Brain image for the Knowledge Graph center (350×350px crop)
+    ├── brain-circle.jpg    # Brain image for the Knowledge Brain Graph center (350×350px crop)
+    └── circuit-crop.jpg    # Circuit board image for the Ecosystem Circuit Graph center (500×500px crop)
 ```
 
 ## Features
@@ -57,7 +58,14 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
     - GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers
     - Talks with no external resources (Benedikt Stemmildt, Matthias Patzak) are omitted from the list
 
-### 🌱 Local Ecosystem & Events
+### 🔧 Ecosystem Circuit Graph *(section 06 — before Local Ecosystem)*
+- **Orbital circuit graph** — 7 local/global community initiatives orbiting the AI circuit board image
+- Circuit board image (`assets/circuit-crop.jpg`) cropped from the hero image — red/orange PCB aesthetic
+- Nodes and dots in **orange/red** to match the circuit color palette (vs cyan for the brain graph)
+- Same beam animation as the rest of the site — faisceaux rouges continus
+- Hover to slow · Click to visit each community's website
+
+### 🌱 Local Ecosystem & Events *(section 07)*
 8 community cards covering:
 - **AI Agents Montreal** · **Mental Health in SW Eng** · **Software Crafters MTL** · **AI Craftspeople Guild** · **/dev/mtl** · **Devoxx4Kids Québec** · **MenderCon** · *(more to come)*
 - Format badges: 📍 In-Person / 🌐 Online · Frequency badges: 🔁 Regular / 📆 On demand
