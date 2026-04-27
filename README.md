@@ -8,8 +8,11 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 
 ```
 /
-├── index.html              # Single-page site (self-contained)
+├── index.html              # Single-page site (loads data files below)
 ├── README.md
+├── data/
+│   ├── speakers.js         # const speakers — all speaker objects (bio, location, talk, links…)
+│   └── talks.js            # const talks + const talkResources (past talks, YouTube links, resources)
 └── assets/
     ├── ai-agents-image.jpg # Header background image (parallax + circuit animation)
     ├── brain-circle.jpg    # Brain image for the Knowledge Brain Graph center (350×350px crop)
@@ -138,18 +141,19 @@ The site has been audited and hardened against common web vulnerabilities:
 
 1. Create a GitHub repository (e.g. `aiagents-montreal`) — can be **public** (required for free GitHub Pages)
 2. Upload `index.html`, `README.md`, `NEW_TALK_TEMPLATE.md` to the root
-3. Create an `assets/` folder and upload `ai-agents-image.jpg`, `brain-circle.jpg`, `circuit-crop.jpg` inside it
-4. Go to **Settings → Pages → Source: `main` / `/ (root)`** → Save
-5. Site goes live at `https://<your-username>.github.io/<repo-name>/`
+3. Create a `data/` folder and upload `speakers.js` and `talks.js` inside it
+4. Create an `assets/` folder and upload `ai-agents-image.jpg`, `brain-circle.jpg`, `circuit-crop.jpg` inside it
+5. Go to **Settings → Pages → Source: `main` / `/ (root)`** → Save
+6. Site goes live at `https://<your-username>.github.io/<repo-name>/`
 
 > ⚠️ GitHub Pages with private repos requires a paid GitHub Team plan. Use a public repo on the free plan.
 
 ## Things to update over time
 
-- **New talks** — fill in `NEW_TALK_TEMPLATE.md` and share with Claude; update `talks` array, `talkResources`, Knowledge Brain Graph orbit count, and mobile list
+- **New talks** — fill in `NEW_TALK_TEMPLATE.md` and share with Claude; update `data/talks.js` (`talks` array + `talkResources`), Knowledge Brain Graph orbit count, and mobile list
+- **New speakers** — add to `data/speakers.js`; set `upcoming: true` for future talks, remove the flag once the talk has aired
 - **Newsletter** — replace the disabled button with your Substack link once created
 - **Speaker bios** — a few speakers (Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting) are still using generated bios; replace with official "About me" once available
-- **New speakers** — add to the `speakers` array; set `upcoming: true` for future talks, remove the flag once the talk has aired
 - **Devoxx4Kids next event** — update the date (~every 3 months)
 - **Montréal JUG next event** — update monthly
 
