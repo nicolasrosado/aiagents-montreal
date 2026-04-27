@@ -28,11 +28,11 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 ### 🧠 Talk Knowledge Brain Graph *(section 01 — displayed first)*
 - **Orbital mind graph** — 14 talks orbiting the AI brain image
 - **Desktop** — 2 concentric orbits: inner (talks 1-7, clockwise) · outer (talks 8-14, counter-clockwise)
-- **Mobile (<768px)** — single orbit (all 14 talks), height 340px, smaller brain (r=72), 7px font — zero impact on desktop
-- Bright cyan pulsing dots per talk with glow halo — hover to slow the rotation, click to open the YouTube video
-- Circuit beam animation (red/orange faisceaux continus) in background — same style as the header
-- Uses `assets/brain-circle.jpg` — 350×350px crop centered on the brain, no "AI" text visible
-- Mask radius r=175 on desktop, r=72 on mobile — image fits exactly inside the circle
+- **Mobile (<768px)** — vertical scrollable list: brain image centered at top, each talk as a tappable row with animated cyan dot — zero impact on desktop
+- Bright cyan pulsing dots per talk with glow halo — hover to slow, click to watch on YouTube
+- Circuit beam animation (red/orange faisceaux continus) in background
+- Uses `assets/brain-circle.jpg` — 350×350px crop, brain only, no "AI" text
+- Mask radius r=175 on desktop
 
 ### 🌍 Global Speakers Map *(section 02)*
 - **Leaflet.js** interactive map with dark CartoDB tiles
@@ -43,17 +43,17 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 
 > ⚠️ Known fixes: (1) bare `&` in JS strings escaped as `\u0026` to prevent HTML parser truncation. (2) Incorrect SRI integrity hashes on Leaflet were silently blocking the map — SRI removed, cdnjs trusted via HTTPS. (3) CSP recalibrated to include CartoDB tile origins in `connect-src` and `img-src`.
 
-### 👤 Speakers *(section 03)*
-- Card grid with avatar, name, LinkedIn icon link (SVG inline), location, bio, and talk title
+### 👤 Speakers
+- Card grid with avatar, name, LinkedIn icon link (SVG cyan), location, bio, and talk title
 - UPCOMING badge (amber) on speakers not yet presented
 - All 20 speakers have complete LinkedIn URLs
 
-### 🎙 Talks *(section 04)*
+### 🎙 Talks
 - Full list of all 14 past talks
 - **All YouTube links updated** with individual video URLs and timestamps
 - **All Meetup event links updated** with individual event pages
 
-### ✍️ Articles & Resources *(section 05)*
+### ✍️ Articles & Resources
 - **Talk Resources tab** *(default open)* — 60+ links across 12 talks: GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers
 - **Articles tab** — dynamically fetched from Nicolas Rosado's Medium RSS feed; excludes "Formation continue"; falls back to hardcoded list
 
@@ -77,7 +77,7 @@ When a newsletter is eventually added, it will redirect to **Substack** — the 
 - Circuit board image (`assets/circuit-crop.jpg`) cropped from the hero image — red/orange PCB aesthetic, **no brightness filter** (full natural luminosity)
 - Nodes and dots in **orange/red** to match the circuit color palette (vs cyan for the brain graph)
 - **Desktop** — single orbit, height 520px, circuit image r=155
-- **Mobile (<768px)** — height 300px, smaller circuit image (r=60), 8px font — zero impact on desktop
+- **Mobile (<768px)** — vertical scrollable list: circuit image centered at top, each initiative as a tappable row with animated orange dot — zero impact on desktop
 - Same beam animation as the rest of the site — faisceaux rouges continus
 - Hover to slow · Click to visit each community's website
 
@@ -133,8 +133,6 @@ The site has been audited and hardened against common web vulnerabilities:
 > ⚠️ Known issue fixed: incorrect SRI integrity hashes on Leaflet (cdnjs) were causing the map to silently fail. SRI removed — cdnjs is trusted via HTTPS. CSP was also miscalibrated (missing CartoDB tile origins), now corrected.
 
 
-
-## Deploy to GitHub Pages
 
 1. Create a GitHub repository (e.g. `aiagents-montreal`) — can be **public** (required for free GitHub Pages)
 2. Upload `index.html`, `README.md`, `TODO.md` to the root
