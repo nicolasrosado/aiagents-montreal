@@ -8,16 +8,25 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 
 ```
 /
-├── index.html              # Single-page site (loads data files below)
+├── index.html              # HTML shell — 711 lines, structure only
 ├── README.md
 ├── data/
 │   ├── speakers.js         # const speakers — all speaker objects (bio, location, talk, links…)
 │   └── talks.js            # const talks + const talkResources (past talks, YouTube links, resources)
+├── styles/
+│   └── main.css            # All CSS (1 249 lines)
+├── scripts/
+│   └── main.js             # All JS logic (981 lines)
 └── assets/
     ├── ai-agents-image.jpg # Header background image (parallax + circuit animation)
     ├── brain-circle.jpg    # Brain image for the Knowledge Brain Graph center (350×350px crop)
     └── circuit-crop.jpg    # Circuit board image for the Ecosystem Circuit Graph center (500×500px crop)
 ```
+
+**Load order** (GitHub Pages, no bundler):
+1. `styles/main.css` — linked in `<head>`
+2. `data/speakers.js` → `data/talks.js` — inline data, loaded before logic
+3. `scripts/main.js` — references `speakers`, `talks`, `talkResources` declared above
 
 ## Features
 
@@ -142,9 +151,11 @@ The site has been audited and hardened against common web vulnerabilities:
 1. Create a GitHub repository (e.g. `aiagents-montreal`) — can be **public** (required for free GitHub Pages)
 2. Upload `index.html`, `README.md`, `NEW_TALK_TEMPLATE.md` to the root
 3. Create a `data/` folder and upload `speakers.js` and `talks.js` inside it
-4. Create an `assets/` folder and upload `ai-agents-image.jpg`, `brain-circle.jpg`, `circuit-crop.jpg` inside it
-5. Go to **Settings → Pages → Source: `main` / `/ (root)`** → Save
-6. Site goes live at `https://<your-username>.github.io/<repo-name>/`
+4. Create a `styles/` folder and upload `main.css` inside it
+5. Create a `scripts/` folder and upload `main.js` inside it
+6. Create an `assets/` folder and upload `ai-agents-image.jpg`, `brain-circle.jpg`, `circuit-crop.jpg` inside it
+7. Go to **Settings → Pages → Source: `main` / `/ (root)`** → Save
+8. Site goes live at `https://<your-username>.github.io/<repo-name>/`
 
 > ⚠️ GitHub Pages with private repos requires a paid GitHub Team plan. Use a public repo on the free plan.
 
