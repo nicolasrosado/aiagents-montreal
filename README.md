@@ -53,13 +53,26 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **All Meetup event links updated** with individual event pages
 
 ### ✍️ Articles & Resources
+- **Talk Resources tab** *(default open)* — 60+ links across 12 talks: GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers
 - **Articles tab** — dynamically fetched from Nicolas Rosado's Medium RSS feed; excludes "Formation continue"; falls back to hardcoded list
-- **Talk Resources tab** — fully populated with 60+ links across 12 talks, sourced from YouTube comments:
-    - GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers
-    - Talks with no external resources (Benedikt Stemmildt, Matthias Patzak) are omitted from the list
+
+### 🔒 Privacy & Data Policy
+The site is **100% read-only** — it collects, stores and sends zero personal data:
+
+| Check | Result |
+|---|---|
+| HTML forms / email inputs | ✅ None |
+| localStorage / sessionStorage / cookies | ✅ None |
+| Analytics / tracking pixels | ✅ None |
+| POST requests (data sent outbound) | ✅ None — GET only |
+| iframes | ✅ None |
+| Newsletter | ✅ Redirects to Substack — their privacy policy applies |
+| All displayed data | ✅ 100% public (Meetup, LinkedIn, YouTube, RSS feeds) |
+
+When a newsletter is eventually added, it will redirect to **Substack** — the user subscribes directly on Substack's platform. No email addresses are ever handled by this site.
 
 ### 🔧 Ecosystem Circuit Graph *(section 06 — before Local Ecosystem)*
-- **Orbital circuit graph** — 7 local/global community initiatives orbiting the AI circuit board image
+- **Orbital circuit graph** — 8 local/global community initiatives orbiting the AI circuit board image
 - Circuit board image (`assets/circuit-crop.jpg`) cropped from the hero image — red/orange PCB aesthetic
 - Nodes and dots in **orange/red** to match the circuit color palette (vs cyan for the brain graph)
 - Same beam animation as the rest of the site — faisceaux rouges continus
@@ -67,9 +80,10 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 
 ### 🌱 Local Ecosystem & Events *(section 07)*
 8 community cards covering:
-- **AI Agents Montreal** · **Mental Health in SW Eng** · **Software Crafters MTL** · **AI Craftspeople Guild** · **/dev/mtl** · **Devoxx4Kids Québec** · **MenderCon** · *(more to come)*
+- **AI Agents Montreal** · **Mental Health in SW Eng** · **Software Crafters MTL** · **AI Craftspeople Guild** · **/dev/mtl** · **Devoxx4Kids Québec** · **Montréal JUG** · **MenderCon**
 - Format badges: 📍 In-Person / 🌐 Online · Frequency badges: 🔁 Regular / 📆 On demand
 - Dynamic next event for Software Crafters MTL (Guild.host) and MenderCon (scrape)
+- **Montréal JUG** — next event April 30 2026 · Nicolas Rosado guest speaker highlighted · sponsoring CTA
 - "Suggest a Talk" CTAs for AI Agents MTL and Mental Health
 - Sponsoring CTA for /dev/mtl
 - Community values note: free & independent · psychological safety · humility · kindness

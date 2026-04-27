@@ -1337,12 +1337,12 @@
     </div>
 
     <div class="articles-tabs">
-        <button class="art-tab art-tab--active" data-tab="articles">✍️ Articles</button>
-        <button class="art-tab" data-tab="resources">🔗 Talk Resources</button>
+        <button class="art-tab art-tab--active" data-tab="resources">🔗 Talk Resources</button>
+        <button class="art-tab" data-tab="articles">✍️ Articles</button>
     </div>
 
     <!-- ARTICLES TAB -->
-    <div id="tab-articles" class="art-panel">
+    <div id="tab-articles" class="art-panel" style="display:none">
         <div id="medium-articles" class="articles-grid">
             <div class="art-loading">
                 <span class="loading-pulse">Fetching articles from Medium…</span>
@@ -1354,7 +1354,7 @@
     </div>
 
     <!-- RESOURCES TAB -->
-    <div id="tab-resources" class="art-panel" style="display:none">
+    <div id="tab-resources" class="art-panel">
         <div class="resources-list" id="resources-list"></div>
     </div>
 </section>
@@ -1650,6 +1650,55 @@
             <a href="https://www.devoxx4kids.org/quebec/" target="_blank" class="eco-link primary" rel="noopener noreferrer">↗ Website</a>
             <a href="https://bsky.app/profile/devoxx4kidsqc.bsky.social" target="_blank" class="eco-link contact" rel="noopener noreferrer">🦋 Bluesky ↗</a>
             <a href="mailto:devoxx4kids@montreal-jug.org" class="eco-link sponsor">✉ Contact</a>
+        </div>
+    </div>
+
+    <!-- Montreal JUG -->
+    <div class="eco-card">
+        <div class="eco-card-header">
+            <div class="eco-emoji">☕</div>
+            <div>
+                <div class="eco-name">Montréal JUG</div>
+                <div class="eco-type">Community · Java · Montréal</div>
+                <div class="eco-badges">
+                    <span class="eco-badge eco-badge--inperson">📍 In-Person</span>
+                    <span class="eco-badge eco-badge--regular">🔁 Monthly</span>
+                </div>
+            </div>
+        </div>
+        <div class="eco-body">
+            <div class="eco-desc">
+                Le Montréal Java User Group rassemble les développeurs Java et JVM de Montréal pour échanger des idées et discuter des avancées technologiques. Partenaire de Devoxx4Kids Québec — deux communautés unies par le code, le partage et la passion.
+            </div>
+            <div class="eco-next-event">
+                <div class="eco-next-label">📅 Next event</div>
+                <div class="eco-next-title">April 30, 2026 — Reactive Programming avec Spring WebFlux</div>
+                <div class="eco-next-date">🏠 Hosted by Web Hosting Canada · <a href="https://www.meetup.com/montreal-jug/events/314465570/" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">RSVP on Meetup ↗</a></div>
+            </div>
+
+            <!-- Nicolas guest speaker highlight -->
+            <div class="eco-community-note" style="border-left-color:#a78bfa;background:rgba(124,58,237,0.06);border-color:rgba(124,58,237,0.25);">
+                <div class="eco-community-icon">🎙️</div>
+                <div class="eco-community-text">
+                    <strong style="color:#a78bfa">Nicolas Rosado — Guest Speaker</strong><br/>
+                    Deuxième partie : <em>Pourquoi commencer par un test permet-il de réduire le stress ?</em><br/>
+                    <a href="https://www.youtube.com/watch?v=IzVKECIsjs4" target="_blank" rel="noopener noreferrer" style="color:#a78bfa;font-size:0.7rem;">▶ Watch on YouTube ↗</a>
+                </div>
+            </div>
+
+            <div class="suggest-talk-block" style="background:rgba(124,58,237,0.07);border-color:rgba(124,58,237,0.2);">
+                <div class="suggest-talk-text">
+                    <div class="suggest-talk-title" style="color:#a78bfa">💰 Devenir commanditaire ?</div>
+                    <div class="suggest-talk-desc">Soutenez le Montréal JUG et Devoxx4Kids Québec — plans de commandite disponibles.</div>
+                </div>
+                <a href="https://www.montreal-jug.org/sponsoring/" target="_blank" rel="noopener noreferrer" class="suggest-talk-btn" style="background:linear-gradient(135deg,#7c3aed,#9333ea);">Sponsoring ↗</a>
+            </div>
+        </div>
+        <div class="eco-footer">
+            <a href="https://www.montreal-jug.org" target="_blank" class="eco-link primary" rel="noopener noreferrer">↗ Website</a>
+            <a href="https://www.meetup.com/montreal-jug/" target="_blank" class="eco-link contact" rel="noopener noreferrer">● Meetup ↗</a>
+            <a href="https://www.youtube.com/@montrealjug" target="_blank" class="eco-link sponsor" rel="noopener noreferrer">▶ YouTube ↗</a>
+            <a href="https://linktr.ee/devoxx4kids_montrealjug" target="_blank" class="eco-link contact" rel="noopener noreferrer">🔗 Linktree ↗</a>
         </div>
     </div>
 
@@ -3000,6 +3049,7 @@
             { name:'/dev/mtl',               emoji:'\uD83C\uDFD9\uFE0F', url:'https://www.dev-mtl.ca' },
             { name:'Devoxx4Kids Qu\u00e9bec', emoji:'\uD83D\uDC7E', url:'https://www.devoxx4kids.org/quebec/' },
             { name:'MenderCon',              emoji:'\uD83D\uDD27', url:'https://mendercon.com' },
+            { name:'Montr\u00e9al JUG',      emoji:'\u2615', url:'https://www.montreal-jug.org' },
         ];
 
         // Circuit image center
