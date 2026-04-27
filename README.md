@@ -1,6 +1,6 @@
 # AI Agents Montreal — Community Website
 
-A single-page community site showcasing the global reach of [AI Agents Montreal](https://www.meetup.com/ai-agent-montreal/) — 19 speakers, 9 countries, 4 continents.
+A single-page community site showcasing the global reach of [AI Agents Montreal](https://www.meetup.com/ai-agent-montreal/) — 21 speakers, 10 countries, 4 continents.
 
 🌐 **Live site** → [nicolasrosado.github.io/aiagents-montreal](https://nicolasrosado.github.io/aiagents-montreal/)
 
@@ -26,8 +26,8 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - "🎙 Suggest a Talk" CTA → LinkedIn
 
 ### 🧠 Talk Knowledge Brain Graph *(section 01 — displayed first)*
-- **Orbital mind graph** — 14 talks orbiting the AI brain image
-- **Desktop** — 2 concentric orbits: inner (talks 1-7, clockwise) · outer (talks 8-14, counter-clockwise)
+- **Orbital mind graph** — 15 talks orbiting the AI brain image
+- **Desktop** — 2 concentric orbits: inner (talks 1-8, clockwise) · outer (talks 9-15, counter-clockwise)
 - **Mobile (<768px)** — vertical scrollable list: brain image centered at top, each talk as a tappable row with animated cyan dot — zero impact on desktop
 - Bright cyan pulsing dots per talk with glow halo — hover to slow, click to watch on YouTube
 - Circuit beam animation (red/orange faisceaux continus) in background
@@ -38,7 +38,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **Leaflet.js** interactive map with dark CartoDB tiles
 - 🔵 Cyan glowing markers = past speakers · 🟡 Amber glowing markers = upcoming speakers
 - Click any marker for a popup with name, location, and talk title
-- 19 speakers across 13 cities
+- 21 speakers across 10 countries (19 cities)
 - `map.invalidateSize()` called at 200ms and 800ms after load for reliable rendering on GitHub Pages
 
 > ⚠️ Known fixes: (1) bare `&` in JS strings escaped as `\u0026` to prevent HTML parser truncation. (2) Incorrect SRI integrity hashes on Leaflet were silently blocking the map — SRI removed, cdnjs trusted via HTTPS. (3) CSP recalibrated to include CartoDB tile origins in `connect-src` and `img-src`.
@@ -46,10 +46,10 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 ### 👤 Speakers
 - Card grid with avatar, name, LinkedIn icon link (SVG cyan), location, bio, and talk title
 - UPCOMING badge (amber) on speakers not yet presented
-- All 20 speakers have complete LinkedIn URLs
+- All 21 speakers have complete LinkedIn URLs
 
 ### 🎙 Talks
-- Full list of all 14 past talks
+- Full list of all 15 past talks
 - **All YouTube links updated** with individual video URLs and timestamps
 - **All Meetup event links updated** with individual event pages
 
@@ -134,9 +134,11 @@ The site has been audited and hardened against common web vulnerabilities:
 
 
 
+## Deploy to GitHub Pages
+
 1. Create a GitHub repository (e.g. `aiagents-montreal`) — can be **public** (required for free GitHub Pages)
-2. Upload `index.html`, `README.md`, `TODO.md` to the root
-3. Create an `assets/` folder and upload `ai-agents-image.jpg` inside it
+2. Upload `index.html`, `README.md`, `NEW_TALK_TEMPLATE.md` to the root
+3. Create an `assets/` folder and upload `ai-agents-image.jpg`, `brain-circle.jpg`, `circuit-crop.jpg` inside it
 4. Go to **Settings → Pages → Source: `main` / `/ (root)`** → Save
 5. Site goes live at `https://<your-username>.github.io/<repo-name>/`
 
@@ -144,11 +146,12 @@ The site has been audited and hardened against common web vulnerabilities:
 
 ## Things to update over time
 
-- **New talks** — add to the `talks` array and populate `talkResources` with links from YouTube comments
+- **New talks** — fill in `NEW_TALK_TEMPLATE.md` and share with Claude; update `talks` array, `talkResources`, Knowledge Brain Graph orbit count, and mobile list
 - **Newsletter** — replace the disabled button with your Substack link once created
 - **Speaker bios** — a few speakers (Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting) are still using generated bios; replace with official "About me" once available
 - **New speakers** — add to the `speakers` array; set `upcoming: true` for future talks, remove the flag once the talk has aired
 - **Devoxx4Kids next event** — update the date (~every 3 months)
+- **Montréal JUG next event** — update monthly
 
 ## Organized by
 

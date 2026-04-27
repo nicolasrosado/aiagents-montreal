@@ -1320,7 +1320,7 @@
             <div class="section-line"></div>
         </div>
         <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem;">
-            This brain is the Collective knowledge of our community. 14 talks orbiting the AI brain — hover to slow, click to watch on YouTube.
+            This brain is the Collective knowledge of our community. 15 talks orbiting the AI brain — hover to slow, click to watch on YouTube.
         </p>
         <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem;">
             Life is all about connections, collaborations and interactions.
@@ -1408,7 +1408,7 @@
         <div class="section-line"></div>
     </div>
     <div id="map"></div>
-    <p class="map-caption">19 speakers across 13 cities — click a marker to learn more. <span style="color:var(--accent3)">●</span> Upcoming speakers.</p>
+    <p class="map-caption">21 speakers across 15 countries — click a marker to learn more. <span style="color:var(--accent3)">●</span> Upcoming speakers.</p>
 </section>
 
 <hr class="section-divider" />
@@ -2080,7 +2080,7 @@
         },
         {
             name: "Adam Tornhill",
-            location: "Sweden 🇸🇪",
+            location: "Stockholm, Sweden 🇸🇪",
             lat: 59.3293, lng: 18.0686,
             bio: "Programmer who combines degrees in engineering and psychology. Founder of CodeScene, where he designs tools for software analysis. Author of the best-selling \"Your Code as a Crime Scene\" and three more technical books. His other interests include music, retro computers, and martial arts.",
             talk: "Agentic AI Coding: Best Practice Patterns for Speed with Quality",
@@ -2126,9 +2126,9 @@
             bio: "Staff Engineer with deep expertise in distributed systems and software design. Advocates for Systems Thinking, Lean, Theory of Constraints, and XP applied to AI-assisted development teams. Based in Berlin.",
             talk: "LLM-assisted Coding: A Systems Perspective",
             linkedin: "https://www.linkedin.com/in/dstepanovic",
-            youtube: "https://www.youtube.com/@aiagentsmontreal",
-            meetup: "https://www.meetup.com/ai-agent-montreal/",
-            upcoming: true
+            youtube: "https://www.youtube.com/watch?v=eEA0gJnWLh0",
+            meetup: "https://www.meetup.com/ai-agent-montreal/events/313980249/",
+            upcoming: false
         },
         {
             name: "Fabrice Monnier",
@@ -2162,6 +2162,17 @@
             youtube: "https://www.youtube.com/@aiagentsmontreal",
             meetup: "https://www.meetup.com/ai-agent-montreal/",
             upcoming: true
+        },
+        {
+            name: "Javier Lopez",
+            location: "Madrid, Spain 🇪🇸",
+            lat: 40.4168, lng: -3.7038,
+            bio: "Javier is an expert software engineer, architect, and technical blogger who strongly advocates for Evolutionary Design, Continuous Integration, and Lean software principles. Through his software philosophy, he explores the intersection of technical excellence, team dynamics, and system architecture. He believes that software development is a continuous learning exercise where the ultimate goal is not to write code fast, but to safely and efficiently solve real customer problems.",
+            talk: "The Great AI Spec-Driven Illusion: Why Developers Must Remain Architects",
+            linkedin: "https://www.linkedin.com/in/javierlopezfernandez/",
+            youtube: "https://www.youtube.com/@aiagentsmontreal",
+            meetup: "https://www.meetup.com/ai-agent-montreal/events/314512826/",
+            upcoming: true
         }
     ];
 
@@ -2180,6 +2191,7 @@
         { n: 12, title: "Agentic AI Coding: Best Practice Patterns for Speed with Quality", speaker: "Adam Tornhill", yt: "https://www.youtube.com/watch?v=AQWyhqzGHaU\u0026t=982s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313610408/" },
         { n: 13, title: "XP Practices Are the Missing Piece for AI-Assisted Development", speaker: "Paul Hammond", yt: "https://www.youtube.com/watch?v=M58tOdNHbxM\u0026t=4956s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313704055/" },
         { n: 14, title: "AC/DC \u2014 Agent-Centric Development Cycle", speaker: "Edgar Kussberg", yt: "https://www.youtube.com/watch?v=YXXFjebvfNc\u0026t=9s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313880985/" },
+        { n: 15, title: "LLM-assisted Coding: A Systems Perspective", speaker: "Dragan Stepanović", yt: "https://www.youtube.com/watch?v=eEA0gJnWLh0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980249/" }
     ];
 
     // ── MAP ───────────────────────────────────────────────────────────────────
@@ -2623,6 +2635,14 @@
 
     const talkResources = [
         {
+            talk: "LLM-assisted Coding: A Systems Perspective",
+            speaker: "Dragan Stepanović",
+            links: [
+                { label: "From Async Code Reviews to Co-Creation Patterns (InfoQ)", url: "https://www.infoq.com/articles/co-creation-patterns-software-development/" },
+                { label: "Learning Hours — Samman Technical Coaching", url: "https://sammancoaching.org/learning_hours/" },
+            ]
+        },
+        {
             talk: "How to Trust AI Coding at Scale with Packmind",
             speaker: "Arthur Magne",
             links: [
@@ -2998,6 +3018,7 @@
             { t:"Agentic AI Coding: Best Practices",        yt:"https://www.youtube.com/watch?v=AQWyhqzGHaU\u0026t=982s" },
             { t:"XP Practices: The Missing Piece",          yt:"https://www.youtube.com/watch?v=M58tOdNHbxM\u0026t=4956s" },
             { t:"AC/DC \u2014 Agent-Centric Dev Cycle",     yt:"https://www.youtube.com/watch?v=YXXFjebvfNc\u0026t=9s" },
+            { t:"LLM-assisted Coding: A Systems Perspective", yt:"https://www.youtube.com/watch?v=eEA0gJnWLh0" },
         ];
 
         // Brain image — uses assets/ai-agents-image.jpg (already in repo)
@@ -3125,16 +3146,16 @@
                 });
             });
             mgBeams.forEach(mgDrawBeam);
-            // Inner orbit (0-6)
-            for(var i=0;i<7;i++){
-                var a=mgBaseAngle+(i/7)*Math.PI*2;
+            // Inner orbit (0-7, 8 talks, clockwise)
+            for(var i=0;i<8;i++){
+                var a=mgBaseAngle+(i/8)*Math.PI*2;
                 drawOrbNode(i,CX+Math.cos(a)*R1,CY+Math.sin(a)*R1);
             }
-            // Outer orbit (7-13, counter-clockwise)
+            // Outer orbit (8-14, 7 talks, counter-clockwise)
             var outerA=-(mgBaseAngle*(OUTER_SPD/INNER_SPD));
             for(var j=0;j<7;j++){
                 var a2=outerA+(j/7)*Math.PI*2;
-                drawOrbNode(7+j,CX+Math.cos(a2)*R2,CY+Math.sin(a2)*R2);
+                drawOrbNode(8+j,CX+Math.cos(a2)*R2,CY+Math.sin(a2)*R2);
             }
             requestAnimationFrame(mgAnimate);
         }
