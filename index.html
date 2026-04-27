@@ -1172,6 +1172,16 @@
             .talk-links { grid-column: 1 / -1; }
             .stats-row { gap: 1.5rem; }
         }
+
+        /* ── MOBILE: Knowledge Brain Graph + Ecosystem Circuit Graph ─────────── */
+        @media (max-width: 768px) {
+            #mindgraph-container {
+                height: 340px !important;
+            }
+            #ecograph-container {
+                height: 300px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2848,8 +2858,13 @@
         var W  = container.offsetWidth;
         var H  = container.offsetHeight;
         var CX = W/2, CY = H/2;
-        var R1 = Math.min(W,H) * 0.26;
-        var R2 = Math.min(W,H) * 0.39;
+        var isMobile = W < 768;
+        // Option A+C: smaller radii + single orbit on mobile
+        var R1 = isMobile ? Math.min(W,H) * 0.38 : Math.min(W,H) * 0.26;
+        var R2 = isMobile ? null : Math.min(W,H) * 0.39;
+        var BRAIN_R = isMobile ? 72 : 175;
+        var FONT_SIZE = isMobile ? '7px' : '9px';
+        var LINE_LIMIT = isMobile ? 15 : 999;
 
         mgCanvas.width = W; mgCanvas.height = H;
         mgHit.width    = W; mgHit.height    = H;
@@ -2876,14 +2891,15 @@
         // Brain image — uses assets/ai-agents-image.jpg (already in repo)
         document.getElementById('mg-bmc').setAttribute('cx', CX);
         document.getElementById('mg-bmc').setAttribute('cy', CY);
-        mgEl('image', { href:'assets/brain-circle.jpg', x:CX-175, y:CY-175,
-            width:350, height:350, mask:'url(#mg-bm)',
+        document.getElementById('mg-bmc').setAttribute('r', BRAIN_R);
+        mgEl('image', { href:'assets/brain-circle.jpg', x:CX-BRAIN_R, y:CY-BRAIN_R,
+            width:BRAIN_R*2, height:BRAIN_R*2, mask:'url(#mg-bm)',
             preserveAspectRatio:'none',
             style:'' }, mgSvg);
-        mgEl('circle', { cx:CX,cy:CY,r:175,fill:'url(#mg-grid)',mask:'url(#mg-bm)',style:'pointer-events:none;opacity:0.5' }, mgSvg);
-        mgEl('circle', { cx:CX,cy:CY,r:175,fill:'url(#mg-bd)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
-        mgEl('circle', { cx:CX,cy:CY,r:175,fill:'url(#mg-cg)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
-        mgEl('circle', { cx:CX,cy:CY,r:175,fill:'url(#mg-vg)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:BRAIN_R,fill:'url(#mg-grid)',mask:'url(#mg-bm)',style:'pointer-events:none;opacity:0.5' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:BRAIN_R,fill:'url(#mg-bd)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:BRAIN_R,fill:'url(#mg-cg)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
+        mgEl('circle', { cx:CX,cy:CY,r:BRAIN_R,fill:'url(#mg-vg)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
 
 
         // Circuit rails — beam style
@@ -3034,7 +3050,10 @@
         var W  = container.offsetWidth;
         var H  = container.offsetHeight;
         var CX = W/2, CY = H/2;
-        var R1 = Math.min(W,H) * 0.30;
+        var ecoIsMobile = W < 768;
+        var R1 = ecoIsMobile ? Math.min(W,H) * 0.38 : Math.min(W,H) * 0.30;
+        var ECO_BRAIN_R = ecoIsMobile ? 60 : 155;
+        var ECO_FONT = ecoIsMobile ? '8px' : '10px';
 
         ecoCanvas.width = W; ecoCanvas.height = H;
         ecoHit.width    = W; ecoHit.height    = H;
@@ -3055,12 +3074,14 @@
         // Circuit image center
         document.getElementById('eco-cmc').setAttribute('cx', CX);
         document.getElementById('eco-cmc').setAttribute('cy', CY);
-        ecoEl('image', { href:'assets/circuit-crop.jpg', x:CX-155, y:CY-155,
-            width:310, height:310, mask:'url(#eco-cm)',
-            preserveAspectRatio:'none', style:'filter:brightness(0.85)' }, ecoSvg);
-        ecoEl('circle', { cx:CX,cy:CY,r:155,fill:'url(#eco-grid)',mask:'url(#eco-cm)',style:'pointer-events:none;opacity:0.4' }, ecoSvg);
-        ecoEl('circle', { cx:CX,cy:CY,r:155,fill:'url(#eco-cd)',mask:'url(#eco-cm)',style:'pointer-events:none' }, ecoSvg);
-        ecoEl('circle', { cx:CX,cy:CY,r:155,fill:'url(#eco-rg)',mask:'url(#eco-cm)',style:'pointer-events:none' }, ecoSvg);
+        document.getElementById('eco-cmc').setAttribute('r', ECO_BRAIN_R);
+        document.getElementById('eco-cmc').setAttribute('r', ECO_BRAIN_R);
+        ecoEl('image', { href:'assets/circuit-crop.jpg', x:CX-ECO_BRAIN_R, y:CY-ECO_BRAIN_R,
+            width:ECO_BRAIN_R*2, height:ECO_BRAIN_R*2, mask:'url(#eco-cm)',
+            preserveAspectRatio:'none', style:'' }, ecoSvg);
+        ecoEl('circle', { cx:CX,cy:CY,r:ECO_BRAIN_R,fill:'url(#eco-grid)',mask:'url(#eco-cm)',style:'pointer-events:none;opacity:0.4' }, ecoSvg);
+        ecoEl('circle', { cx:CX,cy:CY,r:ECO_BRAIN_R,fill:'url(#eco-cd)',mask:'url(#eco-cm)',style:'pointer-events:none' }, ecoSvg);
+        ecoEl('circle', { cx:CX,cy:CY,r:ECO_BRAIN_R,fill:'url(#eco-rg)',mask:'url(#eco-cm)',style:'pointer-events:none' }, ecoSvg);
 
         var ecoRails = [
             [{x:0,y:H*.18},{x:W*.10,y:H*.18},{x:W*.10,y:H*.40},{x:W*.28,y:H*.40},{x:W*.28,y:H*.12},{x:W*.55,y:H*.12},{x:W*.55,y:H*.38},{x:W*.78,y:H*.38},{x:W*.78,y:H*.08},{x:W,y:H*.08}],
@@ -3113,7 +3134,7 @@
 
         function ecoDrawNode(i, x, y) {
             var isHov=ecoHovered===i, init=INITIATIVES[i];
-            ecoCtx.font='10px Space Mono, monospace';
+            ecoCtx.font=ECO_FONT+' Space Mono, monospace';
             var label=init.emoji+' '+init.name, tw=ecoCtx.measureText(label).width;
             ecoPositions[i]={x:x,y:y,w:tw};
             var gr=ecoCtx.createRadialGradient(x,y,0,x,y,isHov?35:24);
@@ -3127,7 +3148,7 @@
             ecoCtx.beginPath();ecoCtx.arc(x-1,y-1,isHov?2:1.5,0,Math.PI*2);
             ecoCtx.fillStyle='rgba(255,255,255,0.8)';ecoCtx.fill();
             ecoCtx.save();ecoCtx.textAlign='center';ecoCtx.textBaseline='middle';
-            ecoCtx.font=isHov?'bold 10px Space Mono, monospace':'10px Space Mono, monospace';
+            ecoCtx.font=isHov?'bold '+ECO_FONT+' Space Mono, monospace':ECO_FONT+' Space Mono, monospace';
             if(isHov){ecoCtx.shadowColor='rgba(255,120,30,0.9)';ecoCtx.shadowBlur=14;}
             ecoCtx.fillStyle=isHov?'#ffb060':'rgba(220,180,150,0.82)';
             ecoCtx.fillText(label,x,y-16);
