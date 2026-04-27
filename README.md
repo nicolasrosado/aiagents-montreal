@@ -86,7 +86,20 @@ Uses a **cascade of 3 CORS proxies** — if one fails, the next is tried automat
 | Next MenderCon event | mendercon.com scrape | Link to mendercon.com |
 | Medium articles | nicolas-rosado.medium.com RSS | Hardcoded 5 articles |
 
-## Deploy to GitHub Pages
+## Security
+
+The site has been audited and hardened against common web vulnerabilities:
+
+- **XSS prevention** — `sanitize()` and `sanitizeUrl()` helper functions applied to all fetched data before insertion into the DOM; RSS descriptions use `textContent` instead of `innerHTML`
+- **Open redirect protection** — `sanitizeUrl()` enforces `https?://` protocol on all externally-sourced URLs
+- **Clickjacking** — `frame-ancestors 'none'` in CSP blocks embedding in iframes
+- **Reverse tabnapping** — `rel="noopener noreferrer"` on all 49 `target="_blank"` links
+- **No secrets** — no hardcoded API keys, tokens, or credentials
+- **No dangerous JS** — no `eval()`, `document.write()`, `new Function()`, or `__proto__` manipulation
+- **CSP meta tag** — Content-Security-Policy restricts scripts, styles, fonts, images and connections to known trusted origins
+- **SRI integrity hashes** — Leaflet loaded from cdnjs with `integrity=` + `crossorigin=anonymous`
+
+
 
 1. Create a GitHub repository (e.g. `aiagents-montreal`) — can be **public** (required for free GitHub Pages)
 2. Upload `index.html`, `README.md`, `TODO.md` to the root
