@@ -504,135 +504,6 @@
     loadCraftCodeEpisode();
 
 
-    // ── CIRCUIT BEAM ANIMATION ────────────────────────────────────────────────────
-
-    (function () {
-        const canvas = document.getElementById('circuit-canvas');
-        if (!canvas) return;
-
-        const ctx = canvas.getContext('2d');
-        let rails = [];
-        let beams  = [];
-        let raf;
-
-        function resize() {
-            const w = canvas.parentElement ? canvas.parentElement.offsetWidth : window.innerWidth;
-            const h = canvas.parentElement ? canvas.parentElement.offsetHeight : window.innerHeight;
-            canvas.width  = w || window.innerWidth;
-            canvas.height = h || 500;
-        }
-
-        function buildRails() {
-            const W = canvas.width, H = canvas.height;
-            if (!W || !H) return;
-
-            rails = [
-                [{x:0,y:H*.22},{x:W*.12,y:H*.22},{x:W*.12,y:H*.44},{x:W*.28,y:H*.44},{x:W*.28,y:H*.18},{x:W*.55,y:H*.18},{x:W*.55,y:H*.38},{x:W*.72,y:H*.38},{x:W*.72,y:H*.12},{x:W,y:H*.12}],
-                [{x:W,y:H*.30},{x:W*.88,y:H*.30},{x:W*.88,y:H*.58},{x:W*.68,y:H*.58},{x:W*.68,y:H*.28},{x:W*.48,y:H*.28},{x:W*.48,y:H*.62},{x:W*.32,y:H*.62},{x:W*.32,y:H*.35},{x:W*.15,y:H*.35},{x:W*.15,y:H*.72},{x:0,y:H*.72}],
-                [{x:W*.20,y:0},{x:W*.20,y:H*.25},{x:W*.38,y:H*.25},{x:W*.38,y:H*.68},{x:W*.52,y:H*.68},{x:W*.52,y:H*.15},{x:W*.65,y:H*.15},{x:W*.65,y:H*.50},{x:W*.82,y:H*.50},{x:W*.82,y:H}],
-            ];
-
-            beams = rails.map(function(rail, ri) {
-                return {
-                    rail:   rail,
-                    pos:    ri / rails.length,
-                    speed:  0.0018 + ri * 0.00036,   // x3 vs previous
-                    length: 0.18 + ri * 0.04,
-                    width:  3 + ri * 0.8,
-                };
-            });
-        }
-
-        function ptOn(rail, t) {
-            t = ((t % 1) + 1) % 1;
-            const n = rail.length - 1;
-            const seg = Math.min(Math.floor(t * n), n - 1);
-            const f = t * n - seg;
-            return {
-                x: rail[seg].x + (rail[seg + 1].x - rail[seg].x) * f,
-                y: rail[seg].y + (rail[seg + 1].y - rail[seg].y) * f,
-            };
-        }
-
-        function drawRail(rail) {
-            ctx.beginPath();
-            ctx.moveTo(rail[0].x, rail[0].y);
-            for (let i = 1; i < rail.length; i++) ctx.lineTo(rail[i].x, rail[i].y);
-            ctx.strokeStyle = 'rgba(120,15,5,0.18)';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-            rail.forEach(function(p, i) {
-                if (i === 0 || i === rail.length - 1) return;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(160,30,8,0.28)';
-                ctx.fill();
-            });
-        }
-
-        function drawBeam(b) {
-            b.pos = (b.pos + b.speed) % 1;
-            const steps = 80;
-            for (let i = 0; i < steps; i++) {
-                const t    = ((b.pos - i / steps * b.length) + 1) % 1;
-                const pt   = ptOn(b.rail, t);
-                const frac = i / steps;
-                let r, g, bv, alpha;
-                if (frac < 0.08) {
-                    r=255; g=240; bv=180; alpha=1.0;
-                } else if (frac < 0.2) {
-                    const f=(frac-0.08)/0.12;
-                    r=255; g=Math.round(240-(240-120)*f); bv=Math.round(180*(1-f)); alpha=0.95-f*0.1;
-                } else if (frac < 0.5) {
-                    const f=(frac-0.2)/0.3;
-                    r=255; g=Math.round(120*(1-f)); bv=0; alpha=0.85-f*0.35;
-                } else {
-                    const f=(frac-0.5)/0.5;
-                    r=Math.round(200*(1-f*0.5)); g=0; bv=0; alpha=(0.5-f*0.5)*0.8;
-                }
-                const size = b.width * (1 - frac * 0.7);
-                // Halo
-                if (frac < 0.3) {
-                    const haloSize = size * 3;
-                    const hGrd = ctx.createRadialGradient(pt.x,pt.y,0,pt.x,pt.y,haloSize);
-                    const hAlpha = alpha * 0.25 * (1 - frac / 0.3);
-                    hGrd.addColorStop(0, 'rgba('+r+','+g+','+bv+','+hAlpha+')');
-                    hGrd.addColorStop(1, 'rgba('+r+','+g+','+bv+',0)');
-                    ctx.beginPath(); ctx.arc(pt.x,pt.y,haloSize,0,Math.PI*2);
-                    ctx.fillStyle = hGrd; ctx.fill();
-                }
-                ctx.beginPath(); ctx.arc(pt.x,pt.y,size,0,Math.PI*2);
-                ctx.fillStyle = 'rgba('+r+','+g+','+bv+','+alpha+')';
-                ctx.fill();
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            rails.forEach(drawRail);
-            beams.forEach(drawBeam);
-            raf = requestAnimationFrame(animate);
-        }
-
-        function start() {
-            resize();
-            buildRails();
-            if (canvas.width > 0 && canvas.height > 0) {
-                animate();
-            } else {
-                setTimeout(start, 100);
-            }
-        }
-
-        window.addEventListener('resize', function() { resize(); buildRails(); });
-
-        if (document.readyState === 'complete') {
-            setTimeout(start, 50);
-        } else {
-            window.addEventListener('load', function() { setTimeout(start, 50); });
-        }
-    })();
-
     loadMeetupData();
     loadCraftersEvent();
     loadMenderConEvent();
@@ -701,48 +572,6 @@
         mgEl('circle', { cx:CX,cy:CY,r:BRAIN_R,fill:'url(#mg-vg)',mask:'url(#mg-bm)',style:'pointer-events:none' }, mgSvg);
 
 
-        // Circuit rails — beam style
-        var mgRails = [
-            [{x:0,y:H*.18},{x:W*.10,y:H*.18},{x:W*.10,y:H*.40},{x:W*.28,y:H*.40},{x:W*.28,y:H*.12},{x:W*.55,y:H*.12},{x:W*.55,y:H*.38},{x:W*.78,y:H*.38},{x:W*.78,y:H*.08},{x:W,y:H*.08}],
-            [{x:W,y:H*.72},{x:W*.85,y:H*.72},{x:W*.85,y:H*.52},{x:W*.60,y:H*.52},{x:W*.60,y:H*.82},{x:W*.35,y:H*.82},{x:W*.35,y:H*.60},{x:W*.12,y:H*.60},{x:W*.12,y:H*.90},{x:0,y:H*.90}],
-            [{x:W*.22,y:0},{x:W*.22,y:H*.28},{x:W*.42,y:H*.28},{x:W*.42,y:H*.72},{x:W*.60,y:H*.72},{x:W*.60,y:H*.15},{x:W*.80,y:H*.15},{x:W*.80,y:H}],
-        ];
-        var mgBeams = mgRails.map(function(rail, ri) {
-            return { rail:rail, pos:ri/mgRails.length, speed:0.0018+ri*0.00036, length:0.18+ri*0.04, width:3+ri*0.8 };
-        });
-        function mgPtOn(rail, t) {
-            t=((t%1)+1)%1;
-            var n=rail.length-1, seg=Math.min(Math.floor(t*n),n-1), f=t*n-seg;
-            return { x:rail[seg].x+(rail[seg+1].x-rail[seg].x)*f, y:rail[seg].y+(rail[seg+1].y-rail[seg].y)*f };
-        }
-        function mgDrawBeam(b) {
-            b.pos=(b.pos+b.speed)%1;
-            var steps=80;
-            for(var i=0;i<steps;i++){
-                var t=((b.pos-i/steps*b.length)+1)%1;
-                var pt=mgPtOn(b.rail,t);
-                var frac=i/steps;
-                var r,g,bv,alpha;
-                if(frac<0.08){r=255;g=240;bv=180;alpha=1.0;}
-                else if(frac<0.2){var f=(frac-0.08)/0.12;r=255;g=Math.round(240-(240-120)*f);bv=Math.round(180*(1-f));alpha=0.95-f*0.1;}
-                else if(frac<0.5){var f=(frac-0.2)/0.3;r=255;g=Math.round(120*(1-f));bv=0;alpha=0.85-f*0.35;}
-                else{var f=(frac-0.5)/0.5;r=Math.round(200*(1-f*0.5));g=0;bv=0;alpha=(0.5-f*0.5)*0.8;}
-                var size=b.width*(1-frac*0.7);
-                if(frac<0.3){
-                    var haloSize=size*3;
-                    var hGrd=mgCtx.createRadialGradient(pt.x,pt.y,0,pt.x,pt.y,haloSize);
-                    var hAlpha=alpha*0.25*(1-frac/0.3);
-                    hGrd.addColorStop(0,'rgba('+r+','+g+','+bv+','+hAlpha+')');
-                    hGrd.addColorStop(1,'rgba('+r+','+g+','+bv+',0)');
-                    mgCtx.beginPath();mgCtx.arc(pt.x,pt.y,haloSize,0,Math.PI*2);
-                    mgCtx.fillStyle=hGrd;mgCtx.fill();
-                }
-                mgCtx.beginPath();mgCtx.arc(pt.x,pt.y,size,0,Math.PI*2);
-                mgCtx.fillStyle='rgba('+r+','+g+','+bv+','+alpha+')';
-                mgCtx.fill();
-            }
-        }
-
         var mgBaseAngle = 0;
         var mgHovered   = -1;
         var mgPositions = MG_TALKS.map(function() { return {x:0,y:0,w:0}; });
@@ -800,18 +629,6 @@
                 mgCtx.strokeStyle='rgba(0,229,255,0.05)';mgCtx.lineWidth=1;
                 mgCtx.setLineDash([3,9]);mgCtx.stroke();mgCtx.setLineDash([]);
             });
-            // Circuit rails
-            mgRails.forEach(function(rail){
-                mgCtx.beginPath();mgCtx.moveTo(rail[0].x,rail[0].y);
-                rail.forEach(function(p){mgCtx.lineTo(p.x,p.y);});
-                mgCtx.strokeStyle='rgba(120,15,5,0.18)';mgCtx.lineWidth=1.5;mgCtx.stroke();
-                rail.forEach(function(p,i){
-                    if(i===0||i===rail.length-1)return;
-                    mgCtx.beginPath();mgCtx.arc(p.x,p.y,2.5,0,Math.PI*2);
-                    mgCtx.fillStyle='rgba(160,30,8,0.28)';mgCtx.fill();
-                });
-            });
-            mgBeams.forEach(mgDrawBeam);
             // Inner orbit (0-7, 8 talks, clockwise)
             for(var i=0;i<8;i++){
                 var a=mgBaseAngle+(i/8)*Math.PI*2;
@@ -881,39 +698,6 @@
         ecoEl('circle', { cx:CX,cy:CY,r:ECO_BRAIN_R,fill:'url(#eco-cd)',mask:'url(#eco-cm)',style:'pointer-events:none' }, ecoSvg);
         ecoEl('circle', { cx:CX,cy:CY,r:ECO_BRAIN_R,fill:'url(#eco-rg)',mask:'url(#eco-cm)',style:'pointer-events:none' }, ecoSvg);
 
-        var ecoRails = [
-            [{x:0,y:H*.18},{x:W*.10,y:H*.18},{x:W*.10,y:H*.40},{x:W*.28,y:H*.40},{x:W*.28,y:H*.12},{x:W*.55,y:H*.12},{x:W*.55,y:H*.38},{x:W*.78,y:H*.38},{x:W*.78,y:H*.08},{x:W,y:H*.08}],
-            [{x:W,y:H*.72},{x:W*.85,y:H*.72},{x:W*.85,y:H*.52},{x:W*.60,y:H*.52},{x:W*.60,y:H*.82},{x:W*.35,y:H*.82},{x:W*.35,y:H*.60},{x:W*.12,y:H*.60},{x:W*.12,y:H*.90},{x:0,y:H*.90}],
-            [{x:W*.22,y:0},{x:W*.22,y:H*.28},{x:W*.42,y:H*.28},{x:W*.42,y:H*.72},{x:W*.60,y:H*.72},{x:W*.60,y:H*.15},{x:W*.80,y:H*.15},{x:W*.80,y:H}],
-        ];
-        var ecoBeams = ecoRails.map(function(rail, ri) {
-            return { rail:rail, pos:ri/ecoRails.length, speed:0.0018+ri*0.00036, length:0.18+ri*0.04, width:3+ri*0.8 };
-        });
-        function ecoPtOn(rail, t) {
-            t=((t%1)+1)%1;
-            var n=rail.length-1, seg=Math.min(Math.floor(t*n),n-1), f=t*n-seg;
-            return { x:rail[seg].x+(rail[seg+1].x-rail[seg].x)*f, y:rail[seg].y+(rail[seg+1].y-rail[seg].y)*f };
-        }
-        function ecoDrawBeam(b) {
-            b.pos=(b.pos+b.speed)%1;
-            var steps=80;
-            for(var i=0;i<steps;i++){
-                var t=((b.pos-i/steps*b.length)+1)%1, pt=ecoPtOn(b.rail,t), frac=i/steps;
-                var r,g,bv,alpha;
-                if(frac<0.08){r=255;g=240;bv=180;alpha=1.0;}
-                else if(frac<0.2){var ff=(frac-0.08)/0.12;r=255;g=Math.round(240-(240-120)*ff);bv=Math.round(180*(1-ff));alpha=0.95-ff*0.1;}
-                else if(frac<0.5){var ff=(frac-0.2)/0.3;r=255;g=Math.round(120*(1-ff));bv=0;alpha=0.85-ff*0.35;}
-                else{var ff=(frac-0.5)/0.5;r=Math.round(200*(1-ff*0.5));g=0;bv=0;alpha=(0.5-ff*0.5)*0.8;}
-                var size=b.width*(1-frac*0.7);
-                if(frac<0.3){
-                    var hs=size*3,hG=ecoCtx.createRadialGradient(pt.x,pt.y,0,pt.x,pt.y,hs),hA=alpha*0.25*(1-frac/0.3);
-                    hG.addColorStop(0,'rgba('+r+','+g+','+bv+','+hA+')');hG.addColorStop(1,'rgba('+r+','+g+','+bv+',0)');
-                    ecoCtx.beginPath();ecoCtx.arc(pt.x,pt.y,hs,0,Math.PI*2);ecoCtx.fillStyle=hG;ecoCtx.fill();
-                }
-                ecoCtx.beginPath();ecoCtx.arc(pt.x,pt.y,size,0,Math.PI*2);
-                ecoCtx.fillStyle='rgba('+r+','+g+','+bv+','+alpha+')';ecoCtx.fill();
-            }
-        }
 
         var ECO_SPEED=0.00035, ecoBaseAngle=0, ecoHovered=-1;
         var ecoPositions=INITIATIVES.map(function(){ return {x:0,y:0,w:0}; });
@@ -960,17 +744,6 @@
             ecoCtx.beginPath();ecoCtx.arc(CX,CY,R1,0,Math.PI*2);
             ecoCtx.strokeStyle='rgba(200,50,10,0.12)';ecoCtx.lineWidth=1;
             ecoCtx.setLineDash([3,9]);ecoCtx.stroke();ecoCtx.setLineDash([]);
-            ecoRails.forEach(function(rail){
-                ecoCtx.beginPath();ecoCtx.moveTo(rail[0].x,rail[0].y);
-                rail.forEach(function(p){ecoCtx.lineTo(p.x,p.y);});
-                ecoCtx.strokeStyle='rgba(120,15,5,0.18)';ecoCtx.lineWidth=1.5;ecoCtx.stroke();
-                rail.forEach(function(p,i){
-                    if(i===0||i===rail.length-1)return;
-                    ecoCtx.beginPath();ecoCtx.arc(p.x,p.y,2.5,0,Math.PI*2);
-                    ecoCtx.fillStyle='rgba(160,30,8,0.28)';ecoCtx.fill();
-                });
-            });
-            ecoBeams.forEach(ecoDrawBeam);
             for(var i=0;i<INITIATIVES.length;i++){
                 var angle=ecoBaseAngle+(i/INITIATIVES.length)*Math.PI*2;
                 ecoDrawNode(i,CX+Math.cos(angle)*R1,CY+Math.sin(angle)*R1);
