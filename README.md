@@ -8,25 +8,26 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 
 ```
 /
-├── index.html              # HTML shell — 711 lines, structure only
+├── index.html              # HTML shell — 369 lines, structure only
 ├── README.md
 ├── data/
 │   ├── speakers.js         # const speakers — all speaker objects (bio, location, talk, links…)
-│   └── talks.js            # const talks + const talkResources (past talks, YouTube links, resources)
+│   ├── talks.js            # const talks + const talkResources (past talks, YouTube links, resources)
+│   └── ecosystem.js        # const INITIATIVES (orbit graph) + const ecosystemCommunities (9 cards)
 ├── styles/
-│   └── main.css            # All CSS (1 249 lines)
+│   └── main.css            # All CSS
 ├── scripts/
-│   └── main.js             # All JS logic (981 lines)
+│   └── main.js             # All JS logic (renderEcosystem, map, animations, data loaders…)
 └── assets/
-    ├── ai-agents-image.jpg # Header background image (parallax + circuit animation)
+    ├── ai-agents-image.jpg # Header background image (parallax)
     ├── brain-circle.jpg    # Brain image for the Knowledge Brain Graph center (350×350px crop)
     └── circuit-crop.jpg    # Circuit board image for the Ecosystem Circuit Graph center (500×500px crop)
 ```
 
 **Load order** (GitHub Pages, no bundler):
 1. `styles/main.css` — linked in `<head>`
-2. `data/speakers.js` → `data/talks.js` — inline data, loaded before logic
-3. `scripts/main.js` — references `speakers`, `talks`, `talkResources` declared above
+2. `data/speakers.js` → `data/talks.js` → `data/ecosystem.js` — data globals, loaded before logic
+3. `scripts/main.js` — renders cards from data, runs map, animations, data loaders
 
 ## Features
 
@@ -92,14 +93,14 @@ When a newsletter is eventually added, it will redirect to **Substack** — the 
 - Hover to slow · Click to visit each community's website
 
 ### 🌱 Local Ecosystem & Events *(section 07)*
-8 community cards covering:
-- **AI Agents Montreal** · **Mental Health in SW Eng** · **Software Crafters MTL** · **AI Craftspeople Guild** · **/dev/mtl** · **Devoxx4Kids Québec** · **Montréal JUG** · **MenderCon**
+9 community cards, rendered from `data/ecosystem.js` via `renderEcosystem()`:
+- **Mental Health in SW Eng** · **Software Crafters MTL** · **AI Agents Montreal** · **AI Craftspeople Guild** · **/dev/mtl** · **Devoxx4Kids Québec** · **Montréal JUG** · **CraftCode Podcast** · **MenderCon**
 - Format badges: 📍 In-Person / 🌐 Online · Frequency badges: 🔁 Regular / 📆 On demand
-- Dynamic next event for Software Crafters MTL (Guild.host) and MenderCon (scrape)
-- **Montréal JUG** — next event April 30 2026 · Nicolas Rosado guest speaker highlighted · sponsoring CTA
-- "Suggest a Talk" CTAs for AI Agents MTL and Mental Health
-- Sponsoring CTA for /dev/mtl
+- Dynamic next event for AI Agents MTL (Meetup), Software Crafters MTL (Guild.host), CraftCode (RSS), MenderCon (scrape)
+- **Montréal JUG** — Nicolas Rosado guest speaker highlighted · sponsoring CTA
+- "Suggest a Talk" CTAs for AI Agents MTL and Mental Health · Sponsoring CTA for /dev/mtl
 - Community values note: free & independent · psychological safety · humility · kindness
+- To edit a card: update `data/ecosystem.js` only
 
 ### 🔔 Stay in the Loop *(section 08)*
 - YouTube Subscribe button
@@ -148,7 +149,7 @@ The site has been audited and hardened against common web vulnerabilities:
 
 1. Create a GitHub repository (e.g. `aiagents-montreal`) — can be **public** (required for free GitHub Pages)
 2. Upload `index.html`, `README.md`, `NEW_TALK_TEMPLATE.md` to the root
-3. Create a `data/` folder and upload `speakers.js` and `talks.js` inside it
+3. Create a `data/` folder and upload `speakers.js`, `talks.js`, and `ecosystem.js` inside it
 4. Create a `styles/` folder and upload `main.css` inside it
 5. Create a `scripts/` folder and upload `main.js` inside it
 6. Create an `assets/` folder and upload `ai-agents-image.jpg`, `brain-circle.jpg`, `circuit-crop.jpg` inside it
@@ -163,8 +164,9 @@ The site has been audited and hardened against common web vulnerabilities:
 - **New speakers** — add to `data/speakers.js`; set `upcoming: true` for future talks, remove the flag once the talk has aired
 - **Newsletter** — replace the disabled button with your Substack link once created
 - **Speaker bios** — a few speakers (Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting) are still using generated bios; replace with official "About me" once available
-- **Devoxx4Kids next event** — update the date (~every 3 months)
-- **Montréal JUG next event** — update monthly
+- **Ecosystem cards** — edit `data/ecosystem.js` to update any community card (event dates, descriptions, links, CTAs)
+- **Devoxx4Kids next event** — update `dateStatic` in `data/ecosystem.js` (~every 3 months)
+- **Montréal JUG next event** — update `titleStatic` in `data/ecosystem.js` monthly
 
 ## Organized by
 
