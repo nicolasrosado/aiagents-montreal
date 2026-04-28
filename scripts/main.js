@@ -444,7 +444,18 @@
     </div>`;
             return;
         }
-        container.innerHTML = talkResources.map((t, i) => `
+        container.innerHTML = talkResources.map((t, i) => {
+            if (t.links.length === 0) {
+                return `
+    <div class="resource-group resource-group--empty" id="rg-${i}">
+      <div class="resource-group-header resource-group-header--empty">
+        <span>${t.talk}</span>
+        <span class="resource-group-speaker">${t.speaker}</span>
+        <span class="resource-no-links">No resources for this talk</span>
+      </div>
+    </div>`;
+            }
+            return `
     <div class="resource-group" id="rg-${i}">
       <div class="resource-group-header" onclick="toggleResource(${i})">
         <span>${t.talk}</span>
@@ -458,8 +469,8 @@
           </a>
         `).join('')}
       </div>
-    </div>
-  `).join('');
+    </div>`;
+        }).join('');
     }
 
     function toggleResource(i) {

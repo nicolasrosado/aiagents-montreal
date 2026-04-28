@@ -66,7 +66,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **All Meetup event links updated** with individual event pages
 
 ### ✍️ Articles & Resources
-- **Talk Resources tab** *(default open)* — 60+ links across 12 talks: GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers
+- **Talk Resources tab** *(default open)* — all 15 talks listed in order; 60+ links across 13 talks (GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers); talks without resources display "No resources for this talk" instead of being omitted
 - **Articles tab** — dynamically fetched from Nicolas Rosado's Medium RSS feed; excludes "Formation continue"; falls back to hardcoded list
 
 ### 🔒 Privacy & Data Policy

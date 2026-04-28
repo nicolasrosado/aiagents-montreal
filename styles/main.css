@@ -848,6 +848,20 @@
 
         .resource-group.open .resource-toggle { transform: rotate(180deg); }
 
+        .resource-group--empty .resource-group-header--empty {
+            cursor: default;
+            opacity: 0.5;
+        }
+
+        .resource-no-links {
+            margin-left: auto;
+            font-size: 0.68rem;
+            color: var(--muted);
+            font-family: var(--font-mono);
+            font-style: italic;
+            font-weight: 400;
+        }
+
         .resource-links {
             display: none;
             padding: 0.5rem 1.5rem 1rem 3rem;

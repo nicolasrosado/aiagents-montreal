@@ -1,32 +1,24 @@
     const talks = [
-        { n: 1, title: "How to Trust AI Coding at Scale with Packmind", speaker: "Arthur Magne", yt: "https://www.youtube.com/watch?v=Ie27sg1FQik\u0026t=1989s", meetup: "https://www.meetup.com/ai-agent-montreal/events/311354376/" },
-        { n: 2, title: "Software Craftsmanship for Coding Agents: Taming the Dragon", speaker: "Steven Diamante", yt: "https://www.youtube.com/watch?v=nd2fXYHK4vc\u0026t=5s", meetup: "https://www.meetup.com/ai-agent-montreal/events/311544422/" },
-        { n: 3, title: "Refactoring Legacy Code Safely with AI + TDD", speaker: "Michael R. Larson", yt: "https://www.youtube.com/watch?v=nDu0zA_QiwU\u0026t=2773s", meetup: "https://www.meetup.com/ai-agent-montreal/events/312274490/" },
-        { n: 4, title: "Zero Lines, Zero Bugs", speaker: "William Bernting", yt: "https://www.youtube.com/watch?v=c6EsmTs4dAY\u0026t=154s", meetup: "https://www.meetup.com/ai-agent-montreal/events/312482727/" },
-        { n: 5, title: "How to Instrument, Govern, and Debug Agents Before They Go Rogue", speaker: "Carl Lapierre", yt: "https://www.youtube.com/watch?v=BQfBNesA_7A\u0026t=551s", meetup: "https://www.meetup.com/ai-agent-montreal/events/312375599/" },
-        { n: 6, title: "Team Dynamics After AI", speaker: "Duncan Brown", yt: "https://www.youtube.com/watch?v=9coYgxFwHuU\u0026t=423s", meetup: "https://www.meetup.com/ai-agent-montreal/events/312852942/" },
-        { n: 7, title: "Agents Across the SDLC: From Refinement to Retro", speaker: "Benedikt Stemmildt", yt: "https://www.youtube.com/watch?v=CZjImpmUR7Y\u0026t=1605s", meetup: "https://www.meetup.com/ai-agent-montreal/events/312948414/" },
+        { n: 1, title: "How to Trust AI Coding at Scale with Packmind", speaker: "Arthur Magne", yt: "https://www.youtube.com/watch?v=Ie27sg1FQik&t=1989s", meetup: "https://www.meetup.com/ai-agent-montreal/events/311354376/" },
+        { n: 2, title: "Software Craftsmanship for Coding Agents: Taming the Dragon", speaker: "Steven Diamante", yt: "https://www.youtube.com/watch?v=nd2fXYHK4vc&t=5s", meetup: "https://www.meetup.com/ai-agent-montreal/events/311544422/" },
+        { n: 3, title: "Refactoring Legacy Code Safely with AI + TDD", speaker: "Michael R. Larson", yt: "https://www.youtube.com/watch?v=nDu0zA_QiwU&t=2773s", meetup: "https://www.meetup.com/ai-agent-montreal/events/312274490/" },
+        { n: 4, title: "Zero Lines, Zero Bugs", speaker: "William Bernting", yt: "https://www.youtube.com/watch?v=c6EsmTs4dAY&t=154s", meetup: "https://www.meetup.com/ai-agent-montreal/events/312482727/" },
+        { n: 5, title: "How to Instrument, Govern, and Debug Agents Before They Go Rogue", speaker: "Carl Lapierre", yt: "https://www.youtube.com/watch?v=BQfBNesA_7A&t=551s", meetup: "https://www.meetup.com/ai-agent-montreal/events/312375599/" },
+        { n: 6, title: "Team Dynamics After AI", speaker: "Duncan Brown", yt: "https://www.youtube.com/watch?v=9coYgxFwHuU&t=423s", meetup: "https://www.meetup.com/ai-agent-montreal/events/312852942/" },
+        { n: 7, title: "Agents Across the SDLC: From Refinement to Retro", speaker: "Benedikt Stemmildt", yt: "https://www.youtube.com/watch?v=CZjImpmUR7Y&t=1605s", meetup: "https://www.meetup.com/ai-agent-montreal/events/312948414/" },
         { n: 8, title: "How AI Coding Agents Really Read Code (Inside the Runtime)", speaker: "Leandro Damasio", yt: "https://www.youtube.com/watch?v=YXx4YQnu7Cs", meetup: "https://www.meetup.com/ai-agent-montreal/events/312979153/" },
-        { n: 9, title: "Approximation Before Precision", speaker: "Alex Bunardzic", yt: "https://www.youtube.com/watch?v=82Tah-yrcFY\u0026t=327s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313397780/" },
-        { n: 10, title: "New Organizational Models for the Age of AI Agents", speaker: "Matthias Patzak", yt: "https://www.youtube.com/watch?v=McozJv6ThiQ\u0026t=3030s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313420496/" },
-        { n: 11, title: "From Spaghetti to Ravioli: AI-Guided Refactoring with nWave", speaker: "Alessandro Di Gioia \u0026 Michele Brissoni", yt: "https://www.youtube.com/watch?v=Zdobci6tWeM\u0026t=9s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313651906/" },
-        { n: 12, title: "Agentic AI Coding: Best Practice Patterns for Speed with Quality", speaker: "Adam Tornhill", yt: "https://www.youtube.com/watch?v=AQWyhqzGHaU\u0026t=982s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313610408/" },
-        { n: 13, title: "XP Practices Are the Missing Piece for AI-Assisted Development", speaker: "Paul Hammond", yt: "https://www.youtube.com/watch?v=M58tOdNHbxM\u0026t=4956s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313704055/" },
-        { n: 14, title: "AC/DC \u2014 Agent-Centric Development Cycle", speaker: "Edgar Kussberg", yt: "https://www.youtube.com/watch?v=YXXFjebvfNc\u0026t=9s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313880985/" },
+        { n: 9, title: "Approximation Before Precision", speaker: "Alex Bunardzic", yt: "https://www.youtube.com/watch?v=82Tah-yrcFY&t=327s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313397780/" },
+        { n: 10, title: "New Organizational Models for the Age of AI Agents", speaker: "Matthias Patzak", yt: "https://www.youtube.com/watch?v=McozJv6ThiQ&t=3030s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313420496/" },
+        { n: 11, title: "From Spaghetti to Ravioli: AI-Guided Refactoring with nWave", speaker: "Alessandro Di Gioia & Michele Brissoni", yt: "https://www.youtube.com/watch?v=Zdobci6tWeM&t=9s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313651906/" },
+        { n: 12, title: "Agentic AI Coding: Best Practice Patterns for Speed with Quality", speaker: "Adam Tornhill", yt: "https://www.youtube.com/watch?v=AQWyhqzGHaU&t=982s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313610408/" },
+        { n: 13, title: "XP Practices Are the Missing Piece for AI-Assisted Development", speaker: "Paul Hammond", yt: "https://www.youtube.com/watch?v=M58tOdNHbxM&t=4956s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313704055/" },
+        { n: 14, title: "AC/DC — Agent-Centric Development Cycle", speaker: "Edgar Kussberg", yt: "https://www.youtube.com/watch?v=YXXFjebvfNc&t=9s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313880985/" },
         { n: 15, title: "LLM-assisted Coding: A Systems Perspective", speaker: "Dragan Stepanović", yt: "https://www.youtube.com/watch?v=eEA0gJnWLh0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980249/" }
     ];
 
     // ── TALK RESOURCES (to be filled with YouTube comment links) ─────────────────
 
     const talkResources = [
-        {
-            talk: "LLM-assisted Coding: A Systems Perspective",
-            speaker: "Dragan Stepanović",
-            links: [
-                { label: "From Async Code Reviews to Co-Creation Patterns (InfoQ)", url: "https://www.infoq.com/articles/co-creation-patterns-software-development/" },
-                { label: "Learning Hours — Samman Technical Coaching", url: "https://sammancoaching.org/learning_hours/" },
-            ]
-        },
         {
             talk: "How to Trust AI Coding at Scale with Packmind",
             speaker: "Arthur Magne",
@@ -39,7 +31,7 @@
             talk: "Software Craftsmanship for Coding Agents: Taming the Dragon",
             speaker: "Steven Diamante",
             links: [
-                { label: "Claude commands \u0026 setup (GitHub)", url: "https://github.com/SDiamante13/dotfiles/tree/main/claude" },
+                { label: "Claude commands & setup (GitHub)", url: "https://github.com/SDiamante13/dotfiles/tree/main/claude" },
                 { label: "Book a discovery call with Steven", url: "https://calendly.com/diamantetechcoaching" },
                 { label: "Beads Issue Tracker (GitHub)", url: "https://github.com/steveyegge/beads" },
                 { label: "Vibe Coding Book (Amazon)", url: "https://www.amazon.com/dp/1966280025" },
@@ -80,6 +72,11 @@
             ]
         },
         {
+            talk: "Agents Across the SDLC: From Refinement to Retro",
+            speaker: "Benedikt Stemmildt",
+            links: []
+        },
+        {
             talk: "How AI Coding Agents Really Read Code (Inside the Runtime)",
             speaker: "Leandro Damasio",
             links: [
@@ -108,8 +105,13 @@
             ]
         },
         {
+            talk: "New Organizational Models for the Age of AI Agents",
+            speaker: "Matthias Patzak",
+            links: []
+        },
+        {
             talk: "From Spaghetti to Ravioli: AI-Guided Refactoring with nWave",
-            speaker: "Alessandro Di Gioia \u0026 Michele Brissoni",
+            speaker: "Alessandro Di Gioia & Michele Brissoni",
             links: [
                 { label: "nWave website", url: "https://nwave.ai" },
                 { label: "nWave GitHub repo", url: "https://github.com/nWave-ai/nWave.git" },
@@ -124,7 +126,7 @@
                 { label: "Slide deck (Google Drive)", url: "https://drive.google.com/file/d/1voLRlQS0UmR7MkY8IKCshynE5CZBi0On/view" },
                 { label: "CodeScene MCP Server (early access)", url: "https://codescene.com/early-access-codescene-mcp-server" },
                 { label: "Code Health docs", url: "https://codescene.io/docs/guides/technical/code-health.html" },
-                { label: "Paper: AI-Ready Code \u0026 Code Health", url: "https://codescene.com/hubfs/whitepapers/AI-Ready-Code-How-Code-Health-Determines-AI-Performance.pdf" },
+                { label: "Paper: AI-Ready Code & Code Health", url: "https://codescene.com/hubfs/whitepapers/AI-Ready-Code-How-Code-Health-Determines-AI-Performance.pdf" },
                 { label: "PIT Mutation Testing (Java)", url: "https://pitest.org/" },
             ]
         },
@@ -141,7 +143,7 @@
             ]
         },
         {
-            talk: "AC/DC \u2014 Agent-Centric Development Cycle",
+            talk: "AC/DC — Agent-Centric Development Cycle",
             speaker: "Edgar Kussberg",
             links: [
                 { label: "Sonar architecture", url: "https://www.sonarsource.com/solutions/architecture/" },
@@ -150,6 +152,14 @@
                 { label: "Context Flywheel article", url: "https://jedi.be/blog/2026/context-flywheel/" },
                 { label: "Anthropic courses", url: "https://anthropic.skilljar.com" },
                 { label: "Linear AI", url: "https://linear.app/ai" },
+            ]
+        },
+        {
+            talk: "LLM-assisted Coding: A Systems Perspective",
+            speaker: "Dragan Stepanović",
+            links: [
+                { label: "From Async Code Reviews to Co-Creation Patterns (InfoQ)", url: "https://www.infoq.com/articles/co-creation-patterns-software-development/" },
+                { label: "Learning Hours — Samman Technical Coaching", url: "https://sammancoaching.org/learning_hours/" },
             ]
         },
     ];
