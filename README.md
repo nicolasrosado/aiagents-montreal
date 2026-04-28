@@ -161,9 +161,9 @@ The site has been audited and hardened against common web vulnerabilities:
 
 ## Things to update over time
 
-- **New talks** — fill in `NEW_TALK_TEMPLATE.md` and share with Claude; update `data/talks.js` (`talks` array + `talkResources`), Knowledge Brain Graph orbit count, and mobile list
+- **New talks** — fill in `NEW_TALK_TEMPLATE.md` and share with Claude; update `data/talks.js` (`talks` array + `talkResources`), Knowledge Brain Graph orbit count, and mobile list in `index.html`
 - **New speakers** — add to `data/speakers.js`; set `upcoming: true` for future talks, remove the flag once the talk has aired
-- **Newsletter** — replace the disabled button with your Substack link once created
+- **Talk resources** — add links to `talkResources` in `data/talks.js` for talks currently showing "No resources for this talk" (Benedikt Stemmildt #7, Matthias Patzak #10)
 - **Speaker bios** — a few speakers (Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting) are still using generated bios; replace with official "About me" once available
 - **Ecosystem cards** — edit `data/ecosystem.js` to update any community card (event dates, descriptions, links, CTAs)
 - **Devoxx4Kids next event** — update `dateStatic` in `data/ecosystem.js` (~every 3 months)
