@@ -45,6 +45,14 @@
             z-index: -1;
         }
 
+        /* background-attachment: fixed unsupported on iOS/Android — element is already position:fixed */
+        @media (max-width: 768px) {
+            .parallax-bg {
+                background-attachment: scroll;
+                -webkit-background-attachment: scroll;
+            }
+        }
+
         header::before {
             content: '';
             position: absolute;
