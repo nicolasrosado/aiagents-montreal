@@ -499,11 +499,120 @@
         }
     }
 
+    function renderEcoCard(c) {
+        var badgesHtml = '';
+        if (c.badges && c.badges.length) {
+            badgesHtml = '<div class="eco-badges">' +
+                c.badges.map(function(b) {
+                    return '<span class="eco-badge eco-badge--' + b.type + '">' + b.label + '</span>';
+                }).join('') + '</div>';
+        }
+
+        var e = c.event || {};
+        var eventContainerAttr = e.containerId ? ' id="' + e.containerId + '"' : '';
+        var eventHtml;
+        if (e.titleId) {
+            eventHtml = '<div class="eco-next-event"' + eventContainerAttr + '>' +
+                '<div class="eco-next-label">' + e.label + '</div>' +
+                '<div class="eco-next-title" id="' + e.titleId + '"><span class="loading-pulse">Loading…</span></div>' +
+                '<div class="eco-next-date"' + (e.dateId ? ' id="' + e.dateId + '"' : '') + '></div>' +
+                '</div>';
+        } else {
+            var dateContent = e.dateHtml || e.dateStatic || '';
+            eventHtml = '<div class="eco-next-event"' + eventContainerAttr + '>' +
+                '<div class="eco-next-label">' + e.label + '</div>' +
+                '<div class="eco-next-title">' + (e.titleStatic || '') + '</div>' +
+                '<div class="eco-next-date">' + dateContent + '</div>' +
+                '</div>';
+        }
+
+        var blocksHtml = (c.blocks || []).map(function(b) {
+            if (b.type === 'community-note') {
+                return '<div class="eco-community-note">' +
+                    '<div class="eco-community-icon">' + b.icon + '</div>' +
+                    '<div class="eco-community-text">' + b.html + '</div>' +
+                    '</div>';
+            }
+            if (b.type === 'suggest-talk') {
+                var inner = b.title
+                    ? '<div class="suggest-talk-text"><div class="suggest-talk-title">' + b.title + '</div>' +
+                      '<div class="suggest-talk-desc">' + b.desc + '</div></div>'
+                    : '<div class="suggest-talk-desc">' + b.desc + '</div>';
+                var btn = b.btnText
+                    ? '<a href="' + b.btnUrl + '" target="_blank" class="suggest-talk-btn" rel="noopener noreferrer">' + b.btnText + '</a>'
+                    : '';
+                return '<div class="suggest-talk-block">' + inner + btn + '</div>';
+            }
+            if (b.type === 'hosting') {
+                return '<div class="eco-hosting">' +
+                    '<div class="eco-hosting-title">🏠 We\'re looking for hosts &amp; speakers!</div>' +
+                    b.items.map(function(item) {
+                        return '<div class="eco-hosting-text"><span class="lang-tag">' + item.lang + '</span> ' + item.html + '</div>';
+                    }).join('') +
+                    '</div>';
+            }
+            if (b.type === 'guest-speaker') {
+                return '<div class="eco-community-note" style="border-left-color:#a78bfa;background:rgba(124,58,237,0.06);border-color:rgba(124,58,237,0.25);">' +
+                    '<div class="eco-community-icon">' + b.icon + '</div>' +
+                    '<div class="eco-community-text">' + b.nameHtml + '<br/>' + b.talkHtml + '<br/>' +
+                    '<a href="' + b.youtubeUrl + '" target="_blank" rel="noopener noreferrer" style="color:#a78bfa;font-size:0.7rem;">' + b.youtubeLabel + '</a>' +
+                    '</div></div>';
+            }
+            if (b.type === 'sponsor') {
+                var blockStyle = b.blockStyle ? ' style="' + b.blockStyle + '"' : '';
+                var titleStyle = b.titleStyle ? ' style="' + b.titleStyle + '"' : '';
+                var descHtml = b.descHtml || b.desc || '';
+                var btnsHtml;
+                if (b.buttons.length === 1) {
+                    var btn2 = b.buttons[0];
+                    var btnStyle = btn2.style ? ' style="' + btn2.style + '"' : '';
+                    btnsHtml = '<a href="' + btn2.url + '" target="_blank" rel="noopener noreferrer" class="suggest-talk-btn"' + btnStyle + '>' + btn2.text + '</a>';
+                } else {
+                    btnsHtml = '<div style="display:flex;flex-direction:column;gap:0.4rem;flex-shrink:0">' +
+                        b.buttons.map(function(btn3) {
+                            return '<a href="' + btn3.url + '" target="_blank" rel="noopener noreferrer" class="suggest-talk-btn">' + btn3.text + '</a>';
+                        }).join('') + '</div>';
+                }
+                return '<div class="suggest-talk-block"' + blockStyle + '>' +
+                    '<div class="suggest-talk-text"><div class="suggest-talk-title"' + titleStyle + '>' + b.title + '</div>' +
+                    '<div class="suggest-talk-desc">' + descHtml + '</div></div>' +
+                    btnsHtml + '</div>';
+            }
+            return '';
+        }).join('');
+
+        var footerHtml = (c.footer || []).map(function(l) {
+            var idAttr     = l.id       ? ' id="'    + l.id    + '"' : '';
+            var styleAttr  = l.style    ? ' style="' + l.style + '"' : '';
+            var targetAttr = l.noTarget ? '' : ' target="_blank"';
+            var relAttr    = l.noTarget ? '' : ' rel="noopener noreferrer"';
+            return '<a href="' + l.href + '"' + targetAttr + ' class="eco-link ' + l.cls + '"' + relAttr + idAttr + styleAttr + '>' + l.label + '</a>';
+        }).join('');
+
+        var cardIdAttr = c.cardId ? ' id="' + c.cardId + '"' : '';
+        return '<div class="eco-card"' + cardIdAttr + '>' +
+            '<div class="eco-card-header"><div class="eco-emoji">' + c.emoji + '</div>' +
+            '<div><div class="eco-name">' + c.name + '</div>' +
+            '<div class="eco-type">' + c.type + '</div>' +
+            badgesHtml + '</div></div>' +
+            '<div class="eco-body"><div class="eco-desc">' + c.desc + '</div>' +
+            eventHtml + blocksHtml + '</div>' +
+            '<div class="eco-footer">' + footerHtml + '</div>' +
+            '</div>';
+    }
+
+    function renderEcosystem() {
+        var container = document.getElementById('ecosystem-cards');
+        if (!container) return;
+        container.innerHTML = ecosystemCommunities.map(renderEcoCard).join('');
+    }
+
     loadMediumArticles();
     renderResources();
     loadCraftCodeEpisode();
 
 
+    renderEcosystem();
     loadMeetupData();
     loadCraftersEvent();
     loadMenderConEvent();
@@ -675,16 +784,7 @@
 
         var ecoCtx = ecoCanvas.getContext('2d');
 
-        var INITIATIVES = [
-            { name:'AI Agents Montreal',      emoji:'\uD83E\uDD16', url:'https://www.meetup.com/ai-agent-montreal/' },
-            { name:'Software Crafters MTL',   emoji:'\uD83D\uDD27', url:'https://guild.host/software-crafters-montreal' },
-            { name:'Mental Health in SW Eng', emoji:'\uD83E\uDDE0', url:'https://www.meetup.com/mental-health-in-software-engineering-montreal/' },
-            { name:'AI Craftspeople Guild',   emoji:'\u2692\uFE0F', url:'https://aicraftspeopleguild.github.io' },
-            { name:'/dev/mtl',               emoji:'\uD83C\uDFD9\uFE0F', url:'https://www.dev-mtl.ca' },
-            { name:'Devoxx4Kids Qu\u00e9bec', emoji:'\uD83D\uDC7E', url:'https://www.devoxx4kids.org/quebec/' },
-            { name:'MenderCon',              emoji:'\uD83D\uDD27', url:'https://mendercon.com' },
-            { name:'Montr\u00e9al JUG',      emoji:'\u2615', url:'https://www.montreal-jug.org' },
-        ];
+
 
         // Circuit image center
         document.getElementById('eco-cmc').setAttribute('cx', CX);
