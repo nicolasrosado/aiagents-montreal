@@ -864,34 +864,36 @@
         ecoAnimate();
     })();
 
-    // ── NAV HIGHLIGHT (IntersectionObserver) ─────────────────────────────────────
+    // ── NAV HIGHLIGHT (scrollspy) ─────────────────────────────────────────────────
     (function initNavHighlight() {
-        if (!window.IntersectionObserver) return;
         const navBtns = [...document.querySelectorAll('.nav-btn[data-section]')];
         if (!navBtns.length) return;
 
-        const ratios = {};
-        const thresholds = Array.from({ length: 21 }, (_, i) => i * 0.05);
+        const sections = navBtns
+            .map(b => document.getElementById(b.dataset.section))
+            .filter(Boolean);
 
-        const setActive = () => {
-            const entries = Object.entries(ratios);
-            const active = entries.length
-                ? entries.reduce((best, cur) => cur[1] > best[1] ? cur : best)[0]
-                : null;
+        const setActive = (activeId) => {
             navBtns.forEach(b => {
-                const on = active && b.dataset.section === active;
+                const on = b.dataset.section === activeId;
                 b.classList.toggle('primary', on);
                 b.classList.toggle('secondary', !on);
             });
         };
 
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(e => { ratios[e.target.id] = e.intersectionRatio; });
-            setActive();
-        }, { threshold: thresholds });
+        const update = () => {
+            const trigger = window.scrollY + window.innerHeight * 0.3;
+            let active = sections[0];
+            for (const s of sections) {
+                if (s.getBoundingClientRect().top + window.scrollY <= trigger) active = s;
+            }
+            setActive(active ? active.id : null);
+        };
 
-        navBtns.forEach(b => {
-            const el = document.getElementById(b.dataset.section);
-            if (el) observer.observe(el);
-        });
+        let raf = false;
+        window.addEventListener('scroll', () => {
+            if (!raf) { raf = true; requestAnimationFrame(() => { update(); raf = false; }); }
+        }, { passive: true });
+
+        update();
     })();
