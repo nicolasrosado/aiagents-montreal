@@ -863,3 +863,35 @@
         }
         ecoAnimate();
     })();
+
+    // ── NAV HIGHLIGHT (IntersectionObserver) ─────────────────────────────────────
+    (function initNavHighlight() {
+        if (!window.IntersectionObserver) return;
+        const navBtns = [...document.querySelectorAll('.nav-btn[data-section]')];
+        if (!navBtns.length) return;
+
+        const ratios = {};
+        const thresholds = Array.from({ length: 21 }, (_, i) => i * 0.05);
+
+        const setActive = () => {
+            const entries = Object.entries(ratios);
+            const active = entries.length
+                ? entries.reduce((best, cur) => cur[1] > best[1] ? cur : best)[0]
+                : null;
+            navBtns.forEach(b => {
+                const on = active && b.dataset.section === active;
+                b.classList.toggle('primary', on);
+                b.classList.toggle('secondary', !on);
+            });
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { ratios[e.target.id] = e.intersectionRatio; });
+            setActive();
+        }, { threshold: thresholds });
+
+        navBtns.forEach(b => {
+            const el = document.getElementById(b.dataset.section);
+            if (el) observer.observe(el);
+        });
+    })();

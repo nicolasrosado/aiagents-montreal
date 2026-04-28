@@ -195,6 +195,31 @@
             transform: translateY(-1px);
         }
 
+        .nav-btn.yt {
+            background: #e60023;
+            color: #ffffff;
+            border-color: #e60023;
+            font-weight: 700;
+            box-shadow: 0 0 14px rgba(230,0,35,0.35);
+        }
+
+        .nav-btn.yt:hover {
+            background: #cc001f;
+            border-color: #cc001f;
+            box-shadow: 0 0 22px rgba(230,0,35,0.6);
+            transform: translateY(-1px);
+        }
+
+        .nav-btn.meetup {
+            color: rgba(255,170,0,0.8);
+            border-color: rgba(255,170,0,0.4);
+        }
+
+        .nav-btn.meetup:hover {
+            color: rgba(255,200,0,1);
+            border-color: rgba(255,170,0,0.8);
+        }
+
         /* ── SUGGEST A TALK BLOCK ── */
         .suggest-talk-block {
             background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(0,229,255,0.05));
