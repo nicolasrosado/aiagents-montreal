@@ -105,7 +105,7 @@ The newsletter links to **Substack** — the user subscribes directly on Substac
 
 ### 🔔 Stay in the Loop *(section 08)*
 - YouTube Subscribe button
-- RSS Feed + Add to Feedly
+- RSS Feed — "Copy RSS URL" copies feed URL to clipboard (shows "Copied ✓" for 2s); "Add to Feedly" opens Feedly subscription · channel ID `UCiie5knSJ0sd8IARCT0ACNg`
 - Newsletter — live Substack link → [substack.com/@nicolasrosado](https://substack.com/@nicolasrosado) · no email collected by this site
 
 ## Dynamic data (fetched at page load)
