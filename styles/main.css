@@ -35,7 +35,7 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             height: 100vh;
-            background-image: url('assets/ai-agents-image.jpg');
+            background-image: url('../assets/ai-agents-image.jpg');
             background-size: cover;
             background-position: center 30%;
             background-attachment: fixed;
