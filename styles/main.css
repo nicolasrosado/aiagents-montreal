@@ -164,6 +164,15 @@
 
         .nav-btn.primary:hover { background: #00c4db; border-color: #00c4db; }
 
+        .nav-btn.secondary {
+            color: rgba(0,229,255,0.55);
+            border-color: rgba(0,229,255,0.25);
+        }
+        .nav-btn.secondary:hover {
+            color: rgba(0,229,255,1);
+            border-color: rgba(0,229,255,0.7);
+        }
+
         .nav-btn.cta {
             background: linear-gradient(135deg, var(--accent2), #9333ea);
             color: white;
