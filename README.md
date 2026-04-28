@@ -165,7 +165,7 @@ The site has been audited and hardened against common web vulnerabilities:
 - **New speakers** — add to `data/speakers.js`; set `upcoming: true` for future talks, remove the flag once the talk has aired
 - **Talk resources** — add links to `talkResources` in `data/talks.js` for talks currently showing "No resources for this talk" (Benedikt Stemmildt #7, Matthias Patzak #10)
 - **Speaker bios** — a few speakers (Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting) are still using generated bios; replace with official "About me" once available
-- **Ecosystem cards** — edit `data/ecosystem.js` to update any community card (event dates, descriptions, links, CTAs)
+- **Ecosystem cards** — edit `data/ecosystem.js` to update any community card (event dates, descriptions, links, CTAs); also update the mobile orbit list in `index.html` (`#eco-mobile-list`) if communities are added or removed
 - **Devoxx4Kids next event** — update `dateStatic` in `data/ecosystem.js` (~every 3 months)
 - **Montréal JUG next event** — update `titleStatic` in `data/ecosystem.js` monthly
 
