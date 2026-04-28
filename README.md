@@ -32,7 +32,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 
 ### 🎬 Header
 - **Parallax background** — `ai-agents-image.jpg` fixed in place with dark overlay (Option D — Cinematic), grid and cyan/violet glows layered on top
-- **Animated circuit board** — red/orange particle flow (Option B) on orthogonal rails inspired by the PCB in the hero image; speed reduced ~60% for a smoother, more subtle effect; responsive canvas, auto-rebuilds on resize
+- **Animated circuit board** — grid overlay and cyan/violet glows layered on the parallax background
 - Live member count fetched from Meetup
 - Live next event banner fetched from Meetup
 - "🎙 Suggest a Talk" CTA → LinkedIn
@@ -42,7 +42,6 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **Desktop** — 2 concentric orbits: inner (talks 1-8, clockwise) · outer (talks 9-15, counter-clockwise)
 - **Mobile (<768px)** — vertical scrollable list: brain image centered at top, each talk as a tappable row with animated cyan dot — zero impact on desktop
 - Bright cyan pulsing dots per talk with glow halo — hover to slow, click to watch on YouTube
-- Circuit beam animation (red/orange faisceaux continus) in background
 - Uses `assets/brain-circle.jpg` — 350×350px crop, brain only, no "AI" text
 - Mask radius r=175 on desktop
 
@@ -90,7 +89,6 @@ When a newsletter is eventually added, it will redirect to **Substack** — the 
 - Nodes and dots in **orange/red** to match the circuit color palette (vs cyan for the brain graph)
 - **Desktop** — single orbit, height 520px, circuit image r=155
 - **Mobile (<768px)** — vertical scrollable list: circuit image centered at top, each initiative as a tappable row with animated orange dot — zero impact on desktop
-- Same beam animation as the rest of the site — faisceaux rouges continus
 - Hover to slow · Click to visit each community's website
 
 ### 🌱 Local Ecosystem & Events *(section 07)*
