@@ -37,6 +37,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - Live member count fetched from Meetup
 - Live next event banner fetched from Meetup
 - "🎙 Suggest a Talk" CTA → LinkedIn
+- **Nav buttons** — 3-tier hierarchy: internal section links (secondary cyan, active section highlighted in primary cyan via `IntersectionObserver`) · **▶ Subscribe** (red YouTube brand, links directly to subscribe URL) · **Join on Meetup** (amber outline) · **🎙 Suggest a Talk** (violet CTA)
 
 ### 🧠 Talk Knowledge Brain Graph *(section 01 — displayed first)*
 - **Orbital mind graph** — 15 talks orbiting the AI brain image
@@ -82,7 +83,7 @@ The site is **100% read-only** — it collects, stores and sends zero personal d
 | Newsletter | ✅ Redirects to Substack — their privacy policy applies |
 | All displayed data | ✅ 100% public (Meetup, LinkedIn, YouTube, RSS feeds) |
 
-When a newsletter is eventually added, it will redirect to **Substack** — the user subscribes directly on Substack's platform. No email addresses are ever handled by this site.
+The newsletter links to **Substack** — the user subscribes directly on Substack's platform. No email addresses are ever handled by this site.
 
 ### 🔧 Ecosystem Circuit Graph *(section 06 — before Local Ecosystem)*
 - **Orbital circuit graph** — 8 local/global community initiatives orbiting the AI circuit board image
@@ -105,7 +106,7 @@ When a newsletter is eventually added, it will redirect to **Substack** — the 
 ### 🔔 Stay in the Loop *(section 08)*
 - YouTube Subscribe button
 - RSS Feed + Add to Feedly
-- Newsletter — "Coming Soon" *(will redirect to Substack — no email collected by this site)*
+- Newsletter — live Substack link → [substack.com/@nicolasrosado](https://substack.com/@nicolasrosado) · no email collected by this site
 
 ## Dynamic data (fetched at page load)
 
