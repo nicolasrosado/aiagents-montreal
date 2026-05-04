@@ -176,11 +176,11 @@
             location: "Bretagne, France 🇫🇷",
             lat: 48.1173, lng: -1.6778,
             bio: "Software engineer and consultant specializing in spec-driven development. Explores how to structure AI-assisted workflows using frameworks like BMAD, OpenSpec and SpecKit — in solo and team contexts.",
-            talk: "Spec-Driven Development: From BMAD to Custom Skills",
+            talk: "Spec-Driven Development in the Real World: From BMAD to Custom Skills",
             linkedin: "https://www.linkedin.com/in/fabrice-monnier-cloud-data-devops",
-            youtube: "https://www.youtube.com/@aiagentsmontreal",
-            meetup: "https://www.meetup.com/ai-agent-montreal/",
-            upcoming: true
+            youtube: "https://www.youtube.com/watch?v=OTdCijajbH0",
+            meetup: "https://www.meetup.com/ai-agent-montreal/events/313903717/",
+            upcoming: false
         },
         {
             name: "Margaret-Anne Storey",

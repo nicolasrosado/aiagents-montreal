@@ -13,7 +13,8 @@
         { n: 12, title: "Agentic AI Coding: Best Practice Patterns for Speed with Quality", speaker: "Adam Tornhill", yt: "https://www.youtube.com/watch?v=AQWyhqzGHaU&t=982s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313610408/" },
         { n: 13, title: "XP Practices Are the Missing Piece for AI-Assisted Development", speaker: "Paul Hammond", yt: "https://www.youtube.com/watch?v=M58tOdNHbxM&t=4956s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313704055/" },
         { n: 14, title: "AC/DC — Agent-Centric Development Cycle", speaker: "Edgar Kussberg", yt: "https://www.youtube.com/watch?v=YXXFjebvfNc&t=9s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313880985/" },
-        { n: 15, title: "LLM-assisted Coding: A Systems Perspective", speaker: "Dragan Stepanović", yt: "https://www.youtube.com/watch?v=eEA0gJnWLh0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980249/" }
+        { n: 15, title: "LLM-assisted Coding: A Systems Perspective", speaker: "Dragan Stepanović", yt: "https://www.youtube.com/watch?v=eEA0gJnWLh0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980249/" },
+        { n: 16, title: "Spec-Driven Development in the Real World: From BMAD to Custom Skills", speaker: "Fabrice Monnier", yt: "https://www.youtube.com/watch?v=OTdCijajbH0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313903717/" }
     ];
 
     // ── TALK RESOURCES (to be filled with YouTube comment links) ─────────────────
@@ -160,6 +161,17 @@
             links: [
                 { label: "From Async Code Reviews to Co-Creation Patterns (InfoQ)", url: "https://www.infoq.com/articles/co-creation-patterns-software-development/" },
                 { label: "Learning Hours — Samman Technical Coaching", url: "https://sammancoaching.org/learning_hours/" },
+            ]
+        },
+        {
+            talk: "Spec-Driven Development in the Real World: From BMAD to Custom Skills",
+            speaker: "Fabrice Monnier",
+            links: [
+                { label: "OpenSpec (GitHub)", url: "https://github.com/Fission-AI/OpenSpec" },
+                { label: "BMAD Method (GitHub)", url: "https://github.com/bmad-code-org/BMAD-METHOD" },
+                { label: "Substack (Fabrice Monnier)", url: "https://fabricemonnier.substack.com" },
+                { label: "Serena (GitHub)", url: "https://github.com/oraios/serena" },
+                { label: "Claude Code Caveman (GitHub)", url: "https://github.com/juliusbrussee/caveman" },
             ]
         },
     ];
