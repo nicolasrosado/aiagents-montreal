@@ -650,6 +650,26 @@
         container.innerHTML = ecosystemCommunities.map(renderEcoCard).join('');
     }
 
+    function renderBrainMobile() {
+        var container = document.getElementById('mg-mobile-items');
+        if (!container) return;
+        container.innerHTML = talks.map(function(t, i) {
+            return '<a href="' + sanitizeUrl(t.yt) + '" target="_blank" rel="noopener noreferrer" class="mg-mobile-item" style="animation-delay:' + (i * 0.1) + 's">' +
+                '<div class="mg-mobile-dot mg-mobile-dot--cyan" style="animation-delay:' + (i * 0.15) + 's"></div>' +
+                '<div class="mg-mobile-text">' + sanitize(t.title) + '</div></a>';
+        }).join('');
+    }
+
+    function renderEcoMobile() {
+        var container = document.getElementById('eco-mobile-items');
+        if (!container) return;
+        container.innerHTML = INITIATIVES.map(function(init, i) {
+            return '<a href="' + sanitizeUrl(init.url) + '" target="_blank" rel="noopener noreferrer" class="mg-mobile-item">' +
+                '<div class="mg-mobile-dot mg-mobile-dot--orange" style="animation-delay:' + (i * 0.15) + 's"></div>' +
+                '<div class="mg-mobile-text">' + sanitize(init.emoji + ' ' + init.name) + '</div></a>';
+        }).join('');
+    }
+
     loadMediumArticles();
     renderCommunityArticles();
     renderResources();
@@ -657,6 +677,8 @@
 
 
     renderEcosystem();
+    renderBrainMobile();
+    renderEcoMobile();
     loadMeetupData();
     loadCraftersEvent();
     loadMenderConEvent();

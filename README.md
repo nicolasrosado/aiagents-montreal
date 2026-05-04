@@ -41,7 +41,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 ### 🧠 Talk Knowledge Brain Graph *(section 01 — displayed first)*
 - **Orbital mind graph** — 16 talks orbiting the AI brain image
 - **Desktop** — 2 concentric orbits: inner (talks 1-8, clockwise) · outer (talks 9-16, counter-clockwise)
-- **Mobile (<768px)** — vertical scrollable list: brain image centered at top, each talk as a tappable row with animated cyan dot — zero impact on desktop
+- **Mobile (<768px)** — vertical scrollable list auto-generated from `data/talks.js` via `renderBrainMobile()`: brain image centered at top, each talk as a tappable row with animated cyan dot — zero impact on desktop
 - Bright cyan pulsing dots per talk with glow halo — hover to slow, click to watch on YouTube
 - Uses `assets/brain-circle.jpg` — 350×350px crop, brain only, no "AI" text
 - Mask radius r=175 on desktop
@@ -90,7 +90,7 @@ The newsletter links to **Substack** — the user subscribes directly on Substac
 - Circuit board image (`assets/circuit-crop.jpg`) cropped from the hero image — red/orange PCB aesthetic, **no brightness filter** (full natural luminosity)
 - Nodes and dots in **orange/red** to match the circuit color palette (vs cyan for the brain graph)
 - **Desktop** — single orbit, height 520px, circuit image r=155
-- **Mobile (<768px)** — vertical scrollable list: circuit image centered at top, each initiative as a tappable row with animated orange dot — zero impact on desktop
+- **Mobile (<768px)** — vertical scrollable list auto-generated from `INITIATIVES` in `data/ecosystem.js` via `renderEcoMobile()`: circuit image centered at top, each initiative as a tappable row with animated orange dot — zero impact on desktop
 - Hover to slow · Click to visit each community's website
 
 ### 🌱 Local Ecosystem & Events *(section 07)*
@@ -161,7 +161,7 @@ The site has been audited and hardened against common web vulnerabilities:
 
 ## Things to update over time
 
-- **New talks** — fill in `NEW_TALK_TEMPLATE.md` and share with Claude; update `data/talks.js` (`talks` array + `talkResources`), Knowledge Brain Graph orbit count, mobile list and talk count text in `index.html`
+- **New talks** — fill in `NEW_TALK_TEMPLATE.md` and share with Claude; update `data/talks.js` (`talks` array + `talkResources`), `MG_TALKS` in `scripts/main.js` (+ outer orbit loop count), and talk count text in `index.html` — mobile list is auto-generated
 - **Community articles** — add entries to `communityArticles` in `scripts/main.js`; always rendered in the Articles tab below the Medium feed
 - **New speakers** — add to `data/speakers.js`; set `upcoming: true` for future talks, remove the flag once the talk has aired
 - **Talk resources** — add links to `talkResources` in `data/talks.js` for talks currently showing "No resources for this talk" (Benedikt Stemmildt #7, Matthias Patzak #10)

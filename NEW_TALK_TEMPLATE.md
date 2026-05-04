@@ -48,7 +48,7 @@ Add as many as needed. Remove section if none.
 - [ ] Add speaker to `speakers` array
 - [ ] Add talk to `talks` array (with YouTube URL + Meetup link)
 - [ ] Add talk to Knowledge Brain Graph orbit (desktop — `MG_TALKS` in `scripts/main.js`, update outer orbit loop count)
-- [ ] Add talk to Brain Graph mobile list (`#mg-mobile-items` in `index.html`, increment animation delays)
+- [ ] Brain Graph mobile list — auto-generated from `talks` array in `data/talks.js` (no HTML edit needed)
 - [ ] Add resources to `talkResources` object
 - [ ] Add map marker (lat/lng)
 - [ ] If previously `upcoming: true` → flip to past (remove flag, update talk/YouTube)
