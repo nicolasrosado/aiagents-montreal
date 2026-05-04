@@ -42,8 +42,9 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **Orbital mind graph** — 16 talks orbiting the AI brain image
 - **Desktop** — 2 concentric orbits: inner (talks 1-8, clockwise) · outer (talks 9-16, counter-clockwise)
 - **Mobile (<768px)** — vertical scrollable list auto-generated from `data/talks.js` via `renderBrainMobile()`: brain image centered at top, each talk as a tappable row with animated cyan dot — zero impact on desktop
+  - Mobile brain circle size: `.mg-mobile-brain` in `styles/main.css` (currently 240×240px) — change `width`/`height` there to resize
 - Bright cyan pulsing dots per talk with glow halo — hover to slow, click to watch on YouTube
-- Uses `assets/brain-circle.jpg` — 350×350px crop, brain only, no "AI" text
+- Uses `assets/brain-circle.jpg` — 700×700px crop (2× retina), brain only, left half of hero image
 - Mask radius r=175 on desktop
 
 ### 🌍 Global Speakers Map *(section 02)*
@@ -91,6 +92,8 @@ The newsletter links to **Substack** — the user subscribes directly on Substac
 - Nodes and dots in **orange/red** to match the circuit color palette (vs cyan for the brain graph)
 - **Desktop** — single orbit, height 520px, circuit image r=155
 - **Mobile (<768px)** — vertical scrollable list auto-generated from `INITIATIVES` in `data/ecosystem.js` via `renderEcoMobile()`: circuit image centered at top, each initiative as a tappable row with animated orange dot — zero impact on desktop
+  - Mobile circuit circle size: same `.mg-mobile-brain` class in `styles/main.css` (shared with brain graph, currently 240×240px)
+- Uses `assets/circuit-crop.jpg` — 1000×1000px crop (2× retina), circuit board with "AI" text, right portion of hero image
 - Hover to slow · Click to visit each community's website
 
 ### 🌱 Local Ecosystem & Events *(section 07)*
