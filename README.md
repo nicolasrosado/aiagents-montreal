@@ -36,12 +36,11 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **Animated circuit board** — grid overlay and cyan/violet glows layered on the parallax background
 - Live member count fetched from Meetup
 - Live next event banner fetched from Meetup
-- "🎙 Suggest a Talk" CTA → LinkedIn
-- **Nav buttons** — 3-tier hierarchy: internal section links (secondary cyan, active section highlighted in primary cyan via `IntersectionObserver`) · **▶ Subscribe** (red YouTube brand, links directly to subscribe URL) · **Join on Meetup** (amber outline) · **🎙 Suggest a Talk** (violet CTA)
+- **Nav buttons** — 3-tier hierarchy: internal section links (secondary cyan, active section highlighted in primary cyan via `IntersectionObserver`) · **▶ Subscribe** (red YouTube brand, links directly to subscribe URL) · **Join on Meetup** (amber outline) · **✉ Newsletter** (orange Substack brand, links to substack.com/@nicolasrosado) · **🎙 Suggest a Talk** (secondary cyan, links to LinkedIn DM)
 
 ### 🧠 Talk Knowledge Brain Graph *(section 01 — displayed first)*
-- **Orbital mind graph** — 15 talks orbiting the AI brain image
-- **Desktop** — 2 concentric orbits: inner (talks 1-8, clockwise) · outer (talks 9-15, counter-clockwise)
+- **Orbital mind graph** — 16 talks orbiting the AI brain image
+- **Desktop** — 2 concentric orbits: inner (talks 1-8, clockwise) · outer (talks 9-16, counter-clockwise)
 - **Mobile (<768px)** — vertical scrollable list: brain image centered at top, each talk as a tappable row with animated cyan dot — zero impact on desktop
 - Bright cyan pulsing dots per talk with glow halo — hover to slow, click to watch on YouTube
 - Uses `assets/brain-circle.jpg` — 350×350px crop, brain only, no "AI" text
@@ -62,13 +61,14 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - All 21 speakers have complete LinkedIn URLs
 
 ### 🎙 Talks
-- Full list of all 15 past talks
+- Full list of all 16 past talks
 - **All YouTube links updated** with individual video URLs and timestamps
 - **All Meetup event links updated** with individual event pages
 
 ### ✍️ Articles & Resources
-- **Talk Resources tab** *(default open)* — all 15 talks listed in order; 60+ links across 13 talks (GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers); talks without resources display "No resources for this talk" instead of being omitted
+- **Talk Resources tab** *(default open)* — all 16 talks listed in order; 60+ links across 14 talks (GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers); talks without resources display "No resources for this talk" instead of being omitted
 - **Articles tab** — dynamically fetched from Nicolas Rosado's Medium RSS feed; excludes "Formation continue"; falls back to hardcoded list
+- **From the Community** — hardcoded curated articles from the community (non-Medium sources); always visible below the Medium articles; add entries to `communityArticles` in `scripts/main.js`
 
 ### 🔒 Privacy & Data Policy
 The site is **100% read-only** — it collects, stores and sends zero personal data:
@@ -161,7 +161,8 @@ The site has been audited and hardened against common web vulnerabilities:
 
 ## Things to update over time
 
-- **New talks** — fill in `NEW_TALK_TEMPLATE.md` and share with Claude; update `data/talks.js` (`talks` array + `talkResources`), Knowledge Brain Graph orbit count, and mobile list in `index.html`
+- **New talks** — fill in `NEW_TALK_TEMPLATE.md` and share with Claude; update `data/talks.js` (`talks` array + `talkResources`), Knowledge Brain Graph orbit count, mobile list and talk count text in `index.html`
+- **Community articles** — add entries to `communityArticles` in `scripts/main.js`; always rendered in the Articles tab below the Medium feed
 - **New speakers** — add to `data/speakers.js`; set `upcoming: true` for future talks, remove the flag once the talk has aired
 - **Talk resources** — add links to `talkResources` in `data/talks.js` for talks currently showing "No resources for this talk" (Benedikt Stemmildt #7, Matthias Patzak #10)
 - **Speaker bios** — a few speakers (Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting) are still using generated bios; replace with official "About me" once available
@@ -171,5 +172,5 @@ The site has been audited and hardened against common web vulnerabilities:
 
 ## Organized by
 
-[Nicolas Rosado](https://www.linkedin.com/in/nicolas-rosado-a97b3393) · [Meetup](https://www.meetup.com/ai-agent-montreal/) · [YouTube](https://www.youtube.com/@aiagentsmontreal) · [LinkedIn](https://www.linkedin.com/company/ai-agents-montreal)
+[Nicolas Rosado](https://www.linkedin.com/in/nicolas-rosado-a97b3393) · [Meetup](https://www.meetup.com/ai-agent-montreal/) · [YouTube](https://www.youtube.com/@aiagentsmontreal?sub_confirmation=1) · [LinkedIn](https://www.linkedin.com/company/ai-agents-montreal) · [Newsletter](https://substack.com/@nicolasrosado)
 
