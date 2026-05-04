@@ -195,8 +195,8 @@
         },
         {
             name: "Soma Bini",
-            location: "Paris, France 🇫🇷",
-            lat: 48.8566, lng: 2.3522,
+            location: "Dubai, UAE 🇦🇪",
+            lat: 25.2048, lng: 55.2708,
             bio: "Software engineer and practitioner of spec-driven, agent-assisted development. Demonstrates how to build production-ready applications end-to-end using AI agents — from design and architecture to CI/CD deployment.",
             talk: "From Specs to Production: Building Software with AI Agents End to End",
             linkedin: "https://www.linkedin.com/in/soma-bini",
