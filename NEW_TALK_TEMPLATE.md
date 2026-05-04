@@ -20,7 +20,7 @@ Copy this file, fill in all fields, and share it with Claude to update the site.
 - **Talk title:**
 - **Meetup event URL:** https://www.meetup.com/ai-agent-montreal/events/
 - **YouTube video URL (with timestamp if applicable):** https://www.youtube.com/watch?v=
-- **Talk number** (next in sequence — currently 15): #
+- **Talk number** (next in sequence — currently 16): #
 
 ---
 
