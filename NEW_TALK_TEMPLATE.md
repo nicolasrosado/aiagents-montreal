@@ -52,6 +52,7 @@ Add as many as needed. Remove section if none.
 - [ ] Add map marker (lat/lng)
 - [ ] If previously `upcoming: true` → flip to past (remove flag, update talk/YouTube)
 - [ ] Update speaker count in header if needed
+- [ ] Update talk count in Brain Graph description (`index.html` — "N talks orbiting the AI brain")
 
 ---
 
