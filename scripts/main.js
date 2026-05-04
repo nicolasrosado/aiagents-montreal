@@ -339,6 +339,38 @@
         });
     });
 
+    // ── COMMUNITY (CURATED) ARTICLES ─────────────────────────────────────────────
+
+    const communityArticles = [
+        {
+            date: 'Feb 9, 2026',
+            title: 'Software Craftsmanship in the AI Era',
+            link: 'https://www.codurance.com/publications/software-craftsmanship-in-the-ai-era',
+            excerpt: 'AI coding tools are transforming development speed — but are teams building well, or just fast? True productivity requires clarity and maintainability, not merely rapid code generation.',
+            source: 'Codurance'
+        },
+        {
+            date: 'Apr 26, 2026',
+            title: 'What We All Got Wrong About Guardrails',
+            link: 'https://www.linkedin.com/pulse/what-people-get-wrong-agent-guardrails-antony-marcano-2g8ue/',
+            excerpt: 'Most teams confuse guidance, guardrails, and gateways. True agent safety requires all three: instructional guidance, technical restrictions, and controlled entry points.',
+            source: 'LinkedIn'
+        },
+    ];
+
+    function renderCommunityArticles() {
+        const container = document.getElementById('community-articles');
+        if (!container) return;
+        container.innerHTML = communityArticles.map(a => `
+      <a href="${sanitizeUrl(a.link)}" target="_blank" class="article-card" rel="noopener noreferrer">
+        <div class="article-date">${a.date}</div>
+        <div class="article-title">${a.title}</div>
+        <div class="article-excerpt">${a.excerpt}</div>
+        <div class="article-readmore">Read on ${a.source} ↗</div>
+      </a>
+    `).join('');
+    }
+
     // ── MEDIUM RSS FETCH ──────────────────────────────────────────────────────────
 
     const EXCLUDED_SLUGS = ['formation-continue']; // slugs to exclude
@@ -619,6 +651,7 @@
     }
 
     loadMediumArticles();
+    renderCommunityArticles();
     renderResources();
     loadCraftCodeEpisode();
 
