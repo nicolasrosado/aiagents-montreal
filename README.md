@@ -1,6 +1,6 @@
 # AI Agents Montreal — Community Website
 
-A single-page community site showcasing the global reach of [AI Agents Montreal](https://www.meetup.com/ai-agent-montreal/) — 21 speakers, 10 countries, 4 continents.
+A single-page community site showcasing the global reach of [AI Agents Montreal](https://www.meetup.com/ai-agent-montreal/) — 21 speakers, 11 countries, 5 continents.
 
 🌐 **Live site** → [nicolasrosado.github.io/aiagents-montreal](https://nicolasrosado.github.io/aiagents-montreal/)
 
@@ -50,7 +50,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **Leaflet.js** interactive map with dark CartoDB tiles
 - 🔵 Cyan glowing markers = past speakers · 🟡 Amber glowing markers = upcoming speakers
 - Click any marker for a popup with name, location, and talk title
-- 21 speakers across 10 countries (19 cities)
+- 21 speakers across 11 countries (19 cities)
 - `map.invalidateSize()` called at 200ms and 800ms after load for reliable rendering on GitHub Pages
 
 > ⚠️ Known fixes: (1) bare `&` in JS strings escaped as `\u0026` to prevent HTML parser truncation. (2) Incorrect SRI integrity hashes on Leaflet were silently blocking the map — SRI removed, cdnjs trusted via HTTPS. (3) CSP recalibrated to include CartoDB tile origins in `connect-src` and `img-src`.
