@@ -220,6 +220,21 @@
             border-color: rgba(255,170,0,0.8);
         }
 
+        .nav-btn.substack {
+            background: #FF6719;
+            color: #ffffff;
+            border-color: #FF6719;
+            font-weight: 700;
+            box-shadow: 0 0 14px rgba(255,103,25,0.35);
+        }
+
+        .nav-btn.substack:hover {
+            background: #e55a12;
+            border-color: #e55a12;
+            box-shadow: 0 0 22px rgba(255,103,25,0.6);
+            transform: translateY(-1px);
+        }
+
         /* ── SUGGEST A TALK BLOCK ── */
         .suggest-talk-block {
             background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(0,229,255,0.05));
