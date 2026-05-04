@@ -1134,16 +1134,19 @@
         .sub-btn--outline:hover { background: rgba(245,158,11,0.08); border-color: var(--accent3); }
 
         .sub-btn--newsletter {
-            background: rgba(124,58,237,0.15);
-            color: #a78bfa;
-            border-color: rgba(124,58,237,0.3);
+            background: #FF6719;
+            color: #ffffff;
+            border-color: #FF6719;
+            font-weight: 700;
+            box-shadow: 0 0 14px rgba(255,103,25,0.35);
             text-decoration: none;
         }
 
         .sub-btn--newsletter:hover {
-            background: rgba(124,58,237,0.28);
-            border-color: rgba(124,58,237,0.6);
-            color: #c4b5fd;
+            background: #e55a12;
+            border-color: #e55a12;
+            box-shadow: 0 0 22px rgba(255,103,25,0.6);
+            transform: translateY(-1px);
         }
 
         @media (max-width: 640px) {
