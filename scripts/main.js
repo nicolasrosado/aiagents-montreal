@@ -705,9 +705,9 @@
         var W  = container.offsetWidth;
         var H  = container.offsetHeight;
         var CX = W/2, CY = H/2;
-        var R1 = Math.min(W,H) * 0.26;
-        var R2 = Math.min(W,H) * 0.39;
-        var BRAIN_R = 175;
+        var R1 = Math.min(W,H) * 0.30;
+        var R2 = Math.min(W,H) * 0.46;
+        var BRAIN_R = 220;
         var FONT_SIZE = '9px';
 
         mgCanvas.width = W; mgCanvas.height = H;
@@ -842,8 +842,8 @@
         var W  = container.offsetWidth;
         var H  = container.offsetHeight;
         var CX = W/2, CY = H/2;
-        var R1 = Math.min(W,H) * 0.30;
-        var ECO_BRAIN_R = 155;
+        var R1 = Math.min(W,H) * 0.40;
+        var ECO_BRAIN_R = 200;
         var ECO_FONT = '10px';
 
         ecoCanvas.width = W; ecoCanvas.height = H;
