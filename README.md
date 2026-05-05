@@ -41,11 +41,12 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 ### 🧠 Talk Knowledge Brain Graph *(section 01 — displayed first)*
 - **Orbital mind graph** — 16 talks orbiting the AI brain image
 - **Desktop** — 2 concentric orbits: inner (talks 1-8, clockwise) · outer (talks 9-16, counter-clockwise)
+  - Desktop sizes live in `scripts/main.js`: `BRAIN_R` (center image radius, currently 185) · `R1` (inner orbit, currently `min(W,H)*0.34`) · `R2` (outer orbit, currently `min(W,H)*0.44`)
 - **Mobile (<768px)** — vertical scrollable list auto-generated from `data/talks.js` via `renderBrainMobile()`: brain image centered at top, each talk as a tappable row with animated cyan dot — zero impact on desktop
   - Mobile brain circle size: `.mg-mobile-brain` in `styles/main.css` (currently 240×240px) — change `width`/`height` there to resize
 - Bright cyan pulsing dots per talk with glow halo — hover to slow, click to watch on YouTube
-- Uses `assets/brain-circle.jpg` — 700×700px crop (2× retina), brain only, left half of hero image
-- Mask radius r=175 on desktop
+- Uses `assets/brain-circle.jpg` — 700×700px crop (2× retina), brain only
+- Mask radius = `BRAIN_R` on desktop (currently 185px)
 
 ### 🌍 Global Speakers Map *(section 02)*
 - **Leaflet.js** interactive map with dark CartoDB tiles
