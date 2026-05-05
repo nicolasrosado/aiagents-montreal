@@ -705,9 +705,9 @@
         var W  = container.offsetWidth;
         var H  = container.offsetHeight;
         var CX = W/2, CY = H/2;
-        var R1 = Math.min(W,H) * 0.30;
-        var R2 = Math.min(W,H) * 0.48;
-        var BRAIN_R = 260;
+        var R1 = Math.min(W,H) * 0.36;
+        var R2 = Math.min(W,H) * 0.50;
+        var BRAIN_R = 185;
         var FONT_SIZE = '9px';
 
         mgCanvas.width = W; mgCanvas.height = H;
