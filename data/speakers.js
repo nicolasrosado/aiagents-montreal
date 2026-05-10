@@ -153,7 +153,15 @@
             name: "Antony Marcano",
             location: "London, UK 🇬🇧",
             lat: 51.515, lng: -0.11,
-            bio: "Co-founder of RiverGlide, agile coaching \u0026 consultancy firm. Creator of the Screenplay Pattern. Nearly 25 years in software development — practitioner, coach, trainer, and keynote speaker in XP, TDD, BDD, and Software Craftsmanship. Referenced in multiple agile books; former Technical Editor at Better Software Magazine. Guest lecturer at Oxford University on TDD and ATDD.",
+            bio: "Antony Marcano has over 30 years in software development, with more than 25 years in agile software development. He works as a consultant and coach, and has taken on interim Head of Engineering and fractional CTO roles.\n" +
+                "\n" +
+                "In that time, he has helped organisations achieve the “Elite” DORA software delivery performance benchmark, both before and during the rise of AI-augmented coding.\n" +
+                "\n" +
+                "Known for the Screenplay Pattern for automated acceptance tests, he more recently created Test-Driven Agentic Behaviours — a test-driven approach to improving AI coding agents one automated behaviour at a time.\n" +
+                "\n" +
+                "His work is reflected in contributions to, and acknowledgements in, books including Agile Coaching, Bridging the Communication Gap, Software Craftsmanship Apprenticeship Patterns, and Agile Testing. He has also written for Better Software Magazine, where he served as Technical Editor.\n" +
+                "\n" +
+                "He remains hands-on in the code, speaks at international conferences, and has been an invited speaker and guest lecturer at Oxford University, Cambridge University, and McGill University.",
             talk: "Upcoming talk — May 2026",
             linkedin: "https://www.linkedin.com/in/antonymarcano/",
             youtube: "https://www.youtube.com/@aiagentsmontreal",
@@ -164,7 +172,7 @@
             name: "Dragan Stepanović",
             location: "Berlin, Germany 🇩🇪",
             lat: 52.52, lng: 13.405,
-            bio: "Staff Engineer with deep expertise in distributed systems and software design. Advocates for Systems Thinking, Lean, Theory of Constraints, and XP applied to AI-assisted development teams. Based in Berlin.",
+            bio: "Dragan is based in Berlin and as a principal engineer helps companies evolve their engineering culture, tame their bottlenecks, and maximize their throughput of the value.\n\nTypically, in search of better ways of working, exploring ends of the spectrum, and helping teams and organizations try out counter-intuitive ideas that initially don't make a lot of sense, but surprisingly end up as completely opposite of that.\n\nHe enjoys endless discussions connecting XP, Theory of Constraints, Systems Thinking and Lean.",
             talk: "LLM-assisted Coding: A Systems Perspective",
             linkedin: "https://www.linkedin.com/in/dstepanovic",
             youtube: "https://www.youtube.com/watch?v=eEA0gJnWLh0",
@@ -175,7 +183,7 @@
             name: "Fabrice Monnier",
             location: "Bretagne, France 🇫🇷",
             lat: 48.1173, lng: -1.6778,
-            bio: "Software engineer and consultant specializing in spec-driven development. Explores how to structure AI-assisted workflows using frameworks like BMAD, OpenSpec and SpecKit — in solo and team contexts.",
+            bio: "Fabrice Monnier is a senior freelance Data and Cloud DevOps engineer working across AWS, Azure and Databricks. Based in Brittany, France, he holds a Master Degree in both Computer Science & Market Finance and has spent the last several years building data platforms at scale. He now writes and experiments at the intersection of cloud / data engineering and AI tooling, documenting his workflows on Substack and LinkedIn.",
             talk: "Spec-Driven Development in the Real World: From BMAD to Custom Skills",
             linkedin: "https://www.linkedin.com/in/fabrice-monnier-cloud-data-devops",
             youtube: "https://www.youtube.com/watch?v=OTdCijajbH0",
@@ -186,7 +194,7 @@
             name: "Margaret-Anne Storey",
             location: "Victoria, Canada 🇨🇦",
             lat: 48.4284, lng: -123.3656,
-            bio: "Professor at the University of Victoria and Canada Research Chair in Human and Social Aspects of Software Engineering. Pioneer researcher on developer experience, AI in software engineering, and the emerging concept of Triple Debt (technical, cognitive, and intent debt).",
+            bio: "Margaret-Anne Storey is a Professor of Computer Science at the University of Victoria and Canada Research Chair in the Human and Social Aspects of Software Engineering. Her work focuses on developer experience, program comprehension, and how generative AI is changing software development practices.",
             talk: "Cognitive and Intent Debt in Practice",
             linkedin: "https://www.linkedin.com/in/margaret-anne-storey",
             youtube: "https://www.youtube.com/@aiagentsmontreal",
@@ -197,7 +205,7 @@
             name: "Soma Bini",
             location: "Dubai, UAE 🇦🇪",
             lat: 25.2048, lng: 55.2708,
-            bio: "Software engineer and practitioner of spec-driven, agent-assisted development. Demonstrates how to build production-ready applications end-to-end using AI agents — from design and architecture to CI/CD deployment.",
+            bio: "Soma is a Technical Leader and Solutions Architect with 10+ years of experience building scalable systems and startups. He specializes in Golang, cloud architecture, and DevOps, and focuses on taking products from 0 to production with strong engineering standards and automation.",
             talk: "From Specs to Production: Building Software with AI Agents End to End",
             linkedin: "https://www.linkedin.com/in/soma-bini",
             youtube: "https://www.youtube.com/@aiagentsmontreal",
