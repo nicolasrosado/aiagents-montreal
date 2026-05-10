@@ -169,7 +169,7 @@ The site has been audited and hardened against common web vulnerabilities:
 - **Community articles** — add entries to `communityArticles` in `scripts/main.js`; always rendered in the Articles tab below the Medium feed
 - **New speakers** — add to `data/speakers.js`; set `upcoming: true` for future talks, remove the flag once the talk has aired
 - **Talk resources** — add links to `talkResources` in `data/talks.js` for talks currently showing "No resources for this talk" (Benedikt Stemmildt #7, Matthias Patzak #10)
-- **Speaker bios** — a few speakers (Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting) are still using generated bios; replace with official "About me" once available
+- **Speaker bios** — most bios are now official (provided by speakers); 4 still using generated bios: Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting — replace with official "About me" once available
 - **Ecosystem cards** — edit `data/ecosystem.js` to update any community card (event dates, descriptions, links, CTAs); also update the mobile orbit list in `index.html` (`#eco-mobile-list`) if communities are added or removed
 - **Devoxx4Kids next event** — update `dateStatic` in `data/ecosystem.js` (~every 3 months)
 - **Montréal JUG next event** — update `titleStatic` in `data/ecosystem.js` monthly
