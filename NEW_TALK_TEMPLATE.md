@@ -20,7 +20,7 @@ Copy this file, fill in all fields, and share it with Claude to update the site.
 - **Talk title:**
 - **Meetup event URL:** https://www.meetup.com/ai-agent-montreal/events/
 - **YouTube video URL (with timestamp if applicable):** https://www.youtube.com/watch?v=
-- **Talk number** (next in sequence — currently 16): #
+- **Talk number** (next in sequence — currently 17): #
 
 ---
 
@@ -54,6 +54,7 @@ Add as many as needed. Remove section if none.
 - [ ] If previously `upcoming: true` → flip to past (remove flag, update talk/YouTube)
 - [ ] Update speaker count in header if needed
 - [ ] Update talk count in Brain Graph description (`index.html` — "N talks orbiting the AI brain")
+- [ ] Update README — talk count in "Full list of all N past talks" + talk number in `NEW_TALK_TEMPLATE.md`
 
 ---
 
