@@ -216,7 +216,7 @@
             name: "Javier Lopez",
             location: "Madrid, Spain 🇪🇸",
             lat: 40.4168, lng: -3.7038,
-            bio: "Javier is an expert software engineer, architect, and technical blogger who strongly advocates for Evolutionary Design, Continuous Integration, and Lean software principles. Through his software philosophy, he explores the intersection of technical excellence, team dynamics, and system architecture. He believes that software development is a continuous learning exercise where the ultimate goal is not to write code fast, but to safely and efficiently solve real customer problems.",
+            bio: "Javier is an expert software engineer, architect, and technical blogger who strongly advocates for Evolutionary Design, Continuous Integration, and Lean software principles. Through his software philosophy, he explores the intersection of technical excellence, team dynamics, and system architecture.\n\nHe believes that software development is a continuous learning exercise where the ultimate goal is not to write code fast, but to safely and efficiently solve real customer problems.",
             talk: "The Great AI Spec-Driven Illusion: Why Developers Must Remain Architects",
             linkedin: "https://www.linkedin.com/in/javierlopezfernandez/",
             youtube: "https://www.youtube.com/@aiagentsmontreal",
