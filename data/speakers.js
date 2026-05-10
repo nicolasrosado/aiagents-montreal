@@ -208,9 +208,9 @@
             bio: "Soma is a Technical Leader and Solutions Architect with 10+ years of experience building scalable systems and startups. He specializes in Golang, cloud architecture, and DevOps, and focuses on taking products from 0 to production with strong engineering standards and automation.",
             talk: "From Specs to Production: Building Software with AI Agents End to End",
             linkedin: "https://www.linkedin.com/in/soma-bini",
-            youtube: "https://www.youtube.com/@aiagentsmontreal",
-            meetup: "https://www.meetup.com/ai-agent-montreal/",
-            upcoming: true
+            youtube: "https://www.youtube.com/watch?v=BqzODQ0Qajo",
+            meetup: "https://www.meetup.com/ai-agent-montreal/events/313980286/",
+            upcoming: false
         },
         {
             name: "Javier Lopez",
