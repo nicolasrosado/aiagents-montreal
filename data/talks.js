@@ -14,7 +14,8 @@
         { n: 13, title: "XP Practices Are the Missing Piece for AI-Assisted Development", speaker: "Paul Hammond", yt: "https://www.youtube.com/watch?v=M58tOdNHbxM&t=4956s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313704055/" },
         { n: 14, title: "AC/DC — Agent-Centric Development Cycle", speaker: "Edgar Kussberg", yt: "https://www.youtube.com/watch?v=YXXFjebvfNc&t=9s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313880985/" },
         { n: 15, title: "LLM-assisted Coding: A Systems Perspective", speaker: "Dragan Stepanović", yt: "https://www.youtube.com/watch?v=eEA0gJnWLh0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980249/" },
-        { n: 16, title: "Spec-Driven Development in the Real World: From BMAD to Custom Skills", speaker: "Fabrice Monnier", yt: "https://www.youtube.com/watch?v=OTdCijajbH0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313903717/" }
+        { n: 16, title: "Spec-Driven Development in the Real World: From BMAD to Custom Skills", speaker: "Fabrice Monnier", yt: "https://www.youtube.com/watch?v=OTdCijajbH0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313903717/" },
+        { n: 17, title: "From Specs to Production: Building Software with AI Agents End to End", speaker: "Soma Bini", yt: "https://www.youtube.com/watch?v=BqzODQ0Qajo", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980286/" }
     ];
 
     // ── TALK RESOURCES (to be filled with YouTube comment links) ─────────────────

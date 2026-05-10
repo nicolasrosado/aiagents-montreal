@@ -732,6 +732,7 @@
             { t:"AC/DC \u2014 Agent-Centric Dev Cycle",     yt:"https://www.youtube.com/watch?v=YXXFjebvfNc\u0026t=9s" },
             { t:"LLM-assisted Coding: A Systems Perspective", yt:"https://www.youtube.com/watch?v=eEA0gJnWLh0" },
             { t:"Spec-Driven Dev: BMAD to Custom Skills",     yt:"https://www.youtube.com/watch?v=OTdCijajbH0" },
+            { t:"From Specs to Production: AI Agents E2E",    yt:"https://www.youtube.com/watch?v=BqzODQ0Qajo" },
         ];
 
         // Brain image — uses assets/ai-agents-image.jpg (already in repo)
@@ -810,10 +811,10 @@
                 var a=mgBaseAngle+(i/8)*Math.PI*2;
                 drawOrbNode(i,CX+Math.cos(a)*R1,CY+Math.sin(a)*R1);
             }
-            // Outer orbit (8-15, 8 talks, counter-clockwise)
+            // Outer orbit (8-16, 9 talks, counter-clockwise)
             var outerA=-(mgBaseAngle*(OUTER_SPD/INNER_SPD));
-            for(var j=0;j<8;j++){
-                var a2=outerA+(j/8)*Math.PI*2;
+            for(var j=0;j<9;j++){
+                var a2=outerA+(j/9)*Math.PI*2;
                 drawOrbNode(8+j,CX+Math.cos(a2)*R2,CY+Math.sin(a2)*R2);
             }
             requestAnimationFrame(mgAnimate);
