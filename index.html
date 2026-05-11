@@ -201,20 +201,24 @@
 
         <!-- ARTICLES TAB -->
         <div id="tab-articles" class="art-panel" style="display:none">
-            <div id="medium-articles" class="articles-grid">
-                <div class="art-loading">
-                    <span class="loading-pulse">Fetching articles from Medium…</span>
-                </div>
+            <div class="section-header" style="margin-bottom:1rem">
+                <h3 style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin:0">From the Community</h3>
+                <div class="section-line"></div>
             </div>
-            <div style="text-align:center;margin-top:1.5rem">
-                <a href="https://nicolas-rosado.medium.com" target="_blank" class="nav-btn secondary" rel="noopener noreferrer">See all on Medium ↗</a>
-            </div>
+            <div id="community-articles" class="articles-grid"></div>
             <div style="margin-top:2.5rem">
                 <div class="section-header" style="margin-bottom:1rem">
-                    <h3 style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin:0">From the Community</h3>
+                    <h3 style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin:0">My Own Articles</h3>
                     <div class="section-line"></div>
                 </div>
-                <div id="community-articles" class="articles-grid"></div>
+                <div id="medium-articles" class="articles-grid">
+                    <div class="art-loading">
+                        <span class="loading-pulse">Fetching articles from Medium…</span>
+                    </div>
+                </div>
+                <div style="text-align:center;margin-top:1.5rem">
+                    <a href="https://nicolas-rosado.medium.com" target="_blank" class="nav-btn secondary" rel="noopener noreferrer">See all on Medium ↗</a>
+                </div>
             </div>
         </div>
 
