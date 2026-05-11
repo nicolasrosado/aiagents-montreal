@@ -23,7 +23,8 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
     ├── brain-circle.jpg    # Brain image for the Knowledge Brain Graph center (350×350px crop)
     ├── circuit-crop.jpg    # Circuit board image for the Ecosystem Circuit Graph center (500×500px crop)
     ├── wearedevelopers-logo.jpeg # WeAreDevelopers community partner logo (100×100px display)
-    ├── ai-agents-montreal-logo.png             # AI Agents Montreal logo — used in community partner section (150×90px display)
+    ├── ai-agents-montreal-logo.png             # AI Agents Montreal logo — used in community partner section desktop (150×90px display)
+    ├── logo-youtube.jpg                        # AI Agents Montreal logo — used in community partner section mobile
     ├── ai-agents-montreal-logo-transparent.png # AI Agents Montreal logo (transparent variant)
     └── ai-agents-montreal-logo-white.png       # AI Agents Montreal logo (white variant)
 ```
@@ -118,7 +119,7 @@ The newsletter links to **Substack** — the user subscribes directly on Substac
 ### 🤝 Community Partner Event *(section 08)*
 - **WeAreDevelopers World Congress North America** — 23–25 September 2026 · San José, CA
 - Two logos side by side with `×` divider:
-  - **AI Agents Montreal logo** (`assets/ai-agents-montreal-logo.png`) — links to [wearedevelopers.com/about/community](https://www.wearedevelopers.com/about/community) with "Community Partner ↗" caption in cyan
+  - **AI Agents Montreal logo** — desktop: `assets/ai-agents-montreal-logo.png` · mobile: `assets/logo-youtube.jpg` (via `<picture>`) — links to [wearedevelopers.com/about/community](https://www.wearedevelopers.com/about/community) with "Community Partner ↗" caption in cyan
   - **WeAreDevelopers logo** (`assets/wearedevelopers-logo.jpeg`) — links to congress registration page
 - CTA button links to registration page
 - Discount code callout with link to Nicolas on LinkedIn
