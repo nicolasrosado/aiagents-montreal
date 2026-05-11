@@ -105,6 +105,21 @@
         });
     }
 
+    // ── ARTICLES TOGGLE ─────────────────────────────────────────────────────────
+    const articlesToggleBtn = document.getElementById('articles-toggle');
+    const articlesBody = document.getElementById('articles-body');
+    if (articlesToggleBtn && articlesBody) {
+        if (sessionStorage.getItem('articles-collapsed') !== '0') {
+            articlesBody.classList.add('collapsed');
+            articlesToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+        articlesToggleBtn.addEventListener('click', function() {
+            const isNowCollapsed = articlesBody.classList.toggle('collapsed');
+            articlesToggleBtn.setAttribute('aria-expanded', isNowCollapsed ? 'false' : 'true');
+            sessionStorage.setItem('articles-collapsed', isNowCollapsed ? '1' : '0');
+        });
+    }
+
     // ── TALKS TOGGLE ────────────────────────────────────────────────────────────
     const talksToggleBtn = document.getElementById('talks-toggle');
     const talksToggleLabel = document.getElementById('talks-toggle-label');

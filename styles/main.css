@@ -386,6 +386,16 @@
             max-height: 0;
             opacity: 0;
         }
+        #articles-body {
+            overflow: hidden;
+            max-height: 9000px;
+            opacity: 1;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+        }
+        #articles-body.collapsed {
+            max-height: 0;
+            opacity: 0;
+        }
 
         /* ── NEXT EVENT BANNER ── */
         .next-event-banner {
