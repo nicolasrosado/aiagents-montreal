@@ -128,22 +128,31 @@ Uses a **cascade of 3 CORS proxies** — if one fails, the next is tried automat
 
 ## Security
 
-The site has been audited and hardened against common web vulnerabilities:
+The site has been fully audited (May 2026) and hardened against common web vulnerabilities:
 
-- **XSS prevention** — `sanitize()` and `sanitizeUrl()` helper functions applied to all fetched data before insertion into the DOM; RSS descriptions use `textContent` instead of `innerHTML`
+- **XSS prevention** — `sanitize()` and `sanitizeUrl()` applied to all externally-fetched data (Meetup, Guild.host, Medium RSS) before insertion into the DOM; static data uses `textContent` where possible
 - **Open redirect protection** — `sanitizeUrl()` enforces `https?://` protocol on all externally-sourced URLs
 - **No data collection** — no forms, no email inputs, no analytics, no localStorage/cookies. 100% read-only site
 - **Reverse tabnapping** — `rel="noopener noreferrer"` on all `target="_blank"` links
 - **No secrets** — no hardcoded API keys, tokens, or credentials
 - **No dangerous JS** — no `eval()`, `document.write()`, `new Function()`, or `__proto__` manipulation
 - **Content-Security-Policy meta tag** — restricts scripts, styles, fonts, images and connections to known trusted origins; calibrated to allow Leaflet (cdnjs) and CartoDB tiles
-    - `script-src` — self, inline, cdnjs, Google Fonts
-    - `style-src` — self, inline, cdnjs, Google Fonts
+    - `script-src` — self, cdnjs, Google Fonts (**`unsafe-inline` removed** — no inline scripts)
+    - `style-src` — self, inline, cdnjs, Google Fonts (`unsafe-inline` retained for dynamic inline styles injected by `main.js`)
     - `img-src` — self, data, blob, *.cartocdn.com, *.openstreetmap.org
     - `connect-src` — self, *.basemaps.cartocdn.com (Leaflet tiles), CORS proxies, Meetup, Medium RSS
     - `worker-src` — blob (required by Leaflet)
     - Note: `frame-ancestors` must be set via HTTP header — not supported in `<meta>` CSP
 - **Newsletter** — redirects to Substack; no email addresses handled by this site
+- **sessionStorage** — used only for UI toggle state (`'0'`/`'1'`); never injected into the DOM
+
+### Audit log
+
+| Date | Finding | Fix |
+|------|---------|-----|
+| May 2026 | XSS: `ev.slug` + `name` (Guild.host API) injected into `innerHTML` unsanitized | `sanitize()` + `sanitizeUrl()` applied |
+| May 2026 | XSS: Meetup event title (via CORS proxy) injected into `innerHTML` unsanitized | `sanitize()` + `sanitizeUrl()` applied |
+| May 2026 | CSP: `unsafe-inline` in `script-src` (sole cause: `onclick` on RSS button) | RSS section removed; `unsafe-inline` removed from `script-src` |
 
 > ⚠️ Known issue fixed: incorrect SRI integrity hashes on Leaflet (cdnjs) were causing the map to silently fail. SRI removed — cdnjs is trusted via HTTPS. CSP was also miscalibrated (missing CartoDB tile origins), now corrected.
 
