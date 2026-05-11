@@ -121,6 +121,7 @@ The newsletter links to **Substack** — the user subscribes directly on Substac
 - Two logos side by side with `×` divider:
   - **AI Agents Montreal logo** — desktop: `assets/ai-agents-montreal-logo.png` · mobile: `assets/logo-youtube.jpg` (via `<picture>`) — links to [wearedevelopers.com/about/community](https://www.wearedevelopers.com/about/community) with "Community Partner ↗" caption in cyan
   - **WeAreDevelopers logo** (`assets/wearedevelopers-logo.jpeg`) — links to congress registration page with "Registration ↗" caption in cyan
+- Both logos have a cyan glow on hover
 - CTA button links to registration page
 - Discount code callout with link to Nicolas on LinkedIn
 - Static HTML — no data file needed; edit directly in `index.html`
