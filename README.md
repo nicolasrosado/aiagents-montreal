@@ -61,16 +61,19 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - Card grid with avatar, name, LinkedIn icon link (SVG cyan), location, bio, and talk title
 - UPCOMING badge (amber) on speakers not yet presented
 - All 21 speakers have complete LinkedIn URLs
+- **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`
 
 ### 🎙 Talks
 - Full list of all 17 past talks
 - **All YouTube links updated** with individual video URLs and timestamps
 - **All Meetup event links updated** with individual event pages
+- **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`
 
 ### ✍️ Articles & Resources
 - **Talk Resources tab** *(default open)* — all 17 talks listed in order; 60+ links across 14 talks (GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers); talks without resources display "No resources for this talk" instead of being omitted
 - **Articles tab** — dynamically fetched from Nicolas Rosado's Medium RSS feed; excludes "Formation continue"; falls back to hardcoded list
 - **From the Community** — hardcoded curated articles from the community (non-Medium sources); always visible below the Medium articles; add entries to `communityArticles` in `scripts/main.js`
+- **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`
 
 ### 🔒 Privacy & Data Policy
 The site is **100% read-only** — it collects, stores and sends zero personal data:
