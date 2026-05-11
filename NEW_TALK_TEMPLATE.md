@@ -26,7 +26,9 @@ Copy this file, fill in all fields, and share it with Claude to update the site.
 
 ## Talk Resources *(optional — from YouTube comments or slides)*
 
-Add as many as needed. Remove section if none.
+> ⚠️ **Claude: always ask for resources before proceeding**, even if this section is left blank. Do not skip this step.
+
+Add as many as needed. Leave blank or write "none" if no resources.
 
 ```
 - title: ""
