@@ -105,6 +105,23 @@
         });
     }
 
+    // ── TALKS TOGGLE ────────────────────────────────────────────────────────────
+    const talksToggleBtn = document.getElementById('talks-toggle');
+    const talksToggleLabel = document.getElementById('talks-toggle-label');
+    const talksList = document.getElementById('talks-list');
+    if (talksToggleLabel) talksToggleLabel.textContent = talks.length + ' talks';
+    if (talksToggleBtn && talksList) {
+        if (sessionStorage.getItem('talks-collapsed') !== '0') {
+            talksList.classList.add('collapsed');
+            talksToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+        talksToggleBtn.addEventListener('click', function() {
+            const isNowCollapsed = talksList.classList.toggle('collapsed');
+            talksToggleBtn.setAttribute('aria-expanded', isNowCollapsed ? 'false' : 'true');
+            sessionStorage.setItem('talks-collapsed', isNowCollapsed ? '1' : '0');
+        });
+    }
+
     // ── TALKS LIST ──────────────────────────────────────────────────────────────
 
     const list = document.getElementById('talks-list');
