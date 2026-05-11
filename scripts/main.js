@@ -989,11 +989,3 @@
         update();
     })();
 
-    function copyRssUrl(btn) {
-        const url = 'https://www.youtube.com/feeds/videos.xml?channel_id=UCiie5knSJ0sd8IARCT0ACNg';
-        navigator.clipboard.writeText(url).then(() => {
-            const orig = btn.textContent;
-            btn.textContent = 'Copied ✓';
-            setTimeout(() => { btn.textContent = orig; }, 2000);
-        });
-    }

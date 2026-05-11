@@ -1089,7 +1089,6 @@
         }
 
         .sub-card--yt .sub-icon { color: #ff4444; }
-        .sub-card--rss .sub-icon { color: var(--accent3); }
         .sub-card--newsletter .sub-icon { color: #a78bfa; }
 
         .sub-content {
@@ -1164,13 +1163,6 @@
         }
         .sub-btn--yt:hover { background: #e03333; border-color: #e03333; }
 
-        .sub-btn--rss {
-            background: var(--accent3);
-            color: var(--bg);
-            border-color: var(--accent3);
-            font-weight: 700;
-        }
-        .sub-btn--rss:hover { background: #d97706; border-color: #d97706; }
 
         .sub-btn--outline {
             background: transparent;
