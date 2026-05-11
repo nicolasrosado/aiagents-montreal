@@ -1102,6 +1102,24 @@
             gap: 1rem;
             box-shadow: 0 0 40px rgba(0,229,255,0.06);
         }
+        .partner-card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        .partner-logo-link {
+            flex-shrink: 0;
+        }
+        .partner-logo {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 12px;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+        .partner-logo:hover { opacity: 1; }
         .partner-badge {
             font-family: var(--font-mono);
             font-size: 0.68rem;
