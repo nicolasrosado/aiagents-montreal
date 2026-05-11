@@ -165,7 +165,7 @@
                     : '';
                 const mode = ev.isInPerson ? 'In-Person' : ev.isVirtual ? 'Virtual' : '';
                 const attendees = ev.attendeeCount || ev.attendees_count || '';
-                titleEl.innerHTML = `<a href="https://guild.host/events/${ev.slug || ''}" target="_blank" style="color:inherit;text-decoration:none;" rel="noopener noreferrer">${name} ↗</a>`;
+                titleEl.innerHTML = `<a href="${sanitizeUrl('https://guild.host/events/' + (ev.slug || ''))}" target="_blank" style="color:inherit;text-decoration:none;" rel="noopener noreferrer">${sanitize(name)} ↗</a>`;
                 dateEl.textContent = [dateStr, mode, attendees ? `${attendees} attending` : ''].filter(Boolean).join(' · ');
             } else {
                 throw new Error('no event');
