@@ -1140,7 +1140,7 @@
             height: 90px;
             background: #0f172a;
             padding: 8px;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 10px;
         }
         .partner-logo-caption {
