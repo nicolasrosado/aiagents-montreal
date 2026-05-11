@@ -94,7 +94,7 @@
     const speakersGrid = document.getElementById('speakers-grid');
     if (speakersToggleLabel) speakersToggleLabel.textContent = speakers.length + ' speakers';
     if (speakersToggleBtn && speakersGrid) {
-        if (sessionStorage.getItem('speakers-collapsed') === '1') {
+        if (sessionStorage.getItem('speakers-collapsed') !== '0') {
             speakersGrid.classList.add('collapsed');
             speakersToggleBtn.setAttribute('aria-expanded', 'false');
         }
