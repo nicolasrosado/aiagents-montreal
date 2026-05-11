@@ -1136,9 +1136,12 @@
         }
         .partner-logo:hover { opacity: 1; }
         .partner-logo--ours {
+            width: 150px;
+            height: 90px;
             background: #0f172a;
             padding: 8px;
-            object-fit: contain;
+            object-fit: cover;
+            border-radius: 10px;
         }
         .partner-logo-caption {
             font-family: var(--font-mono);
