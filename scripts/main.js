@@ -88,6 +88,23 @@
   `;
     });
 
+    // ── SPEAKERS TOGGLE ─────────────────────────────────────────────────────────
+    const speakersToggleBtn = document.getElementById('speakers-toggle');
+    const speakersToggleLabel = document.getElementById('speakers-toggle-label');
+    const speakersGrid = document.getElementById('speakers-grid');
+    if (speakersToggleLabel) speakersToggleLabel.textContent = speakers.length + ' speakers';
+    if (speakersToggleBtn && speakersGrid) {
+        if (sessionStorage.getItem('speakers-collapsed') === '1') {
+            speakersGrid.classList.add('collapsed');
+            speakersToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+        speakersToggleBtn.addEventListener('click', function() {
+            const isNowCollapsed = speakersGrid.classList.toggle('collapsed');
+            speakersToggleBtn.setAttribute('aria-expanded', isNowCollapsed ? 'false' : 'true');
+            sessionStorage.setItem('speakers-collapsed', isNowCollapsed ? '1' : '0');
+        });
+    }
+
     // ── TALKS LIST ──────────────────────────────────────────────────────────────
 
     const list = document.getElementById('talks-list');
