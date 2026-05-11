@@ -341,7 +341,7 @@
     function _updateAIAgentsEcoCard(title, url, date) {
         const t = document.getElementById('aiagents-eco-title');
         const d = document.getElementById('aiagents-eco-date');
-        if (t) t.innerHTML = `<a href="${url}" target="_blank" style="color:inherit;text-decoration:none;" rel="noopener noreferrer">${title} ↗</a>`;
+        if (t) t.innerHTML = `<a href="${sanitizeUrl(url)}" target="_blank" style="color:inherit;text-decoration:none;" rel="noopener noreferrer">${sanitize(title)} ↗</a>`;
         if (d && date) d.textContent = date;
     }
 
