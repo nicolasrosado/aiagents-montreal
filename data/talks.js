@@ -175,4 +175,14 @@
                 { label: "Claude Code Caveman (GitHub)", url: "https://github.com/juliusbrussee/caveman" },
             ]
         },
+        {
+            talk: "From Specs to Production: Building Software with AI Agents End to End",
+            speaker: "Soma Bini",
+            links: [
+                { label: "Droid (factory.ai)", url: "https://factory.ai/" },
+                { label: "SpecKit (site)", url: "https://speckit.org" },
+                { label: "SpecKit (GitHub)", url: "https://github.com/github/spec-kit" },
+                { label: "Kiro", url: "https://kiro.dev" },
+            ]
+        },
     ];
