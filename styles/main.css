@@ -332,6 +332,10 @@
             margin-left: 1rem;
         }
 
+        @keyframes toggle-pulse {
+            0%, 100% { border-color: rgba(0,229,255,0.35); box-shadow: 0 0 0 0 rgba(0,229,255,0); color: var(--accent); }
+            50%       { border-color: rgba(0,229,255,0.85); box-shadow: 0 0 7px 2px rgba(0,229,255,0.18); color: var(--accent); }
+        }
         .speakers-toggle {
             background: none;
             border: 1px solid var(--border);
@@ -344,13 +348,17 @@
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
-            transition: color 0.2s, border-color 0.2s;
+            transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
             white-space: nowrap;
             flex-shrink: 0;
+        }
+        .speakers-toggle[aria-expanded="false"] {
+            animation: toggle-pulse 2.4s ease-in-out infinite;
         }
         .speakers-toggle:hover {
             color: var(--accent);
             border-color: var(--accent);
+            animation: none;
         }
         .speakers-toggle-chevron {
             transition: transform 0.35s ease;
