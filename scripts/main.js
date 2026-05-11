@@ -538,7 +538,7 @@
             }
             return `
     <div class="resource-group" id="rg-${i}">
-      <div class="resource-group-header" onclick="toggleResource(${i})">
+      <div class="resource-group-header" data-rg="${i}">
         <span>${t.talk}</span>
         <span class="resource-group-speaker">${t.speaker}</span>
         <span class="resource-toggle">▼</span>
@@ -554,9 +554,10 @@
         }).join('');
     }
 
-    function toggleResource(i) {
-        document.getElementById('rg-' + i)?.classList.toggle('open');
-    }
+    document.getElementById('resources-list').addEventListener('click', function(e) {
+        const header = e.target.closest('[data-rg]');
+        if (header) document.getElementById('rg-' + header.dataset.rg)?.classList.toggle('open');
+    });
 
     // ── DYNAMIC: CraftCode Podcast — title/date from Anchor RSS, link → YouTube ───
 
