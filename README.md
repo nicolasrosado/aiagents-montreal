@@ -21,7 +21,8 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 └── assets/
     ├── ai-agents-image.jpg # Header background image (parallax)
     ├── brain-circle.jpg    # Brain image for the Knowledge Brain Graph center (350×350px crop)
-    └── circuit-crop.jpg    # Circuit board image for the Ecosystem Circuit Graph center (500×500px crop)
+    ├── circuit-crop.jpg    # Circuit board image for the Ecosystem Circuit Graph center (500×500px crop)
+    └── wearedevelopers-logo.jpeg # WeAreDevelopers community partner logo (110×110px display)
 ```
 
 **Load order** (GitHub Pages, no bundler):
@@ -110,7 +111,14 @@ The newsletter links to **Substack** — the user subscribes directly on Substac
 - Community values note: free & independent · psychological safety · humility · kindness
 - To edit a card: update `data/ecosystem.js` only
 
-### 🔔 Stay in the Loop *(section 08)*
+### 🤝 Community Partner Event *(section 08)*
+- **WeAreDevelopers World Congress North America** — 23–25 September 2026 · San José, CA
+- Logo (`assets/wearedevelopers-logo.jpeg`) links to [wearedevelopers.com/about/community](https://www.wearedevelopers.com/about/community)
+- CTA button links to registration page
+- Discount code callout with link to Nicolas on LinkedIn
+- Static HTML — no data file needed; edit directly in `index.html`
+
+### 🔔 Stay in the Loop *(section 09)*
 - YouTube Subscribe button
 - Newsletter — live Substack link → [substack.com/@nicolasrosado](https://substack.com/@nicolasrosado) · no email collected by this site
 
