@@ -1151,7 +1151,7 @@
             text-transform: uppercase;
             white-space: nowrap;
         }
-        .partner-logo-link--ours:hover .partner-logo { box-shadow: 0 0 14px rgba(0,229,255,0.3); }
+        .partner-logo-link:hover .partner-logo { box-shadow: 0 0 14px rgba(0,229,255,0.3); }
         .partner-badge {
             font-family: var(--font-mono);
             font-size: 0.68rem;
