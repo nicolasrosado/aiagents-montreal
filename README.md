@@ -75,8 +75,9 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 
 ### ✍️ Articles & Resources
 - **Talk Resources tab** *(default open)* — all 17 talks listed in order; 60+ links across 14 talks (GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers); talks without resources display "No resources for this talk" instead of being omitted
-- **Articles tab** — dynamically fetched from Nicolas Rosado's Medium RSS feed; excludes "Formation continue"; falls back to hardcoded list
-- **From the Community** — hardcoded curated articles from the community (non-Medium sources); always visible below the Medium articles; add entries to `communityArticles` in `scripts/main.js`
+- **Articles tab** — two labelled sub-sections in order:
+  1. **From the Community** — hardcoded curated articles from the community (non-Medium sources); add entries to `communityArticles` in `scripts/main.js`
+  2. **My Own Articles** — dynamically fetched from Nicolas Rosado's Medium RSS feed; excludes "Formation continue"; falls back to hardcoded list; "See all on Medium ↗" link below
 - **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`
 
 ### 🔒 Privacy & Data Policy
