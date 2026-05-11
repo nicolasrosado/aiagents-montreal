@@ -1346,6 +1346,30 @@
         }
 
         @media (max-width: 640px) {
+            .resource-group-header {
+                padding: 0.85rem 1rem;
+                flex-wrap: wrap;
+                gap: 0.3rem 0.5rem;
+            }
+            .resource-group-header > span:first-child {
+                width: 100%;
+                padding-right: 1.5rem;
+            }
+            .resource-toggle {
+                position: absolute;
+                right: 1rem;
+            }
+            .resource-group { position: relative; }
+            .resource-links {
+                padding: 0.5rem 1rem 1rem 1rem;
+            }
+            .resource-link {
+                flex-wrap: wrap;
+                word-break: break-all;
+            }
+        }
+
+        @media (max-width: 640px) {
             .partner-card { padding: 1.5rem; }
             .partner-card-top {
                 flex-direction: column;
