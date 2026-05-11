@@ -168,6 +168,7 @@ The site has been fully audited (May 2026) and hardened against common web vulne
 | May 2026 | XSS: `ev.slug` + `name` (Guild.host API) injected into `innerHTML` unsanitized | `sanitize()` + `sanitizeUrl()` applied |
 | May 2026 | XSS: Meetup event title (via CORS proxy) injected into `innerHTML` unsanitized | `sanitize()` + `sanitizeUrl()` applied |
 | May 2026 | CSP: `unsafe-inline` in `script-src` (sole cause: `onclick` on RSS button) | RSS section removed; `unsafe-inline` removed from `script-src` |
+| May 2026 | CSP regression: `onclick="toggleResource(i)"` in dynamically generated HTML blocked by `script-src` without `unsafe-inline` | Replaced with event delegation (`addEventListener` + `closest('[data-rg]')`) on resources-list container |
 
 > ⚠️ Known issue fixed: incorrect SRI integrity hashes on Leaflet (cdnjs) were causing the map to silently fail. SRI removed — cdnjs is trusted via HTTPS. CSP was also miscalibrated (missing CartoDB tile origins), now corrected.
 
