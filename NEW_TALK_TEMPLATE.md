@@ -6,27 +6,37 @@ Copy this file, fill in all fields, and share it with Claude to update the site.
 
 ## Speaker
 
+> ⚠️ **Claude: ask this first before anything else** — "Is this speaker already listed on the site as `upcoming: true`?" If yes, look them up in `data/speakers.js`, pre-fill all fields below with their existing data, display them to the user for confirmation, and skip asking for those fields.
+
+- **Upcoming → Past:** Was this speaker previously listed as `upcoming: true`? (yes/no)
 - **Full name:**
 - **LinkedIn URL:** https://www.linkedin.com/in/
 - **Location (City, Country + flag emoji):** e.g. Berlin, Germany 🇩🇪
 - **Latitude / Longitude:** (for the World Map marker — use maps.google.com to find)
 - **Short bio (2-3 sentences):**
-- **Upcoming → Past:** Was this speaker previously listed as `upcoming: true`? (yes/no)
 
 ---
 
 ## Talk
 
+> ⚠️ **Claude: ask the fields below one at a time**, in order. Wait for the user's answer before asking the next. Display the list of upcoming questions upfront so the user knows what's coming, then ask #1.
+
+Upcoming questions (display this list first, then ask one by one):
+1. Quel est le titre du talk ?
+2. Quelle est l'URL de l'événement Meetup ?
+3. Quelle est l'URL YouTube (avec timestamp si applicable) ?
+4. Y a-t-il des ressources à ajouter ? (liens depuis les commentaires YouTube ou slides — répond "aucune" si non)
+
 - **Talk title:**
 - **Meetup event URL:** https://www.meetup.com/ai-agent-montreal/events/
 - **YouTube video URL (with timestamp if applicable):** https://www.youtube.com/watch?v=
-- **Talk number** (next in sequence — currently 17): #
+- **Talk number** (next in sequence — currently 18): #
 
 ---
 
 ## Talk Resources *(optional — from YouTube comments or slides)*
 
-> ⚠️ **Claude: always ask for resources before proceeding**, even if this section is left blank. Do not skip this step.
+> ⚠️ **Claude: ask for resources as question #4 in the one-by-one sequence above**, even if this section is left blank. Do not skip this step.
 
 Add as many as needed. Leave blank or write "none" if no resources.
 
@@ -56,7 +66,7 @@ Add as many as needed. Leave blank or write "none" if no resources.
 - [ ] If previously `upcoming: true` → flip to past (remove flag, update talk/YouTube)
 - [ ] Update speaker count in header if needed
 - [ ] Update talk count in Brain Graph description (`index.html` — "N talks orbiting the AI brain")
-- [ ] Update README — talk count in "Full list of all N past talks" + talk number in `NEW_TALK_TEMPLATE.md`
+- [ ] Update README — talk count in "Full list of all N past talks" + talk number in `NEW_TALK_TEMPLATE.md` + link/talk counts in Talk Resources description (e.g. "71 links across 16 talks")
 
 ---
 

@@ -162,11 +162,10 @@
                 "His work is reflected in contributions to, and acknowledgements in, books including Agile Coaching, Bridging the Communication Gap, Software Craftsmanship Apprenticeship Patterns, and Agile Testing. He has also written for Better Software Magazine, where he served as Technical Editor.\n" +
                 "\n" +
                 "He remains hands-on in the code, speaks at international conferences, and has been an invited speaker and guest lecturer at Oxford University, Cambridge University, and McGill University.",
-            talk: "Upcoming talk — May 2026",
+            talk: "Test-Driven Agentic Behaviours",
             linkedin: "https://www.linkedin.com/in/antonymarcano/",
-            youtube: "https://www.youtube.com/@aiagentsmontreal",
-            meetup: "https://www.meetup.com/ai-agent-montreal/",
-            upcoming: true
+            youtube: "https://www.youtube.com/watch?v=J6QILoLM0CE",
+            meetup: "https://www.meetup.com/ai-agent-montreal/events/314370767"
         },
         {
             name: "Dragan Stepanović",

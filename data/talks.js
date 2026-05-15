@@ -15,7 +15,8 @@
         { n: 14, title: "AC/DC — Agent-Centric Development Cycle", speaker: "Edgar Kussberg", yt: "https://www.youtube.com/watch?v=YXXFjebvfNc&t=9s", meetup: "https://www.meetup.com/ai-agent-montreal/events/313880985/" },
         { n: 15, title: "LLM-assisted Coding: A Systems Perspective", speaker: "Dragan Stepanović", yt: "https://www.youtube.com/watch?v=eEA0gJnWLh0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980249/" },
         { n: 16, title: "Spec-Driven Development in the Real World: From BMAD to Custom Skills", speaker: "Fabrice Monnier", yt: "https://www.youtube.com/watch?v=OTdCijajbH0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313903717/" },
-        { n: 17, title: "From Specs to Production: Building Software with AI Agents End to End", speaker: "Soma Bini", yt: "https://www.youtube.com/watch?v=BqzODQ0Qajo", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980286/" }
+        { n: 17, title: "From Specs to Production: Building Software with AI Agents End to End", speaker: "Soma Bini", yt: "https://www.youtube.com/watch?v=BqzODQ0Qajo", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980286/" },
+        { n: 18, title: "Test-Driven Agentic Behaviours", speaker: "Antony Marcano", yt: "https://www.youtube.com/watch?v=J6QILoLM0CE", meetup: "https://www.meetup.com/ai-agent-montreal/events/314370767" }
     ];
 
     // ── TALK RESOURCES (to be filled with YouTube comment links) ─────────────────
@@ -183,6 +184,19 @@
                 { label: "SpecKit (site)", url: "https://speckit.org" },
                 { label: "SpecKit (GitHub)", url: "https://github.com/github/spec-kit" },
                 { label: "Kiro", url: "https://kiro.dev" },
+            ]
+        },
+        {
+            talk: "Test-Driven Agentic Behaviours",
+            speaker: "Antony Marcano",
+            links: [
+                { label: "GitHub repository of PlantUML based skill framework", url: "https://github.com/stagentic/stagentic-promptbook" },
+                { label: "Demo (when Claude Code isn't down)", url: "https://youtu.be/i3g9ZXiaqh0" },
+                { label: "Claude status", url: "https://status.claude.com" },
+                { label: "LinkedIn (Antony Marcano)", url: "https://www.linkedin.com/in/antonymarcano/" },
+                { label: "Substack (Antony Marcano)", url: "https://substack.com/@antonymarcano" },
+                { label: "PlantUML based Claude skills (README)", url: "https://github.com/stagentic/stagentic-promptbook/blob/main/README.md" },
+                { label: "PlantUML based Claude skills (LinkedIn post)", url: "https://www.linkedin.com/posts/antonymarcano_plantuml-based-claude-skills-enjoy-https-activity-7457853674606931970-mKhF" },
             ]
         },
     ];
