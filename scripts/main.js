@@ -1006,3 +1006,12 @@
         update();
     })();
 
+    // ── BACK TO TOP ──
+    (() => {
+        const btn = document.getElementById('back-to-top');
+        if (!btn) return;
+        window.addEventListener('scroll', () => {
+            btn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+    })();
+
