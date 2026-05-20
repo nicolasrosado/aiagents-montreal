@@ -22,6 +22,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
     ├── ai-agents-image.jpg # Header background image (parallax)
     ├── brain-circle.jpg    # Brain image for the Knowledge Brain Graph center (350×350px crop)
     ├── circuit-crop.jpg    # Circuit board image for the Ecosystem Circuit Graph center (500×500px crop)
+    ├── og-image.jpg                        # OpenGraph / Twitter Card image — 1200×630px
     ├── wearedevelopers-logo.jpeg # WeAreDevelopers community partner logo (100×100px display)
     ├── ai-agents-montreal-logo.png             # AI Agents Montreal logo — used in community partner section desktop (150×90px display)
     ├── logo-youtube.jpg                        # AI Agents Montreal logo — used in community partner section mobile
@@ -39,7 +40,9 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 ### 🔗 SEO & Social Sharing
 - **OpenGraph meta tags** — `og:type`, `og:url`, `og:title`, `og:description`, `og:image` set in `<head>` for rich link previews on Facebook, LinkedIn, Slack, etc.
 - **Twitter Card meta tags** — `twitter:card`, `twitter:url`, `twitter:title`, `twitter:description`, `twitter:image` for rich previews on X/Twitter
-- OG image: `assets/ai-agents-image.jpg` (hero parallax photo)
+- **OG image** — `assets/og-image.jpg` (1200×630px, generated from `ai-agents-montreal-logo.png` with a CTA band); meets opengraph.xyz recommendations: correct size, headline visible, call-to-action present
+- **Title** — 58 chars (optimal 50-60): "AI Agents Montreal — 18 Talks · 21 Speakers · 5 Continents"
+- **Description** — 149 chars (optimal 110-160): community, scope, and key stats
 
 ### ⬆️ Back to top
 - Fixed `↑` button, bottom-right corner — appears after 400px of scroll, fades in/out via CSS `opacity`/`visibility` transition
