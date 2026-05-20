@@ -8,7 +8,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 
 ```
 /
-├── index.html              # HTML shell — 369 lines, structure only
+├── index.html              # HTML shell — 405 lines, structure only
 ├── README.md
 ├── data/
 │   ├── speakers.js         # const speakers — all speaker objects (bio, location, talk, links…)
@@ -35,6 +35,16 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 3. `scripts/main.js` — renders cards from data, runs map, animations, data loaders
 
 ## Features
+
+### 🔗 SEO & Social Sharing
+- **OpenGraph meta tags** — `og:type`, `og:url`, `og:title`, `og:description`, `og:image` set in `<head>` for rich link previews on Facebook, LinkedIn, Slack, etc.
+- **Twitter Card meta tags** — `twitter:card`, `twitter:url`, `twitter:title`, `twitter:description`, `twitter:image` for rich previews on X/Twitter
+- OG image: `https://nicolasrosado.github.io/aiagents-montreal/assets/ai-agents-image.jpg`
+
+### ⬆️ Back to top
+- Fixed `↑` button, bottom-right corner — appears after 400px of scroll, fades in/out via CSS `opacity`/`visibility` transition
+- Styled with the design system: `var(--surface2)` background, `var(--accent)` (cyan) text and hover glow
+- Scroll listener in `scripts/main.js` toggles `.visible` class; `passive: true` for performance
 
 ### 🎬 Header
 - **Parallax background** — `ai-agents-image.jpg` fixed in place with dark overlay (Option D — Cinematic), grid and cyan/violet glows layered on top
