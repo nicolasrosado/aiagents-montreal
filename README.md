@@ -39,7 +39,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 ### 🔗 SEO & Social Sharing
 - **OpenGraph meta tags** — `og:type`, `og:url`, `og:title`, `og:description`, `og:image` set in `<head>` for rich link previews on Facebook, LinkedIn, Slack, etc.
 - **Twitter Card meta tags** — `twitter:card`, `twitter:url`, `twitter:title`, `twitter:description`, `twitter:image` for rich previews on X/Twitter
-- OG image: `https://nicolasrosado.github.io/aiagents-montreal/assets/ai-agents-image.jpg`
+- OG image: `assets/ai-agents-image.jpg` (hero parallax photo)
 
 ### ⬆️ Back to top
 - Fixed `↑` button, bottom-right corner — appears after 400px of scroll, fades in/out via CSS `opacity`/`visibility` transition
