@@ -873,7 +873,7 @@
             // Outer orbit (8-18, 11 talks, counter-clockwise)
             var outerA=-(mgBaseAngle*(OUTER_SPD/INNER_SPD));
             for(var j=0;j<11;j++){
-                var a2=outerA+(j/10)*Math.PI*2;
+                var a2=outerA+(j/11)*Math.PI*2;
                 drawOrbNode(8+j,CX+Math.cos(a2)*R2,CY+Math.sin(a2)*R2);
             }
             requestAnimationFrame(mgAnimate);

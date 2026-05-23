@@ -30,7 +30,7 @@ Upcoming questions (display this list first, then ask one by one):
 - **Talk title:**
 - **Meetup event URL:** https://www.meetup.com/ai-agent-montreal/events/
 - **YouTube video URL (with timestamp if applicable):** https://www.youtube.com/watch?v=
-- **Talk number** (next in sequence — currently 19): #
+- **Talk number** (next in sequence — currently 20): #
 
 ---
 
@@ -66,7 +66,12 @@ Add as many as needed. Leave blank or write "none" if no resources.
 - [ ] If previously `upcoming: true` → flip to past (remove flag, update talk/YouTube)
 - [ ] Update speaker count in header if needed
 - [ ] Update talk count in Brain Graph description (`index.html` — "N talks orbiting the AI brain")
-- [ ] Update README — talk count in "Full list of all N past talks" + talk number in `NEW_TALK_TEMPLATE.md` + link/talk counts in Talk Resources description (e.g. "71 links across 16 talks")
+- [ ] Update README — all of the following:
+  - "Full list of all N past talks" (Talks section)
+  - OG title description: "N Talks · 21 Speakers · 5 Continents"
+  - Outer orbit range: "outer (talks 9-N, counter-clockwise)"
+  - Talk Resources link count: "N links across N talks" (add new talk's resource count)
+  - Talk number in `NEW_TALK_TEMPLATE.md` (next in sequence)
 
 ---
 
