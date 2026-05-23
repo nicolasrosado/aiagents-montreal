@@ -16,7 +16,8 @@
         { n: 15, title: "LLM-assisted Coding: A Systems Perspective", speaker: "Dragan Stepanović", yt: "https://www.youtube.com/watch?v=eEA0gJnWLh0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980249/" },
         { n: 16, title: "Spec-Driven Development in the Real World: From BMAD to Custom Skills", speaker: "Fabrice Monnier", yt: "https://www.youtube.com/watch?v=OTdCijajbH0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313903717/" },
         { n: 17, title: "From Specs to Production: Building Software with AI Agents End to End", speaker: "Soma Bini", yt: "https://www.youtube.com/watch?v=BqzODQ0Qajo", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980286/" },
-        { n: 18, title: "Test-Driven Agentic Behaviours", speaker: "Antony Marcano", yt: "https://www.youtube.com/watch?v=J6QILoLM0CE", meetup: "https://www.meetup.com/ai-agent-montreal/events/314370767" }
+        { n: 18, title: "Test-Driven Agentic Behaviours", speaker: "Antony Marcano", yt: "https://www.youtube.com/watch?v=J6QILoLM0CE", meetup: "https://www.meetup.com/ai-agent-montreal/events/314370767" },
+        { n: 19, title: "The Great AI Spec-Driven Illusion: Why Developers Must Remain Architects", speaker: "Javier Lopez", yt: "https://www.youtube.com/watch?v=8vP7wSQqPzg", meetup: "https://www.meetup.com/ai-agent-montreal/events/314512826/" }
     ];
 
     // ── TALK RESOURCES (to be filled with YouTube comment links) ─────────────────
@@ -197,6 +198,15 @@
                 { label: "Substack (Antony Marcano)", url: "https://substack.com/@antonymarcano" },
                 { label: "PlantUML based Claude skills (README)", url: "https://github.com/stagentic/stagentic-promptbook/blob/main/README.md" },
                 { label: "PlantUML based Claude skills (LinkedIn post)", url: "https://www.linkedin.com/posts/antonymarcano_plantuml-based-claude-skills-enjoy-https-activity-7457853674606931970-mKhF" },
+            ]
+        },
+        {
+            talk: "The Great AI Spec-Driven Illusion: Why Developers Must Remain Architects",
+            speaker: "Javier Lopez",
+            links: [
+                { label: "Mars Rover Kata", url: "https://codingdojo.org/kata/mars-rover/" },
+                { label: "The Great AI Spec-Driven Illusion (article)", url: "https://javil.substack.com/p/the-great-ai-spec-driven-illusion" },
+                { label: "Substack (Javier Lopez)", url: "https://substack.com/@javilopez1" },
             ]
         },
     ];

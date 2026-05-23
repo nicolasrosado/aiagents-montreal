@@ -405,6 +405,13 @@
             excerpt: 'Most teams confuse guidance, guardrails, and gateways. True agent safety requires all three: instructional guidance, technical restrictions, and controlled entry points.',
             source: 'LinkedIn'
         },
+        {
+            date: 'Apr 26, 2026',
+            title: 'The Great AI Spec-Driven Illusion',
+            link: 'https://javil.substack.com/p/the-great-ai-spec-driven-illusion',
+            excerpt: 'AI can generate specs and code at speed — but does that make developers unnecessary? Javier Lopez argues that developers must remain architects, not prompt engineers blindly executing AI-generated blueprints.',
+            source: 'Substack'
+        },
     ];
 
     function renderCommunityArticles() {
@@ -784,6 +791,7 @@
             { t:"Spec-Driven Dev: BMAD to Custom Skills",     yt:"https://www.youtube.com/watch?v=OTdCijajbH0" },
             { t:"From Specs to Production: AI Agents E2E",    yt:"https://www.youtube.com/watch?v=BqzODQ0Qajo" },
             { t:"Test-Driven Agentic Behaviours",              yt:"https://www.youtube.com/watch?v=J6QILoLM0CE" },
+            { t:"The Great AI Spec-Driven Illusion",           yt:"https://www.youtube.com/watch?v=8vP7wSQqPzg" },
         ];
 
         // Brain image — uses assets/ai-agents-image.jpg (already in repo)
@@ -862,9 +870,9 @@
                 var a=mgBaseAngle+(i/8)*Math.PI*2;
                 drawOrbNode(i,CX+Math.cos(a)*R1,CY+Math.sin(a)*R1);
             }
-            // Outer orbit (8-17, 10 talks, counter-clockwise)
+            // Outer orbit (8-18, 11 talks, counter-clockwise)
             var outerA=-(mgBaseAngle*(OUTER_SPD/INNER_SPD));
-            for(var j=0;j<10;j++){
+            for(var j=0;j<11;j++){
                 var a2=outerA+(j/10)*Math.PI*2;
                 drawOrbNode(8+j,CX+Math.cos(a2)*R2,CY+Math.sin(a2)*R2);
             }

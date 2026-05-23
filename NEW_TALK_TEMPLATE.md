@@ -30,7 +30,7 @@ Upcoming questions (display this list first, then ask one by one):
 - **Talk title:**
 - **Meetup event URL:** https://www.meetup.com/ai-agent-montreal/events/
 - **YouTube video URL (with timestamp if applicable):** https://www.youtube.com/watch?v=
-- **Talk number** (next in sequence — currently 18): #
+- **Talk number** (next in sequence — currently 19): #
 
 ---
 

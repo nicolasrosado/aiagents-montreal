@@ -57,7 +57,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **Nav buttons** — 3-tier hierarchy: internal section links (secondary cyan, active section highlighted in primary cyan via `IntersectionObserver`) · **▶ Subscribe** (red YouTube brand, links directly to subscribe URL) · **Join on Meetup** (amber outline) · **✉ Newsletter** (orange Substack brand, links to substack.com/@nicolasrosado) · **🎙 Suggest a Talk** (secondary cyan, links to LinkedIn DM)
 
 ### 🧠 Talk Knowledge Brain Graph *(section 01 — displayed first)*
-- **Orbital mind graph** — 18 talks orbiting the AI brain image
+- **Orbital mind graph** — 19 talks orbiting the AI brain image
 - **Desktop** — 2 concentric orbits: inner (talks 1-8, clockwise) · outer (talks 9-18, counter-clockwise)
   - Desktop sizes live in `scripts/main.js`: `BRAIN_R` (center image radius, currently 185) · `R1` (inner orbit, currently `min(W,H)*0.34`) · `R2` (outer orbit, currently `min(W,H)*0.44`)
 - **Mobile (<768px)** — vertical scrollable list auto-generated from `data/talks.js` via `renderBrainMobile()`: brain image centered at top, each talk as a tappable row with animated cyan dot — zero impact on desktop
@@ -82,13 +82,13 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`
 
 ### 🎙 Talks
-- Full list of all 18 past talks
+- Full list of all 19 past talks
 - **All YouTube links updated** with individual video URLs and timestamps
 - **All Meetup event links updated** with individual event pages
 - **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`
 
 ### ✍️ Articles & Resources
-- **Talk Resources tab** *(default open)* — all 18 talks listed in order; 71 links across 16 talks (GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers); talks without resources display "No resources for this talk" instead of being omitted
+- **Talk Resources tab** *(default open)* — all 19 talks listed in order; 74 links across 17 talks (GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers); talks without resources display "No resources for this talk" instead of being omitted
 - **Articles tab** — two labelled sub-sections in order:
   1. **From the Community** — hardcoded curated articles from the community (non-Medium sources); add entries to `communityArticles` in `scripts/main.js`
   2. **My Own Articles** — dynamically fetched from Nicolas Rosado's Medium RSS feed; excludes "Formation continue"; falls back to hardcoded list; "See all on Medium ↗" link below
