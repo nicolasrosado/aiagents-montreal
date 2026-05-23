@@ -23,6 +23,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
     ├── brain-circle.jpg    # Brain image for the Knowledge Brain Graph center (350×350px crop)
     ├── circuit-crop.jpg    # Circuit board image for the Ecosystem Circuit Graph center (500×500px crop)
     ├── og-image.jpg                        # OpenGraph / Twitter Card image — 1200×630px
+    ├── dev-mtl-logo.jpeg         # /dev/mtl community partner logo
     ├── wearedevelopers-logo.jpeg # WeAreDevelopers community partner logo (100×100px display)
     ├── ai-agents-montreal-logo.png             # AI Agents Montreal logo — used in community partner section desktop (150×90px display)
     ├── logo-youtube.jpg                        # AI Agents Montreal logo — used in community partner section mobile
@@ -129,15 +130,22 @@ The newsletter links to **Substack** — the user subscribes directly on Substac
 - Community values note: free & independent · psychological safety · humility · kindness
 - To edit a card: update `data/ecosystem.js` only
 
-### 🤝 Community Partner Event *(section 08)*
-- **WeAreDevelopers World Congress North America** — 23–25 September 2026 · San José, CA
+### 🤝 Community Partner Events *(section 08)*
+Two partner cards, static HTML — no data file needed; edit directly in `index.html`.
+
+**1. /dev/mtl 2026** *(displayed first)* — 27 November 2026 · Concordia University Conference Centre, Montreal
 - Two logos side by side with `×` divider:
-  - **AI Agents Montreal logo** — desktop: `assets/ai-agents-montreal-logo.png` · mobile: `assets/logo-youtube.jpg` (via `<picture>`) — links to [wearedevelopers.com/about/community](https://www.wearedevelopers.com/about/community) with "Community Partner ↗" caption in cyan
-  - **WeAreDevelopers logo** (`assets/wearedevelopers-logo.jpeg`) — links to congress registration page with "Registration ↗" caption in cyan
-- Both logos have a cyan glow on hover
+  - **AI Agents Montreal logo** — desktop: `assets/ai-agents-montreal-logo.png` · mobile: `assets/logo-youtube.jpg` (via `<picture>`) — links to [dev-mtl.ca](https://www.dev-mtl.ca/?lang=en) with "Community Partner ↗" caption
+  - **/dev/mtl logo** (`assets/dev-mtl-logo.jpeg`) — links to Eventbrite early bird tickets with "Registration ↗" caption
+- Two CTA buttons: **Early Bird Tickets** (Eventbrite) · **Submit a Talk** (Sessionize CFP)
+- Sponsorship callout with EN and FR links
+
+**2. WeAreDevelopers World Congress North America** — 23–25 September 2026 · San José, CA
+- Two logos side by side with `×` divider:
+  - **AI Agents Montreal logo** — links to [wearedevelopers.com/about/community](https://www.wearedevelopers.com/about/community) with "Community Partner ↗" caption
+  - **WeAreDevelopers logo** (`assets/wearedevelopers-logo.jpeg`) — links to congress registration page with "Registration ↗" caption
 - CTA button links to registration page
 - Discount code callout with link to Nicolas on LinkedIn
-- Static HTML — no data file needed; edit directly in `index.html`
 
 ### 🔔 Stay in the Loop *(section 09)*
 - YouTube Subscribe button
