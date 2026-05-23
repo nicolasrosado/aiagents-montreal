@@ -55,7 +55,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **Animated circuit board** — grid overlay and cyan/violet glows layered on the parallax background
 - Live member count fetched from Meetup
 - Live next event banner fetched from Meetup
-- **Nav buttons** — 3-tier hierarchy: internal section links (secondary cyan, active section highlighted in primary cyan via `IntersectionObserver`) · **▶ Subscribe** (red YouTube brand, links directly to subscribe URL) · **Join on Meetup** (amber outline) · **✉ Newsletter** (orange Substack brand, links to substack.com/@nicolasrosado) · **🎙 Suggest a Talk** (secondary cyan, links to LinkedIn DM)
+- **Nav buttons** — 3-tier hierarchy: internal section links (secondary cyan, active section highlighted in primary cyan via `IntersectionObserver`) · **▶ Subscribe** (red YouTube brand, links directly to subscribe URL) · **Join on Meetup** (amber outline) · **✉ Newsletter** (orange Substack brand, links to substack.com/@nicolasrosado) · **🎙 Suggest a Talk** (secondary cyan, links to LinkedIn DM) · **Partner Events** (secondary cyan, links to `#partner` section)
 
 ### 🧠 Talk Knowledge Brain Graph *(section 01 — displayed first)*
 - **Orbital mind graph** — 19 talks orbiting the AI brain image
