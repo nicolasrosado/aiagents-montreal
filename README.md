@@ -80,7 +80,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - Card grid with avatar, name, LinkedIn icon link (SVG cyan), location, bio, and talk title
 - UPCOMING badge (amber) on speakers not yet presented
 - All 21 speakers have complete LinkedIn URLs
-- **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`
+- **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`; `max-height` set to `20000px` (increased from 9000px) to prevent last speakers from being clipped on mobile single-column layout
 
 ### 🎙 Talks
 - Full list of all 19 past talks
@@ -194,6 +194,7 @@ The site has been fully audited (May 2026) and hardened against common web vulne
 | May 2026 | XSS: Meetup event title (via CORS proxy) injected into `innerHTML` unsanitized | `sanitize()` + `sanitizeUrl()` applied |
 | May 2026 | CSP: `unsafe-inline` in `script-src` (sole cause: `onclick` on RSS button) | RSS section removed; `unsafe-inline` removed from `script-src` |
 | May 2026 | CSP regression: `onclick="toggleResource(i)"` in dynamically generated HTML blocked by `script-src` without `unsafe-inline` | Replaced with event delegation (`addEventListener` + `closest('[data-rg]')`) on resources-list container |
+| May 2026 | Mobile bug: last speaker(s) not visible — `#speakers-grid` `max-height: 9000px` clipped the single-column layout on small screens | Increased to `max-height: 20000px` in `styles/main.css` |
 
 > ⚠️ Known issue fixed: incorrect SRI integrity hashes on Leaflet (cdnjs) were causing the map to silently fail. SRI removed — cdnjs is trusted via HTTPS. CSP was also miscalibrated (missing CartoDB tile origins), now corrected.
 
