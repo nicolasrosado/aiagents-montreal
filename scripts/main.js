@@ -318,15 +318,24 @@
                     const heading = a.querySelector('h2, h3, h1, [class*="title"], [class*="name"]');
                     title = heading ? heading.textContent.trim() : 'Upcoming event';
                 }
+
+                // Meetup appends date/time directly to anchor text with no separator — strip it
+                const dateInTitle = title.match(/((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*,?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}.*)$/i);
+                let embeddedDate = '';
+                if (dateInTitle) {
+                    embeddedDate = dateInTitle[0].trim();
+                    title = title.slice(0, dateInTitle.index).trim();
+                }
+
                 if (title.length > 80) title = title.slice(0, 77) + '…';
 
-                // Look for a date near the anchor
+                // Look for a date near the anchor (fallback if not embedded in title)
                 const parentText = (a.parentElement ? a.parentElement.textContent : '') +
                     (a.parentElement?.parentElement ? a.parentElement.parentElement.textContent : '');
                 const dateMatch = parentText.match(
                     /(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*,?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}/i
                 );
-                const dateStr = dateMatch ? dateMatch[0] : '';
+                const dateStr = embeddedDate || (dateMatch ? dateMatch[0] : '');
 
                 linkEl.textContent = title;
                 linkEl.href = fullUrl;
