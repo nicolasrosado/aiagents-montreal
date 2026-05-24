@@ -320,7 +320,7 @@
                 }
 
                 // Meetup appends date/time directly to anchor text with no separator — strip it
-                const dateInTitle = title.match(/((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*,?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}.*)$/i);
+                const dateInTitle = title.match(/((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*,?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:\s*[·•]\s*\d{1,2}:\d{2}\s*(?:AM|PM)(?:\s*[A-Z]{2,5})?)?)/i);
                 let embeddedDate = '';
                 if (dateInTitle) {
                     embeddedDate = dateInTitle[0].trim();
