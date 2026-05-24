@@ -1,6 +1,6 @@
 # AI Agents Montreal — Community Website
 
-A single-page community site showcasing the global reach of [AI Agents Montreal](https://www.meetup.com/ai-agent-montreal/) — 21 speakers, 11 countries, 5 continents.
+A single-page community site showcasing the global reach of [AI Agents Montreal](https://www.meetup.com/ai-agent-montreal/) — 23 speakers, 11 countries, 5 continents.
 
 🌐 **Live site** → [nicolasrosado.github.io/aiagents-montreal](https://nicolasrosado.github.io/aiagents-montreal/)
 
@@ -42,7 +42,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **OpenGraph meta tags** — `og:type`, `og:url`, `og:title`, `og:description`, `og:image` set in `<head>` for rich link previews on Facebook, LinkedIn, Slack, etc.
 - **Twitter Card meta tags** — `twitter:card`, `twitter:url`, `twitter:title`, `twitter:description`, `twitter:image` for rich previews on X/Twitter
 - **OG image** — `assets/og-image.jpg` (1200×630px, generated from `ai-agents-montreal-logo.png` with a CTA band); meets opengraph.xyz recommendations: correct size, headline visible, call-to-action present
-- **Title** — 58 chars (optimal 50-60): "AI Agents Montreal — 19 Talks · 21 Speakers · 5 Continents"
+- **Title** — 58 chars (optimal 50-60): "AI Agents Montreal — 19 Talks · 23 Speakers · 5 Continents"
 - **Description** — 149 chars (optimal 110-160): community, scope, and key stats
 
 ### ⬆️ Back to top
@@ -71,7 +71,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **Leaflet.js** interactive map with dark CartoDB tiles
 - 🔵 Cyan glowing markers = past speakers · 🟡 Amber glowing markers = upcoming speakers
 - Click any marker for a popup with name, location, and talk title
-- 21 speakers across 11 countries (19 cities)
+- 23 speakers across 11 countries (19 cities)
 - `map.invalidateSize()` called at 200ms and 800ms after load for reliable rendering on GitHub Pages
 
 > ⚠️ Known fixes: (1) bare `&` in JS strings escaped as `\u0026` to prevent HTML parser truncation. (2) Incorrect SRI integrity hashes on Leaflet were silently blocking the map — SRI removed, cdnjs trusted via HTTPS. (3) CSP recalibrated to include CartoDB tile origins in `connect-src` and `img-src`.
@@ -79,7 +79,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 ### 👤 Speakers
 - Card grid with avatar, name, LinkedIn icon link (SVG cyan), location, bio, and talk title
 - UPCOMING badge (amber) on speakers not yet presented
-- All 21 speakers have complete LinkedIn URLs
+- All 23 speakers have complete LinkedIn URLs
 - **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`; `max-height` set to `20000px` (increased from 9000px) to prevent last speakers from being clipped on mobile single-column layout
 
 ### 🎙 Talks

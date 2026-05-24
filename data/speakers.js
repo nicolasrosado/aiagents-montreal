@@ -221,5 +221,27 @@
             youtube: "https://www.youtube.com/watch?v=8vP7wSQqPzg",
             meetup: "https://www.meetup.com/ai-agent-montreal/events/314512826/",
             upcoming: false
+        },
+        {
+            name: "Woody Zuill",
+            location: "San Diego, USA 🇺🇸",
+            lat: 32.7157, lng: -117.1611,
+            bio: "Woody Zuill is an Agile and Lean Software Development guide who has been programming computers for 40+ years. He is an originator and pioneer of the Software Teaming (Mob Programming) approach to teamwork in software development, and provides workshops, coaching, and training on team software development. He is also a founder of the \"Beyond Estimates\" discussion, and a frequent speaker at conferences and developer meet-ups all over the world.",
+            talk: "Software Teaming and AI: Thinking Together with AI",
+            linkedin: "https://www.linkedin.com/in/woodyzuill/",
+            youtube: "https://www.youtube.com/@aiagentsmontreal",
+            meetup: "https://www.meetup.com/ai-agent-montreal/events/314937910/",
+            upcoming: true
+        },
+        {
+            name: "James Herr",
+            location: "Harrisburg, USA 🇺🇸",
+            lat: 43.4294, lng: -96.6997,
+            bio: "As a full stack engineer, James is passionate about how people and technology evolve together. He has helped advance mob programming practices, lead collaborative squads, and explored how AI can support smarter, more human-centered development. When he's not working on enterprise software, he's usually in Godot, creating experimental games and learning through play.",
+            talk: "Software Teaming and AI: Thinking Together with AI",
+            linkedin: "https://www.linkedin.com/in/james-herr-63b85b1b3/",
+            youtube: "https://www.youtube.com/@aiagentsmontreal",
+            meetup: "https://www.meetup.com/ai-agent-montreal/events/314937910/",
+            upcoming: true
         }
     ];
