@@ -330,7 +330,7 @@
 
                 linkEl.textContent = title;
                 linkEl.href = fullUrl;
-                if (dateStr) dateEl.textContent = dateStr;
+                if (dateStr) dateEl.textContent = ' — ' + dateStr;
                 banner.style.display = 'inline-flex';
                 // Populate ecosystem card too
                 _updateAIAgentsEcoCard(title, fullUrl, dateStr);
