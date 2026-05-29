@@ -30,16 +30,15 @@
 
         const coordMap = {};
         speakers.forEach(function(s) {
-            const key = s.lat.toFixed(2) + ',' + s.lng.toFixed(2);
+            const key = s.lat.toFixed(1) + ',' + s.lng.toFixed(1);
             if (!coordMap[key]) coordMap[key] = [];
             coordMap[key].push(s);
         });
 
         Object.keys(coordMap).forEach(function(key) {
             const group = coordMap[key];
-            const parts = key.split(',');
-            const lat = parseFloat(parts[0]);
-            const lng = parseFloat(parts[1]);
+            const lat = group.reduce(function(s, x) { return s + x.lat; }, 0) / group.length;
+            const lng = group.reduce(function(s, x) { return s + x.lng; }, 0) / group.length;
             const isUpcoming = group.every(function(s) { return s.upcoming; });
             const names = group.map(function(s) { return s.name; }).join(' + ');
             const locs = group.map(function(s) { return s.location; })
