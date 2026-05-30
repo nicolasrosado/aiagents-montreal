@@ -800,6 +800,7 @@
             { t:"From Specs to Production: AI Agents E2E",    yt:"https://www.youtube.com/watch?v=BqzODQ0Qajo" },
             { t:"Test-Driven Agentic Behaviours",              yt:"https://www.youtube.com/watch?v=J6QILoLM0CE" },
             { t:"The Great AI Spec-Driven Illusion",           yt:"https://www.youtube.com/watch?v=8vP7wSQqPzg" },
+            { t:"Software Teaming and AI",                      yt:"https://www.youtube.com/watch?v=1uV-oBj1U18" },
         ];
 
         // Brain image — uses assets/ai-agents-image.jpg (already in repo)

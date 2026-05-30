@@ -17,7 +17,8 @@
         { n: 16, title: "Spec-Driven Development in the Real World: From BMAD to Custom Skills", speaker: "Fabrice Monnier", yt: "https://www.youtube.com/watch?v=OTdCijajbH0", meetup: "https://www.meetup.com/ai-agent-montreal/events/313903717/" },
         { n: 17, title: "From Specs to Production: Building Software with AI Agents End to End", speaker: "Soma Bini", yt: "https://www.youtube.com/watch?v=BqzODQ0Qajo", meetup: "https://www.meetup.com/ai-agent-montreal/events/313980286/" },
         { n: 18, title: "Test-Driven Agentic Behaviours", speaker: "Antony Marcano", yt: "https://www.youtube.com/watch?v=J6QILoLM0CE", meetup: "https://www.meetup.com/ai-agent-montreal/events/314370767" },
-        { n: 19, title: "The Great AI Spec-Driven Illusion: Why Developers Must Remain Architects", speaker: "Javier Lopez", yt: "https://www.youtube.com/watch?v=8vP7wSQqPzg", meetup: "https://www.meetup.com/ai-agent-montreal/events/314512826/" }
+        { n: 19, title: "The Great AI Spec-Driven Illusion: Why Developers Must Remain Architects", speaker: "Javier Lopez", yt: "https://www.youtube.com/watch?v=8vP7wSQqPzg", meetup: "https://www.meetup.com/ai-agent-montreal/events/314512826/" },
+        { n: 20, title: "Software Teaming and AI: Thinking Together with AI", speaker: "Woody Zuill & James Herr", yt: "https://www.youtube.com/watch?v=1uV-oBj1U18", meetup: "https://www.meetup.com/ai-agent-montreal/events/314937910/" }
     ];
 
     // ── TALK RESOURCES (to be filled with YouTube comment links) ─────────────────
@@ -207,6 +208,27 @@
                 { label: "Mars Rover Kata", url: "https://codingdojo.org/kata/mars-rover/" },
                 { label: "The Great AI Spec-Driven Illusion (article)", url: "https://javil.substack.com/p/the-great-ai-spec-driven-illusion" },
                 { label: "Substack (Javier Lopez)", url: "https://substack.com/@javilopez1" },
+            ]
+        },
+        {
+            talk: "Software Teaming and AI: Thinking Together with AI",
+            speaker: "Woody Zuill & James Herr",
+            links: [
+                { label: "Mob Programming (Agile Alliance Glossary)", url: "https://agilealliance.org/glossary/mob-programming/" },
+                { label: "Mob Programming – A Whole Team Approach (Woody Zuill, Agile 2014)", url: "https://agilealliance.org/resources/experience-reports/mob-programming-agile2014/" },
+                { label: "Flow: The Psychology of Optimal Experience (Csikszentmihalyi)", url: "https://www.amazon.ca/Flow-Psychology-Experience-Mihaly-Csikszentmihalyi/dp/0061339202" },
+                { label: "Team Flow: The Psychology of Optimal Collaboration", url: "https://www.amazon.ca/Team-Flow-psychology-optimal-collaboration/dp/3030278700" },
+                { label: "Teaming: How Organizations Learn, Innovate, and Compete (Edmondson)", url: "https://www.amazon.ca/Learning-Team-Teaming-Learn-Organization/dp/078797093X" },
+                { label: "The Principles of Product Development Flow (Reinertsen)", url: "https://www.amazon.ca/Principles-Product-Development-Flow-Generation/dp/1935401009" },
+                { label: "Zen Mind, Beginner's Mind", url: "https://www.amazon.ca/Zen-Mind-Beginners-50th-Anniversary/dp/1611808413" },
+                { label: "AnyDesk — remote desktop tool", url: "https://anydesk.com/en" },
+                { label: "Pop — Work together, remotely", url: "https://pop.com" },
+                { label: "Tuple — Remote pair programming app", url: "https://tuple.app/" },
+                { label: "TeamViewer", url: "https://www.teamviewer.com/en-ca/" },
+                { label: "Code With Me (JetBrains)", url: "https://www.jetbrains.com/help/idea/code-with-me.html" },
+                { label: "Live Share — Real-Time Code Collaboration (Visual Studio)", url: "https://visualstudio.microsoft.com/services/live-share/" },
+                { label: "Warp — Open agentic development environment", url: "https://www.warp.dev" },
+                { label: "mob.sh — Fast git handover for remote mob programming", url: "https://mob.sh" },
             ]
         },
     ];
