@@ -59,7 +59,10 @@ Add as many as needed. Leave blank or write "none" if no resources.
 
 - [ ] Add speaker to `speakers` array
 - [ ] Add talk to `talks` array (with YouTube URL + Meetup link)
-- [ ] Add talk to Knowledge Brain Graph orbit (desktop — `MG_TALKS` in `scripts/main.js`, update outer orbit loop count)
+- [ ] Add talk to Knowledge Brain Graph orbit (desktop — `MG_TALKS` array in `scripts/main.js`)
+  - ⚠️ **Adding to `MG_TALKS` is NOT enough** — the draw loop has hardcoded counts. The graph draws `inner orbit (8) + outer orbit (N)` nodes; any talk beyond that is silently skipped (this is exactly how talk #20 went missing).
+  - In `mgAnimate()`, bump the **outer orbit** loop to match the new total (`MG_TALKS.length − 8`). Update **both** numbers: `for(var j=0;j<N;j++)` **and** `(j/N)`, plus the `// Outer orbit (8-N, ...)` comment.
+  - Sanity check: `8 (inner) + outer count === MG_TALKS.length`.
 - [ ] Brain Graph mobile list — auto-generated from `talks` array in `data/talks.js` (no HTML edit needed)
 - [ ] Add resources to `talkResources` object
 - [ ] Add map marker (lat/lng)

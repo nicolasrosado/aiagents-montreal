@@ -879,10 +879,10 @@
                 var a=mgBaseAngle+(i/8)*Math.PI*2;
                 drawOrbNode(i,CX+Math.cos(a)*R1,CY+Math.sin(a)*R1);
             }
-            // Outer orbit (8-18, 11 talks, counter-clockwise)
+            // Outer orbit (8-19, 12 talks, counter-clockwise)
             var outerA=-(mgBaseAngle*(OUTER_SPD/INNER_SPD));
-            for(var j=0;j<11;j++){
-                var a2=outerA+(j/11)*Math.PI*2;
+            for(var j=0;j<12;j++){
+                var a2=outerA+(j/12)*Math.PI*2;
                 drawOrbNode(8+j,CX+Math.cos(a2)*R2,CY+Math.sin(a2)*R2);
             }
             requestAnimationFrame(mgAnimate);
