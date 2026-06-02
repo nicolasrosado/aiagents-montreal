@@ -400,6 +400,13 @@
 
     const communityArticles = [
         {
+            date: 'May 22, 2026',
+            title: 'What (Almost) Everyone Gets Wrong About TDD & BDD',
+            link: 'https://www.linkedin.com/pulse/what-almost-everyone-gets-wrong-tdd-bdd-antony-marcano-shjye/',
+            excerpt: 'TDD and BDD share the same core intent — using executable examples to specify behavior — but both were diluted as they hit the mainstream. Antony Marcano traces their origins and the "outer and inner loops" Kent Beck originally envisioned.',
+            source: 'LinkedIn'
+        },
+        {
             date: 'Feb 9, 2026',
             title: 'Software Craftsmanship in the AI Era',
             link: 'https://www.codurance.com/publications/software-craftsmanship-in-the-ai-era',
