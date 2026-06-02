@@ -135,7 +135,7 @@ Two partner cards, static HTML — no data file needed; edit directly in `index.
 
 **1. /dev/mtl 2026** *(displayed first)* — 27 November 2026 · Concordia University Conference Centre, Montreal
 - Two logos side by side with `×` divider:
-  - **AI Agents Montreal logo** — desktop: `assets/ai-agents-montreal-logo.png` · mobile: `assets/logo-youtube.jpg` (via `<picture>`) — links to [dev-mtl.ca](https://www.dev-mtl.ca/?lang=en) with "Community Partner ↗" caption
+  - **AI Agents Montreal logo** — desktop: `assets/ai-agents-montreal-logo.png` · mobile: `assets/logo-youtube.jpg` (via `<picture>`) — links to [dev-mtl.ca](https://www.dev-mtl.ca/about) with "Community Partner ↗" caption
   - **/dev/mtl logo** (`assets/dev-mtl-logo.jpeg`) — links to Eventbrite early bird tickets with "Registration ↗" caption
 - Two CTA buttons: **Early Bird Tickets** (Eventbrite) · **Submit a Talk** (Sessionize CFP)
 - Sponsorship callout with EN and FR links
