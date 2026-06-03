@@ -288,7 +288,6 @@ const ecosystemCommunities = [
         footer: [
             { cls: 'primary', href: 'https://www.eventbrite.com/o/120683088253',          label: '🎟 Events ↗' },
             { cls: 'sponsor', href: 'https://www.eventbrite.com/e/aws-community-day-montreal-tickets-1986733601684', label: '☁️ Community Day ↗' },
-            { cls: 'contact', href: 'https://www.meetup.com/aws-user-group-montreal/',     label: '● Meetup ↗' },
         ],
     },
 ];
