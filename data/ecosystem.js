@@ -4,10 +4,11 @@ const INITIATIVES = [
     { name:'Software Crafters MTL',   emoji:'🔧', url:'https://guild.host/software-crafters-montreal' },
     { name:'Mental Health in SW Eng', emoji:'🧠', url:'https://www.meetup.com/mental-health-in-software-engineering-montreal/' },
     { name:'AI Craftspeople Guild',   emoji:'⚒️', url:'https://aicraftspeopleguild.github.io' },
-    { name:'/dev/mtl',               emoji:'🏙️', url:'https://www.dev-mtl.ca' },
+    { name:'/dev/mtl',               emoji:'🏙️', url:'https://www.dev-mtl.ca/about' },
     { name:'Devoxx4Kids Québec', emoji:'👾', url:'https://www.devoxx4kids.org/quebec/' },
     { name:'MenderCon',              emoji:'🔧', url:'https://mendercon.com' },
     { name:'Montréal JUG',      emoji:'☕', url:'https://www.montreal-jug.org' },
+    { name:'AWS User Group MTL', emoji:'☁️', url:'https://www.eventbrite.com/o/120683088253' },
 ];
 
 // Ecosystem section community cards (rendered by renderEcosystem in main.js)
@@ -163,7 +164,7 @@ const ecosystemCommunities = [
             },
         ],
         footer: [
-            { cls: 'primary', href: 'https://www.dev-mtl.ca',                                   label: '↗ Website' },
+            { cls: 'primary', href: 'https://www.dev-mtl.ca/about',                              label: '↗ Website' },
             { cls: 'contact', href: 'https://www.linkedin.com/company/dev-mtl/',                 label: 'in LinkedIn ↗' },
             { cls: 'contact', href: 'https://www.linkedin.com/in/nicolas-rosado-a97b3393',       label: '✉ Contact' },
         ],
@@ -267,6 +268,27 @@ const ecosystemCommunities = [
         footer: [
             { cls: 'primary', href: 'https://mendercon.com', label: '↗ mendercon.com' },
             { cls: 'sponsor', href: 'https://mendercon.com', label: '🎟 Get ticket ↗', id: 'mendercon-ticket-link', style: 'display:none' },
+        ],
+    },
+    {
+        emoji: '☁️',
+        name: 'AWS User Group Montreal',
+        type: 'Community · Cloud &amp; AI · Montréal',
+        badges: [
+            { type: 'inperson', label: '📍 In-Person' },
+            { type: 'regular',  label: '🔁 Regular meetups' },
+        ],
+        desc: 'A community-run, practitioner-focused group for AWS builders in Montreal — sharing real production experience on cloud, GenAI, agents, and data. No vendor pitches, just engineers learning from engineers.',
+        event: {
+            label:       '📅 Next event',
+            titleStatic: 'AWS Community Day East Canada — June 20, 2026',
+            dateStatic:  'Montreal · A community-run, practitioner-focused conference. AI Agents Montreal members get 50% off with code AIAGENT.',
+        },
+        blocks: [],
+        footer: [
+            { cls: 'primary', href: 'https://www.eventbrite.com/o/120683088253',          label: '🎟 Events ↗' },
+            { cls: 'sponsor', href: 'https://www.eventbrite.com/e/aws-community-day-montreal-tickets-1986733601684', label: '☁️ Community Day ↗' },
+            { cls: 'contact', href: 'https://www.meetup.com/aws-user-group-montreal/',     label: '● Meetup ↗' },
         ],
     },
 ];
