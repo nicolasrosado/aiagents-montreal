@@ -57,6 +57,7 @@
         <a href="#articles" class="nav-btn secondary" data-section="articles">Articles</a>
         <a href="#ecosystem" class="nav-btn secondary" data-section="ecosystem">Ecosystem</a>
         <a href="#ecosystem-graph" class="nav-btn secondary" data-section="ecosystem-graph">Ecosystem Graph</a>
+        <a href="#community-support" class="nav-btn secondary" data-section="community-support">💙 Community Support</a>
         <a href="#partner" class="nav-btn secondary" data-section="partner">Partner Events</a>
         <a href="https://www.youtube.com/@aiagentsmontreal?sub_confirmation=1" target="_blank" class="nav-btn yt" rel="noopener noreferrer">▶ Subscribe</a>
         <a href="https://www.meetup.com/ai-agent-montreal/" target="_blank" class="nav-btn meetup" rel="noopener noreferrer">Join on Meetup ↗</a>
@@ -304,11 +305,103 @@
     <div id="ecosystem-cards" class="ecosystem-grid"></div>
 </section>
 
+<!-- COMMUNITY SUPPORT -->
+<hr class="section-divider" />
+<section id="community-support">
+    <div class="section-header">
+        <span class="section-number">08</span>
+        <h2 class="section-title">Supporting Our Local Community</h2>
+        <div class="section-line"></div>
+    </div>
+
+    <div class="support-intro">
+        <p class="support-intro-line"><span class="lang-tag">EN</span> Beyond code and talks, we believe a healthy tech community gives back. <strong>AI Agents Montreal</strong> proudly stands behind its sister community, <a href="https://www.meetup.com/mental-health-in-software-engineering-montreal/" target="_blank" rel="noopener noreferrer" class="support-inline-link">Mental Health in Software Engineering Montreal ↗</a> — a meetup dedicated to mental health and wellbeing in tech. Caring for people in software naturally reaches beyond our industry: that's why this community also shines a light on local Montreal initiatives that fight poverty &amp; social inequality and help people in need. This isn't a partnership — it's our way of giving visibility to and shining a light on causes that matter.</p>
+        <p class="support-intro-line"><span class="lang-tag">FR</span> Au-delà du code et des conférences, nous croyons qu'une communauté tech en santé redonne. <strong>AI Agents Montréal</strong> soutient fièrement son meetup jumeau, <a href="https://www.meetup.com/mental-health-in-software-engineering-montreal/" target="_blank" rel="noopener noreferrer" class="support-inline-link">Mental Health in Software Engineering Montréal ↗</a> — une communauté dédiée à la santé mentale et au bien-être dans la tech. Prendre soin des personnes en logiciel dépasse naturellement notre industrie : c'est pourquoi cette communauté met aussi en lumière les initiatives locales montréalaises qui luttent contre la pauvreté et les inégalités sociales et qui aident les personnes dans le besoin. Ce n'est pas un partenariat — c'est notre façon de donner de la visibilité et de mettre en lumière des causes qui comptent.</p>
+    </div>
+
+    <div style="max-width:1100px;margin:0 auto;padding:0 2rem 0.6rem;">
+        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem;">
+            A community that supports its city — hover to slow, click to visit.
+        </p>
+    </div>
+    <div id="sup-mobile-list" class="mg-mobile-wrap">
+        <div class="mg-mobile-brain" style="border-color:rgba(244,63,94,0.22);box-shadow:0 0 24px rgba(244,63,94,0.14);">
+            <img src="assets/mental-health-mtl.png" alt="Mental Health in Software Engineering Montreal"/>
+        </div>
+        <div class="mg-mobile-items" id="sup-mobile-items"></div>
+        <div class="mg-mobile-hint">Tap to visit each initiative</div>
+    </div>
+    <div id="supgraph-container" style="width:100%;height:460px;position:relative;background:var(--bg);overflow:hidden;">
+        <canvas id="sup-circuit" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+        <svg id="sup-svg" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;">
+            <defs>
+                <radialGradient id="sup-cf" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="white" stop-opacity="1"/>
+                    <stop offset="50%"  stop-color="white" stop-opacity="0.95"/>
+                    <stop offset="72%"  stop-color="white" stop-opacity="0.5"/>
+                    <stop offset="88%"  stop-color="white" stop-opacity="0.12"/>
+                    <stop offset="100%" stop-color="white" stop-opacity="0"/>
+                </radialGradient>
+                <mask id="sup-cm"><circle id="sup-cmc" r="140" fill="url(#sup-cf)"/></mask>
+                <radialGradient id="sup-cd" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="rgba(10,4,12,0.18)"/>
+                    <stop offset="60%"  stop-color="rgba(10,4,12,0.5)"/>
+                    <stop offset="100%" stop-color="rgba(12,6,14,0.92)"/>
+                </radialGradient>
+                <radialGradient id="sup-rg" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%"   stop-color="rgba(244,63,94,0.16)"/>
+                    <stop offset="100%" stop-color="rgba(244,63,94,0)"/>
+                </radialGradient>
+            </defs>
+        </svg>
+        <canvas id="sup-hit" style="position:absolute;inset:0;width:100%;height:100%;z-index:2;background:transparent;"></canvas>
+        <p style="position:absolute;bottom:0.75rem;left:50%;transform:translateX(-50%);font-size:9px;color:rgba(255,255,255,0.15);letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap;z-index:3;pointer-events:none;">
+            Hover to slow · Click to visit
+        </p>
+    </div>
+
+    <div class="support-grid">
+        <div class="support-card">
+            <div class="support-card-top">
+                <a href="https://www.techaidemontreal.org/en/" target="_blank" rel="noopener noreferrer" class="support-logo-chip">
+                    <img src="assets/techaide-logo.jpeg" alt="Tech Aide Montréal" class="support-logo-img" />
+                </a>
+                <div class="support-badge">🤝 We Support</div>
+                <h3 class="support-title">Tech Aide Montréal</h3>
+                <div class="support-meta">Montreal tech community · Fundraising for social good</div>
+            </div>
+            <p class="support-desc"><span class="lang-tag">EN</span> Techaide unites Montreal's tech ecosystem to raise funds and mobilize resources against social inequality. Since 2016, the tech community has donated over <strong>$5 million</strong> — in support of Centraide of Greater Montreal — through events like the AI Conference, Product4Good, and its popular soccer &amp; volleyball tournaments.</p>
+            <p class="support-desc"><span class="lang-tag">FR</span> Techaide rassemble l'écosystème technologique montréalais pour amasser des fonds et mobiliser des ressources contre les inégalités sociales. Depuis 2016, la communauté tech a versé plus de <strong>5 M$</strong> — au profit de Centraide du Grand Montréal — grâce à des événements comme la AI Conference, Product4Good et ses populaires tournois de soccer et de volleyball.</p>
+            <div class="support-links">
+                <a href="https://www.techaidemontreal.org/en/" target="_blank" rel="noopener noreferrer" class="support-link">EN · techaidemontreal.org ↗</a>
+                <a href="https://www.techaidemontreal.org/" target="_blank" rel="noopener noreferrer" class="support-link">FR · techaidemontreal.org ↗</a>
+            </div>
+        </div>
+
+        <div class="support-card">
+            <div class="support-card-top">
+                <a href="https://www.centraide-mtl.org/en/" target="_blank" rel="noopener noreferrer" class="support-logo-chip">
+                    <img src="assets/centraide-logo-full.jpg" alt="Centraide of Greater Montreal" class="support-logo-img" />
+                </a>
+                <div class="support-badge">❤️ We Support</div>
+                <h3 class="support-title">Centraide of Greater Montreal</h3>
+                <div class="support-meta">Charitable organization · Fighting poverty &amp; exclusion</div>
+            </div>
+            <p class="support-desc"><span class="lang-tag">EN</span> Centraide of Greater Montreal is a charitable organization working with communities to fight poverty and social exclusion. It raises and distributes resources to more than <strong>375 community organizations</strong> across Montreal, Laval and the South Shore, helping roughly <strong>800,000 people</strong> every year.</p>
+            <p class="support-desc"><span class="lang-tag">FR</span> Centraide du Grand Montréal est un organisme de bienfaisance qui collabore avec les milieux pour lutter contre la pauvreté et l'exclusion sociale. Il amasse et redistribue des ressources à plus de <strong>375 organismes communautaires</strong> de Montréal, Laval et la Rive-Sud, aidant ainsi quelque <strong>800 000 personnes</strong> chaque année.</p>
+            <div class="support-links">
+                <a href="https://www.centraide-mtl.org/en/" target="_blank" rel="noopener noreferrer" class="support-link">EN · centraide-mtl.org ↗</a>
+                <a href="https://www.centraide-mtl.org/" target="_blank" rel="noopener noreferrer" class="support-link">FR · centraide-mtl.org ↗</a>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- COMMUNITY PARTNER -->
 <hr class="section-divider" />
 <section id="partner">
     <div class="section-header">
-        <span class="section-number">08</span>
+        <span class="section-number">09</span>
         <h2 class="section-title">Community Partner Events</h2>
         <div class="section-line"></div>
     </div>
@@ -404,7 +497,7 @@
 <!-- SUBSCRIBE -->
 <section id="subscribe" style="max-width:1100px;margin:0 auto;padding:5rem 2rem;">
     <div class="section-header">
-        <span class="section-number">09</span>
+        <span class="section-number">10</span>
         <h2 class="section-title">Stay in the Loop</h2>
         <div class="section-line"></div>
     </div>

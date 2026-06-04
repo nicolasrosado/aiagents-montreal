@@ -13,7 +13,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 ├── data/
 │   ├── speakers.js         # const speakers — all speaker objects (bio, location, talk, links…)
 │   ├── talks.js            # const talks + const talkResources (past talks, YouTube links, resources)
-│   └── ecosystem.js        # const INITIATIVES (orbit graph) + const ecosystemCommunities (9 cards)
+│   └── ecosystem.js        # const INITIATIVES (orbit graph) + const ecosystemCommunities (9 cards) + const SUPPORT_CENTER / SUPPORT_INITIATIVES (community support graph)
 ├── styles/
 │   └── main.css            # All CSS
 ├── scripts/
@@ -28,7 +28,12 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
     ├── ai-agents-montreal-logo.png             # AI Agents Montreal logo — used in community partner section desktop (150×90px display)
     ├── logo-youtube.jpg                        # AI Agents Montreal logo — used in community partner section mobile
     ├── ai-agents-montreal-logo-transparent.png # AI Agents Montreal logo (transparent variant)
-    └── ai-agents-montreal-logo-white.png       # AI Agents Montreal logo (white variant)
+    ├── ai-agents-montreal-logo-white.png       # AI Agents Montreal logo (white variant)
+    ├── mental-health-mtl.png    # Mental Health in SW Eng MTL illustration — Community Support Graph center + mobile list
+    ├── techaide-icon.jpeg       # Tech Aide heart mark — Community Support Graph node icon
+    ├── techaide-logo.jpeg       # Tech Aide full logo (heart + wordmark) — Community Support card chip
+    ├── centraide-logo.png       # Centraide square mark — Community Support Graph node icon
+    └── centraide-logo-full.jpg  # Centraide du Grand Montréal full logo — Community Support card chip
 ```
 
 **Load order** (GitHub Pages, no bundler):
@@ -55,7 +60,7 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 - **Animated circuit board** — grid overlay and cyan/violet glows layered on the parallax background
 - Live member count fetched from Meetup
 - Live next event banner fetched from Meetup
-- **Nav buttons** — 3-tier hierarchy: internal section links (secondary cyan, active section highlighted in primary cyan via `IntersectionObserver`) · **▶ Subscribe** (red YouTube brand, links directly to subscribe URL) · **Join on Meetup** (amber outline) · **✉ Newsletter** (orange Substack brand, links to substack.com/@nicolasrosado) · **🎙 Suggest a Talk** (secondary cyan, links to LinkedIn DM) · **Partner Events** (secondary cyan, links to `#partner` section)
+- **Nav buttons** — 3-tier hierarchy: internal section links (secondary cyan, active section highlighted in primary cyan via `IntersectionObserver`) · **▶ Subscribe** (red YouTube brand, links directly to subscribe URL) · **Join on Meetup** (amber outline) · **✉ Newsletter** (orange Substack brand, links to substack.com/@nicolasrosado) · **🎙 Suggest a Talk** (secondary cyan, links to LinkedIn DM) · **💙 Community Support** (secondary cyan, links to `#community-support` section) · **Partner Events** (secondary cyan, links to `#partner` section)
 
 ### 🧠 Talk Knowledge Brain Graph *(section 01 — displayed first)*
 - **Orbital mind graph** — 20 talks orbiting the AI brain image
@@ -130,7 +135,21 @@ The newsletter links to **Substack** — the user subscribes directly on Substac
 - Community values note: free & independent · psychological safety · humility · kindness
 - To edit a card: update `data/ecosystem.js` only
 
-### 🤝 Community Partner Events *(section 08)*
+### 💙 Supporting Our Local Community *(section 08 — before Community Partner Events)*
+A "give back" section expressing that **AI Agents Montreal supports its sister meetup, [Mental Health in Software Engineering Montreal](https://www.meetup.com/mental-health-in-software-engineering-montreal/)** — whose mission to care for people in tech extends to backing local Montreal initiatives that fight poverty & social inequality. Explicitly **not a partnership** — it's about visibility for causes that matter.
+
+- **Bilingual intro (EN/FR)** — rose `lang-tag` chips; the Mental Health meetup is linked inline (`.support-inline-link`)
+- **Community Support Graph** — orbital graph on the same model as the Brain & Ecosystem graphs, in a **rose/solidarity** palette:
+  - **Center = Mental Health in SW Eng MTL** (`assets/mental-health-mtl.png`) — clickable → Meetup, with a `🧠 Mental Health in SW Eng MTL` label below the image
+  - **Orbiting nodes** = the two supported causes, drawn as white badge chips with their real logos + connecting lines to the center: **Tech Aide Montréal** (`assets/techaide-icon.jpeg`) · **Centraide of Greater Montreal** (`assets/centraide-logo.png`)
+  - Driven by `SUPPORT_CENTER` + `SUPPORT_INITIATIVES` in `data/ecosystem.js`; rendered by the community-support IIFE in `scripts/main.js`
+  - **Mobile (<768px)** — switches to a vertical list like the other two graphs via `renderSupMobile()` (`#sup-mobile-list`, rose dots `.mg-mobile-dot--rose`)
+  - Hover to slow · Click to visit
+- **Two bilingual cards** (static HTML in `index.html`) — each with a white logo chip, EN + FR descriptions, and EN + FR website links:
+  - **Tech Aide Montréal** — `techaidemontreal.org/en` (EN) · `techaidemontreal.org` (FR)
+  - **Centraide of Greater Montreal** — `centraide-mtl.org/en` (EN) · `centraide-mtl.org` (FR)
+
+### 🤝 Community Partner Events *(section 09)*
 Two partner cards, static HTML — no data file needed; edit directly in `index.html`.
 
 **1. /dev/mtl 2026** *(displayed first)* — 27 November 2026 · Concordia University Conference Centre, Montreal
@@ -147,7 +166,7 @@ Two partner cards, static HTML — no data file needed; edit directly in `index.
 - CTA button links to registration page
 - Discount code callout with link to Nicolas on LinkedIn
 
-### 🔔 Stay in the Loop *(section 09)*
+### 🔔 Stay in the Loop *(section 10)*
 - YouTube Subscribe button
 - Newsletter — live Substack link → [substack.com/@nicolasrosado](https://substack.com/@nicolasrosado) · no email collected by this site
 
@@ -221,6 +240,7 @@ The site has been fully audited (May 2026) and hardened against common web vulne
 - **Talk resources** — add links to `talkResources` in `data/talks.js` for talks currently showing "No resources for this talk" (Benedikt Stemmildt #7, Matthias Patzak #10)
 - **Speaker bios** — most bios are now official (provided by speakers); 4 still using generated bios: Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting — replace with official "About me" once available
 - **Ecosystem cards** — edit `data/ecosystem.js` to update any community card (event dates, descriptions, links, CTAs); also update the mobile orbit list in `index.html` (`#eco-mobile-list`) if communities are added or removed
+- **Community Support section** — edit the two cards directly in `index.html` (`#community-support`); to change the graph center or supported causes, update `SUPPORT_CENTER` / `SUPPORT_INITIATIVES` in `data/ecosystem.js` (mobile list is auto-generated by `renderSupMobile()`)
 - **Devoxx4Kids next event** — update `dateStatic` in `data/ecosystem.js` (~every 3 months)
 - **Montréal JUG next event** — update `titleStatic` in `data/ecosystem.js` monthly
 

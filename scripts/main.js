@@ -742,6 +742,16 @@
         }).join('');
     }
 
+    function renderSupMobile() {
+        var container = document.getElementById('sup-mobile-items');
+        if (!container || typeof SUPPORT_INITIATIVES === 'undefined') return;
+        container.innerHTML = SUPPORT_INITIATIVES.map(function(init, i) {
+            return '<a href="' + sanitizeUrl(init.url) + '" target="_blank" rel="noopener noreferrer" class="mg-mobile-item">' +
+                '<div class="mg-mobile-dot mg-mobile-dot--rose" style="animation-delay:' + (i * 0.15) + 's"></div>' +
+                '<div class="mg-mobile-text">' + sanitize(init.emoji + ' ' + init.name) + '</div></a>';
+        }).join('');
+    }
+
     loadMediumArticles();
     renderCommunityArticles();
     renderResources();
@@ -751,6 +761,7 @@
     renderEcosystem();
     renderBrainMobile();
     renderEcoMobile();
+    renderSupMobile();
     loadMeetupData();
     loadCraftersEvent();
     loadMenderConEvent();
@@ -994,6 +1005,149 @@
             requestAnimationFrame(ecoAnimate);
         }
         ecoAnimate();
+    })();
+
+    // ── COMMUNITY SUPPORT GRAPH ───────────────────────────────────────────────────
+
+    (function() {
+        var container = document.getElementById('supgraph-container');
+        if (!container || typeof SUPPORT_INITIATIVES === 'undefined') return;
+
+        var supSvg    = document.getElementById('sup-svg');
+        var supCanvas = document.getElementById('sup-circuit');
+        var supHit    = document.getElementById('sup-hit');
+        var NS        = 'http://www.w3.org/2000/svg';
+
+        function supEl(tag, attrs, p) {
+            var e = document.createElementNS(NS, tag);
+            Object.keys(attrs || {}).forEach(function(k){ e.setAttribute(k, attrs[k]); });
+            if (p) p.appendChild(e);
+            return e;
+        }
+
+        var W  = container.offsetWidth;
+        var H  = container.offsetHeight;
+        var CX = W/2, CY = H/2;
+        var R1 = Math.min(W,H) * 0.42;
+        var SUP_CENTER_R = Math.min(140, Math.min(W,H) * 0.30);
+        var SUP_FONT = '10px';
+
+        supCanvas.width = W; supCanvas.height = H;
+        supHit.width    = W; supHit.height    = H;
+        var supCtx = supCanvas.getContext('2d');
+
+        // Center image (Mental Health in Software Engineering Montreal)
+        var centerCfg = (typeof SUPPORT_CENTER !== 'undefined') ? SUPPORT_CENTER
+            : { image:'assets/brain-circle.jpg', url:'#', name:'Mental Health in Software Engineering Montreal' };
+        document.getElementById('sup-cmc').setAttribute('cx', CX);
+        document.getElementById('sup-cmc').setAttribute('cy', CY);
+        document.getElementById('sup-cmc').setAttribute('r',  SUP_CENTER_R);
+        supEl('image', { href:centerCfg.image, x:CX-SUP_CENTER_R, y:CY-SUP_CENTER_R,
+            width:SUP_CENTER_R*2, height:SUP_CENTER_R*2, mask:'url(#sup-cm)',
+            preserveAspectRatio:'xMidYMid slice' }, supSvg);
+        supEl('circle', { cx:CX,cy:CY,r:SUP_CENTER_R,fill:'url(#sup-cd)',mask:'url(#sup-cm)',style:'pointer-events:none' }, supSvg);
+        supEl('circle', { cx:CX,cy:CY,r:SUP_CENTER_R,fill:'url(#sup-rg)',mask:'url(#sup-cm)',style:'pointer-events:none' }, supSvg);
+
+        // Preload node icons
+        var supImgs = SUPPORT_INITIATIVES.map(function(init){
+            var im = new Image();
+            if (init.icon) im.src = init.icon;
+            return im;
+        });
+
+        var SUP_SPEED=0.00030, supBaseAngle=-Math.PI/2, supHovered=-1;
+        var supPositions=SUPPORT_INITIATIVES.map(function(){ return {x:0,y:0,r:0,w:0}; });
+
+        supHit.addEventListener('mousemove', function(e) {
+            var rect=supHit.getBoundingClientRect(), mx=e.clientX-rect.left, my=e.clientY-rect.top;
+            supHovered=-1;
+            supPositions.forEach(function(pos,i){
+                var nearChip = Math.hypot(mx-pos.x, my-pos.y) < pos.r+8;
+                var nearLabel = Math.abs(mx-pos.x) < pos.w/2+8 && Math.abs(my-(pos.y+pos.r+12)) < 12;
+                if (nearChip || nearLabel) supHovered=i;
+            });
+            // Center hub = Mental Health in SW Eng Montreal
+            if (supHovered<0 && Math.hypot(mx-CX, my-CY) < SUP_CENTER_R) supHovered=-2;
+            supHit.style.cursor=(supHovered>=0||supHovered===-2)?'pointer':'default';
+        });
+        supHit.addEventListener('click', function(){
+            if(supHovered>=0) window.open(SUPPORT_INITIATIVES[supHovered].url,'_blank','noopener noreferrer');
+            else if(supHovered===-2 && centerCfg.url) window.open(centerCfg.url,'_blank','noopener noreferrer');
+        });
+
+        function supDrawNode(i, x, y) {
+            var isHov=supHovered===i, init=SUPPORT_INITIATIVES[i];
+            var rChip=isHov?23:19, img=supImgs[i];
+            // glow
+            var gr=supCtx.createRadialGradient(x,y,0,x,y,isHov?44:34);
+            gr.addColorStop(0,isHov?'rgba(244,63,94,0.42)':'rgba(244,63,94,0.26)');
+            gr.addColorStop(1,'rgba(244,63,94,0)');
+            supCtx.beginPath();supCtx.arc(x,y,isHov?44:34,0,Math.PI*2);supCtx.fillStyle=gr;supCtx.fill();
+            // white badge chip with clipped logo
+            supCtx.save();
+            supCtx.beginPath();supCtx.arc(x,y,rChip,0,Math.PI*2);
+            supCtx.shadowColor='rgba(244,63,94,0.6)';supCtx.shadowBlur=isHov?20:12;
+            supCtx.fillStyle='#fff';supCtx.fill();
+            supCtx.shadowBlur=0;supCtx.clip();
+            if(img && img.complete && img.naturalWidth){
+                var s=rChip*2;
+                supCtx.drawImage(img, x-s/2, y-s/2, s, s);
+            } else {
+                supCtx.font=(rChip)+'px serif';supCtx.textAlign='center';supCtx.textBaseline='middle';
+                supCtx.fillText(init.emoji, x, y+1);
+            }
+            supCtx.restore();
+            // ring
+            supCtx.beginPath();supCtx.arc(x,y,rChip,0,Math.PI*2);
+            supCtx.strokeStyle=isHov?'rgba(251,113,133,0.9)':'rgba(244,63,94,0.45)';
+            supCtx.lineWidth=isHov?2:1.25;supCtx.stroke();
+            // label
+            supCtx.save();supCtx.textAlign='center';supCtx.textBaseline='middle';
+            supCtx.font=(isHov?'bold ':'')+SUP_FONT+' Space Mono, monospace';
+            if(isHov){supCtx.shadowColor='rgba(251,113,133,0.9)';supCtx.shadowBlur=12;}
+            supCtx.fillStyle=isHov?'#fda4af':'rgba(230,180,190,0.82)';
+            var label=init.name, tw=supCtx.measureText(label).width;
+            supCtx.fillText(label,x,y+rChip+12);
+            supCtx.restore();
+            supPositions[i]={x:x,y:y,r:rChip,w:tw};
+        }
+
+        function supDrawCenterLabel() {
+            var isHov=supHovered===-2;
+            supCtx.save();
+            supCtx.textAlign='center';supCtx.textBaseline='middle';
+            supCtx.font=(isHov?'bold ':'')+'10px Space Mono, monospace';
+            if(isHov){supCtx.shadowColor='rgba(56,189,248,0.9)';supCtx.shadowBlur=12;}
+            supCtx.fillStyle=isHov?'#7dd3fc':'rgba(190,225,240,0.85)';
+            supCtx.fillText('🧠 Mental Health in SW Eng MTL', CX, CY+SUP_CENTER_R+18);
+            supCtx.restore();
+        }
+
+        function supAnimate() {
+            var mult=supHovered!==-1?0.06:1;
+            supBaseAngle+=SUP_SPEED*mult;
+            supCtx.clearRect(0,0,W,H);
+            // orbit ring
+            supCtx.beginPath();supCtx.arc(CX,CY,R1,0,Math.PI*2);
+            supCtx.strokeStyle='rgba(244,63,94,0.12)';supCtx.lineWidth=1;
+            supCtx.setLineDash([3,9]);supCtx.stroke();supCtx.setLineDash([]);
+            // connecting lines center → node
+            for(var k=0;k<SUPPORT_INITIATIVES.length;k++){
+                var ang=supBaseAngle+(k/SUPPORT_INITIATIVES.length)*Math.PI*2;
+                var nx=CX+Math.cos(ang)*R1, ny=CY+Math.sin(ang)*R1;
+                var ex=CX+Math.cos(ang)*SUP_CENTER_R, ey=CY+Math.sin(ang)*SUP_CENTER_R;
+                supCtx.beginPath();supCtx.moveTo(ex,ey);supCtx.lineTo(nx,ny);
+                supCtx.strokeStyle=supHovered===k?'rgba(251,113,133,0.55)':'rgba(244,63,94,0.22)';
+                supCtx.lineWidth=1;supCtx.setLineDash([2,6]);supCtx.stroke();supCtx.setLineDash([]);
+            }
+            for(var i=0;i<SUPPORT_INITIATIVES.length;i++){
+                var angle=supBaseAngle+(i/SUPPORT_INITIATIVES.length)*Math.PI*2;
+                supDrawNode(i,CX+Math.cos(angle)*R1,CY+Math.sin(angle)*R1);
+            }
+            supDrawCenterLabel();
+            requestAnimationFrame(supAnimate);
+        }
+        supAnimate();
     })();
 
     // ── NAV HIGHLIGHT (scrollspy) ─────────────────────────────────────────────────

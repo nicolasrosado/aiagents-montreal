@@ -1,3 +1,15 @@
+// Community support graph (community-support section)
+// Center = Mental Health in Software Engineering Montreal; orbiting nodes = local causes we support.
+const SUPPORT_CENTER = {
+    name:  'Mental Health in Software Engineering Montreal',
+    image: 'assets/mental-health-mtl.png',
+    url:   'https://www.meetup.com/mental-health-in-software-engineering-montreal/',
+};
+const SUPPORT_INITIATIVES = [
+    { name:'Tech Aide Montréal',            emoji:'🤝', url:'https://www.techaidemontreal.org/en/', icon:'assets/techaide-icon.jpeg' },
+    { name:'Centraide of Greater Montreal', emoji:'❤️', url:'https://www.centraide-mtl.org/en/',    icon:'assets/centraide-logo.png'  },
+];
+
 // Orbit graph nodes (ecosystem-graph section)
 const INITIATIVES = [
     { name:'AI Agents Montreal',      emoji:'🤖', url:'https://www.meetup.com/ai-agent-montreal/' },
