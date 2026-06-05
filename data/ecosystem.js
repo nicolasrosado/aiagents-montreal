@@ -56,6 +56,7 @@ const ecosystemCommunities = [
         footer: [
             { cls: 'primary', href: 'https://www.meetup.com/mental-health-in-software-engineering-montreal/', label: '● Meetup ↗' },
             { cls: 'contact', href: 'https://www.linkedin.com/company/mental-health-in-software-engineering-montreal/', label: 'in LinkedIn ↗' },
+            { cls: 'sponsor', href: 'https://www.youtube.com/@mentalhealthtechmontreal', label: '▶ YouTube ↗' },
         ],
     },
     {
@@ -67,7 +68,7 @@ const ecosystemCommunities = [
             { type: 'inperson', label: '📍 In-Person' },
             { type: 'regular',  label: '🔁 1st Wed. of month' },
         ],
-        desc: 'A community for developers passionate about well-crafted software — testing, DDD, architecture, clean code, refactoring, pairing/mobbing, and legacy code. United by the Software Craftsmanship Manifesto.',
+        desc: 'A community for developers passionate about well-crafted software — testing, DDD, architecture, clean code, refactoring, pairing/mobbing, and legacy code. United by the Software Craftsmanship Manifesto.<br/><br/>📚 <a href="https://github.com/Software-Crafters-Montreal/meetups/tree/main" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Resources shared at our meetups ↗</a>',
         event: {
             label:       '📅 Next event',
             containerId: 'crafters-event',

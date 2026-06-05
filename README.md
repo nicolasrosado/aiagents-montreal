@@ -146,7 +146,7 @@ A "give back" section expressing that **AI Agents Montreal supports its sister m
   - **Mobile (<768px)** — switches to a vertical list like the other two graphs via `renderSupMobile()` (`#sup-mobile-list`, rose dots `.mg-mobile-dot--rose`)
   - Hover to slow · Click to visit
 - **Two bilingual cards** (static HTML in `index.html`) — each with a white logo chip, EN + FR descriptions, and EN + FR website links:
-  - **Tech Aide Montréal** — `techaidemontreal.org/en` (EN) · `techaidemontreal.org` (FR)
+  - **Tech Aide Montréal** — `techaidemontreal.org/en` (EN) · `techaidemontreal.org/fr` (FR)
   - **Centraide of Greater Montreal** — `centraide-mtl.org/en` (EN) · `centraide-mtl.org` (FR)
 
 ### 🤝 Community Partner Events *(section 09)*
