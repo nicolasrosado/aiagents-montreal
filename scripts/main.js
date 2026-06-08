@@ -400,6 +400,13 @@
 
     const communityArticles = [
         {
+            date: 'June 3, 2026',
+            title: 'The Faros Whiplash and The Systems View',
+            link: 'https://agileotter.blogspot.com/2026/06/draft-faros-whiplash-and-systems-view.html',
+            excerpt: 'A Faros report on AI-assisted development shows a paradox: code output rises, but so do waiting times and defects. Tim Ottinger reads it through a systems lens — coding sped up beyond the capacity of downstream processes, turning local speed into global bottlenecks.',
+            source: 'Agile Otter'
+        },
+        {
             date: 'May 22, 2026',
             title: 'What (Almost) Everyone Gets Wrong About TDD & BDD',
             link: 'https://www.linkedin.com/pulse/what-almost-everyone-gets-wrong-tdd-bdd-antony-marcano-shjye/',
