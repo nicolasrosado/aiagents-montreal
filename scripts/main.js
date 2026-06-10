@@ -414,6 +414,13 @@
             source: 'LinkedIn'
         },
         {
+            date: 'Feb 26, 2026',
+            title: 'Mutants in the Machine: The AI Illusion of Test-Driven Code',
+            link: 'https://www.linkedin.com/pulse/mutants-machine-ai-illusion-test-driven-code-antony-marcano-e1bwe/',
+            excerpt: 'Mutation testing exposes a gap in AI-generated "test-driven" code: agents implement more than the tests require, leaving bugs that mutants reveal. Antony Marcano argues real TDD is one Red-Green-Refactor loop at a time — and encoding that restraint into an agent is harder than getting it to write code.',
+            source: 'LinkedIn'
+        },
+        {
             date: 'Feb 9, 2026',
             title: 'Software Craftsmanship in the AI Era',
             link: 'https://www.codurance.com/publications/software-craftsmanship-in-the-ai-era',
