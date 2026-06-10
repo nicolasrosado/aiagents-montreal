@@ -400,6 +400,13 @@
 
     const communityArticles = [
         {
+            date: 'June 9, 2026',
+            title: 'CLEAR: Software Design Principles for the Agentic Age',
+            link: 'https://adamtornhill.substack.com/p/clear-software-design-principles',
+            excerpt: 'Where SOLID optimizes for human maintainability, Adam Tornhill proposes CLEAR — a set of design principles for AI-assisted development. The goal: explicit design that lets agents infer structure and intent, making codebases safer and cheaper to evolve.',
+            source: 'Substack'
+        },
+        {
             date: 'June 3, 2026',
             title: 'The Faros Whiplash and The Systems View',
             link: 'https://agileotter.blogspot.com/2026/06/draft-faros-whiplash-and-systems-view.html',
