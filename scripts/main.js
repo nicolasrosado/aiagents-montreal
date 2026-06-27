@@ -400,6 +400,90 @@
 
     const communityArticles = [
         {
+            date: 'June 20, 2026',
+            title: 'The best tool for your agentic AI frameworks, human feedback',
+            link: 'https://open.substack.com/pub/javil/p/the-best-tool-for-your-agentic-ai',
+            excerpt: 'Human feedback is the real tool for agentic AI: Javier Lopez argues humans should steer agents through test-driven development — validating the direction before code is generated, then refining the design afterward.',
+            source: 'Substack'
+        },
+        {
+            date: 'June 13, 2026',
+            title: 'Everything is a Nail: The Danger of the Software Golden Hammer',
+            link: 'https://open.substack.com/pub/javil/p/everything-is-a-nail-the-danger-of',
+            excerpt: 'Javier Lopez warns against the software golden hammer — applying a favourite pattern as a universal solution adds complexity instead of solving the real problem. AI is just the latest hammer.',
+            source: 'Substack'
+        },
+        {
+            date: 'June 8, 2026',
+            title: 'Loop Engineering',
+            link: 'https://open.substack.com/pub/addyo/p/loop-engineering',
+            excerpt: 'Addy Osmani breaks down loop engineering — designing the agent prompting loop from five building blocks (automations, worktrees, skills, plugins, sub-agents) so AI work becomes a repeatable system rather than ad-hoc chat.',
+            source: 'Substack'
+        },
+        {
+            date: 'June 5, 2026',
+            title: 'The Intent Debt',
+            link: 'https://addyosmani.com/blog/intent-debt/',
+            excerpt: 'Addy Osmani names intent debt — the externalized rationale and goals behind a design that agents cannot recover. It compounds as agentic engineering spreads: an agent can refactor code but cannot generate the missing intent.',
+            source: 'addyosmani.com'
+        },
+        {
+            date: 'May 24, 2026',
+            title: 'The Orchestration Tax',
+            link: 'https://addyosmani.com/blog/orchestration-tax/',
+            excerpt: 'Addy Osmani identifies the orchestration tax: human attention is the serial bottleneck in agentic workflows, so spawning more agents does not raise productivity without the right orchestration architecture.',
+            source: 'addyosmani.com'
+        },
+        {
+            date: 'May 5, 2026',
+            title: 'Cognitive Surrender',
+            link: 'https://addyosmani.com/blog/cognitive-surrender/',
+            excerpt: 'Addy Osmani describes cognitive surrender — accepting model outputs without forming an independent view — and how it quietly accumulates comprehension debt across a codebase.',
+            source: 'addyosmani.com'
+        },
+        {
+            date: 'March 23, 2026',
+            title: 'From Technical Debt to Cognitive and Intent Debt: Rethinking Software Health in the Age of AI',
+            link: 'https://arxiv.org/abs/2603.22106',
+            excerpt: 'A paper by Margaret-Anne Storey proposes a Triple-Debt Model — technical, cognitive, and intent debt — for rethinking software health as AI accelerates development and risk accumulates.',
+            source: 'arXiv'
+        },
+        {
+            date: 'March 21, 2026',
+            title: 'Expectation-Driven Development: A Validation Framework for the Age of AI Agents',
+            link: 'https://open.substack.com/pub/a4al6a/p/expectation-driven-development-a',
+            excerpt: 'Andrea Laforgia proposes Expectation-Driven Development: natural-language expectations paired with AI-generated, executed evidence to validate code in agent-driven workflows — evidence over narration.',
+            source: 'Substack'
+        },
+        {
+            date: 'March 14, 2026',
+            title: 'Comprehension Debt: the hidden cost of AI generated code',
+            link: 'https://addyosmani.com/blog/comprehension-debt/',
+            excerpt: 'Addy Osmani names comprehension debt — the widening gap between how much code AI produces and how much the team actually understands — a hidden cost that risks future failures.',
+            source: 'addyosmani.com'
+        },
+        {
+            date: 'February 9, 2026',
+            title: 'How Generative and Agentic AI Shift Concern from Technical Debt to Cognitive Debt',
+            link: 'http://margaretstorey.com/blog/2026/02/09/cognitive-debt/',
+            excerpt: 'Margaret-Anne Storey reframes the real risk of AI-accelerated development: not technical debt but cognitive debt — the erosion of shared understanding among developers.',
+            source: 'margaretstorey.com'
+        },
+        {
+            date: 'January 31, 2026',
+            title: 'Causality, Learning and Software',
+            link: 'https://open.substack.com/pub/javil/p/causality-learning-and-software',
+            excerpt: 'Javier Lopez connects learning, causality and time: AI-generated code without human understanding creates verification challenges — telling a bug from a feature gets harder when no one has built the mental model.',
+            source: 'Substack'
+        },
+        {
+            date: 'June 10, 2025',
+            title: 'Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant',
+            link: 'https://www.media.mit.edu/publications/your-brain-on-chatgpt/',
+            excerpt: 'An MIT Media Lab study (Kosmyna et al.) finds LLM-assisted essay writing correlates with reduced brain connectivity and weaker memory of what writers produced — the authors call it cognitive debt.',
+            source: 'MIT Media Lab'
+        },
+        {
             date: 'June 9, 2026',
             title: 'CLEAR: Software Design Principles for the Agentic Age',
             link: 'https://adamtornhill.substack.com/p/clear-software-design-principles',
