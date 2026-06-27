@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Augmenting or Overwhelming? — A research suite for software teams in the age of AI</title>
+<meta name="description" content="A free research suite for software teams in the age of AI — three research papers, a practitioner ebook, a maturity scale, and an interactive team tool. Read through one lens: Herbert Simon's bounded rationality. A gift to the software community (CC BY-NC-SA).">
+<style>
+  :root{
+    --ink:#111; --body:#1a1a1a; --muted:#555; --faint:#888; --hair:#e3e3e3;
+    --bg:#ffffff; --panel:#f7f7f7; --panel2:#fafafa;
+    --sans:'Helvetica Neue',Arial,sans-serif; --serif:Georgia,'Times New Roman',serif;
+    --maxw:980px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--body);font-family:var(--serif);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--ink)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  h1,h2,h3,.k{font-family:var(--sans)}
+  .k{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--faint);font-weight:700}
+
+  /* hero */
+  header.hero{border-bottom:1px solid var(--hair);padding:72px 0 56px}
+  .hero .k{margin-bottom:22px}
+  .hero h1{font-size:42px;line-height:1.12;font-weight:800;color:var(--ink);margin:0 0 18px}
+  .hero .lede{font-size:21px;color:var(--muted);margin:0 0 28px;max-width:42em}
+  .hero .lede em{font-style:italic;color:var(--ink)}
+  .tags{display:flex;flex-wrap:wrap;gap:10px;font-family:var(--sans);font-size:13px}
+  .tag{border:1px solid var(--hair);border-radius:999px;padding:5px 13px;color:var(--muted)}
+
+  /* thesis band */
+  .thesis{background:var(--ink);color:#fff;margin:0;padding:40px 0}
+  .thesis p{font-family:var(--serif);font-style:italic;font-size:23px;line-height:1.5;margin:0;max-width:30em}
+  .thesis strong{font-style:normal;font-weight:700}
+
+  section{padding:54px 0}
+  section + section{border-top:1px solid var(--hair)}
+  .sec-h{margin:0 0 6px;font-size:13px}
+  .sec-sub{color:var(--muted);font-size:16px;margin:0 0 28px;max-width:44em}
+  h2.group{font-size:24px;font-weight:800;color:var(--ink);margin:0 0 6px}
+
+  /* cards */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}.hero h1{font-size:32px}}
+  .card{border:1px solid var(--hair);background:var(--bg);padding:22px 22px 20px;display:flex;flex-direction:column}
+  .card .doctype{font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);font-weight:700;margin-bottom:10px}
+  .card h3{font-size:19px;line-height:1.25;font-weight:700;color:var(--ink);margin:0 0 8px}
+  .card p{font-size:15.5px;color:var(--muted);line-height:1.55;margin:0 0 18px;flex:1}
+  .card.feature{grid-column:1 / -1;background:var(--panel);border-color:#d8d8d8}
+
+  /* buttons */
+  .btns{display:flex;flex-wrap:wrap;gap:10px;font-family:var(--sans)}
+  .btn{font-size:13px;font-weight:700;letter-spacing:.02em;padding:9px 15px;border-radius:6px;border:1px solid var(--ink);background:var(--ink);color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn[aria-disabled="true"]{border-color:#cfcfcf;background:#f0f0f0;color:#a0a0a0;cursor:not-allowed}
+  .soon{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#b0760e;background:#fdf3df;border:1px solid #f0dcab;border-radius:4px;padding:2px 6px}
+
+  /* about / license */
+  .panelbox{background:var(--panel);border-left:4px solid var(--ink);padding:22px 24px;margin:0}
+  .stats{display:flex;gap:40px;flex-wrap:wrap;margin:18px 0 0}
+  .stat .n{font-family:var(--sans);font-size:30px;font-weight:800;color:var(--ink);line-height:1}
+  .stat .l{font-family:var(--sans);font-size:12px;color:var(--faint);text-transform:uppercase;letter-spacing:.08em;margin-top:6px}
+  .license{font-size:15.5px;color:var(--muted)}
+  .license strong{color:var(--ink)}
+
+  footer{border-top:1px solid var(--hair);padding:34px 0 56px;font-family:var(--sans);font-size:13px;color:var(--faint)}
+  footer a{color:var(--muted)}
+  .note{font-family:var(--sans);font-size:12.5px;color:var(--faint);margin-top:14px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="k">A research suite for software teams in the age of AI</div>
+    <h1>Will AI <em>augment</em> your team — or <em>overwhelm</em> it?</h1>
+    <p class="lede">Multi-year practitioner research, drawn from a community of speakers and read through a single lens — Herbert&nbsp;Simon's <em>bounded rationality</em> — turned into practical instruments any team can use. <strong style="color:var(--ink)">A gift to the software community.</strong></p>
+    <div class="tags">
+      <span class="tag">Bounded rationality</span>
+      <span class="tag">Psychological safety</span>
+      <span class="tag">Cognitive load</span>
+      <span class="tag">Team maturity</span>
+      <span class="tag">Free · CC BY-NC-SA</span>
+    </div>
+    <p class="note" style="margin-top:18px">🇬🇧 English first. 🇫🇷 <strong style="color:var(--muted)">Version française à venir</strong> — the whole suite is bilingual.</p>
+  </div>
+</header>
+
+<div class="thesis">
+  <div class="wrap">
+    <p>AI amplifies whatever already exists. The real question isn't <em>"is AI good or bad for engineering?"</em> — it's <strong>how high can your team climb, together?</strong> Get the design right and AI augments; neglect it and AI overwhelms.</p>
+  </div>
+</div>
+
+<!-- INTERACTIVE TOOL — featured -->
+<section id="start">
+  <div class="wrap">
+    <div class="k sec-h">Start here</div>
+    <h2 class="group">The interactive team tool</h2>
+    <p class="sec-sub">If you only try one thing: run the locator. It walks your team through nine axes, finds your floor, and names the single highest-leverage next move — without judging.</p>
+    <div class="grid">
+      <div class="card feature">
+        <div class="doctype">Claude skill · interactive</div>
+        <h3>maturity-self-locator</h3>
+        <p>A warm, non-judgmental self-assessment you run in conversation. It locates your team on the Bounded-Rationality Maturity Scale, zooms into psychological safety when that's the floor, and suggests matching levers from the practitioner toolbox. A living tool, continuously improved.</p>
+        <div class="btns">
+          <span class="btn" aria-disabled="true">Get the skill <span class="soon">coming soon</span></span>
+          <a class="btn ghost" href="#suite">See how it fits ↓</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH PAPERS -->
+<section id="suite">
+  <div class="wrap">
+    <div class="k sec-h">Reading angle 1 — practice analysis</div>
+    <h2 class="group">Research papers</h2>
+    <p class="sec-sub">State-of-the-art analysis of a practitioner community: 20 AI Agents Montréal talks and the CraftCode podcast, distilled into patterns, tensions, and one thesis.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="doctype">White paper 1</div>
+        <h3>State of AI Agents Practices</h3>
+        <p>The practices and patterns of agentic development, drawn from 20 talks: context engineering, tests-as-contract, spec-driven work, code health, the tensions teams actually hit.</p>
+        <div class="btns"><span class="btn" aria-disabled="true">Download EN <span class="soon">soon</span></span><span class="btn ghost" aria-disabled="true">FR · bientôt</span></div>
+      </div>
+
+      <div class="card">
+        <div class="doctype">White paper 2</div>
+        <h3>Software Craftsmanship in the Age of AI</h3>
+        <p>Craft fundamentals from the CraftCode podcast — simple design, TDD and its variants, trunk-based development, flow metrics — and why they matter more, not less, with AI in the loop.</p>
+        <div class="btns"><span class="btn" aria-disabled="true">Download EN <span class="soon">soon</span></span><span class="btn ghost" aria-disabled="true">FR · bientôt</span></div>
+      </div>
+
+      <div class="card">
+        <div class="doctype">White paper 3</div>
+        <h3>Craft First, Then AI</h3>
+        <p>The cross-series thesis: craft is the prerequisite for AI to help rather than harm. Where the two series converge, and what it means for how teams adopt AI.</p>
+        <div class="btns"><span class="btn" aria-disabled="true">Download EN <span class="soon">soon</span></span><span class="btn ghost" aria-disabled="true">FR · bientôt</span></div>
+      </div>
+
+      <div class="card">
+        <div class="doctype">White paper 4 · analytical companion</div>
+        <h3>Augmenting or Overwhelming?</h3>
+        <p>The synthesis, read through Herbert Simon's bounded rationality: AI as an amplifier, knowledge and intent debt, the isolation trap, and the new mental-health failure modes of the AI era — with the evidence behind the practitioner suite.</p>
+        <div class="btns"><span class="btn" aria-disabled="true">Download EN <span class="soon">soon</span></span><span class="btn ghost" aria-disabled="true">FR · bientôt</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRACTITIONER SUITE -->
+<section id="practitioner">
+  <div class="wrap">
+    <div class="k sec-h">Reading angle 2 — well-being &amp; bounded rationality</div>
+    <h2 class="group">The practitioner suite</h2>
+    <p class="sec-sub">The same research, re-angled for the person and the team: daily stress, psychological safety, and a growth path from isolation to a team that thinks — and grows — together.</p>
+    <div class="grid">
+
+      <div class="card">
+        <div class="doctype">Ebook · practitioner guide</div>
+        <h3>How to Reduce Your Daily Stress in the Software Industry</h3>
+        <p>A field guide to a calmer day: psychological safety, the stress physiology behind overload, and why starting with a test settles the mind — in the age of AI.</p>
+        <div class="btns"><span class="btn" aria-disabled="true">Download EN <span class="soon">soon</span></span><span class="btn ghost" aria-disabled="true">FR · bientôt</span></div>
+      </div>
+
+      <div class="card">
+        <div class="doctype">Framework</div>
+        <h3>The Bounded-Rationality Maturity Scale</h3>
+        <p>Five levels — from fear to a resilient learning organization — each read through psychological safety, cognitive load, the shared mental model, and Simon's three bounds. A growth path, not a verdict.</p>
+        <div class="btns"><span class="btn" aria-disabled="true">Download EN <span class="soon">soon</span></span><span class="btn ghost" aria-disabled="true">FR · bientôt</span></div>
+      </div>
+
+      <div class="card">
+        <div class="doctype">Instrument</div>
+        <h3>Where Is Your Team on the Scale?</h3>
+        <p>The companion self-locator: a 9-axis radar your team rates honestly. Your level is the lowest axis; the tool names the one next move — and the psychological-safety deep-dive when that's the floor.</p>
+        <div class="btns"><span class="btn" aria-disabled="true">Download EN <span class="soon">soon</span></span><span class="btn ghost" aria-disabled="true">FR · bientôt</span></div>
+      </div>
+
+      <div class="card">
+        <div class="doctype">Interactive · Claude skill</div>
+        <h3>maturity-self-locator</h3>
+        <p>The self-locator made conversational — it runs the nine axes with you, computes the floor, and suggests matching levers. <a href="#start">Featured above ↑</a></p>
+        <div class="btns"><span class="btn" aria-disabled="true">Get the skill <span class="soon">soon</span></span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / PROVENANCE -->
+<section id="about">
+  <div class="wrap">
+    <div class="k sec-h">About this research</div>
+    <div class="panelbox">
+      <p style="margin:0;color:var(--muted);font-size:16.5px">Curated and written by <strong style="color:var(--ink)">Nicolas Rosado</strong> — software engineer; host of the <em>CraftCode</em> podcast; organizer of <em>AI Agents Montréal</em> and <em>Mental Health in Software Engineering Montréal</em>; co-organizer of <em>Software Crafters Montréal</em>. He invited each speaker, drew the threads together, and developed the analytical lens. The selection, structure, theses, and conclusions are his own.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">28</div><div class="l">practitioners</div></div>
+        <div class="stat"><div class="n">12</div><div class="l">countries</div></div>
+        <div class="stat"><div class="n">2</div><div class="l">talk series</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LICENSE -->
+<section id="license">
+  <div class="wrap">
+    <div class="k sec-h">License — shared in the spirit of the community</div>
+    <p class="license">Released under <strong>Creative Commons Attribution–NonCommercial–ShareAlike (CC BY-NC-SA 4.0)</strong>. You're warmly encouraged to read it, share it, translate it, quote it, and build on it — three simple conditions keep it in the spirit it was written in: <strong>credit the author</strong> (so the ideas, and the practitioners they came from, stay traceable), <strong>keep it non-commercial</strong> (it's a gift to the community, not a product to resell), and <strong>share alike</strong> (any adaptation stays just as open). Craft advances through practitioners who openly pass their knowledge to the next generation; this license simply formalizes that spirit. <span style="color:var(--faint)">The license covers the author's own writing only; third-party quotations remain their owners' property.</span></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Nicolas Rosado · A gift to the software community · CC BY-NC-SA 4.0</div>
+    <div class="note">Downloads open at publication. In the meantime, featured speakers and authors are warmly invited to review their mentions — reach out and you'll get early access.</div>
+    <div class="note">The right to make mistakes this work advocates for applies to its author too — if you spot an inconsistency, constructive feedback is warmly welcome.</div>
+    <!-- BUILD NOTE (remove before publish): downloads are intentionally disabled ("coming soon"); wire the buttons to the private unlisted link (courtesy phase) or the public GitHub release (launch) when ready. FR landing to follow once the French docs are re-read. -->
+  </div>
+</footer>
+
+</body>
+</html>
