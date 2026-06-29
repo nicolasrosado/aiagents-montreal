@@ -207,6 +207,7 @@
         <div class="articles-tabs">
             <button class="art-tab art-tab--active" data-tab="resources">🔗 Talk Resources</button>
             <button class="art-tab" data-tab="articles">✍️ Articles</button>
+            <button class="art-tab" data-tab="talks">🎥 Community Talks (videos)</button>
         </div>
 
         <!-- ARTICLES TAB -->
@@ -216,13 +217,6 @@
                 <div class="section-line"></div>
             </div>
             <div id="community-articles" class="articles-grid"></div>
-            <div style="margin-top:2.5rem">
-                <div class="section-header" style="margin-bottom:1rem">
-                    <h3 style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin:0">Community Talks (videos)</h3>
-                    <div class="section-line"></div>
-                </div>
-                <div id="community-talks" class="articles-grid"></div>
-            </div>
             <div style="margin-top:2.5rem">
                 <div class="section-header" style="margin-bottom:1rem">
                     <h3 style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin:0">My Own Articles</h3>
@@ -240,6 +234,14 @@
         </div>
 
         <!-- RESOURCES TAB -->
+        <div id="tab-talks" class="art-panel" style="display:none">
+            <div class="section-header" style="margin-bottom:1rem">
+                <h3 style="font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin:0">Community Talks — videos Nicolas finds useful for the community</h3>
+                <div class="section-line"></div>
+            </div>
+            <div id="community-talks" class="articles-grid"></div>
+        </div>
+
         <div id="tab-resources" class="art-panel">
             <div class="resources-list" id="resources-list"></div>
         </div>

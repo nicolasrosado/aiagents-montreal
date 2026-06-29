@@ -392,6 +392,7 @@
             tab.classList.add('art-tab--active');
             const target = tab.dataset.tab;
             document.getElementById('tab-articles').style.display = target === 'articles' ? 'block' : 'none';
+            document.getElementById('tab-talks').style.display = target === 'talks' ? 'block' : 'none';
             document.getElementById('tab-resources').style.display = target === 'resources' ? 'block' : 'none';
         });
     });
