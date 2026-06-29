@@ -534,6 +534,52 @@
         },
     ];
 
+    const communityTalks = [
+        {
+            speakers: 'Josian Chevalier',
+            title: 'Getting Started with DDD',
+            link: 'https://www.youtube.com/watch?v=I7DawnCS4PQ',
+            excerpt: "Getting started with Domain-Driven Design without fighting your organization — a tour of DDD's tactical and strategic approaches. (In French.)"
+        },
+        {
+            speakers: 'Julien Topçu & Josian Chevalier',
+            title: 'Model Tension Heuristics',
+            link: 'https://www.youtube.com/watch?v=EZTl9FH5AFQ',
+            excerpt: 'Heuristics for spotting when a model is stretched past its coherence ("I smell it in the pull requests") — and when to renew it rather than reuse it.'
+        },
+        {
+            speakers: 'Thomas Salmon',
+            title: 'Comment saboter son projet sans même se rendre compte',
+            link: 'https://www.youtube.com/watch?v=JoDYg8G9T_4',
+            excerpt: 'How teams quietly sabotage their own projects — procrastination, water-scrum-fall, and putting people first. (In French.)'
+        },
+        {
+            speakers: 'Kevin Lalumière',
+            title: 'Échanges avec les collègues qui refusent les bonnes pratiques',
+            link: 'https://www.youtube.com/watch?v=O3893F3aDQo',
+            excerpt: 'Dealing with colleagues who resist good practices: psychological reactance, and why the state of the relationship matters before the argument. (In French.)'
+        },
+        {
+            speakers: 'Joseph Pelrine & Weronika Ilczyszyn',
+            title: 'Beyond Psychological Safety',
+            link: 'https://www.youtube.com/watch?v=gv115MxKs7c',
+            excerpt: 'Why psychological safety is necessary but not sufficient — and what a team needs on top of it (social perceptiveness, receivable feedback).'
+        }
+    ];
+
+    function renderCommunityTalks() {
+        const container = document.getElementById('community-talks');
+        if (!container) return;
+        container.innerHTML = communityTalks.map(t => `
+      <a href="${sanitizeUrl(t.link)}" target="_blank" class="article-card" rel="noopener noreferrer">
+        <div class="article-date">${t.speakers}</div>
+        <div class="article-title">${t.title}</div>
+        <div class="article-excerpt">${t.excerpt}</div>
+        <div class="article-readmore">Watch on YouTube ↗</div>
+      </a>
+    `).join('');
+    }
+
     function renderCommunityArticles() {
         const container = document.getElementById('community-articles');
         if (!container) return;
@@ -859,6 +905,7 @@
 
     loadMediumArticles();
     renderCommunityArticles();
+    renderCommunityTalks();
     renderResources();
     loadCraftCodeEpisode();
 
