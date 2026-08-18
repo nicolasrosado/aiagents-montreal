@@ -28,12 +28,12 @@ const ecosystemCommunities = [
     {
         emoji: '🧠',
         name: 'Mental Health in Software Engineering',
-        type: 'Meetup · Montreal',
+        type: 'Meetup - Montreal',
         badges: [
             { type: 'online',     label: '🌐 Online' },
             { type: 'occasional', label: '📆 On demand' },
         ],
-        desc: 'A safe community space where developers, engineers, and tech professionals can openly discuss mental health — burnout, imposter syndrome, anxiety, work-life balance — without judgment. Because building software is also a human experience.',
+        desc: 'A safe community space where developers, engineers, and tech professionals can openly discuss mental health - burnout, imposter syndrome, anxiety, work-life balance - without judgment. Because building software is also a human experience.',
         event: {
             label: '📅 Next event',
             titleStatic: 'See upcoming events on Meetup',
@@ -43,7 +43,7 @@ const ecosystemCommunities = [
             {
                 type: 'community-note',
                 icon: '💙',
-                html: '<strong>Free &amp; independent</strong> — These meetups are a personal and financial investment by the organizer. They are <strong>100% free</strong> for all attendees. Please check the waiting room chat for any announcements before the event starts.<br/><br/>We are a <strong>community of professionals</strong> — kindness, empathy, and respect are at the heart of everything we do here. <strong>Psychological safety and humility</strong> are the foundation: everyone\'s experience is valid, and vulnerability is a strength. This is a safe space to share openly. 🙏',
+                html: '<strong>Free &amp; independent</strong> - These meetups are a personal and financial investment by the organizer. They are <strong>100% free</strong> for all attendees. Please check the waiting room chat for any announcements before the event starts.<br/><br/>We are a <strong>community of professionals</strong> - kindness, empathy, and respect are at the heart of everything we do here. <strong>Psychological safety and humility</strong> are the foundation: everyone\'s experience is valid, and vulnerability is a strength. This is a safe space to share openly. 🙏',
             },
             {
                 type:    'suggest-talk',
@@ -63,12 +63,12 @@ const ecosystemCommunities = [
         cardId: 'crafters-card',
         emoji: '🛠️',
         name: 'Software Crafters Montréal',
-        type: 'Guild · 505 Members',
+        type: 'Guild - 505 Members',
         badges: [
             { type: 'inperson', label: '📍 In-Person' },
             { type: 'regular',  label: '🔁 1st Wed. of month' },
         ],
-        desc: 'A community for developers passionate about well-crafted software — testing, DDD, architecture, clean code, refactoring, pairing/mobbing, and legacy code. United by the Software Craftsmanship Manifesto.<br/><br/>📚 <a href="https://github.com/Software-Crafters-Montreal/meetups/tree/main" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Resources shared at our meetups ↗</a>',
+        desc: 'A community for developers passionate about well-crafted software - testing, DDD, architecture, clean code, refactoring, pairing/mobbing, and legacy code. United by the Software Craftsmanship Manifesto.<br/><br/>📚 <a href="https://github.com/Software-Crafters-Montreal/meetups/tree/main" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Resources shared at our meetups ↗</a>',
         event: {
             label:       '📅 Next event',
             containerId: 'crafters-event',
@@ -100,12 +100,12 @@ const ecosystemCommunities = [
     {
         emoji: '🤖',
         name: 'AI Agents Montreal',
-        type: 'Meetup · Online · Worldwide',
+        type: 'Meetup - Online - Worldwide',
         badges: [
             { type: 'online',     label: '🌐 Online' },
             { type: 'occasional', label: '📆 On demand' },
         ],
-        desc: 'The community you\'re on right now! A global online meetup exploring AI agents, agentic systems, and the engineering practices around them — bringing world-class speakers to developers everywhere.',
+        desc: 'The community you\'re on right now! A global online meetup exploring AI agents, agentic systems, and the engineering practices around them - bringing world-class speakers to developers everywhere.',
         event: {
             label:   '📅 Next event',
             titleId: 'aiagents-eco-title',
@@ -115,11 +115,11 @@ const ecosystemCommunities = [
             {
                 type: 'community-note',
                 icon: '💙',
-                html: '<strong>Free &amp; independent</strong> — These meetups are a personal and financial investment by the organizer. They are <strong>100% free</strong> for all attendees. Please check the waiting room chat for any announcements before the event starts (speaker delays, technical issues, etc.).<br/><br/>We are a <strong>community of professionals</strong> — we ask everyone to engage with kindness, curiosity, and respect. Speakers volunteer their time and expertise; let\'s honour that with constructive and generous feedback. Our foundation is <strong>psychological safety and humility</strong> — no question is too basic, no idea too bold. 🙏',
+                html: '<strong>Free &amp; independent</strong> - These meetups are a personal and financial investment by the organizer. They are <strong>100% free</strong> for all attendees. Please check the waiting room chat for any announcements before the event starts (speaker delays, technical issues, etc.).<br/><br/>We are a <strong>community of professionals</strong> - we ask everyone to engage with kindness, curiosity, and respect. Speakers volunteer their time and expertise; let\'s honour that with constructive and generous feedback. Our foundation is <strong>psychological safety and humility</strong> - no question is too basic, no idea too bold. 🙏',
             },
             {
                 type:    'suggest-talk',
-                desc:    'Got a topic around AI agents, agentic systems, or engineering practices? Reach out via LinkedIn — all speakers are contacted through this channel.',
+                desc:    'Got a topic around AI agents, agentic systems, or engineering practices? Reach out via LinkedIn - all speakers are contacted through this channel.',
                 btnText: 'Suggest a Talk ↗',
                 btnUrl:  'https://www.linkedin.com/in/nicolas-rosado-a97b3393',
             },
@@ -133,12 +133,12 @@ const ecosystemCommunities = [
     {
         emoji: '⚒️',
         name: 'AI Craftspeople Guild',
-        type: 'Global Movement · Professional Code of Conduct',
+        type: 'Global Movement - Professional Code of Conduct',
         badges: [
             { type: 'online',     label: '🌐 Online' },
             { type: 'occasional', label: '📆 Occasional' },
         ],
-        desc: 'A professional movement advocating for quality, integrity, and human-centered AI in software engineering. ACG promotes a code of conduct for engineers using AI — pushing back against half-baked outputs, snake oil tactics, and the erosion of software craft. A worship-free zone focused on real engineering standards.',
+        desc: 'A professional movement advocating for quality, integrity, and human-centered AI in software engineering. ACG promotes a code of conduct for engineers using AI - pushing back against half-baked outputs, snake oil tactics, and the erosion of software craft. A worship-free zone focused on real engineering standards.',
         event: {
             label:       '📅 Next event',
             titleStatic: 'See upcoming events on LinkedIn',
@@ -154,16 +154,16 @@ const ecosystemCommunities = [
     {
         emoji: '🏙️',
         name: '/dev/mtl',
-        type: 'Conference · Montreal\'s Community-Driven Tech Event',
+        type: 'Conference - Montreal\'s Community-Driven Tech Event',
         badges: [
             { type: 'inperson', label: '📍 In-Person' },
             { type: 'regular',  label: '🔁 Annual Conference' },
         ],
-        desc: 'La conférence des communautés tech de Montréal — Montreal\'s community-driven tech conference. A celebration of the local developer ecosystem, bringing together multiple communities under one roof for talks, workshops, and networking.',
+        desc: 'La conférence des communautés tech de Montréal - Montreal\'s community-driven tech conference. A celebration of the local developer ecosystem, bringing together multiple communities under one roof for talks, workshops, and networking.',
         event: {
             label:       '📅 Next edition',
             titleStatic: '/dev/mtl 2026',
-            dateStatic:  'Date TBA — visit dev-mtl.ca for updates',
+            dateStatic:  'Date TBA - visit dev-mtl.ca for updates',
         },
         blocks: [
             {
@@ -185,16 +185,16 @@ const ecosystemCommunities = [
     {
         emoji: '👾',
         name: 'Devoxx4Kids Québec',
-        type: 'Community · Kids &amp; Technology · Montréal',
+        type: 'Community - Kids &amp; Technology - Montréal',
         badges: [
             { type: 'inperson', label: '📍 In-Person' },
             { type: 'regular',  label: '🔁 Every ~3 months' },
         ],
-        desc: 'Notre but est de faire découvrir l\'informatique, la robotique et l\'ingénierie à nos jeunes — introducing kids to programming, robotics, and engineering through hands-on workshops. A bilingual (FR/EN) community rooted in Montréal, part of the global Devoxx4Kids movement.',
+        desc: 'Notre but est de faire découvrir l\'informatique, la robotique et l\'ingénierie à nos jeunes - introducing kids to programming, robotics, and engineering through hands-on workshops. A bilingual (FR/EN) community rooted in Montréal, part of the global Devoxx4Kids movement.',
         event: {
             label:       '📅 Next event',
-            titleStatic: '~June 2026 — approximately every 3 months',
-            dateStatic:  'Last event: Sat. March 21, 2026 · Follow on Bluesky or subscribe to their mailing list for the exact date.',
+            titleStatic: '~June 2026 - approximately every 3 months',
+            dateStatic:  'Last event: Sat. March 21, 2026, Follow on Bluesky or subscribe to their mailing list for the exact date.',
         },
         blocks: [],
         footer: [
@@ -206,22 +206,22 @@ const ecosystemCommunities = [
     {
         emoji: '☕',
         name: 'Montréal JUG',
-        type: 'Community · Java · Montréal',
+        type: 'Community - Java - Montréal',
         badges: [
             { type: 'inperson', label: '📍 In-Person' },
             { type: 'regular',  label: '🔁 Monthly' },
         ],
-        desc: 'Le Montréal Java User Group rassemble les développeurs Java et JVM de Montréal pour échanger des idées et discuter des avancées technologiques. Partenaire de Devoxx4Kids Québec — deux communautés unies par le code, le partage et la passion.',
+        desc: 'Le Montréal Java User Group rassemble les développeurs Java et JVM de Montréal pour échanger des idées et discuter des avancées technologiques. Partenaire de Devoxx4Kids Québec - deux communautés unies par le code, le partage et la passion.',
         event: {
             label:       '📅 Next event',
-            titleStatic: 'April 30, 2026 — Reactive Programming avec Spring WebFlux',
-            dateHtml:    '🏠 Hosted by Web Hosting Canada · <a href="https://www.meetup.com/montreal-jug/events/314465570/" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">RSVP on Meetup ↗</a>',
+            titleStatic: 'April 30, 2026 - Reactive Programming avec Spring WebFlux',
+            dateHtml:    '🏠 Hosted by Web Hosting Canada, <a href="https://www.meetup.com/montreal-jug/events/314465570/" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">RSVP on Meetup ↗</a>',
         },
         blocks: [
             {
                 type:        'guest-speaker',
                 icon:        '🎙️',
-                nameHtml:    '<strong style="color:#a78bfa">Nicolas Rosado — Guest Speaker</strong>',
+                nameHtml:    '<strong style="color:#a78bfa">Nicolas Rosado - Guest Speaker</strong>',
                 talkHtml:    'Deuxième partie : <em>Pourquoi commencer par un test permet-il de réduire le stress ?</em>',
                 youtubeUrl:  'https://www.youtube.com/watch?v=IzVKECIsjs4',
                 youtubeLabel:'▶ Watch on YouTube ↗',
@@ -231,7 +231,7 @@ const ecosystemCommunities = [
                 title:      '💰 Devenir commanditaire ?',
                 titleStyle: 'color:#a78bfa',
                 blockStyle: 'background:rgba(124,58,237,0.07);border-color:rgba(124,58,237,0.2)',
-                descHtml:   'Soutenez le Montréal JUG et Devoxx4Kids Québec — plans de commandite disponibles.',
+                descHtml:   'Soutenez le Montréal JUG et Devoxx4Kids Québec - plans de commandite disponibles.',
                 buttons: [
                     { text: 'Sponsoring ↗', url: 'https://www.montreal-jug.org/sponsoring/', style: 'background:linear-gradient(135deg,#7c3aed,#9333ea)' },
                 ],
@@ -247,9 +247,9 @@ const ecosystemCommunities = [
     {
         emoji: '🎙️',
         name: 'CraftCode Podcast',
-        type: 'Podcast · Interviews · English',
+        type: 'Podcast - Interviews - English',
         badges: [],
-        desc: 'An interview-based podcast hosted by Nicolas Rosado exploring software craftsmanship, engineering excellence, and the practices behind maintainable code — from TDD and clean architecture to DDD, AI impact, and the human side of software. Each episode features a guest practitioner sharing real-world experience and hard-won lessons.',
+        desc: 'An interview-based podcast hosted by Nicolas Rosado exploring software craftsmanship, engineering excellence, and the practices behind maintainable code - from TDD and clean architecture to DDD, AI impact, and the human side of software. Each episode features a guest practitioner sharing real-world experience and hard-won lessons.',
         event: {
             label:   '🎧 Latest episode',
             titleId: 'craftcode-ep-title',
@@ -265,12 +265,12 @@ const ecosystemCommunities = [
     {
         emoji: '🔧',
         name: 'MenderCon',
-        type: 'Virtual Conference · Legacy Code &amp; Modernization',
+        type: 'Virtual Conference - Legacy Code &amp; Modernization',
         badges: [
             { type: 'online',  label: '🌐 Online' },
             { type: 'regular', label: '🔁 Annual Conference' },
         ],
-        desc: 'A full-day virtual unconference focused on modernizing and improving existing software systems — from the smallest apps to the biggest enterprise monoliths. Attendees co-create the schedule on the fly, fostering real conversations between people who love working on legacy code.',
+        desc: 'A full-day virtual unconference focused on modernizing and improving existing software systems - from the smallest apps to the biggest enterprise monoliths. Attendees co-create the schedule on the fly, fostering real conversations between people who love working on legacy code.',
         event: {
             label:       '📅 Next event',
             containerId: 'mendercon-event',
@@ -286,16 +286,16 @@ const ecosystemCommunities = [
     {
         emoji: '☁️',
         name: 'AWS User Group Montreal',
-        type: 'Community · Cloud &amp; AI · Montréal',
+        type: 'Community - Cloud &amp; AI - Montréal',
         badges: [
             { type: 'inperson', label: '📍 In-Person' },
             { type: 'regular',  label: '🔁 Regular meetups' },
         ],
-        desc: 'A community-run, practitioner-focused group for AWS builders in Montreal — sharing real production experience on cloud, GenAI, agents, and data. No vendor pitches, just engineers learning from engineers.',
+        desc: 'A community-run, practitioner-focused group for AWS builders in Montreal - sharing real production experience on cloud, GenAI, agents, and data. No vendor pitches, just engineers learning from engineers.',
         event: {
             label:       '📅 Next event',
-            titleStatic: 'AWS Community Day East Canada — June 20, 2026',
-            dateStatic:  'Montreal · A community-run, practitioner-focused conference. AI Agents Montreal members get 50% off with code AIAGENT.',
+            titleStatic: 'AWS Community Day East Canada - June 20, 2026',
+            dateStatic:  'Montreal, A community-run, practitioner-focused conference. AI Agents Montreal members get 50% off with code AIAGENT.',
         },
         blocks: [],
         footer: [

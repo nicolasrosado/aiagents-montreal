@@ -180,7 +180,7 @@
                 const mode = ev.isInPerson ? 'In-Person' : ev.isVirtual ? 'Virtual' : '';
                 const attendees = ev.attendeeCount || ev.attendees_count || '';
                 titleEl.innerHTML = `<a href="${sanitizeUrl('https://guild.host/events/' + (ev.slug || ''))}" target="_blank" style="color:inherit;text-decoration:none;" rel="noopener noreferrer">${sanitize(name)} ↗</a>`;
-                dateEl.textContent = [dateStr, mode, attendees ? `${attendees} attending` : ''].filter(Boolean).join(' · ');
+                dateEl.textContent = [dateStr, mode, attendees ? `${attendees} attending` : ''].filter(Boolean).join(', ');
             } else {
                 throw new Error('no event');
             }
@@ -222,8 +222,8 @@
             if (eventName) {
                 titleEl.textContent = eventName;
                 dateEl.textContent = dateStr
-                    ? `${dateStr} · Virtual (Gather)`
-                    : 'Date TBA — check mendercon.com';
+                    ? `${dateStr}, Virtual (Gather)`
+                    : 'Date TBA - check mendercon.com';
                 if (ticketAnchor) {
                     ticketEl.href = ticketAnchor.href;
                     ticketEl.style.display = 'inline-flex';
@@ -233,7 +233,7 @@
             }
         } catch (e) {
             // Fallback to last known data
-            titleEl.textContent = 'MenderCon — see mendercon.com for next edition';
+            titleEl.textContent = 'MenderCon - see mendercon.com for next edition';
             dateEl.innerHTML = `<a href="https://mendercon.com" target="_blank" style="color:var(--accent);text-decoration:none;" rel="noopener noreferrer">mendercon.com ↗</a>`;
         }
     }
@@ -257,7 +257,7 @@
         return u;
     }
 
-    // ── CORS PROXY CASCADE — tries multiple proxies for reliability ───────────────
+    // ── CORS PROXY CASCADE - tries multiple proxies for reliability ───────────────
     async function fetchWithProxy(url) {
         const proxies = [
             u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
@@ -318,7 +318,7 @@
                     title = heading ? heading.textContent.trim() : 'Upcoming event';
                 }
 
-                // Meetup appends date/time directly to anchor text with no separator — strip it
+                // Meetup appends date/time directly to anchor text with no separator - strip it
                 const dateInTitle = title.match(/((?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)[a-z]*,?\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:\s*[·•]\s*\d{1,2}:\d{2}\s*(?:AM|PM)(?:\s*[A-Z]{2,5})?)?)/i);
                 let embeddedDate = '';
                 if (dateInTitle) {
@@ -338,7 +338,7 @@
 
                 linkEl.textContent = title;
                 linkEl.href = fullUrl;
-                if (dateStr) dateEl.textContent = ' — ' + dateStr;
+                if (dateStr) dateEl.textContent = ' - ' + dateStr;
                 banner.style.display = 'inline-flex';
                 // Populate ecosystem card too
                 _updateAIAgentsEcoCard(title, fullUrl, dateStr);
@@ -404,28 +404,28 @@
             date: 'June 20, 2026',
             title: 'The best tool for your agentic AI frameworks, human feedback',
             link: 'https://open.substack.com/pub/javil/p/the-best-tool-for-your-agentic-ai',
-            excerpt: 'Human feedback is the real tool for agentic AI: Javier Lopez argues humans should steer agents through test-driven development — validating the direction before code is generated, then refining the design afterward.',
+            excerpt: 'Human feedback is the real tool for agentic AI: Javier Lopez argues humans should steer agents through test-driven development - validating the direction before code is generated, then refining the design afterward.',
             source: 'Substack'
         },
         {
             date: 'June 13, 2026',
             title: 'Everything is a Nail: The Danger of the Software Golden Hammer',
             link: 'https://open.substack.com/pub/javil/p/everything-is-a-nail-the-danger-of',
-            excerpt: 'Javier Lopez warns against the software golden hammer — applying a favourite pattern as a universal solution adds complexity instead of solving the real problem. AI is just the latest hammer.',
+            excerpt: 'Javier Lopez warns against the software golden hammer - applying a favourite pattern as a universal solution adds complexity instead of solving the real problem. AI is just the latest hammer.',
             source: 'Substack'
         },
         {
             date: 'June 8, 2026',
             title: 'Loop Engineering',
             link: 'https://open.substack.com/pub/addyo/p/loop-engineering',
-            excerpt: 'Addy Osmani breaks down loop engineering — designing the agent prompting loop from five building blocks (automations, worktrees, skills, plugins, sub-agents) so AI work becomes a repeatable system rather than ad-hoc chat.',
+            excerpt: 'Addy Osmani breaks down loop engineering - designing the agent prompting loop from five building blocks (automations, worktrees, skills, plugins, sub-agents) so AI work becomes a repeatable system rather than ad-hoc chat.',
             source: 'Substack'
         },
         {
             date: 'June 5, 2026',
             title: 'The Intent Debt',
             link: 'https://addyosmani.com/blog/intent-debt/',
-            excerpt: 'Addy Osmani names intent debt — the externalized rationale and goals behind a design that agents cannot recover. It compounds as agentic engineering spreads: an agent can refactor code but cannot generate the missing intent.',
+            excerpt: 'Addy Osmani names intent debt - the externalized rationale and goals behind a design that agents cannot recover. It compounds as agentic engineering spreads: an agent can refactor code but cannot generate the missing intent.',
             source: 'addyosmani.com'
         },
         {
@@ -439,84 +439,84 @@
             date: 'May 5, 2026',
             title: 'Cognitive Surrender',
             link: 'https://addyosmani.com/blog/cognitive-surrender/',
-            excerpt: 'Addy Osmani describes cognitive surrender — accepting model outputs without forming an independent view — and how it quietly accumulates comprehension debt across a codebase.',
+            excerpt: 'Addy Osmani describes cognitive surrender - accepting model outputs without forming an independent view - and how it quietly accumulates comprehension debt across a codebase.',
             source: 'addyosmani.com'
         },
         {
             date: 'March 23, 2026',
             title: 'From Technical Debt to Cognitive and Intent Debt: Rethinking Software Health in the Age of AI',
             link: 'https://arxiv.org/abs/2603.22106',
-            excerpt: 'A paper by Margaret-Anne Storey proposes a Triple-Debt Model — technical, cognitive, and intent debt — for rethinking software health as AI accelerates development and risk accumulates.',
+            excerpt: 'A paper by Margaret-Anne Storey proposes a Triple-Debt Model - technical, cognitive, and intent debt - for rethinking software health as AI accelerates development and risk accumulates.',
             source: 'arXiv'
         },
         {
             date: 'March 21, 2026',
             title: 'Expectation-Driven Development: A Validation Framework for the Age of AI Agents',
             link: 'https://open.substack.com/pub/a4al6a/p/expectation-driven-development-a',
-            excerpt: 'Andrea Laforgia proposes Expectation-Driven Development: natural-language expectations paired with AI-generated, executed evidence to validate code in agent-driven workflows — evidence over narration.',
+            excerpt: 'Andrea Laforgia proposes Expectation-Driven Development: natural-language expectations paired with AI-generated, executed evidence to validate code in agent-driven workflows - evidence over narration.',
             source: 'Substack'
         },
         {
             date: 'March 14, 2026',
             title: 'Comprehension Debt: the hidden cost of AI generated code',
             link: 'https://addyosmani.com/blog/comprehension-debt/',
-            excerpt: 'Addy Osmani names comprehension debt — the widening gap between how much code AI produces and how much the team actually understands — a hidden cost that risks future failures.',
+            excerpt: 'Addy Osmani names comprehension debt - the widening gap between how much code AI produces and how much the team actually understands - a hidden cost that risks future failures.',
             source: 'addyosmani.com'
         },
         {
             date: 'February 9, 2026',
             title: 'How Generative and Agentic AI Shift Concern from Technical Debt to Cognitive Debt',
             link: 'http://margaretstorey.com/blog/2026/02/09/cognitive-debt/',
-            excerpt: 'Margaret-Anne Storey reframes the real risk of AI-accelerated development: not technical debt but cognitive debt — the erosion of shared understanding among developers.',
+            excerpt: 'Margaret-Anne Storey reframes the real risk of AI-accelerated development: not technical debt but cognitive debt - the erosion of shared understanding among developers.',
             source: 'margaretstorey.com'
         },
         {
             date: 'January 31, 2026',
             title: 'Causality, Learning and Software',
             link: 'https://open.substack.com/pub/javil/p/causality-learning-and-software',
-            excerpt: 'Javier Lopez connects learning, causality and time: AI-generated code without human understanding creates verification challenges — telling a bug from a feature gets harder when no one has built the mental model.',
+            excerpt: 'Javier Lopez connects learning, causality and time: AI-generated code without human understanding creates verification challenges - telling a bug from a feature gets harder when no one has built the mental model.',
             source: 'Substack'
         },
         {
             date: 'June 10, 2025',
             title: 'Your Brain on ChatGPT: Accumulation of Cognitive Debt when Using an AI Assistant',
             link: 'https://www.media.mit.edu/publications/your-brain-on-chatgpt/',
-            excerpt: 'An MIT Media Lab study (Kosmyna et al.) finds LLM-assisted essay writing correlates with reduced brain connectivity and weaker memory of what writers produced — the authors call it cognitive debt.',
+            excerpt: 'An MIT Media Lab study (Kosmyna et al.) finds LLM-assisted essay writing correlates with reduced brain connectivity and weaker memory of what writers produced - the authors call it cognitive debt.',
             source: 'MIT Media Lab'
         },
         {
             date: 'June 9, 2026',
             title: 'CLEAR: Software Design Principles for the Agentic Age',
             link: 'https://adamtornhill.substack.com/p/clear-software-design-principles',
-            excerpt: 'Where SOLID optimizes for human maintainability, Adam Tornhill proposes CLEAR — a set of design principles for AI-assisted development. The goal: explicit design that lets agents infer structure and intent, making codebases safer and cheaper to evolve.',
+            excerpt: 'Where SOLID optimizes for human maintainability, Adam Tornhill proposes CLEAR - a set of design principles for AI-assisted development. The goal: explicit design that lets agents infer structure and intent, making codebases safer and cheaper to evolve.',
             source: 'Substack'
         },
         {
             date: 'June 3, 2026',
             title: 'The Faros Whiplash and The Systems View',
             link: 'https://agileotter.blogspot.com/2026/06/draft-faros-whiplash-and-systems-view.html',
-            excerpt: 'A Faros report on AI-assisted development shows a paradox: code output rises, but so do waiting times and defects. Tim Ottinger reads it through a systems lens — coding sped up beyond the capacity of downstream processes, turning local speed into global bottlenecks.',
+            excerpt: 'A Faros report on AI-assisted development shows a paradox: code output rises, but so do waiting times and defects. Tim Ottinger reads it through a systems lens - coding sped up beyond the capacity of downstream processes, turning local speed into global bottlenecks.',
             source: 'Agile Otter'
         },
         {
             date: 'May 22, 2026',
             title: 'What (Almost) Everyone Gets Wrong About TDD & BDD',
             link: 'https://www.linkedin.com/pulse/what-almost-everyone-gets-wrong-tdd-bdd-antony-marcano-shjye/',
-            excerpt: 'TDD and BDD share the same core intent — using executable examples to specify behavior — but both were diluted as they hit the mainstream. Antony Marcano traces their origins and the "outer and inner loops" Kent Beck originally envisioned.',
+            excerpt: 'TDD and BDD share the same core intent - using executable examples to specify behavior - but both were diluted as they hit the mainstream. Antony Marcano traces their origins and the "outer and inner loops" Kent Beck originally envisioned.',
             source: 'LinkedIn'
         },
         {
             date: 'Feb 26, 2026',
             title: 'Mutants in the Machine: The AI Illusion of Test-Driven Code',
             link: 'https://www.linkedin.com/pulse/mutants-machine-ai-illusion-test-driven-code-antony-marcano-e1bwe/',
-            excerpt: 'Mutation testing exposes a gap in AI-generated "test-driven" code: agents implement more than the tests require, leaving bugs that mutants reveal. Antony Marcano argues real TDD is one Red-Green-Refactor loop at a time — and encoding that restraint into an agent is harder than getting it to write code.',
+            excerpt: 'Mutation testing exposes a gap in AI-generated "test-driven" code: agents implement more than the tests require, leaving bugs that mutants reveal. Antony Marcano argues real TDD is one Red-Green-Refactor loop at a time - and encoding that restraint into an agent is harder than getting it to write code.',
             source: 'LinkedIn'
         },
         {
             date: 'Feb 9, 2026',
             title: 'Software Craftsmanship in the AI Era',
             link: 'https://www.codurance.com/publications/software-craftsmanship-in-the-ai-era',
-            excerpt: 'AI coding tools are transforming development speed — but are teams building well, or just fast? True productivity requires clarity and maintainability, not merely rapid code generation.',
+            excerpt: 'AI coding tools are transforming development speed - but are teams building well, or just fast? True productivity requires clarity and maintainability, not merely rapid code generation.',
             source: 'Codurance'
         },
         {
@@ -530,7 +530,7 @@
             date: 'Apr 26, 2026',
             title: 'The Great AI Spec-Driven Illusion',
             link: 'https://javil.substack.com/p/the-great-ai-spec-driven-illusion',
-            excerpt: 'AI can generate specs and code at speed — but does that make developers unnecessary? Javier Lopez argues that developers must remain architects, not prompt engineers blindly executing AI-generated blueprints.',
+            excerpt: 'AI can generate specs and code at speed - but does that make developers unnecessary? Javier Lopez argues that developers must remain architects, not prompt engineers blindly executing AI-generated blueprints.',
             source: 'Substack'
         },
     ];
@@ -540,19 +540,19 @@
             speakers: 'Josian Chevalier',
             title: 'Getting Started with DDD',
             link: 'https://www.youtube.com/watch?v=I7DawnCS4PQ',
-            excerpt: "Getting started with Domain-Driven Design without fighting your organization — a tour of DDD's tactical and strategic approaches. (In French.)"
+            excerpt: "Getting started with Domain-Driven Design without fighting your organization - a tour of DDD's tactical and strategic approaches. (In French.)"
         },
         {
             speakers: 'Julien Topçu & Josian Chevalier',
             title: 'Model Tension Heuristics',
             link: 'https://www.youtube.com/watch?v=EZTl9FH5AFQ',
-            excerpt: 'Heuristics for spotting when a model is stretched past its coherence ("I smell it in the pull requests") — and when to renew it rather than reuse it.'
+            excerpt: 'Heuristics for spotting when a model is stretched past its coherence ("I smell it in the pull requests") - and when to renew it rather than reuse it.'
         },
         {
             speakers: 'Thomas Salmon',
             title: 'Comment saboter son projet sans même se rendre compte',
             link: 'https://www.youtube.com/watch?v=JoDYg8G9T_4',
-            excerpt: 'How teams quietly sabotage their own projects — procrastination, water-scrum-fall, and putting people first. (In French.)'
+            excerpt: 'How teams quietly sabotage their own projects - procrastination, water-scrum-fall, and putting people first. (In French.)'
         },
         {
             speakers: 'Kevin Lalumière',
@@ -646,7 +646,7 @@
                     date: 'Feb 17, 2025',
                     title: 'Feedback after five episodes of my podcast 🎙️',
                     link: 'https://nicolas-rosado.medium.com/feedback-after-five-episodes-of-my-podcast-%EF%B8%8F-d7d8d94cfc41',
-                    excerpt: 'An open letter to the me of December 2024 from the me of February 2025 — lessons learned after five podcast episodes.'
+                    excerpt: 'An open letter to the me of December 2024 from the me of February 2025 - lessons learned after five podcast episodes.'
                 },
                 {
                     date: 'Feb 17, 2025',
@@ -664,7 +664,7 @@
                     date: 'Dec 2, 2024',
                     title: 'My Journey On How I Started My Podcast (And Why You Should Overcome Your Fears)',
                     link: 'https://nicolas-rosado.medium.com/my-journey-on-how-i-started-my-podcast-and-why-you-should-overcome-your-fears-c6bca3a5478e',
-                    excerpt: 'How I went from fear to action and launched my podcast — and why you should too.'
+                    excerpt: 'How I went from fear to action and launched my podcast - and why you should too.'
                 },
                 {
                     date: 'Jan 17, 2022',
@@ -727,7 +727,7 @@
         if (header) document.getElementById('rg-' + header.dataset.rg)?.classList.toggle('open');
     });
 
-    // ── DYNAMIC: CraftCode Podcast — title/date from Anchor RSS, link → YouTube ───
+    // ── DYNAMIC: CraftCode Podcast - title/date from Anchor RSS, link → YouTube ───
 
     async function loadCraftCodeEpisode() {
         const titleEl = document.getElementById('craftcode-ep-title');
@@ -751,9 +751,9 @@
                 year: 'numeric', month: 'short', day: 'numeric'
             }) : '';
 
-            // Always link to YouTube — RSS is only used for title \u0026 date metadata
+            // Always link to YouTube - RSS is only used for title \u0026 date metadata
             titleEl.innerHTML = `<a href="${YT_PLAYLIST}" target="_blank" style="color:inherit;text-decoration:none;" rel="noopener noreferrer">${title} ↗</a>`;
-            dateEl.textContent = date ? `${date} · Watch on YouTube` : 'Watch on YouTube';
+            dateEl.textContent = date ? `${date}, Watch on YouTube` : 'Watch on YouTube';
         } catch (e) {
             titleEl.innerHTML = `<a href="${YT_PLAYLIST}" target="_blank" style="color:inherit;text-decoration:none;" rel="noopener noreferrer">See all episodes on YouTube ↗</a>`;
             dateEl.textContent = 'Also available on Spotify';
@@ -968,7 +968,7 @@
             { t:"Software Teaming and AI",                      yt:"https://www.youtube.com/watch?v=1uV-oBj1U18" },
         ];
 
-        // Brain image — uses assets/ai-agents-image.jpg (already in repo)
+        // Brain image - uses assets/ai-agents-image.jpg (already in repo)
         document.getElementById('mg-bmc').setAttribute('cx', CX);
         document.getElementById('mg-bmc').setAttribute('cy', CY);
         document.getElementById('mg-bmc').setAttribute('r', BRAIN_R);

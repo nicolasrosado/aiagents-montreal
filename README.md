@@ -1,6 +1,6 @@
-# AI Agents Montreal — Community Website
+# AI Agents Montreal - Community Website
 
-A single-page community site showcasing the global reach of [AI Agents Montreal](https://www.meetup.com/ai-agent-montreal/) — 23 speakers, 11 countries, 5 continents.
+A single-page community site showcasing the global reach of [AI Agents Montreal](https://www.meetup.com/ai-agent-montreal/) - 23 speakers, 11 countries, 5 continents.
 
 🌐 **Live site** → [nicolasrosado.github.io/aiagents-montreal](https://nicolasrosado.github.io/aiagents-montreal/)
 
@@ -8,10 +8,10 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
 
 ```
 /
-├── index.html              # HTML shell — 405 lines, structure only
+├── index.html              # HTML shell - 405 lines, structure only
 ├── README.md
 ├── data/
-│   ├── speakers.js         # const speakers — all speaker objects (bio, location, talk, links…)
+│   ├── speakers.js         # const speakers - all speaker objects (bio, location, talk, links…)
 │   ├── talks.js            # const talks + const talkResources (past talks, YouTube links, resources)
 │   └── ecosystem.js        # const INITIATIVES (orbit graph) + const ecosystemCommunities (9 cards) + const SUPPORT_CENTER / SUPPORT_INITIATIVES (community support graph)
 ├── styles/
@@ -22,157 +22,157 @@ A single-page community site showcasing the global reach of [AI Agents Montreal]
     ├── ai-agents-image.jpg # Header background image (parallax)
     ├── brain-circle.jpg    # Brain image for the Knowledge Brain Graph center (350×350px crop)
     ├── circuit-crop.jpg    # Circuit board image for the Ecosystem Circuit Graph center (500×500px crop)
-    ├── og-image.jpg                        # OpenGraph / Twitter Card image — 1200×630px
+    ├── og-image.jpg                        # OpenGraph / Twitter Card image - 1200×630px
     ├── dev-mtl-logo.jpeg         # /dev/mtl community partner logo
     ├── wearedevelopers-logo.jpeg # WeAreDevelopers community partner logo (100×100px display)
-    ├── ai-agents-montreal-logo.png             # AI Agents Montreal logo — used in community partner section desktop (150×90px display)
-    ├── logo-youtube.jpg                        # AI Agents Montreal logo — used in community partner section mobile
+    ├── ai-agents-montreal-logo.png             # AI Agents Montreal logo - used in community partner section desktop (150×90px display)
+    ├── logo-youtube.jpg                        # AI Agents Montreal logo - used in community partner section mobile
     ├── ai-agents-montreal-logo-transparent.png # AI Agents Montreal logo (transparent variant)
     ├── ai-agents-montreal-logo-white.png       # AI Agents Montreal logo (white variant)
-    ├── mental-health-mtl.png    # Mental Health in SW Eng MTL illustration — Community Support Graph center + mobile list
-    ├── techaide-icon.jpeg       # Tech Aide heart mark — Community Support Graph node icon
-    ├── techaide-logo.jpeg       # Tech Aide full logo (heart + wordmark) — Community Support card chip
-    ├── centraide-logo.png       # Centraide square mark — Community Support Graph node icon
-    └── centraide-logo-full.jpg  # Centraide du Grand Montréal full logo — Community Support card chip
+    ├── mental-health-mtl.png    # Mental Health in SW Eng MTL illustration - Community Support Graph center + mobile list
+    ├── techaide-icon.jpeg       # Tech Aide heart mark - Community Support Graph node icon
+    ├── techaide-logo.jpeg       # Tech Aide full logo (heart + wordmark) - Community Support card chip
+    ├── centraide-logo.png       # Centraide square mark - Community Support Graph node icon
+    └── centraide-logo-full.jpg  # Centraide du Grand Montréal full logo - Community Support card chip
 ```
 
 **Load order** (GitHub Pages, no bundler):
-1. `styles/main.css` — linked in `<head>`
-2. `data/speakers.js` → `data/talks.js` → `data/ecosystem.js` — data globals, loaded before logic
-3. `scripts/main.js` — renders cards from data, runs map, animations, data loaders
+1. `styles/main.css` - linked in `<head>`
+2. `data/speakers.js` → `data/talks.js` → `data/ecosystem.js` - data globals, loaded before logic
+3. `scripts/main.js` - renders cards from data, runs map, animations, data loaders
 
 ## Features
 
 ### 🔗 SEO & Social Sharing
-- **OpenGraph meta tags** — `og:type`, `og:url`, `og:title`, `og:description`, `og:image` set in `<head>` for rich link previews on Facebook, LinkedIn, Slack, etc.
-- **Twitter Card meta tags** — `twitter:card`, `twitter:url`, `twitter:title`, `twitter:description`, `twitter:image` for rich previews on X/Twitter
-- **OG image** — `assets/og-image.jpg` (1200×630px, generated from `ai-agents-montreal-logo.png` with a CTA band); meets opengraph.xyz recommendations: correct size, headline visible, call-to-action present
-- **Title** — 58 chars (optimal 50-60): "AI Agents Montreal — 20 Talks · 23 Speakers · 5 Continents"
-- **Description** — 149 chars (optimal 110-160): community, scope, and key stats
+- **OpenGraph meta tags** - `og:type`, `og:url`, `og:title`, `og:description`, `og:image` set in `<head>` for rich link previews on Facebook, LinkedIn, Slack, etc.
+- **Twitter Card meta tags** - `twitter:card`, `twitter:url`, `twitter:title`, `twitter:description`, `twitter:image` for rich previews on X/Twitter
+- **OG image** - `assets/og-image.jpg` (1200×630px, generated from `ai-agents-montreal-logo.png` with a CTA band); meets opengraph.xyz recommendations: correct size, headline visible, call-to-action present
+- **Title** - 58 chars (optimal 50-60): "AI Agents Montreal - 20 Talks, 23 Speakers, 5 Continents"
+- **Description** - 149 chars (optimal 110-160): community, scope, and key stats
 
 ### ⬆️ Back to top
-- Fixed `↑` button, bottom-right corner — appears after 400px of scroll, fades in/out via CSS `opacity`/`visibility` transition
+- Fixed `↑` button, bottom-right corner - appears after 400px of scroll, fades in/out via CSS `opacity`/`visibility` transition
 - Styled with the design system: `var(--surface2)` background, `var(--accent)` (cyan) text and hover glow
 - Scroll listener in `scripts/main.js` toggles `.visible` class; `passive: true` for performance
 
 ### 🎬 Header
-- **Parallax background** — `ai-agents-image.jpg` fixed in place with dark overlay (Option D — Cinematic), grid and cyan/violet glows layered on top
-- **Animated circuit board** — grid overlay and cyan/violet glows layered on the parallax background
+- **Parallax background** - `ai-agents-image.jpg` fixed in place with dark overlay (Option D - Cinematic), grid and cyan/violet glows layered on top
+- **Animated circuit board** - grid overlay and cyan/violet glows layered on the parallax background
 - Live member count fetched from Meetup
 - Live next event banner fetched from Meetup
-- **Nav buttons** — 3-tier hierarchy: internal section links (secondary cyan, active section highlighted in primary cyan via `IntersectionObserver`) · **▶ Subscribe** (red YouTube brand, links directly to subscribe URL) · **Join on Meetup** (amber outline) · **✉ Newsletter** (orange Substack brand, links to substack.com/@nicolasrosado) · **🎙 Suggest a Talk** (secondary cyan, links to LinkedIn DM) · **💙 Community Support** (secondary cyan, links to `#community-support` section) · **Partner Events** (secondary cyan, links to `#partner` section)
+- **Nav buttons** - 3-tier hierarchy: internal section links (secondary cyan, active section highlighted in primary cyan via `IntersectionObserver`), **▶ Subscribe** (red YouTube brand, links directly to subscribe URL), **Join on Meetup** (amber outline), **✉ Newsletter** (orange Substack brand, links to substack.com/@nicolasrosado), **🎙 Suggest a Talk** (secondary cyan, links to LinkedIn DM), **💙 Community Support** (secondary cyan, links to `#community-support` section), **Partner Events** (secondary cyan, links to `#partner` section)
 
-### 🧠 Talk Knowledge Brain Graph *(section 01 — displayed first)*
-- **Orbital mind graph** — 20 talks orbiting the AI brain image
-- **Desktop** — 2 concentric orbits: inner (talks 1-8, clockwise) · outer (talks 9-20, counter-clockwise)
-  - Desktop sizes live in `scripts/main.js`: `BRAIN_R` (center image radius, currently 185) · `R1` (inner orbit, currently `min(W,H)*0.34`) · `R2` (outer orbit, currently `min(W,H)*0.44`)
-- **Mobile (<768px)** — vertical scrollable list auto-generated from `data/talks.js` via `renderBrainMobile()`: brain image centered at top, each talk as a tappable row with animated cyan dot — zero impact on desktop
-  - Mobile brain circle size: `.mg-mobile-brain` in `styles/main.css` (currently 240×240px) — change `width`/`height` there to resize
-- Bright cyan pulsing dots per talk with glow halo — hover to slow, click to watch on YouTube
-- Uses `assets/brain-circle.jpg` — 700×700px crop (2× retina), brain only
+### 🧠 Talk Knowledge Brain Graph *(section 01 - displayed first)*
+- **Orbital mind graph** - 20 talks orbiting the AI brain image
+- **Desktop** - 2 concentric orbits: inner (talks 1-8, clockwise), outer (talks 9-20, counter-clockwise)
+  - Desktop sizes live in `scripts/main.js`: `BRAIN_R` (center image radius, currently 185), `R1` (inner orbit, currently `min(W,H)*0.34`), `R2` (outer orbit, currently `min(W,H)*0.44`)
+- **Mobile (<768px)** - vertical scrollable list auto-generated from `data/talks.js` via `renderBrainMobile()`: brain image centered at top, each talk as a tappable row with animated cyan dot - zero impact on desktop
+  - Mobile brain circle size: `.mg-mobile-brain` in `styles/main.css` (currently 240×240px) - change `width`/`height` there to resize
+- Bright cyan pulsing dots per talk with glow halo - hover to slow, click to watch on YouTube
+- Uses `assets/brain-circle.jpg` - 700×700px crop (2× retina), brain only
 - Mask radius = `BRAIN_R` on desktop (currently 185px)
 
 ### 🌍 Global Speakers Map *(section 02)*
 - **Leaflet.js** interactive map with dark CartoDB tiles
-- 🔵 Cyan glowing markers = past speakers · 🟡 Amber glowing markers = upcoming speakers
+- 🔵 Cyan glowing markers = past speakers, 🟡 Amber glowing markers = upcoming speakers
 - Click any marker for a popup with name, location, and talk title
 - 23 speakers across 11 countries (19 cities)
 - `map.invalidateSize()` called at 200ms and 800ms after load for reliable rendering on GitHub Pages
 
-> ⚠️ Known fixes: (1) bare `&` in JS strings escaped as `\u0026` to prevent HTML parser truncation. (2) Incorrect SRI integrity hashes on Leaflet were silently blocking the map — SRI removed, cdnjs trusted via HTTPS. (3) CSP recalibrated to include CartoDB tile origins in `connect-src` and `img-src`.
+> ⚠️ Known fixes: (1) bare `&` in JS strings escaped as `\u0026` to prevent HTML parser truncation. (2) Incorrect SRI integrity hashes on Leaflet were silently blocking the map - SRI removed, cdnjs trusted via HTTPS. (3) CSP recalibrated to include CartoDB tile origins in `connect-src` and `img-src`.
 
 ### 👤 Speakers
 - Card grid with avatar, name, LinkedIn icon link (SVG cyan), location, bio, and talk title
 - UPCOMING badge (amber) on speakers not yet presented
 - All 23 speakers have complete LinkedIn URLs
-- **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`; `max-height` set to `20000px` (increased from 9000px) to prevent last speakers from being clipped on mobile single-column layout
+- **Collapsible section** - collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`; `max-height` set to `20000px` (increased from 9000px) to prevent last speakers from being clipped on mobile single-column layout
 
 ### 🎙 Talks
 - Full list of all 20 past talks
 - **All YouTube links updated** with individual video URLs and timestamps
 - **All Meetup event links updated** with individual event pages
-- **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`
+- **Collapsible section** - collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`
 
 ### ✍️ Articles & Resources
-- **Talk Resources tab** *(default open)* — all 20 talks listed in order; 92 links across 18 talks (GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers); talks without resources display "No resources for this talk" instead of being omitted
-- **Articles tab** — two labelled sub-sections in order:
-  1. **From the Community** — hardcoded curated articles from the community (non-Medium sources); add entries to `communityArticles` in `scripts/main.js`
-  2. **My Own Articles** — dynamically fetched from Nicolas Rosado's Medium RSS feed; excludes "Formation continue"; falls back to hardcoded list; "See all on Medium ↗" link below
-- **Collapsible section** — collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`
+- **Talk Resources tab** *(default open)* - all 20 talks listed in order; 92 links across 18 talks (GitHub repos, slide decks, tools, LinkedIn articles, books, Discord servers); talks without resources display "No resources for this talk" instead of being omitted
+- **Articles tab** - two labelled sub-sections in order:
+  1. **From the Community** - hardcoded curated articles from the community (non-Medium sources); add entries to `communityArticles` in `scripts/main.js`
+  2. **My Own Articles** - dynamically fetched from Nicolas Rosado's Medium RSS feed; excludes "Formation continue"; falls back to hardcoded list; "See all on Medium ↗" link below
+- **Collapsible section** - collapsed by default; toggle button pulses cyan; state persisted in `sessionStorage`
 
 ### 🔒 Privacy & Data Policy
-The site is **100% read-only** — it collects, stores and sends zero personal data:
+The site is **100% read-only** - it collects, stores and sends zero personal data:
 
 | Check | Result |
 |---|---|
 | HTML forms / email inputs | ✅ None |
 | localStorage / sessionStorage / cookies | ✅ None |
 | Analytics / tracking pixels | ✅ None |
-| POST requests (data sent outbound) | ✅ None — GET only |
+| POST requests (data sent outbound) | ✅ None - GET only |
 | iframes | ✅ None |
-| Newsletter | ✅ Redirects to Substack — their privacy policy applies |
+| Newsletter | ✅ Redirects to Substack - their privacy policy applies |
 | All displayed data | ✅ 100% public (Meetup, LinkedIn, YouTube, RSS feeds) |
 
-The newsletter links to **Substack** — the user subscribes directly on Substack's platform. No email addresses are ever handled by this site.
+The newsletter links to **Substack** - the user subscribes directly on Substack's platform. No email addresses are ever handled by this site.
 
-### 🔧 Ecosystem Circuit Graph *(section 06 — before Local Ecosystem)*
-- **Orbital circuit graph** — 8 local/global community initiatives orbiting the AI circuit board image
-- Circuit board image (`assets/circuit-crop.jpg`) cropped from the hero image — red/orange PCB aesthetic, **no brightness filter** (full natural luminosity)
+### 🔧 Ecosystem Circuit Graph *(section 06 - before Local Ecosystem)*
+- **Orbital circuit graph** - 8 local/global community initiatives orbiting the AI circuit board image
+- Circuit board image (`assets/circuit-crop.jpg`) cropped from the hero image - red/orange PCB aesthetic, **no brightness filter** (full natural luminosity)
 - Nodes and dots in **orange/red** to match the circuit color palette (vs cyan for the brain graph)
-- **Desktop** — single orbit, height 520px, circuit image r=155
-- **Mobile (<768px)** — vertical scrollable list auto-generated from `INITIATIVES` in `data/ecosystem.js` via `renderEcoMobile()`: circuit image centered at top, each initiative as a tappable row with animated orange dot — zero impact on desktop
+- **Desktop** - single orbit, height 520px, circuit image r=155
+- **Mobile (<768px)** - vertical scrollable list auto-generated from `INITIATIVES` in `data/ecosystem.js` via `renderEcoMobile()`: circuit image centered at top, each initiative as a tappable row with animated orange dot - zero impact on desktop
   - Mobile circuit circle size: same `.mg-mobile-brain` class in `styles/main.css` (shared with brain graph, currently 240×240px)
-- Uses `assets/circuit-crop.jpg` — 1000×1000px crop (2× retina), circuit board with "AI" text, right portion of hero image
-- Hover to slow · Click to visit each community's website
+- Uses `assets/circuit-crop.jpg` - 1000×1000px crop (2× retina), circuit board with "AI" text, right portion of hero image
+- Hover to slow, click to visit each community's website
 
 ### 🌱 Local Ecosystem & Events *(section 07)*
 9 community cards, rendered from `data/ecosystem.js` via `renderEcosystem()`:
-- **Mental Health in SW Eng** · **Software Crafters MTL** · **AI Agents Montreal** · **AI Craftspeople Guild** · **/dev/mtl** · **Devoxx4Kids Québec** · **Montréal JUG** · **CraftCode Podcast** · **MenderCon**
-- Format badges: 📍 In-Person / 🌐 Online · Frequency badges: 🔁 Regular / 📆 On demand
+- **Mental Health in SW Eng**, **Software Crafters MTL**, **AI Agents Montreal**, **AI Craftspeople Guild**, **/dev/mtl**, **Devoxx4Kids Québec**, **Montréal JUG**, **CraftCode Podcast**, **MenderCon**
+- Format badges: 📍 In-Person / 🌐 Online, Frequency badges: 🔁 Regular / 📆 On demand
 - Dynamic next event for AI Agents MTL (Meetup), Software Crafters MTL (Guild.host), CraftCode (RSS), MenderCon (scrape)
-- **Montréal JUG** — Nicolas Rosado guest speaker highlighted · sponsoring CTA
-- "Suggest a Talk" CTAs for AI Agents MTL and Mental Health · Sponsoring CTA for /dev/mtl
-- Community values note: free & independent · psychological safety · humility · kindness
+- **Montréal JUG** - Nicolas Rosado guest speaker highlighted, sponsoring CTA
+- "Suggest a Talk" CTAs for AI Agents MTL and Mental Health, Sponsoring CTA for /dev/mtl
+- Community values note: free & independent, psychological safety, humility, kindness
 - To edit a card: update `data/ecosystem.js` only
 
-### 💙 Supporting Our Local Community *(section 08 — before Community Partner Events)*
-A "give back" section expressing that **AI Agents Montreal supports its sister meetup, [Mental Health in Software Engineering Montreal](https://www.meetup.com/mental-health-in-software-engineering-montreal/)** — whose mission to care for people in tech extends to backing local Montreal initiatives that fight poverty & social inequality. Explicitly **not a partnership** — it's about visibility for causes that matter.
+### 💙 Supporting Our Local Community *(section 08 - before Community Partner Events)*
+A "give back" section expressing that **AI Agents Montreal supports its sister meetup, [Mental Health in Software Engineering Montreal](https://www.meetup.com/mental-health-in-software-engineering-montreal/)** - whose mission to care for people in tech extends to backing local Montreal initiatives that fight poverty & social inequality. Explicitly **not a partnership** - it's about visibility for causes that matter.
 
-- **Bilingual intro (EN/FR)** — rose `lang-tag` chips; the Mental Health meetup is linked inline (`.support-inline-link`)
-- **Community Support Graph** — orbital graph on the same model as the Brain & Ecosystem graphs, in a **rose/solidarity** palette:
-  - **Center = Mental Health in SW Eng MTL** (`assets/mental-health-mtl.png`) — clickable → Meetup, with a `🧠 Mental Health in SW Eng MTL` label below the image
-  - **Orbiting nodes** = the two supported causes, drawn as white badge chips with their real logos + connecting lines to the center: **Tech Aide Montréal** (`assets/techaide-icon.jpeg`) · **Centraide of Greater Montreal** (`assets/centraide-logo.png`)
+- **Bilingual intro (EN/FR)** - rose `lang-tag` chips; the Mental Health meetup is linked inline (`.support-inline-link`)
+- **Community Support Graph** - orbital graph on the same model as the Brain & Ecosystem graphs, in a **rose/solidarity** palette:
+  - **Center = Mental Health in SW Eng MTL** (`assets/mental-health-mtl.png`) - clickable → Meetup, with a `🧠 Mental Health in SW Eng MTL` label below the image
+  - **Orbiting nodes** = the two supported causes, drawn as white badge chips with their real logos + connecting lines to the center: **Tech Aide Montréal** (`assets/techaide-icon.jpeg`), **Centraide of Greater Montreal** (`assets/centraide-logo.png`)
   - Driven by `SUPPORT_CENTER` + `SUPPORT_INITIATIVES` in `data/ecosystem.js`; rendered by the community-support IIFE in `scripts/main.js`
-  - **Mobile (<768px)** — switches to a vertical list like the other two graphs via `renderSupMobile()` (`#sup-mobile-list`, rose dots `.mg-mobile-dot--rose`)
-  - Hover to slow · Click to visit
-- **Two bilingual cards** (static HTML in `index.html`) — each with a white logo chip, EN + FR descriptions, and EN + FR website links:
-  - **Tech Aide Montréal** — `techaidemontreal.org/en` (EN) · `techaidemontreal.org/fr` (FR)
-  - **Centraide of Greater Montreal** — `centraide-mtl.org/en` (EN) · `centraide-mtl.org` (FR)
+  - **Mobile (<768px)** - switches to a vertical list like the other two graphs via `renderSupMobile()` (`#sup-mobile-list`, rose dots `.mg-mobile-dot--rose`)
+  - Hover to slow, click to visit
+- **Two bilingual cards** (static HTML in `index.html`) - each with a white logo chip, EN + FR descriptions, and EN + FR website links:
+  - **Tech Aide Montréal** - `techaidemontreal.org/en` (EN), `techaidemontreal.org/fr` (FR)
+  - **Centraide of Greater Montreal** - `centraide-mtl.org/en` (EN), `centraide-mtl.org` (FR)
 
 ### 🤝 Community Partner Events *(section 09)*
-Two partner cards, static HTML — no data file needed; edit directly in `index.html`.
+Two partner cards, static HTML - no data file needed; edit directly in `index.html`.
 
-**1. /dev/mtl 2026** *(displayed first)* — 27 November 2026 · Concordia University Conference Centre, Montreal
+**1. /dev/mtl 2026** *(displayed first)* - 27 November 2026, Concordia University Conference Centre, Montreal
 - Two logos side by side with `×` divider:
-  - **AI Agents Montreal logo** — desktop: `assets/ai-agents-montreal-logo.png` · mobile: `assets/logo-youtube.jpg` (via `<picture>`) — links to [dev-mtl.ca](https://www.dev-mtl.ca/about) with "Community Partner ↗" caption
-  - **/dev/mtl logo** (`assets/dev-mtl-logo.jpeg`) — links to Eventbrite early bird tickets with "Registration ↗" caption
-- Two CTA buttons: **Early Bird Tickets** (Eventbrite) · **Submit a Talk** (Sessionize CFP)
+  - **AI Agents Montreal logo** - desktop: `assets/ai-agents-montreal-logo.png`, mobile: `assets/logo-youtube.jpg` (via `<picture>`) - links to [dev-mtl.ca](https://www.dev-mtl.ca/about) with "Community Partner ↗" caption
+  - **/dev/mtl logo** (`assets/dev-mtl-logo.jpeg`) - links to Eventbrite early bird tickets with "Registration ↗" caption
+- Two CTA buttons: **Early Bird Tickets** (Eventbrite), **Submit a Talk** (Sessionize CFP)
 - Sponsorship callout with EN and FR links
 
-**2. WeAreDevelopers World Congress North America** — 23–25 September 2026 · San José, CA
+**2. WeAreDevelopers World Congress North America** - 23-25 September 2026 - San José, CA
 - Two logos side by side with `×` divider:
-  - **AI Agents Montreal logo** — links to [wearedevelopers.com/about/community](https://www.wearedevelopers.com/about/community) with "Community Partner ↗" caption
-  - **WeAreDevelopers logo** (`assets/wearedevelopers-logo.jpeg`) — links to congress registration page with "Registration ↗" caption
+  - **AI Agents Montreal logo** - links to [wearedevelopers.com/about/community](https://www.wearedevelopers.com/about/community) with "Community Partner ↗" caption
+  - **WeAreDevelopers logo** (`assets/wearedevelopers-logo.jpeg`) - links to congress registration page with "Registration ↗" caption
 - CTA button links to registration page
 - Discount code callout with link to Nicolas on LinkedIn
 
 ### 🔔 Stay in the Loop *(section 10)*
 - YouTube Subscribe button
-- Newsletter — live Substack link → [substack.com/@nicolasrosado](https://substack.com/@nicolasrosado) · no email collected by this site
+- Newsletter - live Substack link → [substack.com/@nicolasrosado](https://substack.com/@nicolasrosado), no email collected by this site
 
 ## Dynamic data (fetched at page load)
 
-Uses a **cascade of 3 CORS proxies** — if one fails, the next is tried automatically:
+Uses a **cascade of 3 CORS proxies** - if one fails, the next is tried automatically:
 1. `allorigins.win` (primary)
 2. `corsproxy.io` (fallback)
 3. `codetabs.com` (last resort)
@@ -189,21 +189,21 @@ Uses a **cascade of 3 CORS proxies** — if one fails, the next is tried automat
 
 The site has been fully audited (May 2026) and hardened against common web vulnerabilities:
 
-- **XSS prevention** — `sanitize()` and `sanitizeUrl()` applied to all externally-fetched data (Meetup, Guild.host, Medium RSS) before insertion into the DOM; static data uses `textContent` where possible
-- **Open redirect protection** — `sanitizeUrl()` enforces `https?://` protocol on all externally-sourced URLs
-- **No data collection** — no forms, no email inputs, no analytics, no localStorage/cookies. 100% read-only site
-- **Reverse tabnapping** — `rel="noopener noreferrer"` on all `target="_blank"` links
-- **No secrets** — no hardcoded API keys, tokens, or credentials
-- **No dangerous JS** — no `eval()`, `document.write()`, `new Function()`, or `__proto__` manipulation
-- **Content-Security-Policy meta tag** — restricts scripts, styles, fonts, images and connections to known trusted origins; calibrated to allow Leaflet (cdnjs) and CartoDB tiles
-    - `script-src` — self, cdnjs, Google Fonts (**`unsafe-inline` removed** — no inline scripts)
-    - `style-src` — self, inline, cdnjs, Google Fonts (`unsafe-inline` retained for dynamic inline styles injected by `main.js`)
-    - `img-src` — self, data, blob, *.cartocdn.com, *.openstreetmap.org
-    - `connect-src` — self, *.basemaps.cartocdn.com (Leaflet tiles), CORS proxies, Meetup, Medium RSS
-    - `worker-src` — blob (required by Leaflet)
-    - Note: `frame-ancestors` must be set via HTTP header — not supported in `<meta>` CSP
-- **Newsletter** — redirects to Substack; no email addresses handled by this site
-- **sessionStorage** — used only for UI toggle state (`'0'`/`'1'`); never injected into the DOM
+- **XSS prevention** - `sanitize()` and `sanitizeUrl()` applied to all externally-fetched data (Meetup, Guild.host, Medium RSS) before insertion into the DOM; static data uses `textContent` where possible
+- **Open redirect protection** - `sanitizeUrl()` enforces `https?://` protocol on all externally-sourced URLs
+- **No data collection** - no forms, no email inputs, no analytics, no localStorage/cookies. 100% read-only site
+- **Reverse tabnapping** - `rel="noopener noreferrer"` on all `target="_blank"` links
+- **No secrets** - no hardcoded API keys, tokens, or credentials
+- **No dangerous JS** - no `eval()`, `document.write()`, `new Function()`, or `__proto__` manipulation
+- **Content-Security-Policy meta tag** - restricts scripts, styles, fonts, images and connections to known trusted origins; calibrated to allow Leaflet (cdnjs) and CartoDB tiles
+    - `script-src` - self, cdnjs, Google Fonts (**`unsafe-inline` removed** - no inline scripts)
+    - `style-src` - self, inline, cdnjs, Google Fonts (`unsafe-inline` retained for dynamic inline styles injected by `main.js`)
+    - `img-src` - self, data, blob, *.cartocdn.com, *.openstreetmap.org
+    - `connect-src` - self, *.basemaps.cartocdn.com (Leaflet tiles), CORS proxies, Meetup, Medium RSS
+    - `worker-src` - blob (required by Leaflet)
+    - Note: `frame-ancestors` must be set via HTTP header - not supported in `<meta>` CSP
+- **Newsletter** - redirects to Substack; no email addresses handled by this site
+- **sessionStorage** - used only for UI toggle state (`'0'`/`'1'`); never injected into the DOM
 
 ### Audit log
 
@@ -213,15 +213,15 @@ The site has been fully audited (May 2026) and hardened against common web vulne
 | May 2026 | XSS: Meetup event title (via CORS proxy) injected into `innerHTML` unsanitized | `sanitize()` + `sanitizeUrl()` applied |
 | May 2026 | CSP: `unsafe-inline` in `script-src` (sole cause: `onclick` on RSS button) | RSS section removed; `unsafe-inline` removed from `script-src` |
 | May 2026 | CSP regression: `onclick="toggleResource(i)"` in dynamically generated HTML blocked by `script-src` without `unsafe-inline` | Replaced with event delegation (`addEventListener` + `closest('[data-rg]')`) on resources-list container |
-| May 2026 | Mobile bug: last speaker(s) not visible — `#speakers-grid` `max-height: 9000px` clipped the single-column layout on small screens | Increased to `max-height: 20000px` in `styles/main.css` |
+| May 2026 | Mobile bug: last speaker(s) not visible - `#speakers-grid` `max-height: 9000px` clipped the single-column layout on small screens | Increased to `max-height: 20000px` in `styles/main.css` |
 
-> ⚠️ Known issue fixed: incorrect SRI integrity hashes on Leaflet (cdnjs) were causing the map to silently fail. SRI removed — cdnjs is trusted via HTTPS. CSP was also miscalibrated (missing CartoDB tile origins), now corrected.
+> ⚠️ Known issue fixed: incorrect SRI integrity hashes on Leaflet (cdnjs) were causing the map to silently fail. SRI removed - cdnjs is trusted via HTTPS. CSP was also miscalibrated (missing CartoDB tile origins), now corrected.
 
 
 
 ## Deploy to GitHub Pages
 
-1. Create a GitHub repository (e.g. `aiagents-montreal`) — can be **public** (required for free GitHub Pages)
+1. Create a GitHub repository (e.g. `aiagents-montreal`) - can be **public** (required for free GitHub Pages)
 2. Upload `index.html`, `README.md`, `NEW_TALK_TEMPLATE.md` to the root
 3. Create a `data/` folder and upload `speakers.js`, `talks.js`, and `ecosystem.js` inside it
 4. Create a `styles/` folder and upload `main.css` inside it
@@ -234,17 +234,17 @@ The site has been fully audited (May 2026) and hardened against common web vulne
 
 ## Things to update over time
 
-- **New talks** — fill in `NEW_TALK_TEMPLATE.md` and share with Claude; update `data/talks.js` (`talks` array + `talkResources`), `MG_TALKS` in `scripts/main.js` (+ outer orbit loop count), and talk count text in `index.html` — mobile list is auto-generated
-- **Community articles** — add entries to `communityArticles` in `scripts/main.js`; always rendered in the Articles tab below the Medium feed
-- **New speakers** — add to `data/speakers.js`; set `upcoming: true` for future talks, remove the flag once the talk has aired
-- **Talk resources** — add links to `talkResources` in `data/talks.js` for talks currently showing "No resources for this talk" (Benedikt Stemmildt #7, Matthias Patzak #10)
-- **Speaker bios** — most bios are now official (provided by speakers); 4 still using generated bios: Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting — replace with official "About me" once available
-- **Ecosystem cards** — edit `data/ecosystem.js` to update any community card (event dates, descriptions, links, CTAs); also update the mobile orbit list in `index.html` (`#eco-mobile-list`) if communities are added or removed
-- **Community Support section** — edit the two cards directly in `index.html` (`#community-support`); to change the graph center or supported causes, update `SUPPORT_CENTER` / `SUPPORT_INITIATIVES` in `data/ecosystem.js` (mobile list is auto-generated by `renderSupMobile()`)
-- **Devoxx4Kids next event** — update `dateStatic` in `data/ecosystem.js` (~every 3 months)
-- **Montréal JUG next event** — update `titleStatic` in `data/ecosystem.js` monthly
+- **New talks** - fill in `NEW_TALK_TEMPLATE.md` and share with Claude; update `data/talks.js` (`talks` array + `talkResources`), `MG_TALKS` in `scripts/main.js` (+ outer orbit loop count), and talk count text in `index.html` - mobile list is auto-generated
+- **Community articles** - add entries to `communityArticles` in `scripts/main.js`; always rendered in the Articles tab below the Medium feed
+- **New speakers** - add to `data/speakers.js`; set `upcoming: true` for future talks, remove the flag once the talk has aired
+- **Talk resources** - add links to `talkResources` in `data/talks.js` for talks currently showing "No resources for this talk" (Benedikt Stemmildt #7, Matthias Patzak #10)
+- **Speaker bios** - most bios are now official (provided by speakers); 4 still using generated bios: Arthur Magne, Steven Diamante, Michael R. Larson, William Bernting - replace with official "About me" once available
+- **Ecosystem cards** - edit `data/ecosystem.js` to update any community card (event dates, descriptions, links, CTAs); also update the mobile orbit list in `index.html` (`#eco-mobile-list`) if communities are added or removed
+- **Community Support section** - edit the two cards directly in `index.html` (`#community-support`); to change the graph center or supported causes, update `SUPPORT_CENTER` / `SUPPORT_INITIATIVES` in `data/ecosystem.js` (mobile list is auto-generated by `renderSupMobile()`)
+- **Devoxx4Kids next event** - update `dateStatic` in `data/ecosystem.js` (~every 3 months)
+- **Montréal JUG next event** - update `titleStatic` in `data/ecosystem.js` monthly
 
 ## Organized by
 
-[Nicolas Rosado](https://www.linkedin.com/in/nicolas-rosado-a97b3393) · [Meetup](https://www.meetup.com/ai-agent-montreal/) · [YouTube](https://www.youtube.com/@aiagentsmontreal?sub_confirmation=1) · [LinkedIn](https://www.linkedin.com/company/ai-agents-montreal) · [Newsletter](https://substack.com/@nicolasrosado)
+[Nicolas Rosado](https://www.linkedin.com/in/nicolas-rosado-a97b3393), [Meetup](https://www.meetup.com/ai-agent-montreal/), [YouTube](https://www.youtube.com/@aiagentsmontreal?sub_confirmation=1), [LinkedIn](https://www.linkedin.com/company/ai-agents-montreal), [Newsletter](https://substack.com/@nicolasrosado)
 

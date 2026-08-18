@@ -157,7 +157,7 @@
                 "\n" +
                 "In that time, he has helped organisations achieve the “Elite” DORA software delivery performance benchmark, both before and during the rise of AI-augmented coding.\n" +
                 "\n" +
-                "Known for the Screenplay Pattern for automated acceptance tests, he more recently created Test-Driven Agentic Behaviours — a test-driven approach to improving AI coding agents one automated behaviour at a time.\n" +
+                "Known for the Screenplay Pattern for automated acceptance tests, he more recently created Test-Driven Agentic Behaviours - a test-driven approach to improving AI coding agents one automated behaviour at a time.\n" +
                 "\n" +
                 "His work is reflected in contributions to, and acknowledgements in, books including Agile Coaching, Bridging the Communication Gap, Software Craftsmanship Apprenticeship Patterns, and Agile Testing. He has also written for Better Software Magazine, where he served as Technical Editor.\n" +
                 "\n" +
