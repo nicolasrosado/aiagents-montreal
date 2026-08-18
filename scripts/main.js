@@ -559,12 +559,6 @@
             title: 'Échanges avec les collègues qui refusent les bonnes pratiques',
             link: 'https://www.youtube.com/watch?v=O3893F3aDQo',
             excerpt: 'Dealing with colleagues who resist good practices: psychological reactance, and why the state of the relationship matters before the argument. (In French.)'
-        },
-        {
-            speakers: 'Joseph Pelrine & Weronika Ilczyszyn',
-            title: 'Beyond Psychological Safety',
-            link: 'https://www.youtube.com/watch?v=gv115MxKs7c',
-            excerpt: 'Why psychological safety is necessary but not sufficient — and what a team needs on top of it (social perceptiveness, receivable feedback).'
         }
     ];
 
