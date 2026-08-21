@@ -559,6 +559,12 @@
             title: 'Échanges avec les collègues qui refusent les bonnes pratiques',
             link: 'https://www.youtube.com/watch?v=O3893F3aDQo',
             excerpt: 'Dealing with colleagues who resist good practices: psychological reactance, and why the state of the relationship matters before the argument. (In French.)'
+        },
+        {
+            speakers: 'Brett Chalupa',
+            title: "I'm done coding with AI",
+            link: 'https://www.youtube.com/watch?v=2ZU3j4GQ4K8',
+            excerpt: 'A developer explains why he stopped using AI to write code at work, and what he found he was giving up by using it.'
         }
     ];
 
