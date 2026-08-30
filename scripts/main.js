@@ -401,6 +401,13 @@
 
     const communityArticles = [
         {
+            date: 'July 3, 2026',
+            title: '$85,000 in tokens later: What I learned from scaling agentic coding at Lovable',
+            link: 'https://lovable.dev/blog/85000-in-tokens-later-scaling-agentic-coding-at-lovable',
+            excerpt: 'Alexander Lebedev went from 20-30 merged PRs a week to 293 in the first week of June, and from $600 to ~$25K a month in tokens. An unusually honest field report: line-by-line review of AI-written code is no longer practical, an AI risk classifier decides what still needs a human, and preserving what code review used to teach remains an open problem.',
+            source: 'Lovable'
+        },
+        {
             date: 'June 20, 2026',
             title: 'The best tool for your agentic AI frameworks, human feedback',
             link: 'https://open.substack.com/pub/javil/p/the-best-tool-for-your-agentic-ai',
